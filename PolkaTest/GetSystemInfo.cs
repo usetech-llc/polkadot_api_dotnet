@@ -33,6 +33,12 @@ namespace PolkaTest
                 // Check tokenDecimals
                 Assert.Equal(15, result.tokenDecimals);
 
+                Console.WriteLine($"Chain id        : {result.chainId}");
+                Console.WriteLine($"Chain name      : {result.chainName}");
+                Console.WriteLine($"Version         : {result.version}");
+                Console.WriteLine($"Token symbol    : {result.tokenSymbol}");
+                Console.WriteLine($"Token decimals  : {result.tokenDecimals}");
+
                 app.Disconnect();
             }
         }

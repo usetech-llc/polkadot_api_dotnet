@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polkadot", "Polkadot\Polkadot.csproj", "{E1FFFF05-CD38-4912-9218-B5D61EE9445E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolkaTest", "PolkaTest\PolkaTest.csproj", "{C19F2658-D750-4939-8B79-10FC0896FBB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolkaTest", "PolkaTest\PolkaTest.csproj", "{C19F2658-D750-4939-8B79-10FC0896FBB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

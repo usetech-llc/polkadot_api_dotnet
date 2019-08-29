@@ -94,7 +94,8 @@ namespace Polkadot.Source
 
         public void Dispose()
         {
-            ((IDisposable)_wss).Dispose();
+            if (_wss != null)
+                ((IDisposable)_wss).Dispose();
         }
 
         public bool IsConnected()
@@ -123,13 +124,13 @@ namespace Polkadot.Source
 
                 foreach (var cert in certs)
                 {
-                    var currCert = new List<byte>();
-                    var charArr = cert.AsMemory().ToArray();
+                    var currCertBytes = new List<byte>();
+                    var charArr = ("-----BEGIN CERTIFICATE-----" + cert).AsMemory().ToArray();
                     foreach (var item in charArr)
                     {
-                        currCert.Add((byte)item);
+                        currCertBytes.Add((byte)item);
                     }
-                    certCollection.Add(new X509Certificate(currCert.ToArray()));
+                    certCollection.Add(new X509Certificate(currCertBytes.ToArray()));
                 }
             }
 
