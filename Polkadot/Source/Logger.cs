@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-namespace Polkadot.Source
+﻿namespace Polkadot
 {
     public class Logger : ILogger
     {

@@ -1,52 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using WebSocketSharp;
-using System.Security.Cryptography.X509Certificates;
-using System.Net.Security;
-using System.Linq;
-using System.Configuration;
-
-namespace Polkadot.Source
+﻿namespace Polkadot.Api
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using WebSocketSharp;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Net.Security;
+    using System.Linq;
+
     public class Wsclient : IWebSocketClient
     {
-        //public:
-        //    static IWebSocketClient* getInstance(ILogger* logger);
-        //    ~CWebSocketClient() override;
-        //    virtual int connect(string node_url = "");
-        //    virtual bool isConnected();
-        //    virtual void disconnect();
-        //    virtual int send(const string &msg);
-        //    virtual void registerMessageObserver(IMessageObserver* handler);
-
-        //private:
-        //    ILogger* _logger;
-        //    static CWebSocketClient* _instance;
-        //    vector<IMessageObserver*> _observers;
-        //    thread* _connectedThread;
-        //    thread* _healthThread;
-        //    client _c;
-        //    client_no_tls _c_no_tls;
-        //    bool _tls;
-        //    client::connection_ptr _connection;
-        //    client_no_tls::connection_ptr _connection_no_tls;
-        //    bool _connected;
-        //    condition_variable _connectionCV; // Condition variable used to notify about connection
-        //    mutex _connectionMtx;             // Mutex for condition varaiable
-        //    static chrono::seconds ConnectionTimeout;
-        //    mutex _sendMtx; // Mutex for sending data to be block send method
-
-        //    friend context_ptr on_tls_init(const char* hostname, websocketpp::connection_hdl);
-        //    friend void on_message(websocketpp::connection_hdl, client::message_ptr msg);
-        //    friend void on_open(client* c, websocketpp::connection_hdl hdl);
-        //    void health();
-        //    void runWsMessages();
-        //    int connect_tls(string node_url);
-        //    int connect_no_tls(string node_url);
-
-        //    CWebSocketClient(ILogger* logger);
-
         private WebSocketSharp.WebSocket _wss;
         private ILogger _logger;
         private List<IMessageObserver> _observers = new List<IMessageObserver>();

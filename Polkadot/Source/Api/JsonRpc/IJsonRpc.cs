@@ -1,42 +1,10 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-namespace Polkadot.Source
+﻿namespace Polkadot.Api
 {
+    using System;
+    using Newtonsoft.Json.Linq;
+
     public interface IJsonRpc : IDisposable
     {
-        //private:
-        //std::string _jsonrpcVersion;
-        //    unsigned int _lastId;
-        //    ILogger* _logger;
-        //    IWebSocketClient* _wsc;
-
-        //    // Map between request IDs and waiting requests
-        //    map<int, JsonRpcQuery> _queries;
-        //    mutex _queryMtx;
-
-        //    // Map between subscription IDs and subscribers
-        //    map<int, IWebSocketMessageObserver*> _wsSubscribers;
-
-        //    int getNextId();
-        //    ConcurrentMapQueue<Json, int> _queue;
-
-        //    public:
-        //CJsonRpc(IWebSocketClient* wsc, ILogger* logger, JsonRpcParams params);
-        //    ~CJsonRpc() override {}
-        //virtual int connect(string node_url = "");
-        //virtual void disconnect();
-        //virtual Json request(Json jsonMap, long timeout_s = RESPONSE_TIMEOUT_S);
-        //virtual void handleMessage(const string &payload);
-        //virtual int subscribeWs(Json jsonMap, IWebSocketMessageObserver* observer);
-        //virtual int unsubscribeWs(int subscriptionId, string method);
-
-        
-
         /// <summary>
         /// Connects to WebSocket
         /// </summary>

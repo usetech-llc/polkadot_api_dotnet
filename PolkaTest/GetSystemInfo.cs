@@ -1,43 +1,45 @@
-using Polkadot.Source;
-using System;
-using Xunit;
-
 namespace PolkaTest
 {
+    using Polkadot.Api;
+    using Xunit;
+    using Xunit.Abstractions;
+
     public class GetSystemInfo
     {
+        private readonly ITestOutputHelper output;
+
+        public GetSystemInfo(ITestOutputHelper output)
+        {
+            this.output = output;
+        }
+
         [Fact]
         public void Ok()
         {
-            JsonRpcParams param = new JsonRpcParams();
-            param.jsonrpcVersion = "2.0";
-
-            var logger = new Logger();
-            var jsonrpc = new JsonRpc(new Wsclient(logger), logger, param);
-            using (IApplication app = new Application(logger, jsonrpc))
+            using (IApplication app = PolkaApi.GetAppication())
             {
                 app.Connect();
                 var result = app.GetSystemInfo();
 
-                Assert.True(result.chainId.Length > 0);
+                Assert.True(result.ChainId.Length > 0);
 
                 // Check chainName
-                Assert.Equal("parity-polkadot", result.chainName);
+                Assert.Equal("parity-polkadot", result.ChainName);
 
                 // Check version
-                Assert.NotEqual(string.Empty, result.version);
+                Assert.NotEqual(string.Empty, result.Version);
 
                 // Check tokenSymbol
-                Assert.Equal("DOT", result.tokenSymbol);
+                Assert.Equal("DOT", result.TokenSymbol);
 
                 // Check tokenDecimals
-                Assert.Equal(15, result.tokenDecimals);
+                Assert.Equal(15, result.TokenDecimals);
 
-                Console.WriteLine($"Chain id        : {result.chainId}");
-                Console.WriteLine($"Chain name      : {result.chainName}");
-                Console.WriteLine($"Version         : {result.version}");
-                Console.WriteLine($"Token symbol    : {result.tokenSymbol}");
-                Console.WriteLine($"Token decimals  : {result.tokenDecimals}");
+                output.WriteLine($"Chain id        : {result.ChainId}");
+                output.WriteLine($"Chain name      : {result.ChainName}");
+                output.WriteLine($"Version         : {result.Version}");
+                output.WriteLine($"Token symbol    : {result.TokenSymbol}");
+                output.WriteLine($"Token decimals  : {result.TokenDecimals}");
 
                 app.Disconnect();
             }

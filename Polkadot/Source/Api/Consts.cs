@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Polkadot.Source
+﻿namespace Polkadot.Api
 {
     public static class Consts
     {

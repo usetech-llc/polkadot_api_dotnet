@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json.Linq;
-
-namespace Polkadot.Source
+﻿namespace Polkadot.DataFactory
 {
+    using Newtonsoft.Json.Linq;
+
     public interface IParseFactory<T>
     {
         T Parse(JObject json);

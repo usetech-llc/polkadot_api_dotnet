@@ -1,4 +1,4 @@
-﻿namespace Polkadot.Source
+﻿namespace Polkadot
 {
     public interface ILogger
     {

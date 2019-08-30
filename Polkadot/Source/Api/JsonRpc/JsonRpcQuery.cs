@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json.Linq;
-
-namespace Polkadot.Source
+﻿namespace Polkadot.Api
 {
+    using Newtonsoft.Json.Linq;
+
     public struct JsonRpcQuery
     {
         public int Id { get; set; }
