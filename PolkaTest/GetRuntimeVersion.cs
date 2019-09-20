@@ -20,7 +20,7 @@ namespace PolkaTest
         public void Ok()
         {
             JsonRpcParams param = new JsonRpcParams();
-            param.jsonrpcVersion = "2.0";
+            param.JsonrpcVersion = "2.0";
 
             var logger = new Logger();
             var jsonrpc = new MockJsonRpc(new Wsclient(logger), logger, param);

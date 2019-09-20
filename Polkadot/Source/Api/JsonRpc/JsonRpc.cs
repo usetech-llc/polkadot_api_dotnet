@@ -8,7 +8,7 @@
 
     public struct JsonRpcParams
     {
-        public string jsonrpcVersion { get; set; }
+        public string JsonrpcVersion { get; set; }
     };
 
     public class JsonRpc : IJsonRpc, IMessageObserver
@@ -18,7 +18,7 @@
         private JsonRpcParams _jsonRpcParams;
 
         private Dictionary<int, BufferBlock<JObject>> _responces;
-        private Dictionary<int, BufferBlock<JObject>> _subscriptions;
+        private Dictionary<int, IWebSocketMessageObserver> _subscriptions;
 
         private int _lastId = 0;
 
@@ -34,7 +34,7 @@
             _jsonRpcParams = param;
 
             _responces = new Dictionary<int, BufferBlock<JObject>>();
-            _subscriptions = new Dictionary<int, BufferBlock<JObject>>();
+            _subscriptions = new Dictionary<int, IWebSocketMessageObserver>();
             _wsc.RegisterMessageObserver(this);
         }
 
@@ -59,7 +59,7 @@
             JObject request = JObject.FromObject(
                 new {
                     id = query.Id, 
-                    jsonrpc = _jsonRpcParams.jsonrpcVersion, 
+                    jsonrpc = _jsonRpcParams.JsonrpcVersion, 
                     method = jsonMap["method"], 
                     @params = jsonMap["params"]
                 }
@@ -98,7 +98,23 @@
 
         public int SubscribeWs(JObject jsonMap, IWebSocketMessageObserver observer)
         {
-            throw new NotImplementedException();
+            // Send normal request
+            var response = Request(jsonMap);
+
+            // Get response for this request and extract subscription ID
+            int subscriptionId = response["result"].ToObject<int>();
+
+            if (!_subscriptions.ContainsKey(subscriptionId))
+            {
+                lock (_subscriptions)
+                {
+                    _subscriptions.Add(subscriptionId, observer);
+                }
+            }
+
+            _logger.Info($"Subscribed with subscription ID: {subscriptionId}");
+
+            return subscriptionId;
         }
 
         public int UnsubscribeWs(int subscriptionId, string method)
@@ -117,12 +133,25 @@
             if (json["params"] != null)
                 subscriptionId = json["params"]["subscription"].Value;
 
-            var result = json["result"] as JObject;
+            // message is simple request
+            if (requestId != 0)
+            {
+                var result = json["result"] as JObject;
 
-            if (result == null)
-                result = JObject.FromObject( new { result = json["result"].ToString() });
+                if (result == null)
+                    result = JObject.FromObject(new { result = json["result"].ToString() });
 
-            _responces.GetValueOrDefault((int)requestId).SendAsync(result);
+                _responces.GetValueOrDefault((int)requestId).SendAsync(result);
+            }
+            else
+
+            // message is subscription request
+            if (subscriptionId != 0)
+            {
+                // Subscription response arrived.
+                var result = json["params"]["result"] as JObject;
+                _subscriptions.GetValueOrDefault((int)subscriptionId).HandleWsMessage((int)subscriptionId, result);
+            }
         }
 
         public void Dispose()

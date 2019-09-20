@@ -1,6 +1,7 @@
 ﻿namespace Polkadot.Api
 {
     using System;
+    using System.Threading.Tasks;
     using Polkadot.Data;
 
     public interface IApplication : IDisposable
@@ -71,5 +72,23 @@
 
         //Metadata GetMetadata(GetMetadataParams param);
         string GetMetadata(GetMetadataParams param);
+
+
+        /// <summary>
+        /// Subscribe to most recent block number.Only one subscription at a time is allowed.If a subscription already 
+        /// exists, old subscription will be discarded and replaced with the new one.Until unsubscribeBlockNumber method is
+        /// called, the API will be receiving updates and forwarding them to subscribed object/function.Only
+        /// unsubscribeBlockNumber will physically unsubscribe from WebSocket endpoint updates.
+        /// </summary>
+        /// <param name="callback"> callback - delegate that will receive updates</param>
+        /// <returns> operation result </returns>
+        int SubscribeBlockNumber(Action<long> callback);
+
+        /// <summary>
+
+        /// </summary>
+        /// <param name="callback"> callback - delegate that will receive updates</param>
+        /// <returns> operation result </returns>
+        void UnsubscribeBlockNumber(int id);
     }
 }

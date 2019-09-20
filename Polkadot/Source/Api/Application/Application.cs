@@ -1,14 +1,21 @@
 ﻿namespace Polkadot.Api
 {
     using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using System.Threading.Tasks.Dataflow;
     using Newtonsoft.Json.Linq;
     using Polkadot.Data;
     using Polkadot.DataFactory;
 
-    public class Application : IApplication
+    public class Application : IApplication, IWebSocketMessageObserver
     {
         private ILogger _logger;
         private IJsonRpc _jsonRpc;
+        private Dictionary<int, BufferBlock<JObject>> _subscriptionData;
+        private Dictionary<int, CancellationTokenSource> _subscriptionTokens;
 
         private T Deserialize<T, C>(JObject json) 
             where C : IParseFactory<T>, new()
@@ -29,6 +36,8 @@
         {
             _logger = logger;
             _jsonRpc = jsonRpc;
+            _subscriptionData = new Dictionary<int, BufferBlock<JObject>>();
+            _subscriptionTokens = new Dictionary<int, CancellationTokenSource>();
         }
 
         public int Connect(string node_url = "")
@@ -129,6 +138,67 @@
         public FinalHead GetFinalizedHead()
         {
             throw new NotImplementedException();
+        }
+
+        public int SubscribeBlockNumber(Action<long> callback)
+        {
+            JObject subscribeQuery = new JObject { { "method", "chain_subscribeNewHead" }, { "params", new JArray { } } };
+
+            var blockNumberSubscriptionId = _jsonRpc.SubscribeWs(subscribeQuery, this);
+
+            InitSubscription(blockNumberSubscriptionId);  
+
+            Task.Run(() =>
+            {
+                // check if subscription still active
+                while (_subscriptionData.ContainsKey(blockNumberSubscriptionId))
+                {
+                    var ct = _subscriptionTokens.GetValueOrDefault(blockNumberSubscriptionId);
+                    var json = _subscriptionData.GetValueOrDefault(blockNumberSubscriptionId).Receive(ct.Token);
+                    var test = json["number"].ToString().Substring(2);
+                    var blockNumber = long.Parse(test, NumberStyles.HexNumber);
+                    callback(blockNumber);
+                }
+            });
+
+            return blockNumberSubscriptionId;
+        }
+
+        public void UnsubscribeBlockNumber(int id)
+        {
+            RemoveSubscription(id);
+        }
+
+        public void HandleWsMessage(int subscriptionId, JObject message)
+        {
+            // subscription already init otherwise subscription does not exist
+            _subscriptionData.GetValueOrDefault(subscriptionId)?.SendAsync(message);
+        }
+
+        private void InitSubscription(int subscriptionId)
+        {
+            if (subscriptionId != 0 && !_subscriptionData.ContainsKey(subscriptionId))
+            {
+                // init subscription
+                lock (_subscriptionData)
+                {
+                    _subscriptionTokens.Add(subscriptionId, new CancellationTokenSource());
+                    _subscriptionData.Add(subscriptionId, new BufferBlock<JObject>());
+                }
+            }
+        }
+
+        private void RemoveSubscription(int subscriptionId)
+        {
+            if (_subscriptionData.ContainsKey(subscriptionId))
+            {
+                lock (_subscriptionData)
+                {
+                    _subscriptionTokens.GetValueOrDefault(subscriptionId).Cancel();
+                    _subscriptionData.Remove(subscriptionId);
+                    _subscriptionTokens.Remove(subscriptionId);
+                }
+            }
         }
     }
 }

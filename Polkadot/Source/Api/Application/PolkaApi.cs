@@ -7,7 +7,7 @@
         private static void CreateInstance()
         {
             JsonRpcParams param = new JsonRpcParams();
-            param.jsonrpcVersion = "2.0";
+            param.JsonrpcVersion = "2.0";
 
             var logger = new Logger();
             var jsonrpc = new JsonRpc(new Wsclient(logger), logger, param);
