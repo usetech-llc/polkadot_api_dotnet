@@ -20,9 +20,9 @@
     public class BlockHeader
     {
         public string ParentHash { get; set; }
-        ulong Number { get; set; }
-        string StateRoot { get; set; }
-        string ExtrinsicsRoot { get; set; }
-        DigestItem[] Digest { get; set; }
+        public ulong Number { get; set; }
+        public string StateRoot { get; set; }
+        public string ExtrinsicsRoot { get; set; }
+        public DigestItem[] Digest { get; set; }
     }
 }

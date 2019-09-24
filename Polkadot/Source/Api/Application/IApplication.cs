@@ -40,7 +40,6 @@
         /// <returns> SignedBlock struct with result </returns>     
         SignedBlock GetBlock(GetBlockParams param);
 
-
         /// <summary>
         /// Retrieves the header for a specific block
         /// </summary>
@@ -62,7 +61,6 @@
         /// <returns> FinalHead struct with result </returns>
         FinalHead GetFinalizedHead();
 
-
         /**
         *  Retreives the runtime metadata for specific block
         *
@@ -73,6 +71,69 @@
         //Metadata GetMetadata(GetMetadataParams param);
         string GetMetadata(GetMetadataParams param);
 
+        /// <summary>
+        ///  Generates storage key for a certain Module and State variable defined by parameter and prefix. Parameter is a JSON
+        ///   string representing a value of certain type, which has two fields: type and value.Type should be one of type
+        ///   strings defined above.Value should correspond to the type.Example:
+        ///
+        ///      { "type" : "AccountId", "value" : "5ECcjykmdAQK71qHBCkEWpWkoMJY6NXvpdKy8UeMx16q5gFr"}
+        ///
+        ///   Information about Modules and State variables(with parameters and their types) is returned by getMetadata
+        ///   method.
+        /// </summary>
+        /// <param name="jsonPrm"> JSON string that contains parameter and its type</param>
+        /// <param name="module"> module (as in metadata)</param>
+        /// <param name="variable"> state variable (as in metadata for given module)</param>
+        /// <returns> Storage key </returns>
+        string GetKeys(string jsonPrm, string module, string variable);
+
+        /// <summary>
+        ///  Reads storage for a certain Module and State variable defined by parameter and prefix.Parameter is a JSON
+        ///   string representing a value of certain type, which has two fields: type and value.Type should be one of type
+        ///   strings defined above.Value should correspond to the type.Example:
+        ///
+        ///      { "type" : "AccountId", "value" : "5ECcjykmdAQK71qHBCkEWpWkoMJY6NXvpdKy8UeMx16q5gFr"}
+        ///
+        ///   Information about Modules and State variables(with parameters and their types) is returned by getMetadata
+        ///   method.
+        /// </summary>
+        /// <param name="jsonPrm"> JSON string that contains parameter and its type</param>
+        /// <param name="module"> module (as in metadata)</param>
+        /// <param name="variable"> state variable (as in metadata for given module)</param>
+        /// <returns> Storage content </returns>
+        string GetStorage(string jsonPrm, string module, string variable);
+
+        /// <summary>
+        /// Returns storage hash of given State Variable for a given Module defined by parameter.
+        ///  Parameter is a JSON string representing a value of certain type, which has two fields: type and value.Type
+        ///  should be one of type strings defined above.Value should correspond to the type. Example:
+        ///
+        ///      { "type" : "AccountId", "value" : "5ECcjykmdAQK71qHBCkEWpWkoMJY6NXvpdKy8UeMx16q5gFr"}
+        ///
+        ///   Information about Modules and State variables(with parameters and their types) is returned by getMetadata
+        ///   method.
+        /// </summary>
+        /// <param name="jsonPrm"> JSON string that contains parameter and its type</param>
+        /// <param name="module"> module (as in metadata)</param>
+        /// <param name="variable"> state variable (as in metadata for given module)</param>
+        /// <returns> Storage hash </returns>
+        string GetStorageHash(string jsonPrm, string module, string variable);
+
+        /// <summary>
+        /// Returns storage size for a given State Variable for a given Module defined by parameter.
+        ///  Parameter is a JSON string representing a value of certain type, which has two fields: type and value.Type
+        ///  should be one of type strings defined above.Value should correspond to the type. Example:
+        ///
+        ///      { "type" : "AccountId", "value" : "5ECcjykmdAQK71qHBCkEWpWkoMJY6NXvpdKy8UeMx16q5gFr"}
+        ///
+        ///   Information about Modules and State variables(with parameters and their types) is returned by getMetadata
+        ///   method.
+        /// </summary>
+        /// <param name="jsonPrm"> JSON string that contains parameter and its type</param>
+        /// <param name="module"> module (as in metadata)</param>
+        /// <param name="variable"> state variable (as in metadata for given module)</param>
+        /// <returns> Storage size </returns>
+        string GetStorageSize(string jsonPrm, string module, string variable);
 
         /// <summary>
         /// Subscribe to most recent block number.Only one subscription at a time is allowed.If a subscription already 

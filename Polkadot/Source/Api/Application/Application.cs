@@ -119,23 +119,87 @@
             return response.ToString();
         }
 
-        // -------------------------------------------------------------------------------------------------------
         public SignedBlock GetBlock(GetBlockParams param)
+        {
+            JArray prm = new JArray { };
+            if (param != null)
+                prm = new JArray { param.BlockHash };
+            JObject query = new JObject { { "method", "chain_getBlock" }, { "params", prm } };
+
+            JObject response = _jsonRpc.Request(query);
+
+            return Deserialize<SignedBlock, ParseBlock>(response);
+        }
+
+        public BlockHeader GetBlockHeader(GetBlockParams param)
+        {
+            JArray prm = new JArray { };
+            if (param != null)
+                prm = new JArray { param.BlockHash };
+            JObject query = new JObject { { "method", "chain_getHeader" }, { "params", prm } };
+
+            JObject response = _jsonRpc.Request(query);
+
+            return Deserialize<BlockHeader, ParseBlockHeader>(response);
+        }
+
+        public FinalHead GetFinalizedHead()
+        {
+            JObject query = new JObject { { "method", "chain_getFinalizedHead" }, { "params", new JArray { } } };
+
+            JObject response = _jsonRpc.Request(query);
+
+            return Deserialize<FinalHead, ParseFinalizedHead>(response);
+        }
+
+        public string GetKeys(string jsonPrm, string module, string variable)
+        {
+            //// Determine if parameters are required for given module + variable
+            //// Find the module and variable indexes in metadata
+            //int moduleIndex = getModuleIndex(_protocolPrm.metadata, module, false);
+            //if (moduleIndex == -1)
+            //    throw ApplicationException("Module not found");
+            //int variableIndex = getStorageMethodIndex(_protocolPrm.metadata, moduleIndex, variable);
+            //if (variableIndex == -1)
+            //    throw ApplicationException("Variable not found");
+
+            //string key;
+            //if (isStateVariablePlain(_protocolPrm.metadata, moduleIndex, variableIndex))
+            //{
+            //    key = StorageUtils::getPlainStorageKey(_protocolPrm.FreeBalanceHasher, module + " " + variable);
+            //}
+            //else
+            //{
+            //    key = StorageUtils::getMappedStorageKey(_protocolPrm.FreeBalanceHasher, jsonPrm, module + " " + variable);
+            //}
+            //return key;
+
+
+
+
+
+            throw new NotImplementedException();
+        }
+
+        public string GetStorage(string jsonPrm, string module, string variable)
+        {
+            // Get most recent block hash
+            var headHash = GetBlockHash(null);
+
+            throw new NotImplementedException();
+        }
+
+        public string GetStorageHash(string jsonPrm, string module, string variable)
         {
             throw new NotImplementedException();
         }
 
-        public BlockHeader GetBlockHeader(GetBlockParams param)
+        public string GetStorageSize(string jsonPrm, string module, string variable)
         {
             throw new NotImplementedException();
         }
 
         public NetworkState GetNetworkState()
-        {
-            throw new NotImplementedException();
-        }
-
-        public FinalHead GetFinalizedHead()
         {
             throw new NotImplementedException();
         }

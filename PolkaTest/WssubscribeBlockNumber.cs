@@ -30,6 +30,7 @@ namespace PolkaTest
                 {
                     blockNum = blockNumber;
                     messagesCount++;
+                    output.WriteLine($"Last block number        : {blockNumber}");
                 });
 
                 while(messagesCount <= 2)

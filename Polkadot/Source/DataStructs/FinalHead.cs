@@ -1,6 +1,7 @@
 ﻿namespace Polkadot.Data
 {
-    public class FinalHead
+    public struct FinalHead
     {
+        public string BlockHash;
     }
 }
