@@ -3,12 +3,19 @@
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.IO;
+    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Threading.Tasks.Dataflow;
+    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using Polkadot.Data;
     using Polkadot.DataFactory;
+    using Polkadot.DataFactory.Metadata;
+    using Polkadot.DataStructs;
+    using Polkadot.DataStructs.Metadata;
+    using Polkadot.Source.Utils;
 
     public class Application : IApplication, IWebSocketMessageObserver
     {
@@ -16,6 +23,7 @@
         private IJsonRpc _jsonRpc;
         private Dictionary<int, BufferBlock<JObject>> _subscriptionData;
         private Dictionary<int, CancellationTokenSource> _subscriptionTokens;
+        private ProtocolParameters _protocolParams;
 
         private T Deserialize<T, C>(JObject json) 
             where C : IParseFactory<T>, new()
@@ -38,13 +46,31 @@
             _jsonRpc = jsonRpc;
             _subscriptionData = new Dictionary<int, BufferBlock<JObject>>();
             _subscriptionTokens = new Dictionary<int, CancellationTokenSource>();
+            _protocolParams = new ProtocolParameters();
         }
 
         public int Connect(string node_url = "")
         {
             int result = Consts.PAPI_OK;
 
+            // Connect to WS
             result = _jsonRpc.Connect(node_url);
+
+            // Read metadata for head block and initialize protocol parameters
+            _protocolParams.Metadata = new Metadata(GetMetadata(null));
+            _protocolParams.FreeBalanceHasher = _protocolParams.Metadata.GetFuncHasher("Balances", "FreeBalance");
+            _protocolParams.FreeBalancePrefix = "Balances FreeBalance";
+            _protocolParams.BalanceModuleIndex = _protocolParams.Metadata.GetModuleIndex("Balances", true);
+            _protocolParams.TransferMethodIndex = _protocolParams.Metadata.GetCallMethodIndex(
+            _protocolParams.Metadata.GetModuleIndex("Balances", false), "transfer");
+
+            if (_protocolParams.FreeBalanceHasher == Hasher.XXHASH)
+                _logger.Info("FreeBalance hash function is xxHash");
+            else
+                _logger.Info("FreeBalance hash function is Blake2-256");
+
+            _logger.Info($"Balances module index: {_protocolParams.BalanceModuleIndex}" );
+            _logger.Info($"Transfer call index:: {_protocolParams.TransferMethodIndex}" );
 
             return result;
         }
@@ -107,7 +133,7 @@
             return Deserialize<RuntimeVersion, ParseRuntimeVersion>(response);
         }
 
-        public string GetMetadata(GetMetadataParams param)
+        public MetadataBase GetMetadata(GetMetadataParams param)
         {
             JArray prm = new JArray { };
             if (param != null)
@@ -116,7 +142,7 @@
 
             JObject response = _jsonRpc.Request(query);
 
-            return response.ToString();
+            return Deserialize<MetadataV4, ParseMetadataV4>(response);
         }
 
         public SignedBlock GetBlock(GetBlockParams param)
@@ -154,31 +180,26 @@
 
         public string GetKeys(string jsonPrm, string module, string variable)
         {
-            //// Determine if parameters are required for given module + variable
-            //// Find the module and variable indexes in metadata
-            //int moduleIndex = getModuleIndex(_protocolPrm.metadata, module, false);
-            //if (moduleIndex == -1)
-            //    throw ApplicationException("Module not found");
-            //int variableIndex = getStorageMethodIndex(_protocolPrm.metadata, moduleIndex, variable);
-            //if (variableIndex == -1)
-            //    throw ApplicationException("Variable not found");
+            // Determine if parameters are required for given module + variable
+            // Find the module and variable indexes in metadata
+            int moduleIndex = _protocolParams.Metadata.GetModuleIndex(module, false);
+            if (moduleIndex == -1)
+                throw new ApplicationException("Module not found");
+            int variableIndex = _protocolParams.Metadata.GetStorageMethodIndex(moduleIndex, variable);
+            if (variableIndex == -1)
+                throw new ApplicationException("Variable not found");
 
-            //string key;
-            //if (isStateVariablePlain(_protocolPrm.metadata, moduleIndex, variableIndex))
-            //{
-            //    key = StorageUtils::getPlainStorageKey(_protocolPrm.FreeBalanceHasher, module + " " + variable);
-            //}
-            //else
-            //{
-            //    key = StorageUtils::getMappedStorageKey(_protocolPrm.FreeBalanceHasher, jsonPrm, module + " " + variable);
-            //}
-            //return key;
-
-
-
-
-
-            throw new NotImplementedException();
+            string key;
+            if (_protocolParams.Metadata.IsStateVariablePlain(moduleIndex, variableIndex))
+            {
+                key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, $"{module} {variable}");
+            }
+            else
+            {
+                var param = JsonParse.ParseJsonKeyValuePair(jsonPrm);
+                key = _protocolParams.Metadata.GetMappedStorageKey(_protocolParams.FreeBalanceHasher, param, $"{module} {variable}");
+            }
+            return key;
         }
 
         public string GetStorage(string jsonPrm, string module, string variable)
@@ -186,17 +207,111 @@
             // Get most recent block hash
             var headHash = GetBlockHash(null);
 
-            throw new NotImplementedException();
+            string key = GetKeys(jsonPrm, module, variable);
+            JObject query = new JObject { { "method", "state_getStorage" }, { "params", new JArray { key, headHash.Hash } } };
+            JObject response = _jsonRpc.Request(query);
+
+            return response.ToString();
         }
 
         public string GetStorageHash(string jsonPrm, string module, string variable)
         {
-            throw new NotImplementedException();
+            // Get most recent block hash
+            var headHash = GetBlockHash(null);
+
+            string key = GetKeys(jsonPrm, module, variable);
+            JObject query = new JObject { { "method", "state_getStorageHash" }, { "params", new JArray { key, headHash.Hash } } };
+            JObject response = _jsonRpc.Request(query);
+
+            return response["result"].ToString();
         }
 
-        public string GetStorageSize(string jsonPrm, string module, string variable)
+        public int GetStorageSize(string jsonPrm, string module, string variable)
         {
-            throw new NotImplementedException();
+            // Get most recent block hash
+            var headHash = GetBlockHash(null);
+
+            string key = GetKeys(jsonPrm, module, variable);
+            JObject query = new JObject { { "method", "state_getStorageSize" }, { "params", new JArray { key, headHash.Hash } } };
+            JObject response = _jsonRpc.Request(query);
+
+            return response["result"].ToObject<int>();
+        }
+
+        public string GetChildKeys(string childStorageKey, string storageKey)
+        {
+            // Get most recent block hash
+            var headHash = GetBlockHash(null);
+
+            JObject query = new JObject { { "method", "state_getChildKeys" },
+                                          { "params", new JArray { childStorageKey, storageKey, headHash.Hash } } };
+            JObject response = _jsonRpc.Request(query);
+
+            return response.ToString();
+        }
+
+        public string GetChildStorage(string childStorageKey, string storageKey)
+        {
+            // Get most recent block hash
+            var headHash = GetBlockHash(null);
+
+            JObject query = new JObject { { "method", "state_getChildStorage" },
+                { "params", new JArray { childStorageKey, storageKey, headHash.Hash } } };
+            JObject response = _jsonRpc.Request(query);
+
+            return response.ToString();
+        }
+
+        public string GetChildStorageHash(string childStorageKey, string storageKey)
+        {
+            // Get most recent block hash
+            var headHash = GetBlockHash(null);
+
+            JObject query = new JObject { { "method", "state_getChildStorageHash" },
+                { "params", new JArray { childStorageKey, storageKey, headHash.Hash } } };
+            JObject response = _jsonRpc.Request(query);
+
+            return response.ToString();
+        }
+
+        public int GetChildStorageSize(string childStorageKey, string storageKey)
+        {
+            // Get most recent block hash
+            var headHash = GetBlockHash(null);
+
+            JObject query = new JObject { { "method", "state_getChildStorageSize" },
+                { "params", new JArray { childStorageKey, storageKey, headHash.Hash } } };
+            JObject response = _jsonRpc.Request(query);
+
+            return response.ToObject<int>();
+        }
+
+        public StorageItem[] QueryStorage(string key, string startHash, string stopHash, int itemCount)
+       // public int QueryStorage(string key, string startHash, string stopHash, StorageItem[] itemBuf)
+        {
+            JObject query = new JObject { { "method", "state_queryStorage" },
+                 { "params", new JArray { new JArray(key), startHash, stopHash } } };
+            JObject response = _jsonRpc.Request(query, 30);
+
+            var si = new List<StorageItem>();
+
+            int i = 0;
+            var rstring = response["result"].ToString();
+            dynamic values = JsonConvert.DeserializeObject(response["result"].ToString());
+
+            while (i < itemCount && (values.Count > i))
+            {
+                var item = new StorageItem
+                {
+                    BlockHash = values[i]["block"].ToString(),
+                    Key = values[i]["changes"][0][0].ToString(),
+                    Value = values[i]["changes"][0][1].ToString()
+                };
+                si.Add(item);
+                i++;
+            }
+
+            return si.ToArray();
         }
 
         public NetworkState GetNetworkState()
@@ -264,5 +379,6 @@
                 }
             }
         }
+
     }
 }

@@ -8,8 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blake2Core" Version="1.0.0" />
+    <PackageReference Include="Extensions.Data.xxHash.core20" Version="1.0.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="NLog" Version="4.6.7" />
+    <PackageReference Include="SimpleBase" Version="1.8.0" />
     <PackageReference Include="websocketsharp.core" Version="1.0.0" />
   </ItemGroup>
 

@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Polkadot.Data;
+    using Polkadot.DataStructs.Metadata;
 
     public interface IApplication : IDisposable
     {
@@ -61,15 +62,12 @@
         /// <returns> FinalHead struct with result </returns>
         FinalHead GetFinalizedHead();
 
-        /**
-        *  Retreives the runtime metadata for specific block
-        *
-        *  @param struct with blockHash 64 diget number in hex format
-        *  @return Metadata struct with result
-        */
-
-        //Metadata GetMetadata(GetMetadataParams param);
-        string GetMetadata(GetMetadataParams param);
+        /// <summary>
+        ///  Retreives the runtime metadata for specific block
+        /// </summary>
+        /// <param name="param"> struct with blockHash 64 diget number in hex format </param>
+        /// <returns> Metadata struct with result </returns>
+        MetadataBase GetMetadata(GetMetadataParams param);
 
         /// <summary>
         ///  Generates storage key for a certain Module and State variable defined by parameter and prefix. Parameter is a JSON
@@ -133,7 +131,49 @@
         /// <param name="module"> module (as in metadata)</param>
         /// <param name="variable"> state variable (as in metadata for given module)</param>
         /// <returns> Storage size </returns>
-        string GetStorageSize(string jsonPrm, string module, string variable);
+        int GetStorageSize(string jsonPrm, string module, string variable);
+
+        /// <summary>
+        /// Calls storage_getChildKeys RPC method with given child storage key and storage key
+        /// </summary>
+        /// <param name="childStorageKey">string with 0x prefixed child storage key hex value</param>
+        /// <param name="storageKey">string with 0x prefixed storage key hex value</param>
+        /// <returns>string response from RPC method</returns>
+        string GetChildKeys(string childStorageKey, string storageKey);
+
+        /// <summary>
+        /// Calls storage_getChildStorage RPC method with given child storage key and storage key
+        /// </summary>
+        /// <param name="childStorageKey"> string with 0x prefixed child storage key hex value </param>
+        /// <param name="storageKey"> string with 0x prefixed storage key hex value </param>
+        /// <returns> string response from RPC method </returns>
+        string GetChildStorage(string childStorageKey, string storageKey);
+
+        /// <summary>
+        /// Calls storage_getChildStorageHash RPC method with given child storage key and storage key
+        /// </summary>
+        /// <param name="childStorageKey"> string with 0x prefixed child storage key hex value </param>
+        /// <param name="storageKey"> string with 0x prefixed storage key hex value </param>
+        /// <returns> string response from RPC method </returns>
+        string GetChildStorageHash(string childStorageKey, string storageKey);
+
+        /// <summary>
+        /// Calls storage_getChildStorageSize RPC method with given child storage key and storage key
+        /// </summary>
+        /// <param name="childStorageKey">  string with 0x prefixed child storage key hex value </param>
+        /// <param name="storageKey"> string with 0x prefixed storage key hex value </param>
+        /// <returns> int response from RPC method </returns>
+        int GetChildStorageSize(string childStorageKey, string storageKey);
+
+        /// <summary>
+        /// Calls state_queryStorage RPC method to get historical information about storage at a key
+        /// </summary>
+        /// <param name="key"> storage key to query </param>
+        /// <param name="startHash"> hash of block to start with </param>
+        /// <param name="stopHash"> hash of block to stop at </param>
+        /// <param name="itemCount"> size of StorageItem elements for retrieve </param>
+        /// <returns> array of StorageItem elements </returns>
+        StorageItem[] QueryStorage(string key, string startHash, string stopHash, int itemCount);
 
         /// <summary>
         /// Subscribe to most recent block number.Only one subscription at a time is allowed.If a subscription already 

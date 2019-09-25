@@ -23,7 +23,7 @@
         /// <param name="jsonMap"> jsonMap JSON object with command parameters </param>
         /// <param name="timeout"> timeout_s - timeout of response in seconds </param>
         /// <returns> JSON object that contains parsed node response</returns>
-        JObject Request(JObject jsonMap, long timeout = Consts.RESPONSE_TIMEOUT_S);
+        JObject Request(JObject jsonMap, int timeout = Consts.RESPONSE_TIMEOUT_S);
 
         /// <summary>
         /// Send a command to subscribe to websocket updates, e.g.state_subscribeStorage

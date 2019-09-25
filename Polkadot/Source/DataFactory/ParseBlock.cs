@@ -15,7 +15,7 @@
                 Header = new BlockHeader
                 {
                     ParentHash = json["block"]["header"]["parentHash"].ToString(),
-                    Number = Convert.ToUInt64(json["block"]["header"]["number"].ToString().Substring(2)),
+                    Number = Convert.ToUInt64(json["block"]["header"]["number"].ToString().Substring(2), 16),
                     StateRoot = json["block"]["header"]["stateRoot"].ToString(),
                     ExtrinsicsRoot = json["block"]["header"]["extrinsicsRoot"].ToString()
                 }

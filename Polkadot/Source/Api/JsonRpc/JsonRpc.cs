@@ -50,7 +50,7 @@
             _wsc.Disconnect();
         }
 
-        public JObject Request(JObject jsonMap, long timeout_s = Consts.RESPONSE_TIMEOUT_S)
+        public JObject Request(JObject jsonMap, int timeout_s = Consts.RESPONSE_TIMEOUT_S)
         {
             var query = new JsonRpcQuery();
             query.Id = GetNextId();
@@ -90,7 +90,7 @@
                 throw new ApplicationException(message);
             }
 
-            var resp = responce.Receive();         
+            var resp = responce.Receive(new TimeSpan( 0, 0, timeout_s));         
             _responces.Remove(query.Id);
 
             return resp;

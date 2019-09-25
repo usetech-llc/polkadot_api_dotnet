@@ -3,7 +3,6 @@ namespace PolkaTest
     using Polkadot.Api;
     using Xunit;
     using Xunit.Abstractions;
-    using Polkadot.Data;
 
     public class GetMetadata
     {
@@ -23,9 +22,7 @@ namespace PolkaTest
                 var result = app.GetMetadata(null);
 
                 Assert.NotNull(result);
-
                 output.WriteLine($"Result : {result}");
-
                 app.Disconnect();
             }
         }
