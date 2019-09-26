@@ -154,7 +154,6 @@
 
             return new CompactInteger { Value = number };
         }
-  
 
         //CompactIntegerLEBytes encodeCompactInteger(uint128 n) {
 

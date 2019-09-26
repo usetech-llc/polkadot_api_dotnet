@@ -3,10 +3,9 @@ namespace PolkaTest
     using Polkadot.Api;
     using Xunit;
     using Xunit.Abstractions;
-    using Polkadot.Data;
     using Newtonsoft.Json.Linq;
-    using System;
 
+    [Collection("Sequential")]
     public class GetStorageSize
     {
         private readonly ITestOutputHelper output;

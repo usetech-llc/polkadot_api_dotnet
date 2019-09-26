@@ -1,5 +1,6 @@
 ﻿namespace Polkadot.DataFactory
 {
+    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using Polkadot.Data;
 
@@ -14,13 +15,15 @@
     {
         public SystemInfo Parse(JObject jsonObject)
         {
+            dynamic djson = JsonConvert.DeserializeObject(jsonObject["item3"].ToString());
+
             return new SystemInfo
             {
                 ChainName = jsonObject["item0"].ToString(),
                 ChainId = jsonObject["item1"].ToString(),
                 Version = jsonObject["item2"].ToString(),
-                TokenDecimals = jsonObject["item3"]["tokenDecimals"].ToObject<int>(),
-                TokenSymbol = jsonObject["item3"]["tokenSymbol"].ToString()
+                TokenDecimals = djson["tokenDecimals"].ToObject<int>(),
+                TokenSymbol = djson["tokenSymbol"].ToString()
             };
         }
     }

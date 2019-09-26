@@ -3,14 +3,15 @@ namespace PolkaTest
     using Polkadot.Api;
     using Xunit;
     using Xunit.Abstractions;
+    using Polkadot.Data;
     using System.Threading;
 
     [Collection("Sequential")]
-    public class WssubscribeBlockNumber
+    public class WssubscribeRuntimeVersion
     {
         private readonly ITestOutputHelper output;
 
-        public WssubscribeBlockNumber(ITestOutputHelper output)
+        public WssubscribeRuntimeVersion(ITestOutputHelper output)
         {
             this.output = output;
         }
@@ -20,26 +21,24 @@ namespace PolkaTest
         {
             using (IApplication app = PolkaApi.GetAppication())
             {
-                long blockNum = 0;
-                int messagesCount = 0;
+                RuntimeVersion rv = null;
                 app.Connect();
 
-                int subId = app.SubscribeBlockNumber((blockNumber) =>
+                int subId = app.SubscribeRuntimeVersion((runtimeVersion) =>
                 {
-                    blockNum = blockNumber;
-                    messagesCount++;
-                    output.WriteLine($"Last block number        : {blockNumber}");
+                    rv = runtimeVersion;
+                    output.WriteLine($"Runtime version spec name: {runtimeVersion.SpecName}");
                 });
 
-                while(messagesCount < 2)
+                while(rv == null)
                 {
                     Thread.Sleep(300);
                 }
 
-                app.UnsubscribeBlockNumber(subId);
+                app.UnsubscribeRuntimeVersion(subId);
                 app.Disconnect();
 
-                Assert.True(blockNum > 0);
+                Assert.True(rv != null);
             }
         }
     }

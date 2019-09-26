@@ -7,6 +7,7 @@ namespace PolkaTest
     using Xunit;
     using Xunit.Abstractions;
 
+    [Collection("Sequential")]
     public class GetRuntimeVersion
     {
         private readonly ITestOutputHelper output;
@@ -19,8 +20,10 @@ namespace PolkaTest
         [Fact]
         public void Ok()
         {
-            JsonRpcParams param = new JsonRpcParams();
-            param.JsonrpcVersion = "2.0";
+            JsonRpcParams param = new JsonRpcParams
+            {
+                JsonrpcVersion = "2.0"
+            };
 
             var logger = new Logger();
             var jsonrpc = new MockJsonRpc(new Wsclient(logger), logger, param);

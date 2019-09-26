@@ -4,6 +4,7 @@ namespace PolkaTest
     using Xunit;
     using Xunit.Abstractions;
 
+    [Collection("Sequential")]
     public class GetMetadata
     {
         private readonly ITestOutputHelper output;

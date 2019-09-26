@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using WebSocketSharp;
     using System.Security.Cryptography.X509Certificates;
     using System.Net.Security;
     using System.Linq;

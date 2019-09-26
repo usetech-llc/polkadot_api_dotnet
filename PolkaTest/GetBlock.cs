@@ -5,6 +5,7 @@ namespace PolkaTest
     using Xunit.Abstractions;
     using Polkadot.Data;
 
+    [Collection("Sequential")]
     public class GetBlockHash
     {
         private readonly ITestOutputHelper output;

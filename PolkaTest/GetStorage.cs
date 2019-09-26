@@ -3,10 +3,10 @@ namespace PolkaTest
     using Polkadot.Api;
     using Xunit;
     using Xunit.Abstractions;
-    using Polkadot.Data;
     using Newtonsoft.Json.Linq;
     using System;
 
+    [Collection("Sequential")]
     public class GetStorage
     {
         private readonly ITestOutputHelper output;

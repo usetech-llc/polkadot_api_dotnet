@@ -52,8 +52,10 @@
 
         public JObject Request(JObject jsonMap, int timeout_s = Consts.RESPONSE_TIMEOUT_S)
         {
-            var query = new JsonRpcQuery();
-            query.Id = GetNextId();
+            var query = new JsonRpcQuery
+            {
+                Id = GetNextId()
+            };
 
             // build request
             JObject request = JObject.FromObject(
@@ -66,8 +68,7 @@
             );
 
             // create async receiver
-            BufferBlock<JObject> responce;
-            bool exists = _responces.TryGetValue(query.Id, out responce);
+            bool exists = _responces.TryGetValue(query.Id, out BufferBlock<JObject> responce);
 
             if (!exists)
             {
@@ -136,12 +137,9 @@
             // message is simple request
             if (requestId != 0)
             {
-                var result = json["result"] as JObject;
-
-                if (result == null)
-                    result = JObject.FromObject(new { result = json["result"].ToString() });
-
-                _responces.GetValueOrDefault((int)requestId).SendAsync(result);
+                // cut off protocol body
+                _responces.GetValueOrDefault((int)requestId).SendAsync(
+                    JObject.FromObject(new { result = json["result"].ToString() }));
             }
             else
 
@@ -149,7 +147,7 @@
             if (subscriptionId != 0)
             {
                 // Subscription response arrived.
-                var result = json["params"]["result"] as JObject;
+                var result = json["params"] as JObject;
                 _subscriptions.GetValueOrDefault((int)subscriptionId).HandleWsMessage((int)subscriptionId, result);
             }
         }

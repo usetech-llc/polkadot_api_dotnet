@@ -6,6 +6,7 @@ namespace PolkaTest
     using Polkadot.Data;
     using Newtonsoft.Json.Linq;
 
+    [Collection("Sequential")]
     public class GetKeys
     {
         private readonly ITestOutputHelper output;

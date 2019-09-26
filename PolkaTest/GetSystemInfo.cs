@@ -4,6 +4,7 @@ namespace PolkaTest
     using Xunit;
     using Xunit.Abstractions;
 
+    [Collection("Sequential")]
     public class GetSystemInfo
     {
         private readonly ITestOutputHelper output;

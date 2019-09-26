@@ -1,7 +1,6 @@
 ﻿namespace Polkadot.Api
 {
     using System;
-    using System.Threading.Tasks;
     using Polkadot.Data;
     using Polkadot.DataStructs.Metadata;
 
@@ -186,10 +185,30 @@
         int SubscribeBlockNumber(Action<long> callback);
 
         /// <summary>
-
+        /// Unsubscribe from WebSocket endpoint and stop receiving updates with most recent block number.
         /// </summary>
-        /// <param name="callback"> callback - delegate that will receive updates</param>
+        /// <param name="id"> Subscription id </param>
         /// <returns> operation result </returns>
         void UnsubscribeBlockNumber(int id);
+
+        /// <summary>
+        /// Subscribe to most recent runtime version.This subscription is necessary for applications that keep connection
+        /// for a long time.If update about runtime version arrives, it will be necessary to disconnect and reconnect since
+        /// module and method indexes might have changed.
+        /// 
+        /// Only one subscription at a time is allowed.If a subscription already
+        /// exists, old subscription will be discarded and replaced with the new one.Until unsubscribeRuntimeVersion method
+        /// is called, the API will be receiving updates and forwarding them to subscribed object/function.Only
+        /// unsubscribeRuntimeVersion will physically unsubscribe from WebSocket endpoint updates.
+        /// </summary>
+        /// <param name="callback"> callback - delegate that will receive updates </param>
+        /// <returns> operation result </returns>
+        int SubscribeRuntimeVersion(Action<RuntimeVersion> callback);
+
+        /// <summary>
+        /// Unsubscribe from WebSocket endpoint and stop receiving updates with most recent Runtime Version.
+        /// </summary>
+        /// <param name="id"> Subscription id </param>
+        void UnsubscribeRuntimeVersion(int id);
     }
 }

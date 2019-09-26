@@ -1,5 +1,6 @@
 ﻿namespace Polkadot.DataFactory
 {
+    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using Polkadot.Data;
     using System;
@@ -9,20 +10,22 @@
     {
         public SignedBlock Parse(JObject json)
         {
+            dynamic djson = JsonConvert.DeserializeObject(json["result"].ToString());
+
             var block = new Block
             {
                 Extrinsic = null,
                 Header = new BlockHeader
                 {
-                    ParentHash = json["block"]["header"]["parentHash"].ToString(),
-                    Number = Convert.ToUInt64(json["block"]["header"]["number"].ToString().Substring(2), 16),
-                    StateRoot = json["block"]["header"]["stateRoot"].ToString(),
-                    ExtrinsicsRoot = json["block"]["header"]["extrinsicsRoot"].ToString()
+                    ParentHash = djson["block"]["header"]["parentHash"].ToString(),
+                    Number = Convert.ToUInt64(djson["block"]["header"]["number"].ToString().Substring(2), 16),
+                    StateRoot = djson["block"]["header"]["stateRoot"].ToString(),
+                    ExtrinsicsRoot = djson["block"]["header"]["extrinsicsRoot"].ToString()
                 }
             };
 
             var digests = new List<DigestItem>();
-            foreach (var item in json["block"]["header"]["digest"]["logs"].Values())
+            foreach (string item in djson["block"]["header"]["digest"]["logs"].ToObject<string[]>())
             {
                 digests.Add(new DigestItem { Key = 0, Value = item.ToString() });
             }
@@ -30,7 +33,7 @@
 
 
             var extrinsics = new List<string>();
-            foreach (var item in json["block"]["extrinsics"].Values())
+            foreach (string item in djson["block"]["extrinsics"].ToObject<string[]>())
             {
                 extrinsics.Add(item.ToString());
             }
@@ -39,7 +42,7 @@
             return new SignedBlock
             {
                 Block = block,
-                Justification = json["justification"].ToString()
+                Justification = djson["justification"].ToString()
             };
         }
     }

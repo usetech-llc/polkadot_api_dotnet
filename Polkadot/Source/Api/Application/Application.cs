@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using System.IO;
-    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Threading.Tasks.Dataflow;
@@ -70,7 +68,7 @@
                 _logger.Info("FreeBalance hash function is Blake2-256");
 
             _logger.Info($"Balances module index: {_protocolParams.BalanceModuleIndex}" );
-            _logger.Info($"Transfer call index:: {_protocolParams.TransferMethodIndex}" );
+            _logger.Info($"Transfer call index: {_protocolParams.TransferMethodIndex}" );
 
             return result;
         }
@@ -103,7 +101,8 @@
                 item0 = systemNameJson["result"],
                 item1 = systemChainJson["result"],
                 item2 = systemVersionJson["result"],
-                item3 = systemPropertiesJson });
+                item3 = systemPropertiesJson["result"]
+            });
 
             return Deserialize<SystemInfo, ParseSystemInfo>(completeJson);
         }
@@ -287,7 +286,6 @@
         }
 
         public StorageItem[] QueryStorage(string key, string startHash, string stopHash, int itemCount)
-       // public int QueryStorage(string key, string startHash, string stopHash, StorageItem[] itemBuf)
         {
             JObject query = new JObject { { "method", "state_queryStorage" },
                  { "params", new JArray { new JArray(key), startHash, stopHash } } };
@@ -296,7 +294,6 @@
             var si = new List<StorageItem>();
 
             int i = 0;
-            var rstring = response["result"].ToString();
             dynamic values = JsonConvert.DeserializeObject(response["result"].ToString());
 
             while (i < itemCount && (values.Count > i))
@@ -323,24 +320,56 @@
         {
             JObject subscribeQuery = new JObject { { "method", "chain_subscribeNewHead" }, { "params", new JArray { } } };
 
-            var blockNumberSubscriptionId = _jsonRpc.SubscribeWs(subscribeQuery, this);
+            return Subscribe(subscribeQuery, (json) => {
+                var test = json["result"]["number"].ToString().Substring(2);
+                var blockNumber = long.Parse(test, NumberStyles.HexNumber);
+                return blockNumber;
+            }, callback);
+        }
 
-            InitSubscription(blockNumberSubscriptionId);  
+        public int SubscribeRuntimeVersion(Action<RuntimeVersion> callback)
+        {
+            JObject subscribeQuery = new JObject { { "method", "state_subscribeRuntimeVersion" }, { "params", new JArray { } } };
+
+            return Subscribe(subscribeQuery, (json) => {
+                return Deserialize<RuntimeVersion, ParseRuntimeVersion>(json);
+            }, callback);
+        }
+
+        private int Subscribe<T>(JObject subscriptionQuery, Func<JObject, T> parseFunc, Action<T> callback)
+        {
+            var subscriptionId = _jsonRpc.SubscribeWs(subscriptionQuery, this);
+
+            InitSubscription(subscriptionId);
 
             Task.Run(() =>
             {
                 // check if subscription still active
-                while (_subscriptionData.ContainsKey(blockNumberSubscriptionId))
+                while (_subscriptionData.ContainsKey(subscriptionId))
                 {
-                    var ct = _subscriptionTokens.GetValueOrDefault(blockNumberSubscriptionId);
-                    var json = _subscriptionData.GetValueOrDefault(blockNumberSubscriptionId).Receive(ct.Token);
-                    var test = json["number"].ToString().Substring(2);
-                    var blockNumber = long.Parse(test, NumberStyles.HexNumber);
-                    callback(blockNumber);
+                    var ct = _subscriptionTokens.GetValueOrDefault(subscriptionId);
+                    try
+                    {
+                        var json = _subscriptionData.GetValueOrDefault(subscriptionId).Receive(ct.Token);
+                        var data = parseFunc(json);
+                        callback(data);
+                    }
+                    catch (ObjectDisposedException e)
+                    {
+                        _logger.Info($"subscription disposed: {subscriptionId}");
+                    }
+                    catch (OperationCanceledException e)
+                    {
+                        _logger.Info($"operation canceled: {subscriptionId}");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.Error($"Subscription task error : {e.Message} ");
+                    }
                 }
             });
 
-            return blockNumberSubscriptionId;
+            return subscriptionId;
         }
 
         public void UnsubscribeBlockNumber(int id)
@@ -348,8 +377,16 @@
             RemoveSubscription(id);
         }
 
+        public void UnsubscribeRuntimeVersion(int id)
+        {
+            RemoveSubscription(id);
+        }
+
         public void HandleWsMessage(int subscriptionId, JObject message)
         {
+            _logger.Info($"HandleWsMessage JsonRpc called, subscriptionData contains key {_subscriptionData.ContainsKey(subscriptionId) }");
+            _logger.Info($"HandleWsMessage JsonRpc called, subscriptionData completion state {_subscriptionData.GetValueOrDefault(subscriptionId).Completion.Status.ToString() }");
+
             // subscription already init otherwise subscription does not exist
             _subscriptionData.GetValueOrDefault(subscriptionId)?.SendAsync(message);
         }
@@ -379,6 +416,5 @@
                 }
             }
         }
-
     }
 }

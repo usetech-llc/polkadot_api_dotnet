@@ -18,11 +18,12 @@ namespace PolkaTest
         public int GetHashCode(StorageItem product)
         {
             //Check whether the object is null
-            if (Object.ReferenceEquals(product, null)) return 0;
+            if (product is null) return 0;
             return product.Value.GetHashCode();
         }
     }
 
+    [Collection("Sequential")]
     public class QueryStorage
     {
         private readonly ITestOutputHelper output;

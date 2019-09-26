@@ -19,6 +19,5 @@
         public const string STORAGE_TYPE_REFERENDUM_INDEX = "ReferendumIndex";
         public const string STORAGE_TYPE_HASH = "Hash";
         public const string STORAGE_TYPE_PARACHAIN_ID = "ParaId";
-
     }
 }
