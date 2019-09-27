@@ -46,7 +46,7 @@ $ dotnet test --filter BadCertificate
 ```
 
 Here is the code fragment from this unit test that demonstrates that it expects the library to throw a FileNotFoundException:
-```aspx-csharp
+```csharp
 Assert.Throws<FileNotFoundException>(() =>
 {
     using (IApplication app = PolkaApi.GetAppication())
@@ -245,7 +245,7 @@ $ dotnet test --filter WssubscribeAll
 ### Following data can be read from the chain. Updates for this data arrive via WS subscription, are deserialized to an appropriate C# object, and returned from the API via a delegate call (decided to do it as a lambda and callback, this is a better design).
 
 See this code fragment from WssubscribeAll unit test:
-```aspx-csharp
+```csharp
 int subId = app.SubscribeBlockNumber((blockNumber) =>
 {
     blockNum = blockNumber;
