@@ -153,7 +153,7 @@ $ dotnet test --filter GetSystemInfo
 
 The documentation is built with docfx tool and exists in the repository as a static website. (See doc/html folder). Open this file in the browser locally as a starting point: /doc/html/docfx/api/Polkadot.Api.IApplication.html
 
-- Building: See [root level README.md](https://github.com/usetech-llc/polkadot_api_cpp/blob/master/README.md)
+- Building: See [root level README.md](https://github.com/usetech-llc/polkadot_api_dotnet#building-of-documentation)
 
 ## Deliverable 2 - Non-Parameterized Calls
 
@@ -162,7 +162,7 @@ The documentation is built with docfx tool and exists in the repository as a sta
 #### chain_getHeader
 ```
 $ dotnet test --filter GetBlock
-
+...
 2019-09-27 14:01:34.3478|INFO|Polkadot.Logger|Message body {
   "id": 7,
   "jsonrpc": "2.0",
@@ -173,12 +173,13 @@ $ dotnet test --filter GetBlock
 }
 2019-09-27 14:01:34.3478|INFO|Polkadot.Logger|Message 7 was sent
 2019-09-27 14:01:34.6471|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":{"digest":{"logs":["0x037c295a0f00000000ccb5103b9934c8b5a2fa9bd520092e1062dc43415aa8b712fd38d89e6450c5b.....a9c17fd7703a3001cfda9c17723469fa356594bc"},"id":7}
+...
 ```
 
 #### chain_getBlock
 ```
 $ dotnet test --filter GetBlock
-
+...
 2019-09-27 14:01:33.6794|INFO|Polkadot.Logger|Message body {
   "id": 6,
   "jsonrpc": "2.0",
@@ -189,13 +190,13 @@ $ dotnet test --filter GetBlock
 }
 2019-09-27 14:01:33.6794|INFO|Polkadot.Logger|Message 6 was sent
 2019-09-27 14:01:33.9672|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":{"block":{"extrinsics":["0x01000003e8f81c5c","0x010b0000"],"header":{"digest":{"logs":["0x037c295a0f000.....7723469fa356594bc"}},"justification":null},"id":6}
-
+...
 ```
 
 #### chain_getFinalizedHead
 ```
 $ dotnet test --filter GetBlock
-
+...
 2019-09-27 14:01:29.1789|INFO|Polkadot.Logger|Message body {
   "id": 4,
   "jsonrpc": "2.0",
@@ -204,6 +205,7 @@ $ dotnet test --filter GetBlock
 }
 2019-09-27 14:01:29.1789|INFO|Polkadot.Logger|Message 4 was sent
 2019-09-27 14:01:29.4806|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":"0xd245466d766605bfe82b0c531eefabe7b00fcc6ed16bb5f7d52b91f604c86463","id":4}
+...
 ```
 
 #### system_health
