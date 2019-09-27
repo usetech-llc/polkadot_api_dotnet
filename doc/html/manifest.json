@@ -1,0 +1,884 @@
+{
+  "homepages": [],
+  "source_base_path": "c:/Users/greg/Development/src/polkadot_api_dotnet/Polkadot",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Api.Application.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Api.Application.html",
+          "hash": "7hf+W61tgABgq0sqyJApdQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Api.Consts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Api.Consts.html",
+          "hash": "yAPDc63r0esf8OBypWaNuQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Api.IApplication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Api.IApplication.html",
+          "hash": "Bg1eLslNl8TcI4POIsuLsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Api.IJsonRpc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Api.IJsonRpc.html",
+          "hash": "xoH4t7kSySXLPqlFBKmgeg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Api.IMessageObserver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Api.IMessageObserver.html",
+          "hash": "F1Y7oJ75yv4x6NkKFjmnDA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Api.IWebSocketClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Api.IWebSocketClient.html",
+          "hash": "UNReHbF08bfZtTKnvFo6FA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Api.IWebSocketMessageObserver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Api.IWebSocketMessageObserver.html",
+          "hash": "ERoHt3GHPp+TubrAdjfgJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Api.JsonRpc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Api.JsonRpc.html",
+          "hash": "pSUZbiG4mY8rzQKPa/FBvA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Api.JsonRpcParams.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Api.JsonRpcParams.html",
+          "hash": "U6d8+wndi06OZBmFsGQxlA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Api.JsonRpcQuery.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Api.JsonRpcQuery.html",
+          "hash": "hCoXu7Oe05UkCV0C03xMKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Api.PolkaApi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Api.PolkaApi.html",
+          "hash": "BrgkUZ4QexBTwPIdknxtWQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Api.Wsclient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Api.Wsclient.html",
+          "hash": "UY2k30HxhoNMONRqiB2LWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Api.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Api.html",
+          "hash": "dB33CHK5W9juSShbKwt6ow=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.ApiItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.ApiItem.html",
+          "hash": "hsb/R6MT9/fqfy8PeQRI1Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.Block.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.Block.html",
+          "hash": "qNEzyHJ6FY0Ol3845aP5Kw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.BlockHash.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.BlockHash.html",
+          "hash": "gx+6Z2VHPDhZb4C9IHWt8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.BlockHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.BlockHeader.html",
+          "hash": "UZtOqmLAbs7YFMe4FGU0FA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.DigestItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.DigestItem.html",
+          "hash": "gjXZr110WXG+0SulFbSOcQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.DigestItemKey.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.DigestItemKey.html",
+          "hash": "L2eOEtbXYsZAhobALjSz0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.FinalHead.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.FinalHead.html",
+          "hash": "uV45x+5axwCCKvDPsqyYWA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.GetBlockHashParams.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.GetBlockHashParams.html",
+          "hash": "B3SIVqbM31ag9uXvLNufhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.GetBlockParams.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.GetBlockParams.html",
+          "hash": "1lwmUM9McMuXY5c6d0rp4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.GetMetadataParams.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.GetMetadataParams.html",
+          "hash": "jf5AhUi8F7sDXMoa5EDmEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.GetRuntimeVersionParams.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.GetRuntimeVersionParams.html",
+          "hash": "mI3VC9ohQR+9Tdvmds5jrw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.NetworkState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.NetworkState.html",
+          "hash": "Vh19NJjcLlQLb3vdqwjf8g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.RuntimeVersion.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.RuntimeVersion.html",
+          "hash": "BXGFZuu6kuJlyWnwECvUOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.SignedBlock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.SignedBlock.html",
+          "hash": "8X1U8Qyj/tVNhI6jsJIjZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.StorageItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.StorageItem.html",
+          "hash": "PFwCriXJhREJjf1dLQTQfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.SystemInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.SystemInfo.html",
+          "hash": "uxtFrsZVCMkQzmyWfTOlHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Data.html",
+          "hash": "ZOmEQieW3uhzRYOVAWJjEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataFactory.IParseFactory-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataFactory.IParseFactory-1.html",
+          "hash": "SondOOOmxU5l/6DgxhoYbA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataFactory.Metadata.ParseMetadataV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataFactory.Metadata.ParseMetadataV4.html",
+          "hash": "98tGRiaEnrfl6IkY2MkeiA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataFactory.Metadata.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataFactory.Metadata.html",
+          "hash": "bFCZRbOHkkIxqKDG3RYGsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataFactory.ParseBlock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataFactory.ParseBlock.html",
+          "hash": "XYJF0f3EgI7a5fsttwbzTw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataFactory.ParseBlockHash.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataFactory.ParseBlockHash.html",
+          "hash": "vZOnpnhAaXFnwEbZbNVlUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataFactory.ParseBlockHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataFactory.ParseBlockHeader.html",
+          "hash": "b9ZF4Bf50Ze0RsWLEvhPSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataFactory.ParseFinalizedHead.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataFactory.ParseFinalizedHead.html",
+          "hash": "kkheqo28SrwjXCM6DT/VjA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataFactory.ParseRuntimeVersion.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataFactory.ParseRuntimeVersion.html",
+          "hash": "N+1xeLDGmFsGLHq5L0TbFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataFactory.ParseSystemInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataFactory.ParseSystemInfo.html",
+          "hash": "wgCNpjICMGueLiuCeb/NKw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataFactory.html",
+          "hash": "Y45aGgRQJQbDrSZGNEjRHw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataStructs.Address.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataStructs.Address.html",
+          "hash": "xfBWFOaB7vX1666ElRum/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataStructs.Hasher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataStructs.Hasher.html",
+          "hash": "0EOuDTLIHURYRK5GWhmWSA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataStructs.Metadata.CallV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataStructs.Metadata.CallV4.html",
+          "hash": "M50H27p3aMpKOxBmktrU3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataStructs.Metadata.EventArgV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataStructs.Metadata.EventArgV4.html",
+          "hash": "XyJ76yDXAqvDUFGYI15trA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV4.html",
+          "hash": "1ESXotXERkVKd3TzIg+98Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataStructs.Metadata.FunctionCallArgV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataStructs.Metadata.FunctionCallArgV4.html",
+          "hash": "sfE4+rtC+MlCz0A0rczNRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataStructs.Metadata.Metadata.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataStructs.Metadata.Metadata.html",
+          "hash": "qd3rSUu4NXFwAnGA1FUK2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataStructs.Metadata.MetadataBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataStructs.Metadata.MetadataBase.html",
+          "hash": "rYQBXTyetTpSBs5aiff0bQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataStructs.Metadata.MetadataV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataStructs.Metadata.MetadataV4.html",
+          "hash": "da5dN3n+mNQ3Bk1JNqUYNA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataStructs.Metadata.ModuleV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataStructs.Metadata.ModuleV4.html",
+          "hash": "WUYkB4ADAZVN7feEfSDE4g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataStructs.Metadata.StorageV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataStructs.Metadata.StorageV4.html",
+          "hash": "3w4I7AKhH6jneBrE4Q54JA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataStructs.Metadata.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataStructs.Metadata.html",
+          "hash": "nkKoVnI/dKiORoG+CmL4Eg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataStructs.PublicKey.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataStructs.PublicKey.html",
+          "hash": "Ey5n5+6AjeZJ0ETu6hX6rg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.DataStructs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.DataStructs.html",
+          "hash": "7UaYqVjg1prbwu7xcw71lw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.ILogger.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.ILogger.html",
+          "hash": "IWHQZ8s/szJKPdULQg8B9g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Logger.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Logger.html",
+          "hash": "mXLcRCwRKOaXG6VrIwYsQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Source.Utils.CompactInteger.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Source.Utils.CompactInteger.html",
+          "hash": "EjE3Z3PPzf+GZkT+KozyeA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Source.Utils.JsonParse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Source.Utils.JsonParse.html",
+          "hash": "AtdZfEQrL1UryW5jxhffdg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Source.Utils.Scale.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Source.Utils.Scale.html",
+          "hash": "pERXdEB3sDv83iCq/9aaug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Source.Utils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Source.Utils.html",
+          "hash": "4rbw6N5aqADYHlvDbSU/hw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Test.MockJsonRpc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Test.MockJsonRpc.html",
+          "hash": "5B2SalU2vQTkg5YD9x9GlQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.Test.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.Test.html",
+          "hash": "rgKRJcPBqHxpQU4/muRYsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "docfx/api/Polkadot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/Polkadot.html",
+          "hash": "PjZp6E+weMGcATpmjsZ1ag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docfx/api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/index.html",
+          "hash": "A6wuLurx7eThpj1G4LWWgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docfx/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/api/toc.html",
+          "hash": "m2i8c0y5iqiJ+FVN/s70Xg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docfx/articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/articles/intro.html",
+          "hash": "bXGosXPhDyHj9ahAT0TKgg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docfx/articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/articles/toc.html",
+          "hash": "t7iiFrmuYmrKWisdq+lN6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docfx/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/index.html",
+          "hash": "LogpGdw3ha+y83OLZDTqpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docfx/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docfx/toc.html",
+          "hash": "k+/dkjFuwAVS32HduMpmBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Disable incremental build by force rebuild option.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "ForceRebuild"
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 63,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: it's disabled.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
