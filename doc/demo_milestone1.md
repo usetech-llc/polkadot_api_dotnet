@@ -4,19 +4,19 @@ Milestone 1 deliverables are marked by tag [milestone1](https://github.com/usete
 
 ## Deliverable 1
 
-### The project can be built with provided instructions with dotnet command line tool
+### The project can be built with provided instructions on bare installation of Ubuntu Linux 16.04.
 
-For convenience the Dockerfile is provided that installs all dependencies as needed, checks out the code for the API and builds it. In order to execute single API tests manually, please have docker CE installed, then clone this repository and run following commands (first one takes ~20 minutes to run for the first time):
+For convenience the Dockerfile is provided that installs all dependencies as needed, checks out the code for the API and builds it. In order to execute single API tests manually, please have docker CE installed, then clone this repository and run following commands:
 ```
 $ docker build -t polkanet .
 $ docker run -it --rm polkanet /bin/bash
 ```
 
-Now you are connected to a running docker container with API built, tested, and ready. You can execute following commands to examine deliverables.
+Now you are connected to a running docker container with API built. You can execute following commands to examine deliverables.
 
 ### Build project and run tests (Command line tool is provided to execute all milestone deliverables)
 
-The milestone 1 deliverables are demonstrated all with one command through running tests that have verbal output. We will point out the particular fragments of this output that demonstrate deliverables.
+The milestone 1 deliverables can be demonstrated all with one command through running tests that have verbal output. Though separate commands may be run with parameter `dotnet --filter <test name>`. We will point out the particular fragments of this output that demonstrate deliverables as well as suggest running separate tests when it makes sense.
 
 ```
 # dotnet build
