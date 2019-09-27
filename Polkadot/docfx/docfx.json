@@ -3,13 +3,13 @@
     {
       "src": [
         {
+		  "cwd": "..//",
           "files": [
             "**.csproj"
-          ],
-          "src": "C:\\Users\\greg\\Development\\src\\polkadot_api_dotnet\\Polkadot"
+          ]
         }
       ],
-      "dest": "docfx/api",
+      "dest": "api",
       "disableGitFeatures": false,
       "disableDefaultFilter": false
     }
@@ -18,30 +18,30 @@
     "content": [
       {
         "files": [
-          "docfx/api/**.yml",
-          "docfx/api/index.md"
+          "api/**.yml",
+          "api/index.md"
         ]
       },
       {
         "files": [
-          "docfx/articles/**.md",
-          "docfx/articles/**/toc.yml",
-          "docfx/toc.yml",
-          "docfx/*.md"
+          "articles/**.md",
+          "articles/**/toc.yml",
+          "toc.yml",
+          "*.md"
         ]
       }
     ],
     "resource": [
       {
         "files": [
-          "docfx/images/**"
+          "images/**"
         ]
       }
     ],
     "overwrite": [
       {
         "files": [
-          "docfx/apidoc/**.md"
+          "apidoc/**.md"
         ],
         "exclude": [
           "obj/**",
@@ -49,7 +49,7 @@
         ]
       }
     ],
-    "dest": "../doc/html",
+    "dest": "../../doc/html",
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
