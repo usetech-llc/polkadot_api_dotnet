@@ -41,7 +41,7 @@ Edit Polkadot.csproj file and add "build;" in the docfx section like here:
 ```
 <PackageReference Include="docfx.console" Version="2.45.1">
   <PrivateAssets>all</PrivateAssets>
-  <IncludeAssets>runtime; native; contentfiles; analyzers</IncludeAssets>
+  <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 </PackageReference>
 ```
 
