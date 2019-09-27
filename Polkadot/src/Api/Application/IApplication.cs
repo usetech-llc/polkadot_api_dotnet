@@ -165,6 +165,22 @@
         int GetChildStorageSize(string childStorageKey, string storageKey);
 
         /// <summary>
+        /// Returns the currently connected peers
+        /// </summary>
+        /// <returns>
+        /// PeersInfo struct with result
+        /// </returns>
+        PeersInfo GetSystemPeers();
+
+        /// <summary>
+        /// Return health status of the node
+        /// </summary>
+        /// <returns>
+        /// SystemHealth struct with result
+        /// </returns>
+        SystemHealth GetSystemHealth();
+
+        /// <summary>
         /// Calls state_queryStorage RPC method to get historical information about storage at a key
         /// </summary>
         /// <param name="key"> storage key to query </param>
