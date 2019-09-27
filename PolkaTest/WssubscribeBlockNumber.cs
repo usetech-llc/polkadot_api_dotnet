@@ -20,31 +20,27 @@ namespace PolkaTest
         {
             using (IApplication app = PolkaApi.GetAppication())
             {
-                for(var i = 0; i < 100; i++)
+                long blockNum = 0;
+                int messagesCount = 0;
+                app.Connect();
+
+                int subId = app.SubscribeBlockNumber((blockNumber) =>
                 {
-                    long blockNum = 0;
-                    int messagesCount = 0;
-                    app.Connect();
+                    blockNum = blockNumber;
+                    messagesCount++;
+                    output.WriteLine($"Last block number        : {blockNumber}");
+                });
 
-                    int subId = app.SubscribeBlockNumber((blockNumber) =>
-                    {
-                        blockNum = blockNumber;
-                        messagesCount++;
-                        output.WriteLine($"Last block number        : {blockNumber}");
-                    });
-
-                    while (messagesCount < 2)
-                    {
-                        Thread.Sleep(300);
-                    }
-
-                    app.UnsubscribeBlockNumber(subId);
-
-                    app.Disconnect();
-
-                    Assert.True(blockNum > 0);
+                while (messagesCount < 2)
+                {
+                    Thread.Sleep(300);
                 }
 
+                app.UnsubscribeBlockNumber(subId);
+
+                app.Disconnect();
+
+                Assert.True(blockNum > 0);
             }
         }
     }
