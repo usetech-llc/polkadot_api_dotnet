@@ -10,11 +10,10 @@ RUN dotnet restore PolkaTest/PolkaTest.csproj
 COPY . .
 
 COPY ["./Polkadot/ca-chain.cert.pem", "PolkaTest/bin/Debug/netcoreapp2.2/ca-chain.cert.pem"]
- 
+
 WORKDIR "/src/Polkadot"
 RUN dotnet build "Polkadot.csproj" -c Release -o /app
 
-ENTRYPOINT ["dotnet", "Polkadot.dll"]
+#ENTRYPOINT ["dotnet", "Polkadot.dll"]
 
 WORKDIR "/src/PolkaTest"
-RUN dotnet test
