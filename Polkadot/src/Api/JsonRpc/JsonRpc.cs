@@ -148,6 +148,12 @@
             {
                 // Subscription response arrived.
                 var result = json["params"] as JObject;
+
+                if (_subscriptions.GetValueOrDefault((int)subscriptionId) is null)
+                {
+                    _logger.Error($"subscriptionId: {subscriptionId} does not exists");
+                }
+
                 _subscriptions.GetValueOrDefault((int)subscriptionId).HandleWsMessage((int)subscriptionId, result);
             }
         }
