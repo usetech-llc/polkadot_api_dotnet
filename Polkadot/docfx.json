@@ -6,7 +6,7 @@
           "files": [
             "**.csproj"
           ],
-          "src": "C:\\Users\\greg\\Development\\src\\polkadot_api_dotnet\\Polkadot"
+          "cdw": ".."
         }
       ],
       "dest": "docfx/api",
