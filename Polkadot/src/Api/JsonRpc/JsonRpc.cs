@@ -81,8 +81,8 @@
             {
                 _wsc.Send(request.ToString());
 
-                string message = $"Message {query.Id} was sent";
-                _logger.Info(message);
+                _logger.Info($"Message body {request.ToString()}");
+                _logger.Info($"Message {query.Id} was sent");
             }
             else
             {
