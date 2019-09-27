@@ -4,7 +4,7 @@ Milestone 1 deliverables are marked by tag [milestone1](https://github.com/usete
 
 ## Deliverable 1
 
-### The project can be built with provided instructions on bare installation of Ubuntu Linux 16.04.
+### The project can be built with provided instructions with dotnet command line tool
 
 For convenience the Dockerfile is provided that installs all dependencies as needed, checks out the code for the API and builds it. In order to execute single API tests manually, please have docker CE installed, then clone this repository and run following commands (first one takes ~20 minutes to run for the first time):
 ```
