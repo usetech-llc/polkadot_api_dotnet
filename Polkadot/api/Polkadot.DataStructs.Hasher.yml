@@ -1,0 +1,112 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.DataStructs.Hasher
+  commentId: T:Polkadot.DataStructs.Hasher
+  id: Hasher
+  parent: Polkadot.DataStructs
+  children:
+  - Polkadot.DataStructs.Hasher.BLAKE2
+  - Polkadot.DataStructs.Hasher.XXHASH
+  langs:
+  - csharp
+  - vb
+  name: Hasher
+  nameWithType: Hasher
+  fullName: Polkadot.DataStructs.Hasher
+  type: Enum
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Hasher.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Hasher
+    path: src/DataStructs/Hasher.cs
+    startLine: 2
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs
+  syntax:
+    content: public enum Hasher
+    content.vb: Public Enum Hasher
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Polkadot.DataStructs.Hasher.XXHASH
+  commentId: F:Polkadot.DataStructs.Hasher.XXHASH
+  id: XXHASH
+  parent: Polkadot.DataStructs.Hasher
+  langs:
+  - csharp
+  - vb
+  name: XXHASH
+  nameWithType: Hasher.XXHASH
+  fullName: Polkadot.DataStructs.Hasher.XXHASH
+  type: Field
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Hasher.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: XXHASH
+    path: src/DataStructs/Hasher.cs
+    startLine: 4
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs
+  syntax:
+    content: XXHASH = 0
+    return:
+      type: Polkadot.DataStructs.Hasher
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Polkadot.DataStructs.Hasher.BLAKE2
+  commentId: F:Polkadot.DataStructs.Hasher.BLAKE2
+  id: BLAKE2
+  parent: Polkadot.DataStructs.Hasher
+  langs:
+  - csharp
+  - vb
+  name: BLAKE2
+  nameWithType: Hasher.BLAKE2
+  fullName: Polkadot.DataStructs.Hasher.BLAKE2
+  type: Field
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Hasher.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: BLAKE2
+    path: src/DataStructs/Hasher.cs
+    startLine: 4
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs
+  syntax:
+    content: BLAKE2 = 1
+    return:
+      type: Polkadot.DataStructs.Hasher
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Polkadot.DataStructs
+  commentId: N:Polkadot.DataStructs
+  name: Polkadot.DataStructs
+  nameWithType: Polkadot.DataStructs
+  fullName: Polkadot.DataStructs
+- uid: Polkadot.DataStructs.Hasher
+  commentId: T:Polkadot.DataStructs.Hasher
+  parent: Polkadot.DataStructs
+  name: Hasher
+  nameWithType: Hasher
+  fullName: Polkadot.DataStructs.Hasher

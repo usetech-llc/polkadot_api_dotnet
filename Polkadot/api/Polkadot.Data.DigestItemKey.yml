@@ -1,0 +1,277 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.Data.DigestItemKey
+  commentId: T:Polkadot.Data.DigestItemKey
+  id: DigestItemKey
+  parent: Polkadot.Data
+  children:
+  - Polkadot.Data.DigestItemKey.AuthoritiesChange
+  - Polkadot.Data.DigestItemKey.ChangesTrieRoot
+  - Polkadot.Data.DigestItemKey.Consensus
+  - Polkadot.Data.DigestItemKey.Other
+  - Polkadot.Data.DigestItemKey.PreRuntime
+  - Polkadot.Data.DigestItemKey.Seal
+  - Polkadot.Data.DigestItemKey.SealV0
+  langs:
+  - csharp
+  - vb
+  name: DigestItemKey
+  nameWithType: DigestItemKey
+  fullName: Polkadot.Data.DigestItemKey
+  type: Enum
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/BlockHeader.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: DigestItemKey
+    path: src/DataStructs/BlockHeader.cs
+    startLine: 2
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Data
+  syntax:
+    content: public enum DigestItemKey
+    content.vb: Public Enum DigestItemKey
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Polkadot.Data.DigestItemKey.Other
+  commentId: F:Polkadot.Data.DigestItemKey.Other
+  id: Other
+  parent: Polkadot.Data.DigestItemKey
+  langs:
+  - csharp
+  - vb
+  name: Other
+  nameWithType: DigestItemKey.Other
+  fullName: Polkadot.Data.DigestItemKey.Other
+  type: Field
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/BlockHeader.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Other
+    path: src/DataStructs/BlockHeader.cs
+    startLine: 4
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Data
+  syntax:
+    content: Other = 0
+    return:
+      type: Polkadot.Data.DigestItemKey
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Polkadot.Data.DigestItemKey.AuthoritiesChange
+  commentId: F:Polkadot.Data.DigestItemKey.AuthoritiesChange
+  id: AuthoritiesChange
+  parent: Polkadot.Data.DigestItemKey
+  langs:
+  - csharp
+  - vb
+  name: AuthoritiesChange
+  nameWithType: DigestItemKey.AuthoritiesChange
+  fullName: Polkadot.Data.DigestItemKey.AuthoritiesChange
+  type: Field
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/BlockHeader.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: AuthoritiesChange
+    path: src/DataStructs/BlockHeader.cs
+    startLine: 5
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Data
+  syntax:
+    content: AuthoritiesChange = 1
+    return:
+      type: Polkadot.Data.DigestItemKey
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Polkadot.Data.DigestItemKey.ChangesTrieRoot
+  commentId: F:Polkadot.Data.DigestItemKey.ChangesTrieRoot
+  id: ChangesTrieRoot
+  parent: Polkadot.Data.DigestItemKey
+  langs:
+  - csharp
+  - vb
+  name: ChangesTrieRoot
+  nameWithType: DigestItemKey.ChangesTrieRoot
+  fullName: Polkadot.Data.DigestItemKey.ChangesTrieRoot
+  type: Field
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/BlockHeader.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: ChangesTrieRoot
+    path: src/DataStructs/BlockHeader.cs
+    startLine: 6
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Data
+  syntax:
+    content: ChangesTrieRoot = 2
+    return:
+      type: Polkadot.Data.DigestItemKey
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Polkadot.Data.DigestItemKey.SealV0
+  commentId: F:Polkadot.Data.DigestItemKey.SealV0
+  id: SealV0
+  parent: Polkadot.Data.DigestItemKey
+  langs:
+  - csharp
+  - vb
+  name: SealV0
+  nameWithType: DigestItemKey.SealV0
+  fullName: Polkadot.Data.DigestItemKey.SealV0
+  type: Field
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/BlockHeader.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: SealV0
+    path: src/DataStructs/BlockHeader.cs
+    startLine: 7
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Data
+  syntax:
+    content: SealV0 = 3
+    return:
+      type: Polkadot.Data.DigestItemKey
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Polkadot.Data.DigestItemKey.Consensus
+  commentId: F:Polkadot.Data.DigestItemKey.Consensus
+  id: Consensus
+  parent: Polkadot.Data.DigestItemKey
+  langs:
+  - csharp
+  - vb
+  name: Consensus
+  nameWithType: DigestItemKey.Consensus
+  fullName: Polkadot.Data.DigestItemKey.Consensus
+  type: Field
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/BlockHeader.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Consensus
+    path: src/DataStructs/BlockHeader.cs
+    startLine: 8
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Data
+  syntax:
+    content: Consensus = 4
+    return:
+      type: Polkadot.Data.DigestItemKey
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Polkadot.Data.DigestItemKey.Seal
+  commentId: F:Polkadot.Data.DigestItemKey.Seal
+  id: Seal
+  parent: Polkadot.Data.DigestItemKey
+  langs:
+  - csharp
+  - vb
+  name: Seal
+  nameWithType: DigestItemKey.Seal
+  fullName: Polkadot.Data.DigestItemKey.Seal
+  type: Field
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/BlockHeader.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Seal
+    path: src/DataStructs/BlockHeader.cs
+    startLine: 9
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Data
+  syntax:
+    content: Seal = 5
+    return:
+      type: Polkadot.Data.DigestItemKey
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Polkadot.Data.DigestItemKey.PreRuntime
+  commentId: F:Polkadot.Data.DigestItemKey.PreRuntime
+  id: PreRuntime
+  parent: Polkadot.Data.DigestItemKey
+  langs:
+  - csharp
+  - vb
+  name: PreRuntime
+  nameWithType: DigestItemKey.PreRuntime
+  fullName: Polkadot.Data.DigestItemKey.PreRuntime
+  type: Field
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/BlockHeader.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: PreRuntime
+    path: src/DataStructs/BlockHeader.cs
+    startLine: 10
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Data
+  syntax:
+    content: PreRuntime = 6
+    return:
+      type: Polkadot.Data.DigestItemKey
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Polkadot.Data
+  commentId: N:Polkadot.Data
+  name: Polkadot.Data
+  nameWithType: Polkadot.Data
+  fullName: Polkadot.Data
+- uid: Polkadot.Data.DigestItemKey
+  commentId: T:Polkadot.Data.DigestItemKey
+  parent: Polkadot.Data
+  name: DigestItemKey
+  nameWithType: DigestItemKey
+  fullName: Polkadot.Data.DigestItemKey

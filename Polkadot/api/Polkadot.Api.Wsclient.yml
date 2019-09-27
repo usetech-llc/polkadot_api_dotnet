@@ -1,0 +1,880 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.Api.Wsclient
+  commentId: T:Polkadot.Api.Wsclient
+  id: Wsclient
+  parent: Polkadot.Api
+  children:
+  - Polkadot.Api.Wsclient.#ctor(Polkadot.ILogger)
+  - Polkadot.Api.Wsclient.Connect(System.String)
+  - Polkadot.Api.Wsclient.Disconnect
+  - Polkadot.Api.Wsclient.Dispose
+  - Polkadot.Api.Wsclient.IsConnected
+  - Polkadot.Api.Wsclient.RegisterMessageObserver(Polkadot.Api.IMessageObserver)
+  - Polkadot.Api.Wsclient.Send(System.String)
+  langs:
+  - csharp
+  - vb
+  name: Wsclient
+  nameWithType: Wsclient
+  fullName: Polkadot.Api.Wsclient
+  type: Class
+  source:
+    remote:
+      path: Polkadot/src/Api/Wsclient/Wsclient.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Wsclient
+    path: src/Api/Wsclient/Wsclient.cs
+    startLine: 9
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: 'public class Wsclient : IWebSocketClient, IDisposable'
+    content.vb: >-
+      Public Class Wsclient
+
+          Implements IWebSocketClient, IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - Polkadot.Api.IWebSocketClient
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Polkadot.Api.Wsclient.#ctor(Polkadot.ILogger)
+  commentId: M:Polkadot.Api.Wsclient.#ctor(Polkadot.ILogger)
+  id: '#ctor(Polkadot.ILogger)'
+  parent: Polkadot.Api.Wsclient
+  langs:
+  - csharp
+  - vb
+  name: Wsclient(ILogger)
+  nameWithType: Wsclient.Wsclient(ILogger)
+  fullName: Polkadot.Api.Wsclient.Wsclient(Polkadot.ILogger)
+  type: Constructor
+  source:
+    remote:
+      path: Polkadot/src/Api/Wsclient/Wsclient.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: .ctor
+    path: src/Api/Wsclient/Wsclient.cs
+    startLine: 15
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public Wsclient(ILogger logger)
+    parameters:
+    - id: logger
+      type: Polkadot.ILogger
+    content.vb: Public Sub New(logger As ILogger)
+  overload: Polkadot.Api.Wsclient.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Api.Wsclient.Connect(System.String)
+  commentId: M:Polkadot.Api.Wsclient.Connect(System.String)
+  id: Connect(System.String)
+  parent: Polkadot.Api.Wsclient
+  langs:
+  - csharp
+  - vb
+  name: Connect(String)
+  nameWithType: Wsclient.Connect(String)
+  fullName: Polkadot.Api.Wsclient.Connect(System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Api/Wsclient/Wsclient.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Connect
+    path: src/Api/Wsclient/Wsclient.cs
+    startLine: 20
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public int Connect(string node_url = "")
+    parameters:
+    - id: node_url
+      type: System.String
+    return:
+      type: System.Int32
+    content.vb: Public Function Connect(node_url As String = "") As Integer
+  overload: Polkadot.Api.Wsclient.Connect*
+  implements:
+  - Polkadot.Api.IWebSocketClient.Connect(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Api.Wsclient.Disconnect
+  commentId: M:Polkadot.Api.Wsclient.Disconnect
+  id: Disconnect
+  parent: Polkadot.Api.Wsclient
+  langs:
+  - csharp
+  - vb
+  name: Disconnect()
+  nameWithType: Wsclient.Disconnect()
+  fullName: Polkadot.Api.Wsclient.Disconnect()
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Api/Wsclient/Wsclient.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Disconnect
+    path: src/Api/Wsclient/Wsclient.cs
+    startLine: 51
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public void Disconnect()
+    content.vb: Public Sub Disconnect
+  overload: Polkadot.Api.Wsclient.Disconnect*
+  implements:
+  - Polkadot.Api.IWebSocketClient.Disconnect
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Api.Wsclient.Dispose
+  commentId: M:Polkadot.Api.Wsclient.Dispose
+  id: Dispose
+  parent: Polkadot.Api.Wsclient
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: Wsclient.Dispose()
+  fullName: Polkadot.Api.Wsclient.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Api/Wsclient/Wsclient.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Dispose
+    path: src/Api/Wsclient/Wsclient.cs
+    startLine: 56
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose
+  overload: Polkadot.Api.Wsclient.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Api.Wsclient.IsConnected
+  commentId: M:Polkadot.Api.Wsclient.IsConnected
+  id: IsConnected
+  parent: Polkadot.Api.Wsclient
+  langs:
+  - csharp
+  - vb
+  name: IsConnected()
+  nameWithType: Wsclient.IsConnected()
+  fullName: Polkadot.Api.Wsclient.IsConnected()
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Api/Wsclient/Wsclient.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: IsConnected
+    path: src/Api/Wsclient/Wsclient.cs
+    startLine: 62
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public bool IsConnected()
+    return:
+      type: System.Boolean
+    content.vb: Public Function IsConnected As Boolean
+  overload: Polkadot.Api.Wsclient.IsConnected*
+  implements:
+  - Polkadot.Api.IWebSocketClient.IsConnected
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Api.Wsclient.RegisterMessageObserver(Polkadot.Api.IMessageObserver)
+  commentId: M:Polkadot.Api.Wsclient.RegisterMessageObserver(Polkadot.Api.IMessageObserver)
+  id: RegisterMessageObserver(Polkadot.Api.IMessageObserver)
+  parent: Polkadot.Api.Wsclient
+  langs:
+  - csharp
+  - vb
+  name: RegisterMessageObserver(IMessageObserver)
+  nameWithType: Wsclient.RegisterMessageObserver(IMessageObserver)
+  fullName: Polkadot.Api.Wsclient.RegisterMessageObserver(Polkadot.Api.IMessageObserver)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Api/Wsclient/Wsclient.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: RegisterMessageObserver
+    path: src/Api/Wsclient/Wsclient.cs
+    startLine: 67
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public void RegisterMessageObserver(IMessageObserver handler)
+    parameters:
+    - id: handler
+      type: Polkadot.Api.IMessageObserver
+    content.vb: Public Sub RegisterMessageObserver(handler As IMessageObserver)
+  overload: Polkadot.Api.Wsclient.RegisterMessageObserver*
+  implements:
+  - Polkadot.Api.IWebSocketClient.RegisterMessageObserver(Polkadot.Api.IMessageObserver)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Api.Wsclient.Send(System.String)
+  commentId: M:Polkadot.Api.Wsclient.Send(System.String)
+  id: Send(System.String)
+  parent: Polkadot.Api.Wsclient
+  langs:
+  - csharp
+  - vb
+  name: Send(String)
+  nameWithType: Wsclient.Send(String)
+  fullName: Polkadot.Api.Wsclient.Send(System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Api/Wsclient/Wsclient.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Send
+    path: src/Api/Wsclient/Wsclient.cs
+    startLine: 72
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public void Send(string msg)
+    parameters:
+    - id: msg
+      type: System.String
+    content.vb: Public Sub Send(msg As String)
+  overload: Polkadot.Api.Wsclient.Send*
+  implements:
+  - Polkadot.Api.IWebSocketClient.Send(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Polkadot.Api
+  commentId: N:Polkadot.Api
+  name: Polkadot.Api
+  nameWithType: Polkadot.Api
+  fullName: Polkadot.Api
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Polkadot.Api.IWebSocketClient
+  commentId: T:Polkadot.Api.IWebSocketClient
+  parent: Polkadot.Api
+  name: IWebSocketClient
+  nameWithType: IWebSocketClient
+  fullName: Polkadot.Api.IWebSocketClient
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Polkadot.Api.Wsclient.#ctor*
+  commentId: Overload:Polkadot.Api.Wsclient.#ctor
+  name: Wsclient
+  nameWithType: Wsclient.Wsclient
+  fullName: Polkadot.Api.Wsclient.Wsclient
+- uid: Polkadot.ILogger
+  commentId: T:Polkadot.ILogger
+  parent: Polkadot
+  name: ILogger
+  nameWithType: ILogger
+  fullName: Polkadot.ILogger
+- uid: Polkadot
+  commentId: N:Polkadot
+  name: Polkadot
+  nameWithType: Polkadot
+  fullName: Polkadot
+- uid: Polkadot.Api.Wsclient.Connect*
+  commentId: Overload:Polkadot.Api.Wsclient.Connect
+  name: Connect
+  nameWithType: Wsclient.Connect
+  fullName: Polkadot.Api.Wsclient.Connect
+- uid: Polkadot.Api.IWebSocketClient.Connect(System.String)
+  commentId: M:Polkadot.Api.IWebSocketClient.Connect(System.String)
+  parent: Polkadot.Api.IWebSocketClient
+  isExternal: true
+  name: Connect(String)
+  nameWithType: IWebSocketClient.Connect(String)
+  fullName: Polkadot.Api.IWebSocketClient.Connect(System.String)
+  spec.csharp:
+  - uid: Polkadot.Api.IWebSocketClient.Connect(System.String)
+    name: Connect
+    nameWithType: IWebSocketClient.Connect
+    fullName: Polkadot.Api.IWebSocketClient.Connect
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.Api.IWebSocketClient.Connect(System.String)
+    name: Connect
+    nameWithType: IWebSocketClient.Connect
+    fullName: Polkadot.Api.IWebSocketClient.Connect
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Polkadot.Api.Wsclient.Disconnect*
+  commentId: Overload:Polkadot.Api.Wsclient.Disconnect
+  name: Disconnect
+  nameWithType: Wsclient.Disconnect
+  fullName: Polkadot.Api.Wsclient.Disconnect
+- uid: Polkadot.Api.IWebSocketClient.Disconnect
+  commentId: M:Polkadot.Api.IWebSocketClient.Disconnect
+  parent: Polkadot.Api.IWebSocketClient
+  name: Disconnect()
+  nameWithType: IWebSocketClient.Disconnect()
+  fullName: Polkadot.Api.IWebSocketClient.Disconnect()
+  spec.csharp:
+  - uid: Polkadot.Api.IWebSocketClient.Disconnect
+    name: Disconnect
+    nameWithType: IWebSocketClient.Disconnect
+    fullName: Polkadot.Api.IWebSocketClient.Disconnect
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.Api.IWebSocketClient.Disconnect
+    name: Disconnect
+    nameWithType: IWebSocketClient.Disconnect
+    fullName: Polkadot.Api.IWebSocketClient.Disconnect
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Polkadot.Api.Wsclient.Dispose*
+  commentId: Overload:Polkadot.Api.Wsclient.Dispose
+  name: Dispose
+  nameWithType: Wsclient.Dispose
+  fullName: Polkadot.Api.Wsclient.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    nameWithType: IDisposable.Dispose
+    fullName: System.IDisposable.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    nameWithType: IDisposable.Dispose
+    fullName: System.IDisposable.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Polkadot.Api.Wsclient.IsConnected*
+  commentId: Overload:Polkadot.Api.Wsclient.IsConnected
+  name: IsConnected
+  nameWithType: Wsclient.IsConnected
+  fullName: Polkadot.Api.Wsclient.IsConnected
+- uid: Polkadot.Api.IWebSocketClient.IsConnected
+  commentId: M:Polkadot.Api.IWebSocketClient.IsConnected
+  parent: Polkadot.Api.IWebSocketClient
+  name: IsConnected()
+  nameWithType: IWebSocketClient.IsConnected()
+  fullName: Polkadot.Api.IWebSocketClient.IsConnected()
+  spec.csharp:
+  - uid: Polkadot.Api.IWebSocketClient.IsConnected
+    name: IsConnected
+    nameWithType: IWebSocketClient.IsConnected
+    fullName: Polkadot.Api.IWebSocketClient.IsConnected
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.Api.IWebSocketClient.IsConnected
+    name: IsConnected
+    nameWithType: IWebSocketClient.IsConnected
+    fullName: Polkadot.Api.IWebSocketClient.IsConnected
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Polkadot.Api.Wsclient.RegisterMessageObserver*
+  commentId: Overload:Polkadot.Api.Wsclient.RegisterMessageObserver
+  name: RegisterMessageObserver
+  nameWithType: Wsclient.RegisterMessageObserver
+  fullName: Polkadot.Api.Wsclient.RegisterMessageObserver
+- uid: Polkadot.Api.IWebSocketClient.RegisterMessageObserver(Polkadot.Api.IMessageObserver)
+  commentId: M:Polkadot.Api.IWebSocketClient.RegisterMessageObserver(Polkadot.Api.IMessageObserver)
+  parent: Polkadot.Api.IWebSocketClient
+  name: RegisterMessageObserver(IMessageObserver)
+  nameWithType: IWebSocketClient.RegisterMessageObserver(IMessageObserver)
+  fullName: Polkadot.Api.IWebSocketClient.RegisterMessageObserver(Polkadot.Api.IMessageObserver)
+  spec.csharp:
+  - uid: Polkadot.Api.IWebSocketClient.RegisterMessageObserver(Polkadot.Api.IMessageObserver)
+    name: RegisterMessageObserver
+    nameWithType: IWebSocketClient.RegisterMessageObserver
+    fullName: Polkadot.Api.IWebSocketClient.RegisterMessageObserver
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polkadot.Api.IMessageObserver
+    name: IMessageObserver
+    nameWithType: IMessageObserver
+    fullName: Polkadot.Api.IMessageObserver
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.Api.IWebSocketClient.RegisterMessageObserver(Polkadot.Api.IMessageObserver)
+    name: RegisterMessageObserver
+    nameWithType: IWebSocketClient.RegisterMessageObserver
+    fullName: Polkadot.Api.IWebSocketClient.RegisterMessageObserver
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Polkadot.Api.IMessageObserver
+    name: IMessageObserver
+    nameWithType: IMessageObserver
+    fullName: Polkadot.Api.IMessageObserver
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Polkadot.Api.IMessageObserver
+  commentId: T:Polkadot.Api.IMessageObserver
+  parent: Polkadot.Api
+  name: IMessageObserver
+  nameWithType: IMessageObserver
+  fullName: Polkadot.Api.IMessageObserver
+- uid: Polkadot.Api.Wsclient.Send*
+  commentId: Overload:Polkadot.Api.Wsclient.Send
+  name: Send
+  nameWithType: Wsclient.Send
+  fullName: Polkadot.Api.Wsclient.Send
+- uid: Polkadot.Api.IWebSocketClient.Send(System.String)
+  commentId: M:Polkadot.Api.IWebSocketClient.Send(System.String)
+  parent: Polkadot.Api.IWebSocketClient
+  isExternal: true
+  name: Send(String)
+  nameWithType: IWebSocketClient.Send(String)
+  fullName: Polkadot.Api.IWebSocketClient.Send(System.String)
+  spec.csharp:
+  - uid: Polkadot.Api.IWebSocketClient.Send(System.String)
+    name: Send
+    nameWithType: IWebSocketClient.Send
+    fullName: Polkadot.Api.IWebSocketClient.Send
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.Api.IWebSocketClient.Send(System.String)
+    name: Send
+    nameWithType: IWebSocketClient.Send
+    fullName: Polkadot.Api.IWebSocketClient.Send
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )

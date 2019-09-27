@@ -1,0 +1,89 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.DataFactory
+  commentId: N:Polkadot.DataFactory
+  id: Polkadot.DataFactory
+  children:
+  - Polkadot.DataFactory.IParseFactory`1
+  - Polkadot.DataFactory.ParseBlock
+  - Polkadot.DataFactory.ParseBlockHash
+  - Polkadot.DataFactory.ParseBlockHeader
+  - Polkadot.DataFactory.ParseFinalizedHead
+  - Polkadot.DataFactory.ParseRuntimeVersion
+  - Polkadot.DataFactory.ParseSystemInfo
+  langs:
+  - csharp
+  - vb
+  name: Polkadot.DataFactory
+  nameWithType: Polkadot.DataFactory
+  fullName: Polkadot.DataFactory
+  type: Namespace
+  assemblies:
+  - Polkadot
+references:
+- uid: Polkadot.DataFactory.IParseFactory`1
+  commentId: T:Polkadot.DataFactory.IParseFactory`1
+  name: IParseFactory<T>
+  nameWithType: IParseFactory<T>
+  fullName: Polkadot.DataFactory.IParseFactory<T>
+  nameWithType.vb: IParseFactory(Of T)
+  fullName.vb: Polkadot.DataFactory.IParseFactory(Of T)
+  name.vb: IParseFactory(Of T)
+  spec.csharp:
+  - uid: Polkadot.DataFactory.IParseFactory`1
+    name: IParseFactory
+    nameWithType: IParseFactory
+    fullName: Polkadot.DataFactory.IParseFactory
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Polkadot.DataFactory.IParseFactory`1
+    name: IParseFactory
+    nameWithType: IParseFactory
+    fullName: Polkadot.DataFactory.IParseFactory
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Polkadot.DataFactory.ParseBlock
+  commentId: T:Polkadot.DataFactory.ParseBlock
+  name: ParseBlock
+  nameWithType: ParseBlock
+  fullName: Polkadot.DataFactory.ParseBlock
+- uid: Polkadot.DataFactory.ParseBlockHash
+  commentId: T:Polkadot.DataFactory.ParseBlockHash
+  name: ParseBlockHash
+  nameWithType: ParseBlockHash
+  fullName: Polkadot.DataFactory.ParseBlockHash
+- uid: Polkadot.DataFactory.ParseBlockHeader
+  commentId: T:Polkadot.DataFactory.ParseBlockHeader
+  name: ParseBlockHeader
+  nameWithType: ParseBlockHeader
+  fullName: Polkadot.DataFactory.ParseBlockHeader
+- uid: Polkadot.DataFactory.ParseFinalizedHead
+  commentId: T:Polkadot.DataFactory.ParseFinalizedHead
+  name: ParseFinalizedHead
+  nameWithType: ParseFinalizedHead
+  fullName: Polkadot.DataFactory.ParseFinalizedHead
+- uid: Polkadot.DataFactory.ParseRuntimeVersion
+  commentId: T:Polkadot.DataFactory.ParseRuntimeVersion
+  name: ParseRuntimeVersion
+  nameWithType: ParseRuntimeVersion
+  fullName: Polkadot.DataFactory.ParseRuntimeVersion
+- uid: Polkadot.DataFactory.ParseSystemInfo
+  commentId: T:Polkadot.DataFactory.ParseSystemInfo
+  name: ParseSystemInfo
+  nameWithType: ParseSystemInfo
+  fullName: Polkadot.DataFactory.ParseSystemInfo

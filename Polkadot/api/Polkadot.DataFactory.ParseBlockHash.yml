@@ -1,0 +1,571 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.DataFactory.ParseBlockHash
+  commentId: T:Polkadot.DataFactory.ParseBlockHash
+  id: ParseBlockHash
+  parent: Polkadot.DataFactory
+  children:
+  - Polkadot.DataFactory.ParseBlockHash.Parse(Newtonsoft.Json.Linq.JObject)
+  langs:
+  - csharp
+  - vb
+  name: ParseBlockHash
+  nameWithType: ParseBlockHash
+  fullName: Polkadot.DataFactory.ParseBlockHash
+  type: Class
+  source:
+    remote:
+      path: Polkadot/src/DataFactory/ParseBlockHash.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: ParseBlockHash
+    path: src/DataFactory/ParseBlockHash.cs
+    startLine: 5
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataFactory
+  syntax:
+    content: 'public class ParseBlockHash : IParseFactory<BlockHash>'
+    content.vb: >-
+      Public Class ParseBlockHash
+
+          Implements IParseFactory(Of BlockHash)
+  inheritance:
+  - System.Object
+  implements:
+  - Polkadot.DataFactory.IParseFactory{Polkadot.Data.BlockHash}
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Polkadot.DataFactory.ParseBlockHash.Parse(Newtonsoft.Json.Linq.JObject)
+  commentId: M:Polkadot.DataFactory.ParseBlockHash.Parse(Newtonsoft.Json.Linq.JObject)
+  id: Parse(Newtonsoft.Json.Linq.JObject)
+  parent: Polkadot.DataFactory.ParseBlockHash
+  langs:
+  - csharp
+  - vb
+  name: Parse(JObject)
+  nameWithType: ParseBlockHash.Parse(JObject)
+  fullName: Polkadot.DataFactory.ParseBlockHash.Parse(Newtonsoft.Json.Linq.JObject)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/DataFactory/ParseBlockHash.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Parse
+    path: src/DataFactory/ParseBlockHash.cs
+    startLine: 7
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataFactory
+  syntax:
+    content: public BlockHash Parse(JObject json)
+    parameters:
+    - id: json
+      type: Newtonsoft.Json.Linq.JObject
+    return:
+      type: Polkadot.Data.BlockHash
+    content.vb: Public Function Parse(json As JObject) As BlockHash
+  overload: Polkadot.DataFactory.ParseBlockHash.Parse*
+  implements:
+  - Polkadot.DataFactory.IParseFactory{Polkadot.Data.BlockHash}.Parse(Newtonsoft.Json.Linq.JObject)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Polkadot.DataFactory
+  commentId: N:Polkadot.DataFactory
+  name: Polkadot.DataFactory
+  nameWithType: Polkadot.DataFactory
+  fullName: Polkadot.DataFactory
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Polkadot.DataFactory.IParseFactory{Polkadot.Data.BlockHash}
+  commentId: T:Polkadot.DataFactory.IParseFactory{Polkadot.Data.BlockHash}
+  parent: Polkadot.DataFactory
+  definition: Polkadot.DataFactory.IParseFactory`1
+  name: IParseFactory<BlockHash>
+  nameWithType: IParseFactory<BlockHash>
+  fullName: Polkadot.DataFactory.IParseFactory<Polkadot.Data.BlockHash>
+  nameWithType.vb: IParseFactory(Of BlockHash)
+  fullName.vb: Polkadot.DataFactory.IParseFactory(Of Polkadot.Data.BlockHash)
+  name.vb: IParseFactory(Of BlockHash)
+  spec.csharp:
+  - uid: Polkadot.DataFactory.IParseFactory`1
+    name: IParseFactory
+    nameWithType: IParseFactory
+    fullName: Polkadot.DataFactory.IParseFactory
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Polkadot.Data.BlockHash
+    name: BlockHash
+    nameWithType: BlockHash
+    fullName: Polkadot.Data.BlockHash
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Polkadot.DataFactory.IParseFactory`1
+    name: IParseFactory
+    nameWithType: IParseFactory
+    fullName: Polkadot.DataFactory.IParseFactory
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Polkadot.Data.BlockHash
+    name: BlockHash
+    nameWithType: BlockHash
+    fullName: Polkadot.Data.BlockHash
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Polkadot.DataFactory.IParseFactory`1
+  commentId: T:Polkadot.DataFactory.IParseFactory`1
+  name: IParseFactory<T>
+  nameWithType: IParseFactory<T>
+  fullName: Polkadot.DataFactory.IParseFactory<T>
+  nameWithType.vb: IParseFactory(Of T)
+  fullName.vb: Polkadot.DataFactory.IParseFactory(Of T)
+  name.vb: IParseFactory(Of T)
+  spec.csharp:
+  - uid: Polkadot.DataFactory.IParseFactory`1
+    name: IParseFactory
+    nameWithType: IParseFactory
+    fullName: Polkadot.DataFactory.IParseFactory
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Polkadot.DataFactory.IParseFactory`1
+    name: IParseFactory
+    nameWithType: IParseFactory
+    fullName: Polkadot.DataFactory.IParseFactory
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Polkadot.DataFactory.ParseBlockHash.Parse*
+  commentId: Overload:Polkadot.DataFactory.ParseBlockHash.Parse
+  name: Parse
+  nameWithType: ParseBlockHash.Parse
+  fullName: Polkadot.DataFactory.ParseBlockHash.Parse
+- uid: Polkadot.DataFactory.IParseFactory{Polkadot.Data.BlockHash}.Parse(Newtonsoft.Json.Linq.JObject)
+  commentId: M:Polkadot.DataFactory.IParseFactory{Polkadot.Data.BlockHash}.Parse(Newtonsoft.Json.Linq.JObject)
+  parent: Polkadot.DataFactory.IParseFactory{Polkadot.Data.BlockHash}
+  definition: Polkadot.DataFactory.IParseFactory`1.Parse(Newtonsoft.Json.Linq.JObject)
+  name: Parse(JObject)
+  nameWithType: IParseFactory<BlockHash>.Parse(JObject)
+  fullName: Polkadot.DataFactory.IParseFactory<Polkadot.Data.BlockHash>.Parse(Newtonsoft.Json.Linq.JObject)
+  nameWithType.vb: IParseFactory(Of BlockHash).Parse(JObject)
+  fullName.vb: Polkadot.DataFactory.IParseFactory(Of Polkadot.Data.BlockHash).Parse(Newtonsoft.Json.Linq.JObject)
+  spec.csharp:
+  - uid: Polkadot.DataFactory.IParseFactory`1.Parse(Newtonsoft.Json.Linq.JObject)
+    name: Parse
+    nameWithType: IParseFactory<BlockHash>.Parse
+    fullName: Polkadot.DataFactory.IParseFactory<Polkadot.Data.BlockHash>.Parse
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Newtonsoft.Json.Linq.JObject
+    name: JObject
+    nameWithType: JObject
+    fullName: Newtonsoft.Json.Linq.JObject
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.DataFactory.IParseFactory`1.Parse(Newtonsoft.Json.Linq.JObject)
+    name: Parse
+    nameWithType: IParseFactory(Of BlockHash).Parse
+    fullName: Polkadot.DataFactory.IParseFactory(Of Polkadot.Data.BlockHash).Parse
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Newtonsoft.Json.Linq.JObject
+    name: JObject
+    nameWithType: JObject
+    fullName: Newtonsoft.Json.Linq.JObject
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Newtonsoft.Json.Linq.JObject
+  commentId: T:Newtonsoft.Json.Linq.JObject
+  parent: Newtonsoft.Json.Linq
+  isExternal: true
+  name: JObject
+  nameWithType: JObject
+  fullName: Newtonsoft.Json.Linq.JObject
+- uid: Polkadot.Data.BlockHash
+  commentId: T:Polkadot.Data.BlockHash
+  parent: Polkadot.Data
+  name: BlockHash
+  nameWithType: BlockHash
+  fullName: Polkadot.Data.BlockHash
+- uid: Polkadot.DataFactory.IParseFactory`1.Parse(Newtonsoft.Json.Linq.JObject)
+  commentId: M:Polkadot.DataFactory.IParseFactory`1.Parse(Newtonsoft.Json.Linq.JObject)
+  isExternal: true
+  name: Parse(JObject)
+  nameWithType: IParseFactory<T>.Parse(JObject)
+  fullName: Polkadot.DataFactory.IParseFactory<T>.Parse(Newtonsoft.Json.Linq.JObject)
+  nameWithType.vb: IParseFactory(Of T).Parse(JObject)
+  fullName.vb: Polkadot.DataFactory.IParseFactory(Of T).Parse(Newtonsoft.Json.Linq.JObject)
+  spec.csharp:
+  - uid: Polkadot.DataFactory.IParseFactory`1.Parse(Newtonsoft.Json.Linq.JObject)
+    name: Parse
+    nameWithType: IParseFactory<T>.Parse
+    fullName: Polkadot.DataFactory.IParseFactory<T>.Parse
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Newtonsoft.Json.Linq.JObject
+    name: JObject
+    nameWithType: JObject
+    fullName: Newtonsoft.Json.Linq.JObject
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.DataFactory.IParseFactory`1.Parse(Newtonsoft.Json.Linq.JObject)
+    name: Parse
+    nameWithType: IParseFactory(Of T).Parse
+    fullName: Polkadot.DataFactory.IParseFactory(Of T).Parse
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Newtonsoft.Json.Linq.JObject
+    name: JObject
+    nameWithType: JObject
+    fullName: Newtonsoft.Json.Linq.JObject
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Newtonsoft.Json.Linq
+  commentId: N:Newtonsoft.Json.Linq
+  isExternal: true
+  name: Newtonsoft.Json.Linq
+  nameWithType: Newtonsoft.Json.Linq
+  fullName: Newtonsoft.Json.Linq
+- uid: Polkadot.Data
+  commentId: N:Polkadot.Data
+  name: Polkadot.Data
+  nameWithType: Polkadot.Data
+  fullName: Polkadot.Data

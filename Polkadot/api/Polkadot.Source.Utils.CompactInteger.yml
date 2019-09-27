@@ -1,0 +1,720 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.Source.Utils.CompactInteger
+  commentId: T:Polkadot.Source.Utils.CompactInteger
+  id: CompactInteger
+  parent: Polkadot.Source.Utils
+  children:
+  - Polkadot.Source.Utils.CompactInteger.op_Addition(Polkadot.Source.Utils.CompactInteger,Polkadot.Source.Utils.CompactInteger)
+  - Polkadot.Source.Utils.CompactInteger.op_Addition(Polkadot.Source.Utils.CompactInteger,System.Byte)
+  - Polkadot.Source.Utils.CompactInteger.op_Addition(Polkadot.Source.Utils.CompactInteger,System.Int32)
+  - Polkadot.Source.Utils.CompactInteger.op_Addition(Polkadot.Source.Utils.CompactInteger,System.UInt32)
+  - Polkadot.Source.Utils.CompactInteger.op_Multiply(Polkadot.Source.Utils.CompactInteger,Polkadot.Source.Utils.CompactInteger)
+  - Polkadot.Source.Utils.CompactInteger.op_Multiply(Polkadot.Source.Utils.CompactInteger,System.Byte)
+  - Polkadot.Source.Utils.CompactInteger.op_Multiply(Polkadot.Source.Utils.CompactInteger,System.Int32)
+  - Polkadot.Source.Utils.CompactInteger.op_Multiply(Polkadot.Source.Utils.CompactInteger,System.UInt32)
+  - Polkadot.Source.Utils.CompactInteger.Value
+  langs:
+  - csharp
+  - vb
+  name: CompactInteger
+  nameWithType: CompactInteger
+  fullName: Polkadot.Source.Utils.CompactInteger
+  type: Struct
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: CompactInteger
+    path: src/Utils/Scale.cs
+    startLine: 4
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public struct CompactInteger
+    content.vb: Public Structure CompactInteger
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  modifiers.csharp:
+  - public
+  - struct
+  modifiers.vb:
+  - Public
+  - Structure
+- uid: Polkadot.Source.Utils.CompactInteger.op_Addition(Polkadot.Source.Utils.CompactInteger,System.Int32)
+  commentId: M:Polkadot.Source.Utils.CompactInteger.op_Addition(Polkadot.Source.Utils.CompactInteger,System.Int32)
+  id: op_Addition(Polkadot.Source.Utils.CompactInteger,System.Int32)
+  parent: Polkadot.Source.Utils.CompactInteger
+  langs:
+  - csharp
+  - vb
+  name: Addition(CompactInteger, Int32)
+  nameWithType: CompactInteger.Addition(CompactInteger, Int32)
+  fullName: Polkadot.Source.Utils.CompactInteger.Addition(Polkadot.Source.Utils.CompactInteger, System.Int32)
+  type: Operator
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: op_Addition
+    path: src/Utils/Scale.cs
+    startLine: 6
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public static CompactInteger operator +(CompactInteger self, int value)
+    parameters:
+    - id: self
+      type: Polkadot.Source.Utils.CompactInteger
+    - id: value
+      type: System.Int32
+    return:
+      type: Polkadot.Source.Utils.CompactInteger
+    content.vb: Public Shared Operator +(self As CompactInteger, value As Integer) As CompactInteger
+  overload: Polkadot.Source.Utils.CompactInteger.op_Addition*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Polkadot.Source.Utils.CompactInteger.op_Multiply(Polkadot.Source.Utils.CompactInteger,System.Int32)
+  commentId: M:Polkadot.Source.Utils.CompactInteger.op_Multiply(Polkadot.Source.Utils.CompactInteger,System.Int32)
+  id: op_Multiply(Polkadot.Source.Utils.CompactInteger,System.Int32)
+  parent: Polkadot.Source.Utils.CompactInteger
+  langs:
+  - csharp
+  - vb
+  name: Multiply(CompactInteger, Int32)
+  nameWithType: CompactInteger.Multiply(CompactInteger, Int32)
+  fullName: Polkadot.Source.Utils.CompactInteger.Multiply(Polkadot.Source.Utils.CompactInteger, System.Int32)
+  type: Operator
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: op_Multiply
+    path: src/Utils/Scale.cs
+    startLine: 12
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public static CompactInteger operator *(CompactInteger self, int value)
+    parameters:
+    - id: self
+      type: Polkadot.Source.Utils.CompactInteger
+    - id: value
+      type: System.Int32
+    return:
+      type: Polkadot.Source.Utils.CompactInteger
+    content.vb: Public Shared Operator *(self As CompactInteger, value As Integer) As CompactInteger
+  overload: Polkadot.Source.Utils.CompactInteger.op_Multiply*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Polkadot.Source.Utils.CompactInteger.op_Addition(Polkadot.Source.Utils.CompactInteger,System.UInt32)
+  commentId: M:Polkadot.Source.Utils.CompactInteger.op_Addition(Polkadot.Source.Utils.CompactInteger,System.UInt32)
+  id: op_Addition(Polkadot.Source.Utils.CompactInteger,System.UInt32)
+  parent: Polkadot.Source.Utils.CompactInteger
+  langs:
+  - csharp
+  - vb
+  name: Addition(CompactInteger, UInt32)
+  nameWithType: CompactInteger.Addition(CompactInteger, UInt32)
+  fullName: Polkadot.Source.Utils.CompactInteger.Addition(Polkadot.Source.Utils.CompactInteger, System.UInt32)
+  type: Operator
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: op_Addition
+    path: src/Utils/Scale.cs
+    startLine: 18
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public static CompactInteger operator +(CompactInteger self, uint value)
+    parameters:
+    - id: self
+      type: Polkadot.Source.Utils.CompactInteger
+    - id: value
+      type: System.UInt32
+    return:
+      type: Polkadot.Source.Utils.CompactInteger
+    content.vb: Public Shared Operator +(self As CompactInteger, value As UInteger) As CompactInteger
+  overload: Polkadot.Source.Utils.CompactInteger.op_Addition*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Polkadot.Source.Utils.CompactInteger.op_Multiply(Polkadot.Source.Utils.CompactInteger,System.UInt32)
+  commentId: M:Polkadot.Source.Utils.CompactInteger.op_Multiply(Polkadot.Source.Utils.CompactInteger,System.UInt32)
+  id: op_Multiply(Polkadot.Source.Utils.CompactInteger,System.UInt32)
+  parent: Polkadot.Source.Utils.CompactInteger
+  langs:
+  - csharp
+  - vb
+  name: Multiply(CompactInteger, UInt32)
+  nameWithType: CompactInteger.Multiply(CompactInteger, UInt32)
+  fullName: Polkadot.Source.Utils.CompactInteger.Multiply(Polkadot.Source.Utils.CompactInteger, System.UInt32)
+  type: Operator
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: op_Multiply
+    path: src/Utils/Scale.cs
+    startLine: 24
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public static CompactInteger operator *(CompactInteger self, uint value)
+    parameters:
+    - id: self
+      type: Polkadot.Source.Utils.CompactInteger
+    - id: value
+      type: System.UInt32
+    return:
+      type: Polkadot.Source.Utils.CompactInteger
+    content.vb: Public Shared Operator *(self As CompactInteger, value As UInteger) As CompactInteger
+  overload: Polkadot.Source.Utils.CompactInteger.op_Multiply*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Polkadot.Source.Utils.CompactInteger.op_Addition(Polkadot.Source.Utils.CompactInteger,System.Byte)
+  commentId: M:Polkadot.Source.Utils.CompactInteger.op_Addition(Polkadot.Source.Utils.CompactInteger,System.Byte)
+  id: op_Addition(Polkadot.Source.Utils.CompactInteger,System.Byte)
+  parent: Polkadot.Source.Utils.CompactInteger
+  langs:
+  - csharp
+  - vb
+  name: Addition(CompactInteger, Byte)
+  nameWithType: CompactInteger.Addition(CompactInteger, Byte)
+  fullName: Polkadot.Source.Utils.CompactInteger.Addition(Polkadot.Source.Utils.CompactInteger, System.Byte)
+  type: Operator
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: op_Addition
+    path: src/Utils/Scale.cs
+    startLine: 30
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public static CompactInteger operator +(CompactInteger self, byte value)
+    parameters:
+    - id: self
+      type: Polkadot.Source.Utils.CompactInteger
+    - id: value
+      type: System.Byte
+    return:
+      type: Polkadot.Source.Utils.CompactInteger
+    content.vb: Public Shared Operator +(self As CompactInteger, value As Byte) As CompactInteger
+  overload: Polkadot.Source.Utils.CompactInteger.op_Addition*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Polkadot.Source.Utils.CompactInteger.op_Multiply(Polkadot.Source.Utils.CompactInteger,System.Byte)
+  commentId: M:Polkadot.Source.Utils.CompactInteger.op_Multiply(Polkadot.Source.Utils.CompactInteger,System.Byte)
+  id: op_Multiply(Polkadot.Source.Utils.CompactInteger,System.Byte)
+  parent: Polkadot.Source.Utils.CompactInteger
+  langs:
+  - csharp
+  - vb
+  name: Multiply(CompactInteger, Byte)
+  nameWithType: CompactInteger.Multiply(CompactInteger, Byte)
+  fullName: Polkadot.Source.Utils.CompactInteger.Multiply(Polkadot.Source.Utils.CompactInteger, System.Byte)
+  type: Operator
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: op_Multiply
+    path: src/Utils/Scale.cs
+    startLine: 36
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public static CompactInteger operator *(CompactInteger self, byte value)
+    parameters:
+    - id: self
+      type: Polkadot.Source.Utils.CompactInteger
+    - id: value
+      type: System.Byte
+    return:
+      type: Polkadot.Source.Utils.CompactInteger
+    content.vb: Public Shared Operator *(self As CompactInteger, value As Byte) As CompactInteger
+  overload: Polkadot.Source.Utils.CompactInteger.op_Multiply*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Polkadot.Source.Utils.CompactInteger.op_Addition(Polkadot.Source.Utils.CompactInteger,Polkadot.Source.Utils.CompactInteger)
+  commentId: M:Polkadot.Source.Utils.CompactInteger.op_Addition(Polkadot.Source.Utils.CompactInteger,Polkadot.Source.Utils.CompactInteger)
+  id: op_Addition(Polkadot.Source.Utils.CompactInteger,Polkadot.Source.Utils.CompactInteger)
+  parent: Polkadot.Source.Utils.CompactInteger
+  langs:
+  - csharp
+  - vb
+  name: Addition(CompactInteger, CompactInteger)
+  nameWithType: CompactInteger.Addition(CompactInteger, CompactInteger)
+  fullName: Polkadot.Source.Utils.CompactInteger.Addition(Polkadot.Source.Utils.CompactInteger, Polkadot.Source.Utils.CompactInteger)
+  type: Operator
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: op_Addition
+    path: src/Utils/Scale.cs
+    startLine: 42
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public static CompactInteger operator +(CompactInteger self, CompactInteger value)
+    parameters:
+    - id: self
+      type: Polkadot.Source.Utils.CompactInteger
+    - id: value
+      type: Polkadot.Source.Utils.CompactInteger
+    return:
+      type: Polkadot.Source.Utils.CompactInteger
+    content.vb: Public Shared Operator +(self As CompactInteger, value As CompactInteger) As CompactInteger
+  overload: Polkadot.Source.Utils.CompactInteger.op_Addition*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Polkadot.Source.Utils.CompactInteger.op_Multiply(Polkadot.Source.Utils.CompactInteger,Polkadot.Source.Utils.CompactInteger)
+  commentId: M:Polkadot.Source.Utils.CompactInteger.op_Multiply(Polkadot.Source.Utils.CompactInteger,Polkadot.Source.Utils.CompactInteger)
+  id: op_Multiply(Polkadot.Source.Utils.CompactInteger,Polkadot.Source.Utils.CompactInteger)
+  parent: Polkadot.Source.Utils.CompactInteger
+  langs:
+  - csharp
+  - vb
+  name: Multiply(CompactInteger, CompactInteger)
+  nameWithType: CompactInteger.Multiply(CompactInteger, CompactInteger)
+  fullName: Polkadot.Source.Utils.CompactInteger.Multiply(Polkadot.Source.Utils.CompactInteger, Polkadot.Source.Utils.CompactInteger)
+  type: Operator
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: op_Multiply
+    path: src/Utils/Scale.cs
+    startLine: 48
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public static CompactInteger operator *(CompactInteger self, CompactInteger value)
+    parameters:
+    - id: self
+      type: Polkadot.Source.Utils.CompactInteger
+    - id: value
+      type: Polkadot.Source.Utils.CompactInteger
+    return:
+      type: Polkadot.Source.Utils.CompactInteger
+    content.vb: Public Shared Operator *(self As CompactInteger, value As CompactInteger) As CompactInteger
+  overload: Polkadot.Source.Utils.CompactInteger.op_Multiply*
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Polkadot.Source.Utils.CompactInteger.Value
+  commentId: P:Polkadot.Source.Utils.CompactInteger.Value
+  id: Value
+  parent: Polkadot.Source.Utils.CompactInteger
+  langs:
+  - csharp
+  - vb
+  name: Value
+  nameWithType: CompactInteger.Value
+  fullName: Polkadot.Source.Utils.CompactInteger.Value
+  type: Property
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Value
+    path: src/Utils/Scale.cs
+    startLine: 54
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public long Value { get; set; }
+    parameters: []
+    return:
+      type: System.Int64
+    content.vb: Public Property Value As Long
+  overload: Polkadot.Source.Utils.CompactInteger.Value*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Polkadot.Source.Utils
+  commentId: N:Polkadot.Source.Utils
+  name: Polkadot.Source.Utils
+  nameWithType: Polkadot.Source.Utils
+  fullName: Polkadot.Source.Utils
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: ValueType.Equals(Object)
+  fullName: System.ValueType.Equals(System.Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    nameWithType: ValueType.Equals
+    fullName: System.ValueType.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    nameWithType: ValueType.Equals
+    fullName: System.ValueType.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    nameWithType: ValueType.GetHashCode
+    fullName: System.ValueType.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    nameWithType: ValueType.GetHashCode
+    fullName: System.ValueType.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    nameWithType: ValueType.ToString
+    fullName: System.ValueType.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    nameWithType: ValueType.ToString
+    fullName: System.ValueType.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Polkadot.Source.Utils.CompactInteger.op_Addition*
+  commentId: Overload:Polkadot.Source.Utils.CompactInteger.op_Addition
+  name: Addition
+  nameWithType: CompactInteger.Addition
+  fullName: Polkadot.Source.Utils.CompactInteger.Addition
+- uid: Polkadot.Source.Utils.CompactInteger
+  commentId: T:Polkadot.Source.Utils.CompactInteger
+  parent: Polkadot.Source.Utils
+  name: CompactInteger
+  nameWithType: CompactInteger
+  fullName: Polkadot.Source.Utils.CompactInteger
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Polkadot.Source.Utils.CompactInteger.op_Multiply*
+  commentId: Overload:Polkadot.Source.Utils.CompactInteger.op_Multiply
+  name: Multiply
+  nameWithType: CompactInteger.Multiply
+  fullName: Polkadot.Source.Utils.CompactInteger.Multiply
+- uid: System.UInt32
+  commentId: T:System.UInt32
+  parent: System
+  isExternal: true
+  name: UInt32
+  nameWithType: UInt32
+  fullName: System.UInt32
+- uid: System.Byte
+  commentId: T:System.Byte
+  parent: System
+  isExternal: true
+  name: Byte
+  nameWithType: Byte
+  fullName: System.Byte
+- uid: Polkadot.Source.Utils.CompactInteger.Value*
+  commentId: Overload:Polkadot.Source.Utils.CompactInteger.Value
+  name: Value
+  nameWithType: CompactInteger.Value
+  fullName: Polkadot.Source.Utils.CompactInteger.Value
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  name: Int64
+  nameWithType: Int64
+  fullName: System.Int64

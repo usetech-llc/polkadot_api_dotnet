@@ -1,0 +1,1111 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.DataStructs.Metadata.Metadata
+  commentId: T:Polkadot.DataStructs.Metadata.Metadata
+  id: Metadata
+  parent: Polkadot.DataStructs.Metadata
+  children:
+  - Polkadot.DataStructs.Metadata.Metadata.#ctor(Polkadot.DataStructs.Metadata.MetadataBase)
+  - Polkadot.DataStructs.Metadata.Metadata.GetAddressStorageKey(Polkadot.DataStructs.Hasher,Polkadot.DataStructs.Address,System.String)
+  - Polkadot.DataStructs.Metadata.Metadata.GetCallMethodIndex(System.Int32,System.String)
+  - Polkadot.DataStructs.Metadata.Metadata.GetFuncHasher(System.String,System.String)
+  - Polkadot.DataStructs.Metadata.Metadata.GetMappedStorageKey(Polkadot.DataStructs.Hasher,System.Collections.Generic.KeyValuePair{System.String,System.String},System.String)
+  - Polkadot.DataStructs.Metadata.Metadata.GetMetadata``1
+  - Polkadot.DataStructs.Metadata.Metadata.GetModuleIndex(System.String,System.Boolean)
+  - Polkadot.DataStructs.Metadata.Metadata.GetPlainStorageKey(Polkadot.DataStructs.Hasher,System.String)
+  - Polkadot.DataStructs.Metadata.Metadata.GetPublicKeyFromAddr(Polkadot.DataStructs.Address)
+  - Polkadot.DataStructs.Metadata.Metadata.GetStorageKey(Polkadot.DataStructs.Hasher,System.Byte[],System.Int32)
+  - Polkadot.DataStructs.Metadata.Metadata.GetStorageMethodIndex(System.Int32,System.String)
+  - Polkadot.DataStructs.Metadata.Metadata.IsStateVariablePlain(System.Int32,System.Int32)
+  - Polkadot.DataStructs.Metadata.Metadata.MetadataVersion
+  langs:
+  - csharp
+  - vb
+  name: Metadata
+  nameWithType: Metadata
+  fullName: Polkadot.DataStructs.Metadata.Metadata
+  type: Class
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Metadata/Metadata.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Metadata
+    path: src/DataStructs/Metadata/Metadata.cs
+    startLine: 9
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs.Metadata
+  syntax:
+    content: public class Metadata
+    content.vb: Public Class Metadata
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Polkadot.DataStructs.Metadata.Metadata.MetadataVersion
+  commentId: P:Polkadot.DataStructs.Metadata.Metadata.MetadataVersion
+  id: MetadataVersion
+  parent: Polkadot.DataStructs.Metadata.Metadata
+  langs:
+  - csharp
+  - vb
+  name: MetadataVersion
+  nameWithType: Metadata.MetadataVersion
+  fullName: Polkadot.DataStructs.Metadata.Metadata.MetadataVersion
+  type: Property
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Metadata/Metadata.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: MetadataVersion
+    path: src/DataStructs/Metadata/Metadata.cs
+    startLine: 11
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs.Metadata
+  syntax:
+    content: public int MetadataVersion { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property MetadataVersion As Integer
+  overload: Polkadot.DataStructs.Metadata.Metadata.MetadataVersion*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Polkadot.DataStructs.Metadata.Metadata.#ctor(Polkadot.DataStructs.Metadata.MetadataBase)
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.#ctor(Polkadot.DataStructs.Metadata.MetadataBase)
+  id: '#ctor(Polkadot.DataStructs.Metadata.MetadataBase)'
+  parent: Polkadot.DataStructs.Metadata.Metadata
+  langs:
+  - csharp
+  - vb
+  name: Metadata(MetadataBase)
+  nameWithType: Metadata.Metadata(MetadataBase)
+  fullName: Polkadot.DataStructs.Metadata.Metadata.Metadata(Polkadot.DataStructs.Metadata.MetadataBase)
+  type: Constructor
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Metadata/Metadata.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: .ctor
+    path: src/DataStructs/Metadata/Metadata.cs
+    startLine: 15
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs.Metadata
+  syntax:
+    content: public Metadata(MetadataBase metadata)
+    parameters:
+    - id: metadata
+      type: Polkadot.DataStructs.Metadata.MetadataBase
+    content.vb: Public Sub New(metadata As MetadataBase)
+  overload: Polkadot.DataStructs.Metadata.Metadata.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetMetadata``1
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.GetMetadata``1
+  id: GetMetadata``1
+  parent: Polkadot.DataStructs.Metadata.Metadata
+  langs:
+  - csharp
+  - vb
+  name: GetMetadata<T>()
+  nameWithType: Metadata.GetMetadata<T>()
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetMetadata<T>()
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Metadata/Metadata.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: GetMetadata
+    path: src/DataStructs/Metadata/Metadata.cs
+    startLine: 20
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs.Metadata
+  syntax:
+    content: >-
+      public T GetMetadata<T>()
+
+          where T : MetadataBase
+    typeParameters:
+    - id: T
+    return:
+      type: '{T}'
+    content.vb: Public Function GetMetadata(Of T As MetadataBase) As T
+  overload: Polkadot.DataStructs.Metadata.Metadata.GetMetadata*
+  nameWithType.vb: Metadata.GetMetadata(Of T)()
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Polkadot.DataStructs.Metadata.Metadata.GetMetadata(Of T)()
+  name.vb: GetMetadata(Of T)()
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetModuleIndex(System.String,System.Boolean)
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.GetModuleIndex(System.String,System.Boolean)
+  id: GetModuleIndex(System.String,System.Boolean)
+  parent: Polkadot.DataStructs.Metadata.Metadata
+  langs:
+  - csharp
+  - vb
+  name: GetModuleIndex(String, Boolean)
+  nameWithType: Metadata.GetModuleIndex(String, Boolean)
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetModuleIndex(System.String, System.Boolean)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Metadata/Metadata.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: GetModuleIndex
+    path: src/DataStructs/Metadata/Metadata.cs
+    startLine: 25
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs.Metadata
+  syntax:
+    content: public int GetModuleIndex(string moduleName, bool skipZeroCalls)
+    parameters:
+    - id: moduleName
+      type: System.String
+    - id: skipZeroCalls
+      type: System.Boolean
+    return:
+      type: System.Int32
+    content.vb: Public Function GetModuleIndex(moduleName As String, skipZeroCalls As Boolean) As Integer
+  overload: Polkadot.DataStructs.Metadata.Metadata.GetModuleIndex*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetStorageMethodIndex(System.Int32,System.String)
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.GetStorageMethodIndex(System.Int32,System.String)
+  id: GetStorageMethodIndex(System.Int32,System.String)
+  parent: Polkadot.DataStructs.Metadata.Metadata
+  langs:
+  - csharp
+  - vb
+  name: GetStorageMethodIndex(Int32, String)
+  nameWithType: Metadata.GetStorageMethodIndex(Int32, String)
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetStorageMethodIndex(System.Int32, System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Metadata/Metadata.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: GetStorageMethodIndex
+    path: src/DataStructs/Metadata/Metadata.cs
+    startLine: 49
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs.Metadata
+  syntax:
+    content: public int GetStorageMethodIndex(int moduleIndex, string funcName)
+    parameters:
+    - id: moduleIndex
+      type: System.Int32
+    - id: funcName
+      type: System.String
+    return:
+      type: System.Int32
+    content.vb: Public Function GetStorageMethodIndex(moduleIndex As Integer, funcName As String) As Integer
+  overload: Polkadot.DataStructs.Metadata.Metadata.GetStorageMethodIndex*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetCallMethodIndex(System.Int32,System.String)
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.GetCallMethodIndex(System.Int32,System.String)
+  id: GetCallMethodIndex(System.Int32,System.String)
+  parent: Polkadot.DataStructs.Metadata.Metadata
+  langs:
+  - csharp
+  - vb
+  name: GetCallMethodIndex(Int32, String)
+  nameWithType: Metadata.GetCallMethodIndex(Int32, String)
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetCallMethodIndex(System.Int32, System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Metadata/Metadata.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: GetCallMethodIndex
+    path: src/DataStructs/Metadata/Metadata.cs
+    startLine: 70
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs.Metadata
+  syntax:
+    content: public int GetCallMethodIndex(int moduleIndex, string funcName)
+    parameters:
+    - id: moduleIndex
+      type: System.Int32
+    - id: funcName
+      type: System.String
+    return:
+      type: System.Int32
+    content.vb: Public Function GetCallMethodIndex(moduleIndex As Integer, funcName As String) As Integer
+  overload: Polkadot.DataStructs.Metadata.Metadata.GetCallMethodIndex*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.DataStructs.Metadata.Metadata.IsStateVariablePlain(System.Int32,System.Int32)
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.IsStateVariablePlain(System.Int32,System.Int32)
+  id: IsStateVariablePlain(System.Int32,System.Int32)
+  parent: Polkadot.DataStructs.Metadata.Metadata
+  langs:
+  - csharp
+  - vb
+  name: IsStateVariablePlain(Int32, Int32)
+  nameWithType: Metadata.IsStateVariablePlain(Int32, Int32)
+  fullName: Polkadot.DataStructs.Metadata.Metadata.IsStateVariablePlain(System.Int32, System.Int32)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Metadata/Metadata.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: IsStateVariablePlain
+    path: src/DataStructs/Metadata/Metadata.cs
+    startLine: 91
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs.Metadata
+  syntax:
+    content: public bool IsStateVariablePlain(int moduleIndex, int varIndex)
+    parameters:
+    - id: moduleIndex
+      type: System.Int32
+    - id: varIndex
+      type: System.Int32
+    return:
+      type: System.Boolean
+    content.vb: Public Function IsStateVariablePlain(moduleIndex As Integer, varIndex As Integer) As Boolean
+  overload: Polkadot.DataStructs.Metadata.Metadata.IsStateVariablePlain*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetPlainStorageKey(Polkadot.DataStructs.Hasher,System.String)
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.GetPlainStorageKey(Polkadot.DataStructs.Hasher,System.String)
+  id: GetPlainStorageKey(Polkadot.DataStructs.Hasher,System.String)
+  parent: Polkadot.DataStructs.Metadata.Metadata
+  langs:
+  - csharp
+  - vb
+  name: GetPlainStorageKey(Hasher, String)
+  nameWithType: Metadata.GetPlainStorageKey(Hasher, String)
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetPlainStorageKey(Polkadot.DataStructs.Hasher, System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Metadata/Metadata.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: GetPlainStorageKey
+    path: src/DataStructs/Metadata/Metadata.cs
+    startLine: 102
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs.Metadata
+  syntax:
+    content: public string GetPlainStorageKey(Hasher hasher, string prefix)
+    parameters:
+    - id: hasher
+      type: Polkadot.DataStructs.Hasher
+    - id: prefix
+      type: System.String
+    return:
+      type: System.String
+    content.vb: Public Function GetPlainStorageKey(hasher As Hasher, prefix As String) As String
+  overload: Polkadot.DataStructs.Metadata.Metadata.GetPlainStorageKey*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetAddressStorageKey(Polkadot.DataStructs.Hasher,Polkadot.DataStructs.Address,System.String)
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.GetAddressStorageKey(Polkadot.DataStructs.Hasher,Polkadot.DataStructs.Address,System.String)
+  id: GetAddressStorageKey(Polkadot.DataStructs.Hasher,Polkadot.DataStructs.Address,System.String)
+  parent: Polkadot.DataStructs.Metadata.Metadata
+  langs:
+  - csharp
+  - vb
+  name: GetAddressStorageKey(Hasher, Address, String)
+  nameWithType: Metadata.GetAddressStorageKey(Hasher, Address, String)
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetAddressStorageKey(Polkadot.DataStructs.Hasher, Polkadot.DataStructs.Address, System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Metadata/Metadata.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: GetAddressStorageKey
+    path: src/DataStructs/Metadata/Metadata.cs
+    startLine: 107
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs.Metadata
+  syntax:
+    content: public string GetAddressStorageKey(Hasher hasher, Address address, string prefix)
+    parameters:
+    - id: hasher
+      type: Polkadot.DataStructs.Hasher
+    - id: address
+      type: Polkadot.DataStructs.Address
+    - id: prefix
+      type: System.String
+    return:
+      type: System.String
+    content.vb: Public Function GetAddressStorageKey(hasher As Hasher, address As Address, prefix As String) As String
+  overload: Polkadot.DataStructs.Metadata.Metadata.GetAddressStorageKey*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetPublicKeyFromAddr(Polkadot.DataStructs.Address)
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.GetPublicKeyFromAddr(Polkadot.DataStructs.Address)
+  id: GetPublicKeyFromAddr(Polkadot.DataStructs.Address)
+  parent: Polkadot.DataStructs.Metadata.Metadata
+  langs:
+  - csharp
+  - vb
+  name: GetPublicKeyFromAddr(Address)
+  nameWithType: Metadata.GetPublicKeyFromAddr(Address)
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetPublicKeyFromAddr(Polkadot.DataStructs.Address)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Metadata/Metadata.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: GetPublicKeyFromAddr
+    path: src/DataStructs/Metadata/Metadata.cs
+    startLine: 118
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs.Metadata
+  syntax:
+    content: public PublicKey GetPublicKeyFromAddr(Address address)
+    parameters:
+    - id: address
+      type: Polkadot.DataStructs.Address
+    return:
+      type: Polkadot.DataStructs.PublicKey
+    content.vb: Public Function GetPublicKeyFromAddr(address As Address) As PublicKey
+  overload: Polkadot.DataStructs.Metadata.Metadata.GetPublicKeyFromAddr*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetStorageKey(Polkadot.DataStructs.Hasher,System.Byte[],System.Int32)
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.GetStorageKey(Polkadot.DataStructs.Hasher,System.Byte[],System.Int32)
+  id: GetStorageKey(Polkadot.DataStructs.Hasher,System.Byte[],System.Int32)
+  parent: Polkadot.DataStructs.Metadata.Metadata
+  langs:
+  - csharp
+  - vb
+  name: GetStorageKey(Hasher, Byte[], Int32)
+  nameWithType: Metadata.GetStorageKey(Hasher, Byte[], Int32)
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetStorageKey(Polkadot.DataStructs.Hasher, System.Byte[], System.Int32)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Metadata/Metadata.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: GetStorageKey
+    path: src/DataStructs/Metadata/Metadata.cs
+    startLine: 146
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs.Metadata
+  syntax:
+    content: public string GetStorageKey(Hasher hasher, byte[] data, int lenght)
+    parameters:
+    - id: hasher
+      type: Polkadot.DataStructs.Hasher
+    - id: data
+      type: System.Byte[]
+    - id: lenght
+      type: System.Int32
+    return:
+      type: System.String
+    content.vb: Public Function GetStorageKey(hasher As Hasher, data As Byte(), lenght As Integer) As String
+  overload: Polkadot.DataStructs.Metadata.Metadata.GetStorageKey*
+  nameWithType.vb: Metadata.GetStorageKey(Hasher, Byte(), Int32)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Polkadot.DataStructs.Metadata.Metadata.GetStorageKey(Polkadot.DataStructs.Hasher, System.Byte(), System.Int32)
+  name.vb: GetStorageKey(Hasher, Byte(), Int32)
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetMappedStorageKey(Polkadot.DataStructs.Hasher,System.Collections.Generic.KeyValuePair{System.String,System.String},System.String)
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.GetMappedStorageKey(Polkadot.DataStructs.Hasher,System.Collections.Generic.KeyValuePair{System.String,System.String},System.String)
+  id: GetMappedStorageKey(Polkadot.DataStructs.Hasher,System.Collections.Generic.KeyValuePair{System.String,System.String},System.String)
+  parent: Polkadot.DataStructs.Metadata.Metadata
+  langs:
+  - csharp
+  - vb
+  name: GetMappedStorageKey(Hasher, KeyValuePair<String, String>, String)
+  nameWithType: Metadata.GetMappedStorageKey(Hasher, KeyValuePair<String, String>, String)
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetMappedStorageKey(Polkadot.DataStructs.Hasher, System.Collections.Generic.KeyValuePair<System.String, System.String>, System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Metadata/Metadata.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: GetMappedStorageKey
+    path: src/DataStructs/Metadata/Metadata.cs
+    startLine: 200
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs.Metadata
+  syntax:
+    content: public string GetMappedStorageKey(Hasher hasher, KeyValuePair<string, string> param, string prefix)
+    parameters:
+    - id: hasher
+      type: Polkadot.DataStructs.Hasher
+    - id: param
+      type: System.Collections.Generic.KeyValuePair{System.String,System.String}
+    - id: prefix
+      type: System.String
+    return:
+      type: System.String
+    content.vb: Public Function GetMappedStorageKey(hasher As Hasher, param As KeyValuePair(Of String, String), prefix As String) As String
+  overload: Polkadot.DataStructs.Metadata.Metadata.GetMappedStorageKey*
+  nameWithType.vb: Metadata.GetMappedStorageKey(Hasher, KeyValuePair(Of String, String), String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Polkadot.DataStructs.Metadata.Metadata.GetMappedStorageKey(Polkadot.DataStructs.Hasher, System.Collections.Generic.KeyValuePair(Of System.String, System.String), System.String)
+  name.vb: GetMappedStorageKey(Hasher, KeyValuePair(Of String, String), String)
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetFuncHasher(System.String,System.String)
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.GetFuncHasher(System.String,System.String)
+  id: GetFuncHasher(System.String,System.String)
+  parent: Polkadot.DataStructs.Metadata.Metadata
+  langs:
+  - csharp
+  - vb
+  name: GetFuncHasher(String, String)
+  nameWithType: Metadata.GetFuncHasher(String, String)
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetFuncHasher(System.String, System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/Metadata/Metadata.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: GetFuncHasher
+    path: src/DataStructs/Metadata/Metadata.cs
+    startLine: 222
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.DataStructs.Metadata
+  syntax:
+    content: public Hasher GetFuncHasher(string moduleName, string funcName)
+    parameters:
+    - id: moduleName
+      type: System.String
+    - id: funcName
+      type: System.String
+    return:
+      type: Polkadot.DataStructs.Hasher
+    content.vb: Public Function GetFuncHasher(moduleName As String, funcName As String) As Hasher
+  overload: Polkadot.DataStructs.Metadata.Metadata.GetFuncHasher*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Polkadot.DataStructs.Metadata
+  commentId: N:Polkadot.DataStructs.Metadata
+  name: Polkadot.DataStructs.Metadata
+  nameWithType: Polkadot.DataStructs.Metadata
+  fullName: Polkadot.DataStructs.Metadata
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Polkadot.DataStructs.Metadata.Metadata.MetadataVersion*
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.MetadataVersion
+  name: MetadataVersion
+  nameWithType: Metadata.MetadataVersion
+  fullName: Polkadot.DataStructs.Metadata.Metadata.MetadataVersion
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Polkadot.DataStructs.Metadata.Metadata.#ctor*
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.#ctor
+  name: Metadata
+  nameWithType: Metadata.Metadata
+  fullName: Polkadot.DataStructs.Metadata.Metadata.Metadata
+- uid: Polkadot.DataStructs.Metadata.MetadataBase
+  commentId: T:Polkadot.DataStructs.Metadata.MetadataBase
+  parent: Polkadot.DataStructs.Metadata
+  name: MetadataBase
+  nameWithType: MetadataBase
+  fullName: Polkadot.DataStructs.Metadata.MetadataBase
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetMetadata*
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.GetMetadata
+  name: GetMetadata
+  nameWithType: Metadata.GetMetadata
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetMetadata
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetModuleIndex*
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.GetModuleIndex
+  name: GetModuleIndex
+  nameWithType: Metadata.GetModuleIndex
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetModuleIndex
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetStorageMethodIndex*
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.GetStorageMethodIndex
+  name: GetStorageMethodIndex
+  nameWithType: Metadata.GetStorageMethodIndex
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetStorageMethodIndex
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetCallMethodIndex*
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.GetCallMethodIndex
+  name: GetCallMethodIndex
+  nameWithType: Metadata.GetCallMethodIndex
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetCallMethodIndex
+- uid: Polkadot.DataStructs.Metadata.Metadata.IsStateVariablePlain*
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.IsStateVariablePlain
+  name: IsStateVariablePlain
+  nameWithType: Metadata.IsStateVariablePlain
+  fullName: Polkadot.DataStructs.Metadata.Metadata.IsStateVariablePlain
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetPlainStorageKey*
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.GetPlainStorageKey
+  name: GetPlainStorageKey
+  nameWithType: Metadata.GetPlainStorageKey
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetPlainStorageKey
+- uid: Polkadot.DataStructs.Hasher
+  commentId: T:Polkadot.DataStructs.Hasher
+  parent: Polkadot.DataStructs
+  name: Hasher
+  nameWithType: Hasher
+  fullName: Polkadot.DataStructs.Hasher
+- uid: Polkadot.DataStructs
+  commentId: N:Polkadot.DataStructs
+  name: Polkadot.DataStructs
+  nameWithType: Polkadot.DataStructs
+  fullName: Polkadot.DataStructs
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetAddressStorageKey*
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.GetAddressStorageKey
+  name: GetAddressStorageKey
+  nameWithType: Metadata.GetAddressStorageKey
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetAddressStorageKey
+- uid: Polkadot.DataStructs.Address
+  commentId: T:Polkadot.DataStructs.Address
+  parent: Polkadot.DataStructs
+  name: Address
+  nameWithType: Address
+  fullName: Polkadot.DataStructs.Address
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetPublicKeyFromAddr*
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.GetPublicKeyFromAddr
+  name: GetPublicKeyFromAddr
+  nameWithType: Metadata.GetPublicKeyFromAddr
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetPublicKeyFromAddr
+- uid: Polkadot.DataStructs.PublicKey
+  commentId: T:Polkadot.DataStructs.PublicKey
+  parent: Polkadot.DataStructs
+  name: PublicKey
+  nameWithType: PublicKey
+  fullName: Polkadot.DataStructs.PublicKey
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetStorageKey*
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.GetStorageKey
+  name: GetStorageKey
+  nameWithType: Metadata.GetStorageKey
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetStorageKey
+- uid: System.Byte[]
+  isExternal: true
+  name: Byte[]
+  nameWithType: Byte[]
+  fullName: System.Byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: System.Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetMappedStorageKey*
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.GetMappedStorageKey
+  name: GetMappedStorageKey
+  nameWithType: Metadata.GetMappedStorageKey
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetMappedStorageKey
+- uid: System.Collections.Generic.KeyValuePair{System.String,System.String}
+  commentId: T:System.Collections.Generic.KeyValuePair{System.String,System.String}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.KeyValuePair`2
+  name: KeyValuePair<String, String>
+  nameWithType: KeyValuePair<String, String>
+  fullName: System.Collections.Generic.KeyValuePair<System.String, System.String>
+  nameWithType.vb: KeyValuePair(Of String, String)
+  fullName.vb: System.Collections.Generic.KeyValuePair(Of System.String, System.String)
+  name.vb: KeyValuePair(Of String, String)
+  spec.csharp:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.KeyValuePair`2
+  commentId: T:System.Collections.Generic.KeyValuePair`2
+  isExternal: true
+  name: KeyValuePair<TKey, TValue>
+  nameWithType: KeyValuePair<TKey, TValue>
+  fullName: System.Collections.Generic.KeyValuePair<TKey, TValue>
+  nameWithType.vb: KeyValuePair(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.KeyValuePair(Of TKey, TValue)
+  name.vb: KeyValuePair(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.KeyValuePair`2
+    name: KeyValuePair
+    nameWithType: KeyValuePair
+    fullName: System.Collections.Generic.KeyValuePair
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetFuncHasher*
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.GetFuncHasher
+  name: GetFuncHasher
+  nameWithType: Metadata.GetFuncHasher
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetFuncHasher

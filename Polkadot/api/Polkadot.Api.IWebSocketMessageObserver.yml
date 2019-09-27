@@ -1,0 +1,105 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.Api.IWebSocketMessageObserver
+  commentId: T:Polkadot.Api.IWebSocketMessageObserver
+  id: IWebSocketMessageObserver
+  parent: Polkadot.Api
+  children:
+  - Polkadot.Api.IWebSocketMessageObserver.HandleWsMessage(System.Int32,Newtonsoft.Json.Linq.JObject)
+  langs:
+  - csharp
+  - vb
+  name: IWebSocketMessageObserver
+  nameWithType: IWebSocketMessageObserver
+  fullName: Polkadot.Api.IWebSocketMessageObserver
+  type: Interface
+  source:
+    remote:
+      path: Polkadot/src/Api/Wsclient/IWebSocketMessageObserver.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: IWebSocketMessageObserver
+    path: src/Api/Wsclient/IWebSocketMessageObserver.cs
+    startLine: 4
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public interface IWebSocketMessageObserver
+    content.vb: Public Interface IWebSocketMessageObserver
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Polkadot.Api.IWebSocketMessageObserver.HandleWsMessage(System.Int32,Newtonsoft.Json.Linq.JObject)
+  commentId: M:Polkadot.Api.IWebSocketMessageObserver.HandleWsMessage(System.Int32,Newtonsoft.Json.Linq.JObject)
+  id: HandleWsMessage(System.Int32,Newtonsoft.Json.Linq.JObject)
+  parent: Polkadot.Api.IWebSocketMessageObserver
+  langs:
+  - csharp
+  - vb
+  name: HandleWsMessage(Int32, JObject)
+  nameWithType: IWebSocketMessageObserver.HandleWsMessage(Int32, JObject)
+  fullName: Polkadot.Api.IWebSocketMessageObserver.HandleWsMessage(System.Int32, Newtonsoft.Json.Linq.JObject)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Api/Wsclient/IWebSocketMessageObserver.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: HandleWsMessage
+    path: src/Api/Wsclient/IWebSocketMessageObserver.cs
+    startLine: 9
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  summary: "\nDo not call API in message handler thread\n"
+  example: []
+  syntax:
+    content: void HandleWsMessage(int subscriptionId, JObject message)
+    parameters:
+    - id: subscriptionId
+      type: System.Int32
+    - id: message
+      type: Newtonsoft.Json.Linq.JObject
+    content.vb: Sub HandleWsMessage(subscriptionId As Integer, message As JObject)
+  overload: Polkadot.Api.IWebSocketMessageObserver.HandleWsMessage*
+references:
+- uid: Polkadot.Api
+  commentId: N:Polkadot.Api
+  name: Polkadot.Api
+  nameWithType: Polkadot.Api
+  fullName: Polkadot.Api
+- uid: Polkadot.Api.IWebSocketMessageObserver.HandleWsMessage*
+  commentId: Overload:Polkadot.Api.IWebSocketMessageObserver.HandleWsMessage
+  name: HandleWsMessage
+  nameWithType: IWebSocketMessageObserver.HandleWsMessage
+  fullName: Polkadot.Api.IWebSocketMessageObserver.HandleWsMessage
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Newtonsoft.Json.Linq.JObject
+  commentId: T:Newtonsoft.Json.Linq.JObject
+  parent: Newtonsoft.Json.Linq
+  isExternal: true
+  name: JObject
+  nameWithType: JObject
+  fullName: Newtonsoft.Json.Linq.JObject
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Newtonsoft.Json.Linq
+  commentId: N:Newtonsoft.Json.Linq
+  isExternal: true
+  name: Newtonsoft.Json.Linq
+  nameWithType: Newtonsoft.Json.Linq
+  fullName: Newtonsoft.Json.Linq

@@ -1,0 +1,1062 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.Api.JsonRpc
+  commentId: T:Polkadot.Api.JsonRpc
+  id: JsonRpc
+  parent: Polkadot.Api
+  children:
+  - Polkadot.Api.JsonRpc.#ctor(Polkadot.Api.IWebSocketClient,Polkadot.ILogger,Polkadot.Api.JsonRpcParams)
+  - Polkadot.Api.JsonRpc.Connect(System.String)
+  - Polkadot.Api.JsonRpc.Disconnect
+  - Polkadot.Api.JsonRpc.Dispose
+  - Polkadot.Api.JsonRpc.HandleMessage(System.String)
+  - Polkadot.Api.JsonRpc.Request(Newtonsoft.Json.Linq.JObject,System.Int32)
+  - Polkadot.Api.JsonRpc.SubscribeWs(Newtonsoft.Json.Linq.JObject,Polkadot.Api.IWebSocketMessageObserver)
+  - Polkadot.Api.JsonRpc.UnsubscribeWs(System.Int32,System.String)
+  langs:
+  - csharp
+  - vb
+  name: JsonRpc
+  nameWithType: JsonRpc
+  fullName: Polkadot.Api.JsonRpc
+  type: Class
+  source:
+    remote:
+      path: Polkadot/src/Api/JsonRpc/JsonRpc.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: JsonRpc
+    path: src/Api/JsonRpc/JsonRpc.cs
+    startLine: 13
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: 'public class JsonRpc : IJsonRpc, IDisposable, IMessageObserver'
+    content.vb: >-
+      Public Class JsonRpc
+
+          Implements IJsonRpc, IDisposable, IMessageObserver
+  inheritance:
+  - System.Object
+  implements:
+  - Polkadot.Api.IJsonRpc
+  - System.IDisposable
+  - Polkadot.Api.IMessageObserver
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Polkadot.Api.JsonRpc.#ctor(Polkadot.Api.IWebSocketClient,Polkadot.ILogger,Polkadot.Api.JsonRpcParams)
+  commentId: M:Polkadot.Api.JsonRpc.#ctor(Polkadot.Api.IWebSocketClient,Polkadot.ILogger,Polkadot.Api.JsonRpcParams)
+  id: '#ctor(Polkadot.Api.IWebSocketClient,Polkadot.ILogger,Polkadot.Api.JsonRpcParams)'
+  parent: Polkadot.Api.JsonRpc
+  langs:
+  - csharp
+  - vb
+  name: JsonRpc(IWebSocketClient, ILogger, JsonRpcParams)
+  nameWithType: JsonRpc.JsonRpc(IWebSocketClient, ILogger, JsonRpcParams)
+  fullName: Polkadot.Api.JsonRpc.JsonRpc(Polkadot.Api.IWebSocketClient, Polkadot.ILogger, Polkadot.Api.JsonRpcParams)
+  type: Constructor
+  source:
+    remote:
+      path: Polkadot/src/Api/JsonRpc/JsonRpc.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: .ctor
+    path: src/Api/JsonRpc/JsonRpc.cs
+    startLine: 29
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public JsonRpc(IWebSocketClient wsc, ILogger logger, JsonRpcParams param)
+    parameters:
+    - id: wsc
+      type: Polkadot.Api.IWebSocketClient
+    - id: logger
+      type: Polkadot.ILogger
+    - id: param
+      type: Polkadot.Api.JsonRpcParams
+    content.vb: Public Sub New(wsc As IWebSocketClient, logger As ILogger, param As JsonRpcParams)
+  overload: Polkadot.Api.JsonRpc.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Api.JsonRpc.Connect(System.String)
+  commentId: M:Polkadot.Api.JsonRpc.Connect(System.String)
+  id: Connect(System.String)
+  parent: Polkadot.Api.JsonRpc
+  langs:
+  - csharp
+  - vb
+  name: Connect(String)
+  nameWithType: JsonRpc.Connect(String)
+  fullName: Polkadot.Api.JsonRpc.Connect(System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Api/JsonRpc/JsonRpc.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Connect
+    path: src/Api/JsonRpc/JsonRpc.cs
+    startLine: 40
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public int Connect(string node_url)
+    parameters:
+    - id: node_url
+      type: System.String
+    return:
+      type: System.Int32
+    content.vb: Public Function Connect(node_url As String) As Integer
+  overload: Polkadot.Api.JsonRpc.Connect*
+  implements:
+  - Polkadot.Api.IJsonRpc.Connect(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Api.JsonRpc.Disconnect
+  commentId: M:Polkadot.Api.JsonRpc.Disconnect
+  id: Disconnect
+  parent: Polkadot.Api.JsonRpc
+  langs:
+  - csharp
+  - vb
+  name: Disconnect()
+  nameWithType: JsonRpc.Disconnect()
+  fullName: Polkadot.Api.JsonRpc.Disconnect()
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Api/JsonRpc/JsonRpc.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Disconnect
+    path: src/Api/JsonRpc/JsonRpc.cs
+    startLine: 47
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public void Disconnect()
+    content.vb: Public Sub Disconnect
+  overload: Polkadot.Api.JsonRpc.Disconnect*
+  implements:
+  - Polkadot.Api.IJsonRpc.Disconnect
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Api.JsonRpc.Request(Newtonsoft.Json.Linq.JObject,System.Int32)
+  commentId: M:Polkadot.Api.JsonRpc.Request(Newtonsoft.Json.Linq.JObject,System.Int32)
+  id: Request(Newtonsoft.Json.Linq.JObject,System.Int32)
+  parent: Polkadot.Api.JsonRpc
+  langs:
+  - csharp
+  - vb
+  name: Request(JObject, Int32)
+  nameWithType: JsonRpc.Request(JObject, Int32)
+  fullName: Polkadot.Api.JsonRpc.Request(Newtonsoft.Json.Linq.JObject, System.Int32)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Api/JsonRpc/JsonRpc.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Request
+    path: src/Api/JsonRpc/JsonRpc.cs
+    startLine: 52
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public JObject Request(JObject jsonMap, int timeout_s = 10)
+    parameters:
+    - id: jsonMap
+      type: Newtonsoft.Json.Linq.JObject
+    - id: timeout_s
+      type: System.Int32
+    return:
+      type: Newtonsoft.Json.Linq.JObject
+    content.vb: Public Function Request(jsonMap As JObject, timeout_s As Integer = 10) As JObject
+  overload: Polkadot.Api.JsonRpc.Request*
+  implements:
+  - Polkadot.Api.IJsonRpc.Request(Newtonsoft.Json.Linq.JObject,System.Int32)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Api.JsonRpc.SubscribeWs(Newtonsoft.Json.Linq.JObject,Polkadot.Api.IWebSocketMessageObserver)
+  commentId: M:Polkadot.Api.JsonRpc.SubscribeWs(Newtonsoft.Json.Linq.JObject,Polkadot.Api.IWebSocketMessageObserver)
+  id: SubscribeWs(Newtonsoft.Json.Linq.JObject,Polkadot.Api.IWebSocketMessageObserver)
+  parent: Polkadot.Api.JsonRpc
+  langs:
+  - csharp
+  - vb
+  name: SubscribeWs(JObject, IWebSocketMessageObserver)
+  nameWithType: JsonRpc.SubscribeWs(JObject, IWebSocketMessageObserver)
+  fullName: Polkadot.Api.JsonRpc.SubscribeWs(Newtonsoft.Json.Linq.JObject, Polkadot.Api.IWebSocketMessageObserver)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Api/JsonRpc/JsonRpc.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: SubscribeWs
+    path: src/Api/JsonRpc/JsonRpc.cs
+    startLine: 99
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public int SubscribeWs(JObject jsonMap, IWebSocketMessageObserver observer)
+    parameters:
+    - id: jsonMap
+      type: Newtonsoft.Json.Linq.JObject
+    - id: observer
+      type: Polkadot.Api.IWebSocketMessageObserver
+    return:
+      type: System.Int32
+    content.vb: Public Function SubscribeWs(jsonMap As JObject, observer As IWebSocketMessageObserver) As Integer
+  overload: Polkadot.Api.JsonRpc.SubscribeWs*
+  implements:
+  - Polkadot.Api.IJsonRpc.SubscribeWs(Newtonsoft.Json.Linq.JObject,Polkadot.Api.IWebSocketMessageObserver)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Api.JsonRpc.UnsubscribeWs(System.Int32,System.String)
+  commentId: M:Polkadot.Api.JsonRpc.UnsubscribeWs(System.Int32,System.String)
+  id: UnsubscribeWs(System.Int32,System.String)
+  parent: Polkadot.Api.JsonRpc
+  langs:
+  - csharp
+  - vb
+  name: UnsubscribeWs(Int32, String)
+  nameWithType: JsonRpc.UnsubscribeWs(Int32, String)
+  fullName: Polkadot.Api.JsonRpc.UnsubscribeWs(System.Int32, System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Api/JsonRpc/JsonRpc.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: UnsubscribeWs
+    path: src/Api/JsonRpc/JsonRpc.cs
+    startLine: 120
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public int UnsubscribeWs(int subscriptionId, string method)
+    parameters:
+    - id: subscriptionId
+      type: System.Int32
+    - id: method
+      type: System.String
+    return:
+      type: System.Int32
+    content.vb: Public Function UnsubscribeWs(subscriptionId As Integer, method As String) As Integer
+  overload: Polkadot.Api.JsonRpc.UnsubscribeWs*
+  implements:
+  - Polkadot.Api.IJsonRpc.UnsubscribeWs(System.Int32,System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Api.JsonRpc.HandleMessage(System.String)
+  commentId: M:Polkadot.Api.JsonRpc.HandleMessage(System.String)
+  id: HandleMessage(System.String)
+  parent: Polkadot.Api.JsonRpc
+  langs:
+  - csharp
+  - vb
+  name: HandleMessage(String)
+  nameWithType: JsonRpc.HandleMessage(String)
+  fullName: Polkadot.Api.JsonRpc.HandleMessage(System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Api/JsonRpc/JsonRpc.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: HandleMessage
+    path: src/Api/JsonRpc/JsonRpc.cs
+    startLine: 125
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public void HandleMessage(string payload)
+    parameters:
+    - id: payload
+      type: System.String
+    content.vb: Public Sub HandleMessage(payload As String)
+  overload: Polkadot.Api.JsonRpc.HandleMessage*
+  implements:
+  - Polkadot.Api.IMessageObserver.HandleMessage(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Api.JsonRpc.Dispose
+  commentId: M:Polkadot.Api.JsonRpc.Dispose
+  id: Dispose
+  parent: Polkadot.Api.JsonRpc
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: JsonRpc.Dispose()
+  fullName: Polkadot.Api.JsonRpc.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Api/JsonRpc/JsonRpc.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Dispose
+    path: src/Api/JsonRpc/JsonRpc.cs
+    startLine: 160
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Api
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose
+  overload: Polkadot.Api.JsonRpc.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Polkadot.Api
+  commentId: N:Polkadot.Api
+  name: Polkadot.Api
+  nameWithType: Polkadot.Api
+  fullName: Polkadot.Api
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Polkadot.Api.IJsonRpc
+  commentId: T:Polkadot.Api.IJsonRpc
+  parent: Polkadot.Api
+  name: IJsonRpc
+  nameWithType: IJsonRpc
+  fullName: Polkadot.Api.IJsonRpc
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Polkadot.Api.IMessageObserver
+  commentId: T:Polkadot.Api.IMessageObserver
+  parent: Polkadot.Api
+  name: IMessageObserver
+  nameWithType: IMessageObserver
+  fullName: Polkadot.Api.IMessageObserver
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Polkadot.Api.JsonRpc.#ctor*
+  commentId: Overload:Polkadot.Api.JsonRpc.#ctor
+  name: JsonRpc
+  nameWithType: JsonRpc.JsonRpc
+  fullName: Polkadot.Api.JsonRpc.JsonRpc
+- uid: Polkadot.Api.IWebSocketClient
+  commentId: T:Polkadot.Api.IWebSocketClient
+  parent: Polkadot.Api
+  name: IWebSocketClient
+  nameWithType: IWebSocketClient
+  fullName: Polkadot.Api.IWebSocketClient
+- uid: Polkadot.ILogger
+  commentId: T:Polkadot.ILogger
+  parent: Polkadot
+  name: ILogger
+  nameWithType: ILogger
+  fullName: Polkadot.ILogger
+- uid: Polkadot.Api.JsonRpcParams
+  commentId: T:Polkadot.Api.JsonRpcParams
+  parent: Polkadot.Api
+  name: JsonRpcParams
+  nameWithType: JsonRpcParams
+  fullName: Polkadot.Api.JsonRpcParams
+- uid: Polkadot
+  commentId: N:Polkadot
+  name: Polkadot
+  nameWithType: Polkadot
+  fullName: Polkadot
+- uid: Polkadot.Api.JsonRpc.Connect*
+  commentId: Overload:Polkadot.Api.JsonRpc.Connect
+  name: Connect
+  nameWithType: JsonRpc.Connect
+  fullName: Polkadot.Api.JsonRpc.Connect
+- uid: Polkadot.Api.IJsonRpc.Connect(System.String)
+  commentId: M:Polkadot.Api.IJsonRpc.Connect(System.String)
+  parent: Polkadot.Api.IJsonRpc
+  isExternal: true
+  name: Connect(String)
+  nameWithType: IJsonRpc.Connect(String)
+  fullName: Polkadot.Api.IJsonRpc.Connect(System.String)
+  spec.csharp:
+  - uid: Polkadot.Api.IJsonRpc.Connect(System.String)
+    name: Connect
+    nameWithType: IJsonRpc.Connect
+    fullName: Polkadot.Api.IJsonRpc.Connect
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.Api.IJsonRpc.Connect(System.String)
+    name: Connect
+    nameWithType: IJsonRpc.Connect
+    fullName: Polkadot.Api.IJsonRpc.Connect
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Polkadot.Api.JsonRpc.Disconnect*
+  commentId: Overload:Polkadot.Api.JsonRpc.Disconnect
+  name: Disconnect
+  nameWithType: JsonRpc.Disconnect
+  fullName: Polkadot.Api.JsonRpc.Disconnect
+- uid: Polkadot.Api.IJsonRpc.Disconnect
+  commentId: M:Polkadot.Api.IJsonRpc.Disconnect
+  parent: Polkadot.Api.IJsonRpc
+  name: Disconnect()
+  nameWithType: IJsonRpc.Disconnect()
+  fullName: Polkadot.Api.IJsonRpc.Disconnect()
+  spec.csharp:
+  - uid: Polkadot.Api.IJsonRpc.Disconnect
+    name: Disconnect
+    nameWithType: IJsonRpc.Disconnect
+    fullName: Polkadot.Api.IJsonRpc.Disconnect
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.Api.IJsonRpc.Disconnect
+    name: Disconnect
+    nameWithType: IJsonRpc.Disconnect
+    fullName: Polkadot.Api.IJsonRpc.Disconnect
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Polkadot.Api.JsonRpc.Request*
+  commentId: Overload:Polkadot.Api.JsonRpc.Request
+  name: Request
+  nameWithType: JsonRpc.Request
+  fullName: Polkadot.Api.JsonRpc.Request
+- uid: Polkadot.Api.IJsonRpc.Request(Newtonsoft.Json.Linq.JObject,System.Int32)
+  commentId: M:Polkadot.Api.IJsonRpc.Request(Newtonsoft.Json.Linq.JObject,System.Int32)
+  parent: Polkadot.Api.IJsonRpc
+  isExternal: true
+  name: Request(JObject, Int32)
+  nameWithType: IJsonRpc.Request(JObject, Int32)
+  fullName: Polkadot.Api.IJsonRpc.Request(Newtonsoft.Json.Linq.JObject, System.Int32)
+  spec.csharp:
+  - uid: Polkadot.Api.IJsonRpc.Request(Newtonsoft.Json.Linq.JObject,System.Int32)
+    name: Request
+    nameWithType: IJsonRpc.Request
+    fullName: Polkadot.Api.IJsonRpc.Request
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Newtonsoft.Json.Linq.JObject
+    name: JObject
+    nameWithType: JObject
+    fullName: Newtonsoft.Json.Linq.JObject
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.Api.IJsonRpc.Request(Newtonsoft.Json.Linq.JObject,System.Int32)
+    name: Request
+    nameWithType: IJsonRpc.Request
+    fullName: Polkadot.Api.IJsonRpc.Request
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Newtonsoft.Json.Linq.JObject
+    name: JObject
+    nameWithType: JObject
+    fullName: Newtonsoft.Json.Linq.JObject
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Newtonsoft.Json.Linq.JObject
+  commentId: T:Newtonsoft.Json.Linq.JObject
+  parent: Newtonsoft.Json.Linq
+  isExternal: true
+  name: JObject
+  nameWithType: JObject
+  fullName: Newtonsoft.Json.Linq.JObject
+- uid: Newtonsoft.Json.Linq
+  commentId: N:Newtonsoft.Json.Linq
+  isExternal: true
+  name: Newtonsoft.Json.Linq
+  nameWithType: Newtonsoft.Json.Linq
+  fullName: Newtonsoft.Json.Linq
+- uid: Polkadot.Api.JsonRpc.SubscribeWs*
+  commentId: Overload:Polkadot.Api.JsonRpc.SubscribeWs
+  name: SubscribeWs
+  nameWithType: JsonRpc.SubscribeWs
+  fullName: Polkadot.Api.JsonRpc.SubscribeWs
+- uid: Polkadot.Api.IJsonRpc.SubscribeWs(Newtonsoft.Json.Linq.JObject,Polkadot.Api.IWebSocketMessageObserver)
+  commentId: M:Polkadot.Api.IJsonRpc.SubscribeWs(Newtonsoft.Json.Linq.JObject,Polkadot.Api.IWebSocketMessageObserver)
+  parent: Polkadot.Api.IJsonRpc
+  isExternal: true
+  name: SubscribeWs(JObject, IWebSocketMessageObserver)
+  nameWithType: IJsonRpc.SubscribeWs(JObject, IWebSocketMessageObserver)
+  fullName: Polkadot.Api.IJsonRpc.SubscribeWs(Newtonsoft.Json.Linq.JObject, Polkadot.Api.IWebSocketMessageObserver)
+  spec.csharp:
+  - uid: Polkadot.Api.IJsonRpc.SubscribeWs(Newtonsoft.Json.Linq.JObject,Polkadot.Api.IWebSocketMessageObserver)
+    name: SubscribeWs
+    nameWithType: IJsonRpc.SubscribeWs
+    fullName: Polkadot.Api.IJsonRpc.SubscribeWs
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Newtonsoft.Json.Linq.JObject
+    name: JObject
+    nameWithType: JObject
+    fullName: Newtonsoft.Json.Linq.JObject
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Polkadot.Api.IWebSocketMessageObserver
+    name: IWebSocketMessageObserver
+    nameWithType: IWebSocketMessageObserver
+    fullName: Polkadot.Api.IWebSocketMessageObserver
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.Api.IJsonRpc.SubscribeWs(Newtonsoft.Json.Linq.JObject,Polkadot.Api.IWebSocketMessageObserver)
+    name: SubscribeWs
+    nameWithType: IJsonRpc.SubscribeWs
+    fullName: Polkadot.Api.IJsonRpc.SubscribeWs
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Newtonsoft.Json.Linq.JObject
+    name: JObject
+    nameWithType: JObject
+    fullName: Newtonsoft.Json.Linq.JObject
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Polkadot.Api.IWebSocketMessageObserver
+    name: IWebSocketMessageObserver
+    nameWithType: IWebSocketMessageObserver
+    fullName: Polkadot.Api.IWebSocketMessageObserver
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Polkadot.Api.IWebSocketMessageObserver
+  commentId: T:Polkadot.Api.IWebSocketMessageObserver
+  parent: Polkadot.Api
+  name: IWebSocketMessageObserver
+  nameWithType: IWebSocketMessageObserver
+  fullName: Polkadot.Api.IWebSocketMessageObserver
+- uid: Polkadot.Api.JsonRpc.UnsubscribeWs*
+  commentId: Overload:Polkadot.Api.JsonRpc.UnsubscribeWs
+  name: UnsubscribeWs
+  nameWithType: JsonRpc.UnsubscribeWs
+  fullName: Polkadot.Api.JsonRpc.UnsubscribeWs
+- uid: Polkadot.Api.IJsonRpc.UnsubscribeWs(System.Int32,System.String)
+  commentId: M:Polkadot.Api.IJsonRpc.UnsubscribeWs(System.Int32,System.String)
+  parent: Polkadot.Api.IJsonRpc
+  isExternal: true
+  name: UnsubscribeWs(Int32, String)
+  nameWithType: IJsonRpc.UnsubscribeWs(Int32, String)
+  fullName: Polkadot.Api.IJsonRpc.UnsubscribeWs(System.Int32, System.String)
+  spec.csharp:
+  - uid: Polkadot.Api.IJsonRpc.UnsubscribeWs(System.Int32,System.String)
+    name: UnsubscribeWs
+    nameWithType: IJsonRpc.UnsubscribeWs
+    fullName: Polkadot.Api.IJsonRpc.UnsubscribeWs
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.Api.IJsonRpc.UnsubscribeWs(System.Int32,System.String)
+    name: UnsubscribeWs
+    nameWithType: IJsonRpc.UnsubscribeWs
+    fullName: Polkadot.Api.IJsonRpc.UnsubscribeWs
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Polkadot.Api.JsonRpc.HandleMessage*
+  commentId: Overload:Polkadot.Api.JsonRpc.HandleMessage
+  name: HandleMessage
+  nameWithType: JsonRpc.HandleMessage
+  fullName: Polkadot.Api.JsonRpc.HandleMessage
+- uid: Polkadot.Api.IMessageObserver.HandleMessage(System.String)
+  commentId: M:Polkadot.Api.IMessageObserver.HandleMessage(System.String)
+  parent: Polkadot.Api.IMessageObserver
+  isExternal: true
+  name: HandleMessage(String)
+  nameWithType: IMessageObserver.HandleMessage(String)
+  fullName: Polkadot.Api.IMessageObserver.HandleMessage(System.String)
+  spec.csharp:
+  - uid: Polkadot.Api.IMessageObserver.HandleMessage(System.String)
+    name: HandleMessage
+    nameWithType: IMessageObserver.HandleMessage
+    fullName: Polkadot.Api.IMessageObserver.HandleMessage
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.Api.IMessageObserver.HandleMessage(System.String)
+    name: HandleMessage
+    nameWithType: IMessageObserver.HandleMessage
+    fullName: Polkadot.Api.IMessageObserver.HandleMessage
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Polkadot.Api.JsonRpc.Dispose*
+  commentId: Overload:Polkadot.Api.JsonRpc.Dispose
+  name: Dispose
+  nameWithType: JsonRpc.Dispose
+  fullName: Polkadot.Api.JsonRpc.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    nameWithType: IDisposable.Dispose
+    fullName: System.IDisposable.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    nameWithType: IDisposable.Dispose
+    fullName: System.IDisposable.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )

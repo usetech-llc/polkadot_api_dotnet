@@ -1,0 +1,158 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.ILogger
+  commentId: T:Polkadot.ILogger
+  id: ILogger
+  parent: Polkadot
+  children:
+  - Polkadot.ILogger.Error(System.String)
+  - Polkadot.ILogger.Info(System.String)
+  - Polkadot.ILogger.Warning(System.String)
+  langs:
+  - csharp
+  - vb
+  name: ILogger
+  nameWithType: ILogger
+  fullName: Polkadot.ILogger
+  type: Interface
+  source:
+    remote:
+      path: Polkadot/src/ILogger.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: ILogger
+    path: src/ILogger.cs
+    startLine: 2
+  assemblies:
+  - Polkadot
+  namespace: Polkadot
+  syntax:
+    content: public interface ILogger
+    content.vb: Public Interface ILogger
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Polkadot.ILogger.Info(System.String)
+  commentId: M:Polkadot.ILogger.Info(System.String)
+  id: Info(System.String)
+  parent: Polkadot.ILogger
+  langs:
+  - csharp
+  - vb
+  name: Info(String)
+  nameWithType: ILogger.Info(String)
+  fullName: Polkadot.ILogger.Info(System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/ILogger.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Info
+    path: src/ILogger.cs
+    startLine: 4
+  assemblies:
+  - Polkadot
+  namespace: Polkadot
+  syntax:
+    content: void Info(string message)
+    parameters:
+    - id: message
+      type: System.String
+    content.vb: Sub Info(message As String)
+  overload: Polkadot.ILogger.Info*
+- uid: Polkadot.ILogger.Error(System.String)
+  commentId: M:Polkadot.ILogger.Error(System.String)
+  id: Error(System.String)
+  parent: Polkadot.ILogger
+  langs:
+  - csharp
+  - vb
+  name: Error(String)
+  nameWithType: ILogger.Error(String)
+  fullName: Polkadot.ILogger.Error(System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/ILogger.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Error
+    path: src/ILogger.cs
+    startLine: 5
+  assemblies:
+  - Polkadot
+  namespace: Polkadot
+  syntax:
+    content: void Error(string message)
+    parameters:
+    - id: message
+      type: System.String
+    content.vb: Sub Error(message As String)
+  overload: Polkadot.ILogger.Error*
+- uid: Polkadot.ILogger.Warning(System.String)
+  commentId: M:Polkadot.ILogger.Warning(System.String)
+  id: Warning(System.String)
+  parent: Polkadot.ILogger
+  langs:
+  - csharp
+  - vb
+  name: Warning(String)
+  nameWithType: ILogger.Warning(String)
+  fullName: Polkadot.ILogger.Warning(System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/ILogger.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Warning
+    path: src/ILogger.cs
+    startLine: 6
+  assemblies:
+  - Polkadot
+  namespace: Polkadot
+  syntax:
+    content: void Warning(string message)
+    parameters:
+    - id: message
+      type: System.String
+    content.vb: Sub Warning(message As String)
+  overload: Polkadot.ILogger.Warning*
+references:
+- uid: Polkadot
+  commentId: N:Polkadot
+  name: Polkadot
+  nameWithType: Polkadot
+  fullName: Polkadot
+- uid: Polkadot.ILogger.Info*
+  commentId: Overload:Polkadot.ILogger.Info
+  name: Info
+  nameWithType: ILogger.Info
+  fullName: Polkadot.ILogger.Info
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Polkadot.ILogger.Error*
+  commentId: Overload:Polkadot.ILogger.Error
+  name: Error
+  nameWithType: ILogger.Error
+  fullName: Polkadot.ILogger.Error
+- uid: Polkadot.ILogger.Warning*
+  commentId: Overload:Polkadot.ILogger.Warning
+  name: Warning
+  nameWithType: ILogger.Warning
+  fullName: Polkadot.ILogger.Warning

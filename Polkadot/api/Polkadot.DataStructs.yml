@@ -1,0 +1,42 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.DataStructs
+  commentId: N:Polkadot.DataStructs
+  id: Polkadot.DataStructs
+  children:
+  - Polkadot.DataStructs.Address
+  - Polkadot.DataStructs.Hasher
+  - Polkadot.DataStructs.PublicKey
+  langs:
+  - csharp
+  - vb
+  name: Polkadot.DataStructs
+  nameWithType: Polkadot.DataStructs
+  fullName: Polkadot.DataStructs
+  type: Namespace
+  assemblies:
+  - Polkadot
+references:
+- uid: Polkadot.DataStructs.Address
+  commentId: T:Polkadot.DataStructs.Address
+  parent: Polkadot.DataStructs
+  name: Address
+  nameWithType: Address
+  fullName: Polkadot.DataStructs.Address
+- uid: Polkadot.DataStructs.Hasher
+  commentId: T:Polkadot.DataStructs.Hasher
+  parent: Polkadot.DataStructs
+  name: Hasher
+  nameWithType: Hasher
+  fullName: Polkadot.DataStructs.Hasher
+- uid: Polkadot.DataStructs.PublicKey
+  commentId: T:Polkadot.DataStructs.PublicKey
+  parent: Polkadot.DataStructs
+  name: PublicKey
+  nameWithType: PublicKey
+  fullName: Polkadot.DataStructs.PublicKey
+- uid: Polkadot.DataStructs
+  commentId: N:Polkadot.DataStructs
+  name: Polkadot.DataStructs
+  nameWithType: Polkadot.DataStructs
+  fullName: Polkadot.DataStructs

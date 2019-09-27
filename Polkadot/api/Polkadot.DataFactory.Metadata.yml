@@ -1,0 +1,22 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.DataFactory.Metadata
+  commentId: N:Polkadot.DataFactory.Metadata
+  id: Polkadot.DataFactory.Metadata
+  children:
+  - Polkadot.DataFactory.Metadata.ParseMetadataV4
+  langs:
+  - csharp
+  - vb
+  name: Polkadot.DataFactory.Metadata
+  nameWithType: Polkadot.DataFactory.Metadata
+  fullName: Polkadot.DataFactory.Metadata
+  type: Namespace
+  assemblies:
+  - Polkadot
+references:
+- uid: Polkadot.DataFactory.Metadata.ParseMetadataV4
+  commentId: T:Polkadot.DataFactory.Metadata.ParseMetadataV4
+  name: ParseMetadataV4
+  nameWithType: ParseMetadataV4
+  fullName: Polkadot.DataFactory.Metadata.ParseMetadataV4

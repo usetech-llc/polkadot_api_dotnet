@@ -1,0 +1,22 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.Test
+  commentId: N:Polkadot.Test
+  id: Polkadot.Test
+  children:
+  - Polkadot.Test.MockJsonRpc
+  langs:
+  - csharp
+  - vb
+  name: Polkadot.Test
+  nameWithType: Polkadot.Test
+  fullName: Polkadot.Test
+  type: Namespace
+  assemblies:
+  - Polkadot
+references:
+- uid: Polkadot.Test.MockJsonRpc
+  commentId: T:Polkadot.Test.MockJsonRpc
+  name: MockJsonRpc
+  nameWithType: MockJsonRpc
+  fullName: Polkadot.Test.MockJsonRpc

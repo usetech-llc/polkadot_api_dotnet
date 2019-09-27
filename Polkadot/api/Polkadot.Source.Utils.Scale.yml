@@ -1,0 +1,613 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.Source.Utils.Scale
+  commentId: T:Polkadot.Source.Utils.Scale
+  id: Scale
+  parent: Polkadot.Source.Utils
+  children:
+  - Polkadot.Source.Utils.Scale.DecodeCompactInteger(System.String@)
+  - Polkadot.Source.Utils.Scale.ExtractString(System.String@,System.Int32)
+  - Polkadot.Source.Utils.Scale.ExtractString(System.String@,System.Int64)
+  - Polkadot.Source.Utils.Scale.NextByte(System.String@)
+  - Polkadot.Source.Utils.Scale.NextWord(System.String@)
+  langs:
+  - csharp
+  - vb
+  name: Scale
+  nameWithType: Scale
+  fullName: Polkadot.Source.Utils.Scale
+  type: Class
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Scale
+    path: src/Utils/Scale.cs
+    startLine: 57
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public static class Scale
+    content.vb: Public Module Scale
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - static
+  - class
+  modifiers.vb:
+  - Public
+  - Module
+- uid: Polkadot.Source.Utils.Scale.NextByte(System.String@)
+  commentId: M:Polkadot.Source.Utils.Scale.NextByte(System.String@)
+  id: NextByte(System.String@)
+  parent: Polkadot.Source.Utils.Scale
+  langs:
+  - csharp
+  - vb
+  name: NextByte(ref String)
+  nameWithType: Scale.NextByte(ref String)
+  fullName: Polkadot.Source.Utils.Scale.NextByte(ref System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: NextByte
+    path: src/Utils/Scale.cs
+    startLine: 64
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public static byte NextByte(ref string stringStream)
+    parameters:
+    - id: stringStream
+      type: System.String
+    return:
+      type: System.Byte
+    content.vb: Public Shared Function NextByte(ByRef stringStream As String) As Byte
+  overload: Polkadot.Source.Utils.Scale.NextByte*
+  nameWithType.vb: Scale.NextByte(ByRef String)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Polkadot.Source.Utils.Scale.NextByte(ByRef System.String)
+  name.vb: NextByte(ByRef String)
+- uid: Polkadot.Source.Utils.Scale.NextWord(System.String@)
+  commentId: M:Polkadot.Source.Utils.Scale.NextWord(System.String@)
+  id: NextWord(System.String@)
+  parent: Polkadot.Source.Utils.Scale
+  langs:
+  - csharp
+  - vb
+  name: NextWord(ref String)
+  nameWithType: Scale.NextWord(ref String)
+  fullName: Polkadot.Source.Utils.Scale.NextWord(ref System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: NextWord
+    path: src/Utils/Scale.cs
+    startLine: 71
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public static ushort NextWord(ref string stringStream)
+    parameters:
+    - id: stringStream
+      type: System.String
+    return:
+      type: System.UInt16
+    content.vb: Public Shared Function NextWord(ByRef stringStream As String) As UShort
+  overload: Polkadot.Source.Utils.Scale.NextWord*
+  nameWithType.vb: Scale.NextWord(ByRef String)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Polkadot.Source.Utils.Scale.NextWord(ByRef System.String)
+  name.vb: NextWord(ByRef String)
+- uid: Polkadot.Source.Utils.Scale.ExtractString(System.String@,System.Int64)
+  commentId: M:Polkadot.Source.Utils.Scale.ExtractString(System.String@,System.Int64)
+  id: ExtractString(System.String@,System.Int64)
+  parent: Polkadot.Source.Utils.Scale
+  langs:
+  - csharp
+  - vb
+  name: ExtractString(ref String, Int64)
+  nameWithType: Scale.ExtractString(ref String, Int64)
+  fullName: Polkadot.Source.Utils.Scale.ExtractString(ref System.String, System.Int64)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: ExtractString
+    path: src/Utils/Scale.cs
+    startLine: 81
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public static string ExtractString(ref string stringStream, long length)
+    parameters:
+    - id: stringStream
+      type: System.String
+    - id: length
+      type: System.Int64
+    return:
+      type: System.String
+    content.vb: Public Shared Function ExtractString(ByRef stringStream As String, length As Long) As String
+  overload: Polkadot.Source.Utils.Scale.ExtractString*
+  nameWithType.vb: Scale.ExtractString(ByRef String, Int64)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Polkadot.Source.Utils.Scale.ExtractString(ByRef System.String, System.Int64)
+  name.vb: ExtractString(ByRef String, Int64)
+- uid: Polkadot.Source.Utils.Scale.ExtractString(System.String@,System.Int32)
+  commentId: M:Polkadot.Source.Utils.Scale.ExtractString(System.String@,System.Int32)
+  id: ExtractString(System.String@,System.Int32)
+  parent: Polkadot.Source.Utils.Scale
+  langs:
+  - csharp
+  - vb
+  name: ExtractString(ref String, Int32)
+  nameWithType: Scale.ExtractString(ref String, Int32)
+  fullName: Polkadot.Source.Utils.Scale.ExtractString(ref System.String, System.Int32)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: ExtractString
+    path: src/Utils/Scale.cs
+    startLine: 86
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public static string ExtractString(ref string stringStream, int length)
+    parameters:
+    - id: stringStream
+      type: System.String
+    - id: length
+      type: System.Int32
+    return:
+      type: System.String
+    content.vb: Public Shared Function ExtractString(ByRef stringStream As String, length As Integer) As String
+  overload: Polkadot.Source.Utils.Scale.ExtractString*
+  nameWithType.vb: Scale.ExtractString(ByRef String, Int32)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Polkadot.Source.Utils.Scale.ExtractString(ByRef System.String, System.Int32)
+  name.vb: ExtractString(ByRef String, Int32)
+- uid: Polkadot.Source.Utils.Scale.DecodeCompactInteger(System.String@)
+  commentId: M:Polkadot.Source.Utils.Scale.DecodeCompactInteger(System.String@)
+  id: DecodeCompactInteger(System.String@)
+  parent: Polkadot.Source.Utils.Scale
+  langs:
+  - csharp
+  - vb
+  name: DecodeCompactInteger(ref String)
+  nameWithType: Scale.DecodeCompactInteger(ref String)
+  fullName: Polkadot.Source.Utils.Scale.DecodeCompactInteger(ref System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Utils/Scale.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: DecodeCompactInteger
+    path: src/Utils/Scale.cs
+    startLine: 97
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Source.Utils
+  syntax:
+    content: public static CompactInteger DecodeCompactInteger(ref string stringStream)
+    parameters:
+    - id: stringStream
+      type: System.String
+    return:
+      type: Polkadot.Source.Utils.CompactInteger
+    content.vb: Public Shared Function DecodeCompactInteger(ByRef stringStream As String) As CompactInteger
+  overload: Polkadot.Source.Utils.Scale.DecodeCompactInteger*
+  nameWithType.vb: Scale.DecodeCompactInteger(ByRef String)
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+  fullName.vb: Polkadot.Source.Utils.Scale.DecodeCompactInteger(ByRef System.String)
+  name.vb: DecodeCompactInteger(ByRef String)
+references:
+- uid: Polkadot.Source.Utils
+  commentId: N:Polkadot.Source.Utils
+  name: Polkadot.Source.Utils
+  nameWithType: Polkadot.Source.Utils
+  fullName: Polkadot.Source.Utils
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Polkadot.Source.Utils.Scale.NextByte*
+  commentId: Overload:Polkadot.Source.Utils.Scale.NextByte
+  name: NextByte
+  nameWithType: Scale.NextByte
+  fullName: Polkadot.Source.Utils.Scale.NextByte
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Byte
+  commentId: T:System.Byte
+  parent: System
+  isExternal: true
+  name: Byte
+  nameWithType: Byte
+  fullName: System.Byte
+- uid: Polkadot.Source.Utils.Scale.NextWord*
+  commentId: Overload:Polkadot.Source.Utils.Scale.NextWord
+  name: NextWord
+  nameWithType: Scale.NextWord
+  fullName: Polkadot.Source.Utils.Scale.NextWord
+- uid: System.UInt16
+  commentId: T:System.UInt16
+  parent: System
+  isExternal: true
+  name: UInt16
+  nameWithType: UInt16
+  fullName: System.UInt16
+- uid: Polkadot.Source.Utils.Scale.ExtractString*
+  commentId: Overload:Polkadot.Source.Utils.Scale.ExtractString
+  name: ExtractString
+  nameWithType: Scale.ExtractString
+  fullName: Polkadot.Source.Utils.Scale.ExtractString
+- uid: System.Int64
+  commentId: T:System.Int64
+  parent: System
+  isExternal: true
+  name: Int64
+  nameWithType: Int64
+  fullName: System.Int64
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Polkadot.Source.Utils.Scale.DecodeCompactInteger*
+  commentId: Overload:Polkadot.Source.Utils.Scale.DecodeCompactInteger
+  name: DecodeCompactInteger
+  nameWithType: Scale.DecodeCompactInteger
+  fullName: Polkadot.Source.Utils.Scale.DecodeCompactInteger
+- uid: Polkadot.Source.Utils.CompactInteger
+  commentId: T:Polkadot.Source.Utils.CompactInteger
+  parent: Polkadot.Source.Utils
+  name: CompactInteger
+  nameWithType: CompactInteger
+  fullName: Polkadot.Source.Utils.CompactInteger

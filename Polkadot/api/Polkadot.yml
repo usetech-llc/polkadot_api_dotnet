@@ -1,0 +1,34 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot
+  commentId: N:Polkadot
+  id: Polkadot
+  children:
+  - Polkadot.ILogger
+  - Polkadot.Logger
+  langs:
+  - csharp
+  - vb
+  name: Polkadot
+  nameWithType: Polkadot
+  fullName: Polkadot
+  type: Namespace
+  assemblies:
+  - Polkadot
+references:
+- uid: Polkadot.ILogger
+  commentId: T:Polkadot.ILogger
+  parent: Polkadot
+  name: ILogger
+  nameWithType: ILogger
+  fullName: Polkadot.ILogger
+- uid: Polkadot.Logger
+  commentId: T:Polkadot.Logger
+  name: Logger
+  nameWithType: Logger
+  fullName: Polkadot.Logger
+- uid: Polkadot
+  commentId: N:Polkadot
+  name: Polkadot
+  nameWithType: Polkadot
+  fullName: Polkadot

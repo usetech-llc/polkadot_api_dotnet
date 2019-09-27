@@ -1,0 +1,585 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.Data.BlockHeader
+  commentId: T:Polkadot.Data.BlockHeader
+  id: BlockHeader
+  parent: Polkadot.Data
+  children:
+  - Polkadot.Data.BlockHeader.Digest
+  - Polkadot.Data.BlockHeader.ExtrinsicsRoot
+  - Polkadot.Data.BlockHeader.Number
+  - Polkadot.Data.BlockHeader.ParentHash
+  - Polkadot.Data.BlockHeader.StateRoot
+  langs:
+  - csharp
+  - vb
+  name: BlockHeader
+  nameWithType: BlockHeader
+  fullName: Polkadot.Data.BlockHeader
+  type: Class
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/BlockHeader.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: BlockHeader
+    path: src/DataStructs/BlockHeader.cs
+    startLine: 19
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Data
+  syntax:
+    content: public class BlockHeader
+    content.vb: Public Class BlockHeader
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Polkadot.Data.BlockHeader.ParentHash
+  commentId: P:Polkadot.Data.BlockHeader.ParentHash
+  id: ParentHash
+  parent: Polkadot.Data.BlockHeader
+  langs:
+  - csharp
+  - vb
+  name: ParentHash
+  nameWithType: BlockHeader.ParentHash
+  fullName: Polkadot.Data.BlockHeader.ParentHash
+  type: Property
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/BlockHeader.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: ParentHash
+    path: src/DataStructs/BlockHeader.cs
+    startLine: 21
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Data
+  syntax:
+    content: public string ParentHash { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ParentHash As String
+  overload: Polkadot.Data.BlockHeader.ParentHash*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Data.BlockHeader.Number
+  commentId: P:Polkadot.Data.BlockHeader.Number
+  id: Number
+  parent: Polkadot.Data.BlockHeader
+  langs:
+  - csharp
+  - vb
+  name: Number
+  nameWithType: BlockHeader.Number
+  fullName: Polkadot.Data.BlockHeader.Number
+  type: Property
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/BlockHeader.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Number
+    path: src/DataStructs/BlockHeader.cs
+    startLine: 22
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Data
+  syntax:
+    content: public ulong Number { get; set; }
+    parameters: []
+    return:
+      type: System.UInt64
+    content.vb: Public Property Number As ULong
+  overload: Polkadot.Data.BlockHeader.Number*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Data.BlockHeader.StateRoot
+  commentId: P:Polkadot.Data.BlockHeader.StateRoot
+  id: StateRoot
+  parent: Polkadot.Data.BlockHeader
+  langs:
+  - csharp
+  - vb
+  name: StateRoot
+  nameWithType: BlockHeader.StateRoot
+  fullName: Polkadot.Data.BlockHeader.StateRoot
+  type: Property
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/BlockHeader.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: StateRoot
+    path: src/DataStructs/BlockHeader.cs
+    startLine: 23
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Data
+  syntax:
+    content: public string StateRoot { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property StateRoot As String
+  overload: Polkadot.Data.BlockHeader.StateRoot*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Data.BlockHeader.ExtrinsicsRoot
+  commentId: P:Polkadot.Data.BlockHeader.ExtrinsicsRoot
+  id: ExtrinsicsRoot
+  parent: Polkadot.Data.BlockHeader
+  langs:
+  - csharp
+  - vb
+  name: ExtrinsicsRoot
+  nameWithType: BlockHeader.ExtrinsicsRoot
+  fullName: Polkadot.Data.BlockHeader.ExtrinsicsRoot
+  type: Property
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/BlockHeader.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: ExtrinsicsRoot
+    path: src/DataStructs/BlockHeader.cs
+    startLine: 24
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Data
+  syntax:
+    content: public string ExtrinsicsRoot { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ExtrinsicsRoot As String
+  overload: Polkadot.Data.BlockHeader.ExtrinsicsRoot*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Data.BlockHeader.Digest
+  commentId: P:Polkadot.Data.BlockHeader.Digest
+  id: Digest
+  parent: Polkadot.Data.BlockHeader
+  langs:
+  - csharp
+  - vb
+  name: Digest
+  nameWithType: BlockHeader.Digest
+  fullName: Polkadot.Data.BlockHeader.Digest
+  type: Property
+  source:
+    remote:
+      path: Polkadot/src/DataStructs/BlockHeader.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Digest
+    path: src/DataStructs/BlockHeader.cs
+    startLine: 25
+  assemblies:
+  - Polkadot
+  namespace: Polkadot.Data
+  syntax:
+    content: public DigestItem[] Digest { get; set; }
+    parameters: []
+    return:
+      type: Polkadot.Data.DigestItem[]
+    content.vb: Public Property Digest As DigestItem()
+  overload: Polkadot.Data.BlockHeader.Digest*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Polkadot.Data
+  commentId: N:Polkadot.Data
+  name: Polkadot.Data
+  nameWithType: Polkadot.Data
+  fullName: Polkadot.Data
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Polkadot.Data.BlockHeader.ParentHash*
+  commentId: Overload:Polkadot.Data.BlockHeader.ParentHash
+  name: ParentHash
+  nameWithType: BlockHeader.ParentHash
+  fullName: Polkadot.Data.BlockHeader.ParentHash
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Polkadot.Data.BlockHeader.Number*
+  commentId: Overload:Polkadot.Data.BlockHeader.Number
+  name: Number
+  nameWithType: BlockHeader.Number
+  fullName: Polkadot.Data.BlockHeader.Number
+- uid: System.UInt64
+  commentId: T:System.UInt64
+  parent: System
+  isExternal: true
+  name: UInt64
+  nameWithType: UInt64
+  fullName: System.UInt64
+- uid: Polkadot.Data.BlockHeader.StateRoot*
+  commentId: Overload:Polkadot.Data.BlockHeader.StateRoot
+  name: StateRoot
+  nameWithType: BlockHeader.StateRoot
+  fullName: Polkadot.Data.BlockHeader.StateRoot
+- uid: Polkadot.Data.BlockHeader.ExtrinsicsRoot*
+  commentId: Overload:Polkadot.Data.BlockHeader.ExtrinsicsRoot
+  name: ExtrinsicsRoot
+  nameWithType: BlockHeader.ExtrinsicsRoot
+  fullName: Polkadot.Data.BlockHeader.ExtrinsicsRoot
+- uid: Polkadot.Data.BlockHeader.Digest*
+  commentId: Overload:Polkadot.Data.BlockHeader.Digest
+  name: Digest
+  nameWithType: BlockHeader.Digest
+  fullName: Polkadot.Data.BlockHeader.Digest
+- uid: Polkadot.Data.DigestItem[]
+  isExternal: true
+  name: DigestItem[]
+  nameWithType: DigestItem[]
+  fullName: Polkadot.Data.DigestItem[]
+  nameWithType.vb: DigestItem()
+  fullName.vb: Polkadot.Data.DigestItem()
+  name.vb: DigestItem()
+  spec.csharp:
+  - uid: Polkadot.Data.DigestItem
+    name: DigestItem
+    nameWithType: DigestItem
+    fullName: Polkadot.Data.DigestItem
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: Polkadot.Data.DigestItem
+    name: DigestItem
+    nameWithType: DigestItem
+    fullName: Polkadot.Data.DigestItem
+  - name: ()
+    nameWithType: ()
+    fullName: ()

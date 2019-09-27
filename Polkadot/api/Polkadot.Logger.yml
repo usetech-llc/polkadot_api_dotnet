@@ -1,0 +1,636 @@
+### YamlMime:ManagedReference
+items:
+- uid: Polkadot.Logger
+  commentId: T:Polkadot.Logger
+  id: Logger
+  parent: Polkadot
+  children:
+  - Polkadot.Logger.#ctor
+  - Polkadot.Logger.Error(System.String)
+  - Polkadot.Logger.Info(System.String)
+  - Polkadot.Logger.Warning(System.String)
+  langs:
+  - csharp
+  - vb
+  name: Logger
+  nameWithType: Logger
+  fullName: Polkadot.Logger
+  type: Class
+  source:
+    remote:
+      path: Polkadot/src/Logger.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Logger
+    path: src/Logger.cs
+    startLine: 4
+  assemblies:
+  - Polkadot
+  namespace: Polkadot
+  syntax:
+    content: 'public class Logger : ILogger'
+    content.vb: >-
+      Public Class Logger
+
+          Implements ILogger
+  inheritance:
+  - System.Object
+  implements:
+  - Polkadot.ILogger
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Polkadot.Logger.#ctor
+  commentId: M:Polkadot.Logger.#ctor
+  id: '#ctor'
+  parent: Polkadot.Logger
+  langs:
+  - csharp
+  - vb
+  name: Logger()
+  nameWithType: Logger.Logger()
+  fullName: Polkadot.Logger.Logger()
+  type: Constructor
+  source:
+    remote:
+      path: Polkadot/src/Logger.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: .ctor
+    path: src/Logger.cs
+    startLine: 8
+  assemblies:
+  - Polkadot
+  namespace: Polkadot
+  syntax:
+    content: public Logger()
+    content.vb: Public Sub New
+  overload: Polkadot.Logger.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Logger.Error(System.String)
+  commentId: M:Polkadot.Logger.Error(System.String)
+  id: Error(System.String)
+  parent: Polkadot.Logger
+  langs:
+  - csharp
+  - vb
+  name: Error(String)
+  nameWithType: Logger.Error(String)
+  fullName: Polkadot.Logger.Error(System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Logger.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Error
+    path: src/Logger.cs
+    startLine: 24
+  assemblies:
+  - Polkadot
+  namespace: Polkadot
+  syntax:
+    content: public void Error(string message)
+    parameters:
+    - id: message
+      type: System.String
+    content.vb: Public Sub Error(message As String)
+  overload: Polkadot.Logger.Error*
+  implements:
+  - Polkadot.ILogger.Error(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Logger.Info(System.String)
+  commentId: M:Polkadot.Logger.Info(System.String)
+  id: Info(System.String)
+  parent: Polkadot.Logger
+  langs:
+  - csharp
+  - vb
+  name: Info(String)
+  nameWithType: Logger.Info(String)
+  fullName: Polkadot.Logger.Info(System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Logger.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Info
+    path: src/Logger.cs
+    startLine: 29
+  assemblies:
+  - Polkadot
+  namespace: Polkadot
+  syntax:
+    content: public void Info(string message)
+    parameters:
+    - id: message
+      type: System.String
+    content.vb: Public Sub Info(message As String)
+  overload: Polkadot.Logger.Info*
+  implements:
+  - Polkadot.ILogger.Info(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Polkadot.Logger.Warning(System.String)
+  commentId: M:Polkadot.Logger.Warning(System.String)
+  id: Warning(System.String)
+  parent: Polkadot.Logger
+  langs:
+  - csharp
+  - vb
+  name: Warning(String)
+  nameWithType: Logger.Warning(String)
+  fullName: Polkadot.Logger.Warning(System.String)
+  type: Method
+  source:
+    remote:
+      path: Polkadot/src/Logger.cs
+      branch: Sprint_6_Complitely
+      repo: https://github.com/usetech-llc/polkadot_api_dotnet.git
+    id: Warning
+    path: src/Logger.cs
+    startLine: 41
+  assemblies:
+  - Polkadot
+  namespace: Polkadot
+  syntax:
+    content: public void Warning(string message)
+    parameters:
+    - id: message
+      type: System.String
+    content.vb: Public Sub Warning(message As String)
+  overload: Polkadot.Logger.Warning*
+  implements:
+  - Polkadot.ILogger.Warning(System.String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Polkadot
+  commentId: N:Polkadot
+  name: Polkadot
+  nameWithType: Polkadot
+  fullName: Polkadot
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Polkadot.ILogger
+  commentId: T:Polkadot.ILogger
+  parent: Polkadot
+  name: ILogger
+  nameWithType: ILogger
+  fullName: Polkadot.ILogger
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Polkadot.Logger.#ctor*
+  commentId: Overload:Polkadot.Logger.#ctor
+  name: Logger
+  nameWithType: Logger.Logger
+  fullName: Polkadot.Logger.Logger
+- uid: Polkadot.Logger.Error*
+  commentId: Overload:Polkadot.Logger.Error
+  name: Error
+  nameWithType: Logger.Error
+  fullName: Polkadot.Logger.Error
+- uid: Polkadot.ILogger.Error(System.String)
+  commentId: M:Polkadot.ILogger.Error(System.String)
+  parent: Polkadot.ILogger
+  isExternal: true
+  name: Error(String)
+  nameWithType: ILogger.Error(String)
+  fullName: Polkadot.ILogger.Error(System.String)
+  spec.csharp:
+  - uid: Polkadot.ILogger.Error(System.String)
+    name: Error
+    nameWithType: ILogger.Error
+    fullName: Polkadot.ILogger.Error
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.ILogger.Error(System.String)
+    name: Error
+    nameWithType: ILogger.Error
+    fullName: Polkadot.ILogger.Error
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Polkadot.Logger.Info*
+  commentId: Overload:Polkadot.Logger.Info
+  name: Info
+  nameWithType: Logger.Info
+  fullName: Polkadot.Logger.Info
+- uid: Polkadot.ILogger.Info(System.String)
+  commentId: M:Polkadot.ILogger.Info(System.String)
+  parent: Polkadot.ILogger
+  isExternal: true
+  name: Info(String)
+  nameWithType: ILogger.Info(String)
+  fullName: Polkadot.ILogger.Info(System.String)
+  spec.csharp:
+  - uid: Polkadot.ILogger.Info(System.String)
+    name: Info
+    nameWithType: ILogger.Info
+    fullName: Polkadot.ILogger.Info
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.ILogger.Info(System.String)
+    name: Info
+    nameWithType: ILogger.Info
+    fullName: Polkadot.ILogger.Info
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Polkadot.Logger.Warning*
+  commentId: Overload:Polkadot.Logger.Warning
+  name: Warning
+  nameWithType: Logger.Warning
+  fullName: Polkadot.Logger.Warning
+- uid: Polkadot.ILogger.Warning(System.String)
+  commentId: M:Polkadot.ILogger.Warning(System.String)
+  parent: Polkadot.ILogger
+  isExternal: true
+  name: Warning(String)
+  nameWithType: ILogger.Warning(String)
+  fullName: Polkadot.ILogger.Warning(System.String)
+  spec.csharp:
+  - uid: Polkadot.ILogger.Warning(System.String)
+    name: Warning
+    nameWithType: ILogger.Warning
+    fullName: Polkadot.ILogger.Warning
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Polkadot.ILogger.Warning(System.String)
+    name: Warning
+    nameWithType: ILogger.Warning
+    fullName: Polkadot.ILogger.Warning
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
