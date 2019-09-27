@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Polkadot.Api.Application.html",
-          "hash": "CkZ7ewCy2F28TgdHwaaQQA=="
+          "hash": "7vdEp/dsTdSRNwdRFDNwjg=="
         }
       },
       "is_incremental": true,
@@ -93,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Polkadot.Api.JsonRpc.html",
-          "hash": "WiThIoPAxsIX2H8LgYKmFw=="
+          "hash": "9++jpRQsQLr4lcIcFgztcg=="
         }
       },
       "is_incremental": true,
@@ -141,7 +141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Polkadot.Api.Wsclient.html",
-          "hash": "VPIc/j2/aY1EF7M1HcTLSQ=="
+          "hash": "1DIXbocy6suw+5bko61p0w=="
         }
       },
       "is_incremental": true,
@@ -561,7 +561,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Polkadot.DataStructs.Metadata.Metadata.html",
-          "hash": "BQ32dWDatPN9F5bgi1Xj2Q=="
+          "hash": "Gg3aI6orFNA3NvrZIevIIQ=="
         }
       },
       "is_incremental": true,

@@ -16,7 +16,6 @@
         private IWebSocketClient _wsc;
         private ILogger _logger;
         private JsonRpcParams _jsonRpcParams;
-
         private Dictionary<int, BufferBlock<JObject>> _responces;
         private Dictionary<int, IWebSocketMessageObserver> _subscriptions;
 
@@ -148,13 +147,9 @@
             {
                 // Subscription response arrived.
                 var result = json["params"] as JObject;
+                var subid = (int)subscriptionId;
 
-                if (!_subscriptions.ContainsKey((int)subscriptionId))
-                {
-                    _logger.Error($"subscriptionId: {subscriptionId} does not exists");
-                }
-
-                _subscriptions.GetValueOrDefault((int)subscriptionId).HandleWsMessage((int)subscriptionId, result);
+                _subscriptions.GetValueOrDefault(subid).HandleWsMessage(subid, result);
             }
         }
 

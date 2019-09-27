@@ -44,14 +44,15 @@
             };
 
             _wss.Connect();
+            _logger.Info($"Connected to {connectionString}");
 
             return 0;
-
         }
 
         public void Disconnect()
         {
             _wss.Close();
+            _logger.Info($"Connection close");
         }
 
         public void Dispose()
