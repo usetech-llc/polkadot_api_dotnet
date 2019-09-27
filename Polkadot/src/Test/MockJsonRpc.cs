@@ -53,11 +53,13 @@
             if (jsonMap["method"].ToString().Equals("chain_getRuntimeVersion"))
             {
                 ret = GetRuntimeVersion();
+                _logger.Info($"Message received: {ret}");
             }
 
             if (jsonMap["method"].ToString().Equals("state_getMetadata"))
             {
                 ret = GetMetadata();
+                _logger.Info($"Message received: {ret}");
             }
 
             return ret;
