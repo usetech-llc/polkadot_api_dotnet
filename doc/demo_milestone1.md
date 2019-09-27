@@ -1,6 +1,6 @@
-# Manual Demos
+# Manual Demos - Milestone 1
 
-Milestone 1 deliverables are marked by tag [milestone1](https://github.com/usetech-llc/polkadot_api_dotnet/tree/milestone1)
+Milestone 1 deliverables are tagged as [milestone1](https://github.com/usetech-llc/polkadot_api_dotnet/tree/milestone1)
 
 ## Deliverable 1
 
