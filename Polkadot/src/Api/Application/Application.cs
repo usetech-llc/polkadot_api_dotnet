@@ -21,6 +21,7 @@
         private IJsonRpc _jsonRpc;
         private Dictionary<int, BufferBlock<JObject>> _subscriptionData;
         private Dictionary<int, CancellationTokenSource> _subscriptionTokens;
+        private Dictionary<int, List<JObject>> _awaitingMessagesSubscriptions;
         private ProtocolParameters _protocolParams;
 
         private T Deserialize<T, C>(JObject json) 
@@ -45,6 +46,7 @@
             _subscriptionData = new Dictionary<int, BufferBlock<JObject>>();
             _subscriptionTokens = new Dictionary<int, CancellationTokenSource>();
             _protocolParams = new ProtocolParameters();
+            _awaitingMessagesSubscriptions = new Dictionary<int, List<JObject>>();
         }
 
         public int Connect(string node_url = "")
@@ -374,21 +376,38 @@
 
         public void UnsubscribeBlockNumber(int id)
         {
-            RemoveSubscription(id);
+            RemoveSubscription(id, "chain_unsubscribeNewHead");
         }
 
         public void UnsubscribeRuntimeVersion(int id)
         {
-            RemoveSubscription(id);
+            RemoveSubscription(id, "state_unsubscribeRuntimeVersion");
         }
 
         public void HandleWsMessage(int subscriptionId, JObject message)
         {
-            _logger.Info($"HandleWsMessage JsonRpc called, subscriptionData contains key {_subscriptionData.ContainsKey(subscriptionId) }");
-            _logger.Info($"HandleWsMessage JsonRpc called, subscriptionData completion state {_subscriptionData.GetValueOrDefault(subscriptionId).Completion.Status.ToString() }");
-
             // subscription already init otherwise subscription does not exist
-            _subscriptionData.GetValueOrDefault(subscriptionId)?.SendAsync(message);
+            var bb = _subscriptionData.GetValueOrDefault(subscriptionId);
+
+            if (bb == null)
+            {
+                // store not handled messages
+                lock (_awaitingMessagesSubscriptions)
+                {
+                    if (_awaitingMessagesSubscriptions.ContainsKey(subscriptionId))
+                    {
+                        _awaitingMessagesSubscriptions.GetValueOrDefault(subscriptionId).Add(message);
+                    }
+                    else
+                    {
+                        _awaitingMessagesSubscriptions.Add(subscriptionId, new List<JObject> { message });
+                    }
+                }
+            }
+            else
+            {
+                bb.SendAsync(message);
+            }
         }
 
         private void InitSubscription(int subscriptionId)
@@ -401,19 +420,39 @@
                     _subscriptionTokens.Add(subscriptionId, new CancellationTokenSource());
                     _subscriptionData.Add(subscriptionId, new BufferBlock<JObject>());
                 }
+
+                if (_awaitingMessagesSubscriptions.ContainsKey(subscriptionId))
+                {
+                    var missMes = new List<JObject>();
+                    lock (_awaitingMessagesSubscriptions)
+                    {
+                        missMes = _awaitingMessagesSubscriptions.GetValueOrDefault(subscriptionId);
+                        _awaitingMessagesSubscriptions.Remove(subscriptionId);
+                    }
+
+                    foreach (var message in missMes)
+                    {
+                        HandleWsMessage(subscriptionId, message);
+                    }
+                }
             }
         }
 
-        private void RemoveSubscription(int subscriptionId)
+        private void RemoveSubscription(int subscriptionId, string method)
         {
             if (_subscriptionData.ContainsKey(subscriptionId))
             {
+                JObject unsubscribeQuery = new JObject { { "method", method }, { "params", new JArray { subscriptionId } } };
+                _jsonRpc.Request(unsubscribeQuery);
+
                 lock (_subscriptionData)
                 {
                     _subscriptionTokens.GetValueOrDefault(subscriptionId).Cancel();
                     _subscriptionData.Remove(subscriptionId);
                     _subscriptionTokens.Remove(subscriptionId);
                 }
+
+                _logger.Info($"Unsubscribed from subscription ID: {subscriptionId}");
             }
         }
     }

@@ -47,6 +47,7 @@ namespace PolkaTest
 
                 app.UnsubscribeBlockNumber(subId);
                 app.UnsubscribeRuntimeVersion(subId2);
+                
                 app.Disconnect();
 
                 Assert.True(blockNum > 0);

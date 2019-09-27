@@ -31,12 +31,13 @@ namespace PolkaTest
                     output.WriteLine($"Last block number        : {blockNumber}");
                 });
 
-                while(messagesCount < 2)
+                while (messagesCount < 2)
                 {
                     Thread.Sleep(300);
                 }
 
                 app.UnsubscribeBlockNumber(subId);
+                
                 app.Disconnect();
 
                 Assert.True(blockNum > 0);
