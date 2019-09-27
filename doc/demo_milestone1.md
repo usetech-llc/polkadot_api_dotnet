@@ -23,13 +23,14 @@ The milestone 1 deliverables can be demonstrated all with one command through ru
 # dotnet test
 ```
 
-### Connection:
-- Connection to a public Substrate node (at URL wss://alex.unfrastructure.io/public/ws) is established, which makes sending commands and receiving responses possible. Look for the following output:
+### Connection
+
+#### Connection to a public Substrate node (at URL wss://alex.unfrastructure.io/public/ws) is established, which makes sending commands and receiving responses possible. Look for the following output:
 ```
 2019-09-27 13:44:50.0041|INFO|Polkadot.Logger|Connected to wss://alex.unfrastructure.io/public/ws
 ```
 
-- Connection is closed with API disconnect command when the test is done. Look for the following output at the end of each test:
+#### Connection is closed with API disconnect command when the test is done. Look for the following output at the end of each test:
 ```
 2019-09-27 13:44:53.0167|INFO|Polkadot.Logger|Connection close
 ```
@@ -38,12 +39,13 @@ The milestone 1 deliverables can be demonstrated all with one command through ru
 #### Node’s TLS certificate is verified during connection process
 
 Certificate validation happens in standard libraries for .NET, so we only test what happens if certificate file cannot be found.
-The unit test BadCertificate hides file 'ca-chain.cert.pem' that contains trusted root CA certificate making it impossible to verify node's TLS certificate. Look for the following output:
+The unit test BadCertificate hides file 'ca-chain.cert.pem' that contains trusted root CA certificate making it impossible to verify node's TLS certificate:
+
 ```
 $ dotnet test --filter BadCertificate
 ```
 
-Here is the code fragment from this unit test that demonstrates that it expect the library to throw a FileNotFoundException:
+Here is the code fragment from this unit test that demonstrates that it expects the library to throw a FileNotFoundException:
 ```
 Assert.Throws<FileNotFoundException>(() =>
 {
@@ -106,14 +108,45 @@ $ dotnet test --filter GetBlock
 ```
 $ dotnet test --filter GetSystemInfo
 
-2019-09-27 14:07:08.6193|INFO|Polkadot.Logger|Message body {
-  "id": 1,
+...
+
+2019-09-27 15:01:08.0398|INFO|Polkadot.Logger|Message body {
+  "id": 2,
   "jsonrpc": "2.0",
-  "method": "state_getMetadata",
+  "method": "system_name",
   "params": []
 }
-
-...
+2019-09-27 15:01:08.0398|INFO|Polkadot.Logger|Message 2 was sent
+2019-09-27 15:01:08.3443|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":"parity-polkadot","id":2}
+2019-09-27 15:01:08.3443|INFO|Polkadot.Logger|Message received: {"jsonrpc":"2.0","result":"parity-polkadot","id":2}
+2019-09-27 15:01:08.6508|INFO|Polkadot.Logger|Message body {
+  "id": 3,
+  "jsonrpc": "2.0",
+  "method": "system_chain",
+  "params": []
+}
+2019-09-27 15:01:08.6508|INFO|Polkadot.Logger|Message 3 was sent
+2019-09-27 15:01:08.9629|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":"Alexander","id":3}
+2019-09-27 15:01:08.9629|INFO|Polkadot.Logger|Message received: {"jsonrpc":"2.0","result":"Alexander","id":3}
+2019-09-27 15:01:09.2683|INFO|Polkadot.Logger|Message body {
+  "id": 4,
+  "jsonrpc": "2.0",
+  "method": "system_version",
+  "params": []
+}
+2019-09-27 15:01:09.2683|INFO|Polkadot.Logger|Message 4 was sent
+2019-09-27 15:01:09.5724|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":"0.4.4","id":4}
+2019-09-27 15:01:09.5724|INFO|Polkadot.Logger|Message received: {"jsonrpc":"2.0","result":"0.4.4","id":4}
+2019-09-27 15:01:09.8912|INFO|Polkadot.Logger|Message body {
+  "id": 5,
+  "jsonrpc": "2.0",
+  "method": "system_properties",
+  "params": []
+}
+2019-09-27 15:01:09.8912|INFO|Polkadot.Logger|Message 5 was sent
+2019-09-27 15:01:10.1954|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":{"tokenDecimals":15,"tokenSymbol":"DOT"},"id":5}
+2019-09-27 15:01:10.1954|INFO|Polkadot.Logger|Message received: {"jsonrpc":"2.0","result":{"tokenDecimals":15,"tokenSymbol":"DOT"},"id":5}
+2019-09-27 15:01:10.6057|INFO|Polkadot.Logger|Connection close
 ```
 
 ### Building instructions, initialization, and library usage documented
