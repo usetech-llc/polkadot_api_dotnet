@@ -118,9 +118,9 @@ $ dotnet test --filter GetSystemInfo
 
 ### Building instructions, initialization, and library usage documented
 
-- Building: See [root level README.md](https://github.com/usetech-llc/polkadot_api_cpp/blob/master/README.md)
-- Lib usage: See doc/html folder. Documentation may be viewed here: TBD
+The documentation is built with docfx tool and exists in the repository as a static website. (See doc/html folder). Open this file in the browser locally as a starting point: /doc/html/docfx/api/Polkadot.Api.IApplication.html
 
+- Building: See [root level README.md](https://github.com/usetech-llc/polkadot_api_cpp/blob/master/README.md)
 
 ## Deliverable 2 - Non-Parameterized Calls
 
@@ -281,6 +281,17 @@ $ dotnet test --filter WssubscribeAll
 ```
 
 #### Subscribing/unsubscribing and data structures for current block and runtime version are documented
+
+Documentation is placed in doc/html folder as a static website. Open these references in the browser locally to see sections about subscribing/unsibscribing:
+
 ```
-TBD - reference to docs
+/doc/html/docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubscribeBlockNumber_System_Action_System_Int64__
+/doc/html/docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_UnsubscribeBlockNumber_System_Int32_
+
+/doc/html/docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubscribeRuntimeVersion_System_Action_Polkadot_Data_RuntimeVersion__
+/doc/html/docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_UnsubscribeRuntimeVersion_System_Int32_
 ```
+
+... or open this file in the browser locally: /doc/html/docfx/api/Polkadot.Api.IApplication.html
+
+And then scroll down to SubscribeBlockNumber, SubscribeRuntimeVersion, UnsubscribeBlockNumber, UnsubscribeRuntimeVersion.

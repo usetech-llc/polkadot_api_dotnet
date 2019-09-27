@@ -28,9 +28,21 @@ $ dotnet test
 ### Docker
 
 ```
-git clone https://github.com/usetech-llc/polkadot_api_dotnet && cd polkadot_api_dotnet
+git clone https://github.com/usetech-llc/polkadot_api_dotnet
 $ docker build -t polkanet .
 $ docker run -it --rm polkanet /bin/bash
 # dotnet build
 # dotnet test
 ```
+
+### Building of documentation
+
+Edit Polkadot.csproj file and add "build;" in the docfx section like here:
+```
+<PackageReference Include="docfx.console" Version="2.45.1">
+  <PrivateAssets>all</PrivateAssets>
+  <IncludeAssets>runtime; native; contentfiles; analyzers</IncludeAssets>
+</PackageReference>
+```
+
+Now when project is rebuilt, the docuemntation will be updated.
