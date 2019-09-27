@@ -149,7 +149,7 @@
                 // Subscription response arrived.
                 var result = json["params"] as JObject;
 
-                if (_subscriptions.GetValueOrDefault((int)subscriptionId) is null)
+                if (!_subscriptions.ContainsKey((int)subscriptionId))
                 {
                     _logger.Error($"subscriptionId: {subscriptionId} does not exists");
                 }

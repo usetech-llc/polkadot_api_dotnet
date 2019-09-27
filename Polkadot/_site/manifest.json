@@ -1,0 +1,882 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/Users/1/Documents/polkasharp/polkadot_api_dotnet/Polkadot",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Api.Application.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Api.Application.html",
+          "hash": "CkZ7ewCy2F28TgdHwaaQQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Api.Consts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Api.Consts.html",
+          "hash": "okpX31L5DCTBaIT2Sv/aVg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Api.IApplication.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Api.IApplication.html",
+          "hash": "Tv7qzzvkbvNUc5cD2SEzCg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Api.IJsonRpc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Api.IJsonRpc.html",
+          "hash": "7hBlQAPc44/Zqu9SIw+Tng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Api.IMessageObserver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Api.IMessageObserver.html",
+          "hash": "Cbw6F7uhpmUwP8UJL3V20g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Api.IWebSocketClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Api.IWebSocketClient.html",
+          "hash": "7OCi25v7T8RrkyL0FieNCg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Api.IWebSocketMessageObserver.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Api.IWebSocketMessageObserver.html",
+          "hash": "11zw9LmonDmGe14eV/H46g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Api.JsonRpc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Api.JsonRpc.html",
+          "hash": "WiThIoPAxsIX2H8LgYKmFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Api.JsonRpcParams.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Api.JsonRpcParams.html",
+          "hash": "IegC5S+0iLffIYpX5m3/5g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Api.JsonRpcQuery.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Api.JsonRpcQuery.html",
+          "hash": "4A/aVoKvljmIaH8JTHKmmQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Api.PolkaApi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Api.PolkaApi.html",
+          "hash": "U2J3F3ELF7rnuomMxQaOkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Api.Wsclient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Api.Wsclient.html",
+          "hash": "VPIc/j2/aY1EF7M1HcTLSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Api.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Api.html",
+          "hash": "DXXXxOyaWD8mEVrxOEsAUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.ApiItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.ApiItem.html",
+          "hash": "goEINMOuKpZpcVnxoqinKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.Block.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.Block.html",
+          "hash": "7ORrDaL4hR87N2/zh6Pkeg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.BlockHash.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.BlockHash.html",
+          "hash": "ZNVuu3PMq7is5L4Ucj+n7w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.BlockHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.BlockHeader.html",
+          "hash": "hUiZOYetD3pEchbTrnWuhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.DigestItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.DigestItem.html",
+          "hash": "4ssX/vGkgAnuR6LvjLDpLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.DigestItemKey.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.DigestItemKey.html",
+          "hash": "/OGsXRDI196FbAwoppyznA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.FinalHead.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.FinalHead.html",
+          "hash": "bMr08cgdkc4kqzw2fotpPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.GetBlockHashParams.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.GetBlockHashParams.html",
+          "hash": "Y+DbQG4Da8FADoS/H3ZKoA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.GetBlockParams.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.GetBlockParams.html",
+          "hash": "Mn374gZvVwyqaVUjTl4PNw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.GetMetadataParams.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.GetMetadataParams.html",
+          "hash": "Whcj3cPDiobS2tAPukUxug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.GetRuntimeVersionParams.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.GetRuntimeVersionParams.html",
+          "hash": "vqK/VbeAGEC5txfOoYCUbg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.NetworkState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.NetworkState.html",
+          "hash": "W1/5g9Vwfn8JhuWTDFtoCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.RuntimeVersion.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.RuntimeVersion.html",
+          "hash": "DGqxjFqPagIzfxEt8DPPWg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.SignedBlock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.SignedBlock.html",
+          "hash": "az1Lbbqm1UjbTwhmSGW4Rw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.StorageItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.StorageItem.html",
+          "hash": "B+o/zZdRSNRRsmRnVgX+6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.SystemInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.SystemInfo.html",
+          "hash": "csJKqOwaR1Z1IPkElKjJqA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Data.html",
+          "hash": "qG3QAIPNompt3hhdxLYI5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataFactory.IParseFactory-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataFactory.IParseFactory-1.html",
+          "hash": "NG16BMU52y1+Xl97hr4o0w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataFactory.Metadata.ParseMetadataV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataFactory.Metadata.ParseMetadataV4.html",
+          "hash": "BUP7A+o4q/KjvfMzj2Tkmg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataFactory.Metadata.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataFactory.Metadata.html",
+          "hash": "4ZS/5xnuTLy5P+PrzQVHuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataFactory.ParseBlock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataFactory.ParseBlock.html",
+          "hash": "N1sbWGKYw/jMzl0kBv0woQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataFactory.ParseBlockHash.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataFactory.ParseBlockHash.html",
+          "hash": "3l28auTCjYaSxWE9Eb3kJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataFactory.ParseBlockHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataFactory.ParseBlockHeader.html",
+          "hash": "eRyB12FYkmehgMgvgjkXLA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataFactory.ParseFinalizedHead.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataFactory.ParseFinalizedHead.html",
+          "hash": "jy+QJGpRGoFgVVk98aoyew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataFactory.ParseRuntimeVersion.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataFactory.ParseRuntimeVersion.html",
+          "hash": "ahA8DvheyJzUnfgX7JZZqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataFactory.ParseSystemInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataFactory.ParseSystemInfo.html",
+          "hash": "qBRl6rd2OY22mAh261DH7g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataFactory.html",
+          "hash": "hHgirqXux9IhFgOp0HLlvw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataStructs.Address.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataStructs.Address.html",
+          "hash": "OUXYJ6ucx2rjpz4imUUpLA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataStructs.Hasher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataStructs.Hasher.html",
+          "hash": "q/EFAxcfruXrf8iIAVr6cg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataStructs.Metadata.CallV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataStructs.Metadata.CallV4.html",
+          "hash": "YHl30BHh2V1Zp9YgUHyVEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataStructs.Metadata.EventArgV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataStructs.Metadata.EventArgV4.html",
+          "hash": "pL9KxTkMtAuZybIKsMG/Gw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataStructs.Metadata.FuncTypeV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataStructs.Metadata.FuncTypeV4.html",
+          "hash": "khnYKfYUq4ZcWLpVwkcVlQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataStructs.Metadata.FunctionCallArgV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataStructs.Metadata.FunctionCallArgV4.html",
+          "hash": "+fGwFqIfWyJtgnx2x451RA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataStructs.Metadata.Metadata.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataStructs.Metadata.Metadata.html",
+          "hash": "Gg3aI6orFNA3NvrZIevIIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataStructs.Metadata.MetadataBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataStructs.Metadata.MetadataBase.html",
+          "hash": "BAKpl4hC+GEYU+nUgZEXXA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataStructs.Metadata.MetadataV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataStructs.Metadata.MetadataV4.html",
+          "hash": "Tv495kiJpdD67xI566L86w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataStructs.Metadata.ModuleV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataStructs.Metadata.ModuleV4.html",
+          "hash": "Ygr+r1mDTn7+y1KtNfYa3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataStructs.Metadata.StorageV4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataStructs.Metadata.StorageV4.html",
+          "hash": "s4zv/Kcn+Agd0H8Krn7rbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataStructs.Metadata.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataStructs.Metadata.html",
+          "hash": "SyVsKaikS1x9kOktypl/Fw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataStructs.PublicKey.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataStructs.PublicKey.html",
+          "hash": "SiG0jK+kwe1NfR7sBAN+qg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.DataStructs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.DataStructs.html",
+          "hash": "04CEzidHf+zU2xPnYvsDPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.ILogger.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.ILogger.html",
+          "hash": "QssF8suMo2jL4ORb9cmIzw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Logger.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Logger.html",
+          "hash": "o5uKFKDjtzBfcpdGxIzLJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Source.Utils.CompactInteger.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Source.Utils.CompactInteger.html",
+          "hash": "LHHe230um7WOC9G4rfagng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Source.Utils.JsonParse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Source.Utils.JsonParse.html",
+          "hash": "HVDZzUJ1AtQQiBtToXqU8Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Source.Utils.Scale.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Source.Utils.Scale.html",
+          "hash": "QnVmq4ubOKYbijuy4fvrOg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Source.Utils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Source.Utils.html",
+          "hash": "k5ttKhDIKDW/SCUri1gm7w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Test.MockJsonRpc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Test.MockJsonRpc.html",
+          "hash": "94QMSehQavp5nVXQZVVqqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.Test.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.Test.html",
+          "hash": "WafFcKEoL2xhyCigjXh9Dw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Polkadot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Polkadot.html",
+          "hash": "nTnVZCuOrwY7GidfienNKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "RUVCOm5kIyKQQHMRuH7EbQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "m2i8c0y5iqiJ+FVN/s70Xg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "G3QmM7S4yrdLpuW1dbp/PA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "t7iiFrmuYmrKWisdq+lN6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "fBxBAJZNKQCJ1Y74ccJDaQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "k+/dkjFuwAVS32HduMpmBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 63,
+          "skipped_file_count": 9
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 3
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
