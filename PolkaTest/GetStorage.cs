@@ -54,7 +54,7 @@ namespace PolkaTest
                 {
                     string abra = app.GetStorage("", "Abra", "Cadabra");
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     output.WriteLine("Caught expected ApplicationException");
                 }

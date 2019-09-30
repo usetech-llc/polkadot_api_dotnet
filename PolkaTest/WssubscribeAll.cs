@@ -40,7 +40,7 @@ namespace PolkaTest
                     output.WriteLine($"Runtime version spec name: {runtimeVersion.SpecName}");
                 });
 
-                while (messagesCount < 2 || rv == null)
+                while (messagesCount < 1 || rv == null)
                 {
                     Thread.Sleep(300);
                 }

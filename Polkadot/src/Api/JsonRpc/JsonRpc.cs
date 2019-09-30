@@ -1,7 +1,9 @@
 ﻿namespace Polkadot.Api
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Threading;
     using System.Threading.Tasks.Dataflow;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -16,8 +18,11 @@
         private IWebSocketClient _wsc;
         private ILogger _logger;
         private JsonRpcParams _jsonRpcParams;
-        private Dictionary<int, BufferBlock<JObject>> _responces;
-        private Dictionary<int, IWebSocketMessageObserver> _subscriptions;
+        private ConcurrentDictionary<int, BufferBlock<JObject>> _responses;
+        private ConcurrentDictionary<int, IWebSocketMessageObserver> _subscriptions;
+
+        private Object _subscriptionLock = new Object();
+        private ConcurrentDictionary<int, JObject> _pendingSubscriptionUpdates;
 
         private int _lastId = 0;
 
@@ -32,8 +37,9 @@
             _logger = logger;
             _jsonRpcParams = param;
 
-            _responces = new Dictionary<int, BufferBlock<JObject>>();
-            _subscriptions = new Dictionary<int, IWebSocketMessageObserver>();
+            _responses = new ConcurrentDictionary<int, BufferBlock<JObject>>();
+            _subscriptions = new ConcurrentDictionary<int, IWebSocketMessageObserver>();
+            _pendingSubscriptionUpdates = new ConcurrentDictionary<int, JObject>();
             _wsc.RegisterMessageObserver(this);
         }
 
@@ -67,12 +73,12 @@
             );
 
             // create async receiver
-            bool exists = _responces.TryGetValue(query.Id, out BufferBlock<JObject> responce);
+            bool exists = _responses.TryGetValue(query.Id, out BufferBlock<JObject> response);
 
             if (!exists)
             {
-                responce = new BufferBlock<JObject>();
-                _responces.Add(query.Id, responce);
+                response = new BufferBlock<JObject>();
+                _responses.TryAdd(query.Id, response);
             }
 
             // Send the command
@@ -90,8 +96,8 @@
                 throw new ApplicationException(message);
             }
 
-            var resp = responce.Receive(new TimeSpan( 0, 0, timeout_s));         
-            _responces.Remove(query.Id);
+            var resp = response.Receive(new TimeSpan( 0, 0, timeout_s));
+            _responses.TryRemove(query.Id, out _);
 
             return resp;
         }
@@ -104,13 +110,21 @@
             // Get response for this request and extract subscription ID
             int subscriptionId = response["result"].ToObject<int>();
 
-            if (!_subscriptions.ContainsKey(subscriptionId))
+            JObject pendingResponse = null;
+            lock (_subscriptionLock)
             {
-                lock (_subscriptions)
-                {
-                    _subscriptions.Add(subscriptionId, observer);
-                }
+                // Check if there is a pending response for this sibscription ID
+                // The subscription handler may only be set at this point if update arrived before
+                // we knew the subscription ID. In this case, a pending response is present in the response queue.
+                // Handle it immediately.
+                _pendingSubscriptionUpdates.TryRemove(subscriptionId, out pendingResponse);
+
+                // Register observer for this subscription ID
+                _subscriptions.TryAdd(subscriptionId, observer);
             }
+
+            if (pendingResponse != null)
+                observer.HandleWsMessage(subscriptionId, pendingResponse);
 
             _logger.Info($"Subscribed with subscription ID: {subscriptionId}");
 
@@ -127,18 +141,19 @@
             dynamic json = JsonConvert.DeserializeObject(payload);
             _logger.Info($"Message received: {payload}");
             long requestId = 0;
-            long subscriptionId = 0;
+            int subscriptionId = 0;
             if (json["id"] != null)
                 requestId = json["id"].Value;
             if (json["params"] != null)
-                subscriptionId = json["params"]["subscription"].Value;
+                subscriptionId = (int)json["params"]["subscription"].Value;
 
             // message is simple request
             if (requestId != 0)
             {
                 // cut off protocol body
-                _responces.GetValueOrDefault((int)requestId).SendAsync(
-                    JObject.FromObject(new { result = json["result"].ToString() }));
+                BufferBlock<JObject> resp;
+                _responses.TryGetValue((int)requestId, out resp);
+                resp?.SendAsync(JObject.FromObject(new { result = json["result"].ToString() }));
             }
             else
 
@@ -147,9 +162,22 @@
             {
                 // Subscription response arrived.
                 var result = json["params"] as JObject;
-                var subid = (int)subscriptionId;
 
-                _subscriptions.GetValueOrDefault(subid).HandleWsMessage(subid, result);
+                IWebSocketMessageObserver existingObserver = null;
+
+                lock(_subscriptionLock)
+                {
+                    if (!_subscriptions.TryGetValue(subscriptionId, out existingObserver))
+                    {
+                        // We may get here if subscription update arrives before we know subscription ID
+                        // In this case, observer is not found here, pend this response for this subscription ID
+
+                        _pendingSubscriptionUpdates.TryAdd(subscriptionId, result);
+                    }
+                }
+
+                if (existingObserver != null)
+                    existingObserver.HandleWsMessage(subscriptionId, result);
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿namespace Polkadot.Api
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Threading;
@@ -19,10 +20,14 @@
     {
         private ILogger _logger;
         private IJsonRpc _jsonRpc;
-        private Dictionary<int, BufferBlock<JObject>> _subscriptionData;
-        private Dictionary<int, CancellationTokenSource> _subscriptionTokens;
-        private Dictionary<int, List<JObject>> _awaitingMessagesSubscriptions;
+
+        private Object _subscriptionLock = new Object();
+        private ConcurrentDictionary<int, JObject> _pendingSubscriptionUpdates = new ConcurrentDictionary<int, JObject>();
+        private delegate void UpdateDelegate(JObject update);
+        private ConcurrentDictionary<int, UpdateDelegate> _subscriptionHandlers = new ConcurrentDictionary<int, UpdateDelegate>();
         private ProtocolParameters _protocolParams;
+
+
 
         private T Deserialize<T, C>(JObject json) 
             where C : IParseFactory<T>, new()
@@ -43,10 +48,7 @@
         {
             _logger = logger;
             _jsonRpc = jsonRpc;
-            _subscriptionData = new Dictionary<int, BufferBlock<JObject>>();
-            _subscriptionTokens = new Dictionary<int, CancellationTokenSource>();
             _protocolParams = new ProtocolParameters();
-            _awaitingMessagesSubscriptions = new Dictionary<int, List<JObject>>();
         }
 
         public int Connect(string node_url = "")
@@ -325,8 +327,8 @@
             return Subscribe(subscribeQuery, (json) => {
                 var test = json["result"]["number"].ToString().Substring(2);
                 var blockNumber = long.Parse(test, NumberStyles.HexNumber);
-                return blockNumber;
-            }, callback);
+                callback(blockNumber);
+            });
         }
 
         public int SubscribeRuntimeVersion(Action<RuntimeVersion> callback)
@@ -334,42 +336,24 @@
             JObject subscribeQuery = new JObject { { "method", "state_subscribeRuntimeVersion" }, { "params", new JArray { } } };
 
             return Subscribe(subscribeQuery, (json) => {
-                return Deserialize<RuntimeVersion, ParseRuntimeVersion>(json);
-            }, callback);
+                var rtv = Deserialize<RuntimeVersion, ParseRuntimeVersion>(json);
+                callback(rtv);
+            });
         }
 
-        private int Subscribe<T>(JObject subscriptionQuery, Func<JObject, T> parseFunc, Action<T> callback)
+        private int Subscribe(JObject subscriptionQuery, UpdateDelegate parseFunc)
         {
             var subscriptionId = _jsonRpc.SubscribeWs(subscriptionQuery, this);
 
-            InitSubscription(subscriptionId);
-
-            Task.Run(() =>
+            JObject pendingResponse = null;
+            lock (_subscriptionLock)
             {
-                // check if subscription still active
-                while (_subscriptionData.ContainsKey(subscriptionId))
-                {
-                    var ct = _subscriptionTokens.GetValueOrDefault(subscriptionId);
-                    try
-                    {
-                        var json = _subscriptionData.GetValueOrDefault(subscriptionId).Receive(ct.Token);
-                        var data = parseFunc(json);
-                        callback(data);
-                    }
-                    catch (ObjectDisposedException e)
-                    {
-                        _logger.Info($"subscription disposed: {subscriptionId}");
-                    }
-                    catch (OperationCanceledException e)
-                    {
-                        _logger.Info($"operation canceled: {subscriptionId}");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.Error($"Subscription task error : {e.Message} ");
-                    }
-                }
-            });
+                _pendingSubscriptionUpdates.TryRemove(subscriptionId, out pendingResponse);
+                _subscriptionHandlers.TryAdd(subscriptionId, parseFunc);
+            }
+
+            if (pendingResponse != null)
+                parseFunc(pendingResponse);
 
             return subscriptionId;
         }
@@ -387,69 +371,29 @@
         public void HandleWsMessage(int subscriptionId, JObject message)
         {
             // subscription already init otherwise subscription does not exist
-            var bb = _subscriptionData.GetValueOrDefault(subscriptionId);
+            UpdateDelegate handler = null;
 
-            if (bb == null)
+            lock (_subscriptionLock)
             {
-                // store not handled messages
-                lock (_awaitingMessagesSubscriptions)
+                if (!_subscriptionHandlers.TryGetValue(subscriptionId, out handler))
                 {
-                    if (_awaitingMessagesSubscriptions.ContainsKey(subscriptionId))
-                    {
-                        _awaitingMessagesSubscriptions.GetValueOrDefault(subscriptionId).Add(message);
-                    }
-                    else
-                    {
-                        _awaitingMessagesSubscriptions.Add(subscriptionId, new List<JObject> { message });
-                    }
+                    _pendingSubscriptionUpdates.TryAdd(subscriptionId, message);
                 }
             }
-            else
-            {
-                bb.SendAsync(message);
-            }
-        }
 
-        private void InitSubscription(int subscriptionId)
-        {
-            if (subscriptionId != 0 && !_subscriptionData.ContainsKey(subscriptionId))
-            {
-                // init subscription
-                lock (_subscriptionData)
-                {
-                    _subscriptionTokens.Add(subscriptionId, new CancellationTokenSource());
-                    _subscriptionData.Add(subscriptionId, new BufferBlock<JObject>());
-                }
-
-                if (_awaitingMessagesSubscriptions.ContainsKey(subscriptionId))
-                {
-                    var missMes = new List<JObject>();
-                    lock (_awaitingMessagesSubscriptions)
-                    {
-                        missMes = _awaitingMessagesSubscriptions.GetValueOrDefault(subscriptionId);
-                        _awaitingMessagesSubscriptions.Remove(subscriptionId);
-                    }
-
-                    foreach (var message in missMes)
-                    {
-                        HandleWsMessage(subscriptionId, message);
-                    }
-                }
-            }
+            handler?.Invoke(message);
         }
 
         private void RemoveSubscription(int subscriptionId, string method)
         {
-            if (_subscriptionData.ContainsKey(subscriptionId))
+            if (_subscriptionHandlers.ContainsKey(subscriptionId))
             {
                 JObject unsubscribeQuery = new JObject { { "method", method }, { "params", new JArray { subscriptionId } } };
                 _jsonRpc.Request(unsubscribeQuery);
 
-                lock (_subscriptionData)
+                lock (_subscriptionHandlers)
                 {
-                    _subscriptionTokens.GetValueOrDefault(subscriptionId).Cancel();
-                    _subscriptionData.Remove(subscriptionId);
-                    _subscriptionTokens.Remove(subscriptionId);
+                    _subscriptionHandlers.TryRemove(subscriptionId, out _);
                 }
 
                 _logger.Info($"Unsubscribed from subscription ID: {subscriptionId}");
