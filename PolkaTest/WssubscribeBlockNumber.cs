@@ -31,7 +31,7 @@ namespace PolkaTest
                     output.WriteLine($"Last block number        : {blockNumber}");
                 });
 
-                while (messagesCount < 2)
+                while (messagesCount < 1)
                 {
                     Thread.Sleep(300);
                 }
