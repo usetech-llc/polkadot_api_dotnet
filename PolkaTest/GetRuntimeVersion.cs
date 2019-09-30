@@ -61,6 +61,12 @@ namespace PolkaTest
                 // Check specVersion
                 Assert.Equal(112, result.SpecVersion);
 
+                output.WriteLine($"AuthoringVersion:    {result.AuthoringVersion}");
+                output.WriteLine($"ImplVersion:         {result.ImplVersion}");
+                output.WriteLine($"ImplName:            {result.ImplName}");
+                output.WriteLine($"SpecName:            {result.SpecName}");
+                output.WriteLine($"SpecVersion:         {result.SpecVersion}");
+
                 _instance.Disconnect();
             }
         }

@@ -317,7 +317,29 @@
 
         public NetworkState GetNetworkState()
         {
-            throw new NotImplementedException();
+            JObject query = new JObject { { "method", "system_networkState" },
+                                          { "params", new JArray { } } };
+            JObject response = _jsonRpc.Request(query);
+
+            return Deserialize<NetworkState, ParseNetworkState>(response);
+        }
+
+        public PeersInfo GetSystemPeers()
+        {
+            JObject query = new JObject { { "method", "system_peers" },
+                                          { "params", new JArray { } } };
+            JObject response = _jsonRpc.Request(query);
+
+            return Deserialize<PeersInfo, ParsePeersInfo>(response);
+        }
+
+        public SystemHealth GetSystemHealth()
+        {
+            JObject query = new JObject { { "method", "system_health" },
+                                          { "params", new JArray { } } };
+            JObject response = _jsonRpc.Request(query);
+
+            return Deserialize<SystemHealth, ParseSystemHealth>(response);
         }
 
         public int SubscribeBlockNumber(Action<long> callback)

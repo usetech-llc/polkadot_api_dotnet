@@ -1,6 +1,6 @@
-# Manual Demos
+# Manual Demos - Milestone 1
 
-Milestone 1 deliverables are marked by tag [milestone1](https://github.com/usetech-llc/polkadot_api_dotnet/tree/milestone1)
+Milestone 1 deliverables are tagged as [milestone1](https://github.com/usetech-llc/polkadot_api_dotnet/tree/milestone1)
 
 ## Deliverable 1
 
@@ -46,7 +46,7 @@ $ dotnet test --filter BadCertificate
 ```
 
 Here is the code fragment from this unit test that demonstrates that it expects the library to throw a FileNotFoundException:
-```
+```csharp
 Assert.Throws<FileNotFoundException>(() =>
 {
     using (IApplication app = PolkaApi.GetAppication())
@@ -83,8 +83,29 @@ $ dotnet test --filter GetBlock
 ```
 $ dotnet test --filter GetRuntimeVersion
 ...
-
-TBD
+2019-09-27 15:56:07.4913|INFO|Polkadot.Logger|Message body {
+  "id": 1,
+  "jsonrpc": "2.0",
+  "method": "state_getMetadata",
+  "params": []
+}
+2019-09-27 15:56:07.5014|INFO|Polkadot.Logger|Message received: {
+  "result": "0x6d65746103441873797374656d1853797374656d012c304163636f756e744e6f6e6365010130543a3a4163636f756e74496420543a3a496e646.....46865206f6c64206b657920697320737570706c6965642e"
+}
+...
+2019-09-27 15:56:08.1673|INFO|Polkadot.Logger|Message received: {
+  "result": {
+    "apis": [
+      [
+        "0xdf6acb689907609b",
+        2
+      ],
+      [
+        "0x37e397fc7c91f5e4",
+       .....pecName": "polkadot",
+    "specVersion": 112
+  }
+}
 ```
 
 #### state_getMetadata
@@ -153,7 +174,7 @@ $ dotnet test --filter GetSystemInfo
 
 The documentation is built with docfx tool and exists in the repository as a static website. (See doc/html folder). Open this file in the browser locally as a starting point: /doc/html/docfx/api/Polkadot.Api.IApplication.html
 
-- Building: See [root level README.md](https://github.com/usetech-llc/polkadot_api_dotnet#building-of-documentation)
+- Building: See [root level README.md](https://github.com/usetech-llc/polkadot_api_cpp/blob/master/README.md)
 
 ## Deliverable 2 - Non-Parameterized Calls
 
@@ -162,7 +183,7 @@ The documentation is built with docfx tool and exists in the repository as a sta
 #### chain_getHeader
 ```
 $ dotnet test --filter GetBlock
-...
+
 2019-09-27 14:01:34.3478|INFO|Polkadot.Logger|Message body {
   "id": 7,
   "jsonrpc": "2.0",
@@ -173,13 +194,12 @@ $ dotnet test --filter GetBlock
 }
 2019-09-27 14:01:34.3478|INFO|Polkadot.Logger|Message 7 was sent
 2019-09-27 14:01:34.6471|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":{"digest":{"logs":["0x037c295a0f00000000ccb5103b9934c8b5a2fa9bd520092e1062dc43415aa8b712fd38d89e6450c5b.....a9c17fd7703a3001cfda9c17723469fa356594bc"},"id":7}
-...
 ```
 
 #### chain_getBlock
 ```
 $ dotnet test --filter GetBlock
-...
+
 2019-09-27 14:01:33.6794|INFO|Polkadot.Logger|Message body {
   "id": 6,
   "jsonrpc": "2.0",
@@ -190,13 +210,13 @@ $ dotnet test --filter GetBlock
 }
 2019-09-27 14:01:33.6794|INFO|Polkadot.Logger|Message 6 was sent
 2019-09-27 14:01:33.9672|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":{"block":{"extrinsics":["0x01000003e8f81c5c","0x010b0000"],"header":{"digest":{"logs":["0x037c295a0f000.....7723469fa356594bc"}},"justification":null},"id":6}
-...
+
 ```
 
 #### chain_getFinalizedHead
 ```
 $ dotnet test --filter GetBlock
-...
+
 2019-09-27 14:01:29.1789|INFO|Polkadot.Logger|Message body {
   "id": 4,
   "jsonrpc": "2.0",
@@ -205,22 +225,51 @@ $ dotnet test --filter GetBlock
 }
 2019-09-27 14:01:29.1789|INFO|Polkadot.Logger|Message 4 was sent
 2019-09-27 14:01:29.4806|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":"0xd245466d766605bfe82b0c531eefabe7b00fcc6ed16bb5f7d52b91f604c86463","id":4}
-...
 ```
 
 #### system_health
 ```
-TBD
+$ dotnet test --filter GetSystemHealth
+...
+2019-09-27 15:36:27.7264|INFO|Polkadot.Logger|Message body {
+  "id": 2,
+  "jsonrpc": "2.0",
+  "method": "system_health",
+  "params": []
+}
+2019-09-27 15:36:27.7264|INFO|Polkadot.Logger|Message 2 was sent
+2019-09-27 15:36:28.0228|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":{"isSyncing":false,"peers":23,"shouldHavePeers":true},"id":2}
+...
 ```
 
 #### system_peers
 ```
-TBD
+$ dotnet test --filter GetSystemPeers
+...
+2019-09-27 15:37:25.4449|INFO|Polkadot.Logger|Message body {
+  "id": 2,
+  "jsonrpc": "2.0",
+  "method": "system_peers",
+  "params": []
+}
+2019-09-27 15:37:25.4453|INFO|Polkadot.Logger|Message 2 was sent
+2019-09-27 15:37:25.7586|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":[{"bestHash":"0x380eb74e4cb0a59b7f4992ddf4c368cbe0c38454ed8b5068722d1034a36390d0","bestNumber":3278491,.....,"protocolVersion":2,"roles":"AUTHORITY"}],"id":2}
+...
 ```
 
 #### system_networkState
 ```
-TBD
+$ dotnet test --filter GetNetworkState
+...
+2019-09-27 15:38:18.6502|INFO|Polkadot.Logger|Message body {
+  "id": 2,
+  "jsonrpc": "2.0",
+  "method": "system_networkState",
+  "params": []
+}
+2019-09-27 15:38:18.6502|INFO|Polkadot.Logger|Message 2 was sent
+2019-09-27 15:38:18.9658|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":{"averageDownloadPerSec":29868,"averageUploadPerSec":418758,"connectedPeers":{"QmNYP2m5taiwyGcLLGNAqaUB.....PgT9ifhC6UBwLoZXU76VTkS2E","peerset":null},"id":2}
+...
 ```
 
 ## Deliverable 3 - Non-Parameterized Subscriptions
@@ -247,7 +296,7 @@ $ dotnet test --filter WssubscribeAll
 ### Following data can be read from the chain. Updates for this data arrive via WS subscription, are deserialized to an appropriate C# object, and returned from the API via a delegate call (decided to do it as a lambda and callback, this is a better design).
 
 See this code fragment from WssubscribeAll unit test:
-```
+```csharp
 int subId = app.SubscribeBlockNumber((blockNumber) =>
 {
     blockNum = blockNumber;
