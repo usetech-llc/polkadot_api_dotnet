@@ -181,6 +181,38 @@
         SystemHealth GetSystemHealth();
 
         /// <summary>
+        /// Sign a transfer with provided private key, submit it to blockchain, and wait for completion. Once transaction is
+        /// accepted, the callback will be called with parameter "ready". Once completed, the callback will be called with
+        /// completion result string equal to "finalized".
+        /// </summary>
+        /// <param name="sender"> address of sender (who signs the transaction) </param>
+        /// <param name="privateKey"> 64 byte private key of signer in hex, 2 symbols per byte (e.g. "0102ABCD...") </param>
+        /// <param name="recipient"> address that will receive the transfer </param>
+        /// <param name="amount"> amount (in femto DOTs) to transfer </param>
+        /// <param name="callback"> delegate that will receive operation updates </param>
+        void SignAndSendTransfer(string sender, string privateKey, string recipient, ulong amount, Action<string> callback);
+
+        GenericExtrinsic PendingExtrinsics();
+
+        /// <summary>
+        /// Submit a fully formatted extrinsic for block inclusion
+        /// </summary>
+        /// <param name="encodedMethodBytes"> encoded extrintic parametrs </param>
+        /// <param name="module"> invoked module name </param>
+        /// <param name="method"> invoked method name </param>
+        /// <param name="sender"> sender address </param>
+        /// <param name="privateKey"> sender private key </param>
+        /// <returns> Extrinsic hash </returns>
+        string SubmitExtrinsic(byte[] encodedMethodBytes, string module, string method, string sender, string privateKey);
+
+        /// <summary>
+        /// Remove given extrinsic from the pool and temporarily ban it to prevent reimporting
+        /// </summary>
+        /// <param name="extrinsicHash"> hash of extrinsic as returned by submitExtrisic </param>
+        /// <returns> Operation result </returns>
+        bool RemoveExtrinsic(string extrinsicHash);
+
+        /// <summary>
         /// Calls state_queryStorage RPC method to get historical information about storage at a key
         /// </summary>
         /// <param name="key"> storage key to query </param>
