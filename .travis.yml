@@ -1,0 +1,9 @@
+language: csharp
+solution: Polkadot.sln
+mono: none
+dotnet: 2.2.402
+script:
+  - dotnet restore
+  - dotnet build
+  - cp Polkadot/ca-chain.cert.pem PolkaTest/bin/Debug/netcoreapp2.2/ca-chain.cert.pem
+  - dotnet test
