@@ -5,7 +5,7 @@ namespace PolkaTest
     using Xunit.Abstractions;
     using Polkadot.Data;
     using System.Text;
-    using Schnorrkel.Merlin;
+    //using Schnorrkel.Merlin;
 
     public class MerlinTest
     {
@@ -19,15 +19,15 @@ namespace PolkaTest
         [Fact]
         public void Ok()
         {
-            var ts = new Transcript("test protocol");
+        //    var ts = new Transcript("test protocol");
 
-            ts.AppendMessage("some label", "some data");
+        //    ts.AppendMessage("some label", "some data");
 
-            var challenge = new byte[32] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        //    var challenge = new byte[32] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-            ts.ChallengeBytes(Encoding.UTF8.GetBytes("challenge"), ref challenge);
+        //    ts.ChallengeBytes(Encoding.UTF8.GetBytes("challenge"), ref challenge);
 
-            output.WriteLine(ts.ToString());
+        //    output.WriteLine(ts.ToString());
         }
     }
 }

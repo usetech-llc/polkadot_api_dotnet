@@ -4,9 +4,8 @@
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Numerics;
     using System.Threading;
-    using System.Threading.Tasks;
-    using System.Threading.Tasks.Dataflow;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using Polkadot.Data;
@@ -15,6 +14,11 @@
     using Polkadot.DataStructs;
     using Polkadot.DataStructs.Metadata;
     using Polkadot.Source.Utils;
+    using Polkadot.Utils;
+    using sr25519_dotnet.lib;
+    using sr25519_dotnet.lib.Models;
+
+    //using Schnorrkel;
 
     public class Application : IApplication, IWebSocketMessageObserver
     {
@@ -57,13 +61,22 @@
 
             // Connect to WS
             result = _jsonRpc.Connect(node_url);
+            _protocolParams.GenesisBlockHash = new byte[Consts.BLOCK_HASH_SIZE];
+
+            GetBlockHashParams par = new GetBlockHashParams();
+            par.BlockNumber = 0;
+            var genesisHashStr = GetBlockHash(par);
+            for (int i = 0; i < Consts.BLOCK_HASH_SIZE; ++i)
+            {
+                _protocolParams.GenesisBlockHash[i] = Converters.FromHexByte(genesisHashStr.Hash.Substring(2 + i * 2));
+            }
 
             // Read metadata for head block and initialize protocol parameters
             _protocolParams.Metadata = new Metadata(GetMetadata(null));
             _protocolParams.FreeBalanceHasher = _protocolParams.Metadata.GetFuncHasher("Balances", "FreeBalance");
             _protocolParams.FreeBalancePrefix = "Balances FreeBalance";
-            _protocolParams.BalanceModuleIndex = _protocolParams.Metadata.GetModuleIndex("Balances", true);
-            _protocolParams.TransferMethodIndex = _protocolParams.Metadata.GetCallMethodIndex(
+            _protocolParams.BalanceModuleIndex = (byte)_protocolParams.Metadata.GetModuleIndex("Balances", true);
+            _protocolParams.TransferMethodIndex = (byte)_protocolParams.Metadata.GetCallMethodIndex(
             _protocolParams.Metadata.GetModuleIndex("Balances", false), "transfer");
 
             if (_protocolParams.FreeBalanceHasher == Hasher.XXHASH)
@@ -109,6 +122,24 @@
             });
 
             return Deserialize<SystemInfo, ParseSystemInfo>(completeJson);
+        }
+
+        public BigInteger GetAccountNonce(Address address)
+        {
+            // Subscribe to account nonce updates and immediately unsubscribe after response is received
+            // This pattern is borrowed from POC-3 UI
+            bool done = false;
+            BigInteger result = 0;
+
+            var subId = SubscribeAccountNonce(address, (nonce) => {
+                result = nonce;
+                done = true;
+            });
+
+            SpinWait.SpinUntil(() => !done);
+            UnsubscribeAccountNonce(subId);
+
+            return result;
         }
 
         public BlockHash GetBlockHash(GetBlockHashParams param)
@@ -390,6 +421,11 @@
             RemoveSubscription(id, "state_unsubscribeRuntimeVersion");
         }
 
+        public void UnsubscribeAccountNonce(int id)
+        {
+            RemoveSubscription(id, "state_unsubscribeStorage");
+        }
+
         public void HandleWsMessage(int subscriptionId, JObject message)
         {
             // subscription already init otherwise subscription does not exist
@@ -422,81 +458,283 @@
             }
         }
 
-        public void SignAndSendTransfer(string sender, string privateKey, string recipient, ulong amount, Action<string> callback)
+        public int SignAndSendTransfer(string sender, string privateKey, string recipient, BigInteger amount, Action<string> callback)
         {
-            //_logger->info("=== Starting a Transfer Extrinsic ===");
+            _logger.Info("=== Starting a Transfer Extrinsic ===");
 
-            //// Get account Nonce
-            //unsigned long nonce = getAccountNonce(sender);
-            //_logger->info(string("sender nonce: ") + to_string(nonce));
+            // Get account Nonce
+            var address = new Address { Symbols = sender };
+            var nonce = GetAccountNonce(address);
+            _logger.Info($"sender nonce: {nonce} ");
 
-            //// Format transaction
-            //TransferExtrinsic te;
-            //memset(&te, 0, sizeof(te));
-            //te.method.moduleIndex = _protocolPrm.BalanceModuleIndex;
-            //te.method.methodIndex = _protocolPrm.TransferMethodIndex;
-            //auto recipientPK = AddressUtils::getPublicKeyFromAddr(recipient);
-            //memcpy(te.method.receiverPublicKey, recipientPK.bytes, PUBLIC_KEY_LENGTH);
-            //te.method.amount = amount;
-            //te.signature.version = SIGNATURE_VERSION;
-            //auto senderPK = AddressUtils::getPublicKeyFromAddr(sender);
-            //memcpy(te.signature.signerPublicKey, senderPK.bytes, PUBLIC_KEY_LENGTH);
-            //te.signature.nonce = nonce;
-            //te.signature.era = IMMORTAL_ERA;
+            // Format transaction
+            TransferExtrinsic te = new TransferExtrinsic();
+            te.Method.ModuleIndex = _protocolParams.BalanceModuleIndex;
+            te.Method.MethodIndex = _protocolParams.TransferMethodIndex;
 
-            //// Format signature payload
-            //SignaturePayload sp;
-            //sp.nonce = nonce;
-            //uint8_t methodBytes[MAX_METHOD_BYTES_SZ];
-            //sp.methodBytesLength = te.serializeMethodBinary(methodBytes);
-            //sp.methodBytes = methodBytes;
-            //sp.era = IMMORTAL_ERA;
-            //memcpy(sp.authoringBlockHash, _protocolPrm.GenesisBlockHash, BLOCK_HASH_SIZE);
+            var recipientPK = _protocolParams.Metadata.GetPublicKeyFromAddr(new Address(recipient));
+            te.Method.ReceiverPublicKey = recipientPK.Bytes;
+            te.Method.Amount = amount;
+            te.Signature.Version = Consts.SIGNATURE_VERSION;
+            var senderPK = _protocolParams.Metadata.GetPublicKeyFromAddr(new Address(sender));
+            te.Signature.SignerPublicKey = senderPK.Bytes;
+            te.Signature.Nonce = nonce;
+            te.Signature.Era = ExtrinsicEra.IMMORTAL_ERA;
 
-            //// Serialize and Sign payload
-            //uint8_t signaturePayloadBytes[MAX_METHOD_BYTES_SZ];
-            //long payloadLength = sp.serializeBinary(signaturePayloadBytes);
+            // Format signature payload
+            SignaturePayload sp = new SignaturePayload();
+            sp.Nonce = nonce;
+            var methodBytes = new byte[Consts.MAX_METHOD_BYTES_SZ];
+            sp.MethodBytesLength = (int)te.SerializeMethodBinary(ref methodBytes);
+            sp.MethodBytes = methodBytes;
+            sp.Era = ExtrinsicEra.IMMORTAL_ERA;
+            sp.AuthoringBlockHash = _protocolParams.GenesisBlockHash;
 
-            //vector<uint8_t> secretKeyVec = fromHex<vector<uint8_t>>(privateKey);
-            //uint8_t sig[SR25519_SIGNATURE_SIZE] = { 0 };
-            //sr25519_sign(sig, te.signature.signerPublicKey, secretKeyVec.data(), signaturePayloadBytes, payloadLength);
+            // Serialize and Sign payload
+            var signaturePayloadBytes = new byte[Consts.MAX_METHOD_BYTES_SZ];
+            long payloadLength = sp.SerializeBinary(ref signaturePayloadBytes);
 
-            //// Copy signature bytes to transaction
-            //memcpy(te.signature.sr25519Signature, sig, SR25519_SIGNATURE_SIZE);
+            byte[] secretKeyVec = Converters.StringToByteArray(privateKey);
 
-            //// Serialize and send transaction
-            //uint8_t teBytes[MAX_METHOD_BYTES_SZ];
-            //long teByteLength = te.serializeBinary(teBytes);
-            //string teStr("0x");
-            //for (int i = 0; i < teByteLength; ++i)
-            //{
-            //    char b[3] = { 0 };
-            //    sprintf(b, "%02X", teBytes[i]);
-            //    teStr += b;
-            //}
+            // p/invoke version
+            var kp = new SR25519Keypair(te.Signature.SignerPublicKey, secretKeyVec);
+            var sig = SR25519.Sign(signaturePayloadBytes, (ulong)payloadLength, kp);
+            te.Signature.Sr25519Signature = sig;
 
-            //Json query = Json::object{ { "method", "author_submitAndWatchExtrinsic"}, { "params", Json::array{ teStr} } };
+            //// adopted version
+            //var sr25519 = new Sr25519();
+            //var message = signaturePayloadBytes.AsMemory().Slice(0, (int)payloadLength).ToArray();
+            //var sig2 = sr25519.Sign(secretKeyVec, te.Signature.SignerPublicKey, message);
+            //te.Signature.Sr25519Signature = sig2.ToBytes();
 
-            //// Send == Subscribe callback to completion
-            //_transactionCompletionSubscriber = callback;
-            //_transactionCompletionSubscriptionId = _jsonRpc->subscribeWs(query, this);
+            // Serialize and send transaction
+            var teBytes = new byte[Consts.MAX_METHOD_BYTES_SZ];
+            long teByteLength = te.SerializeBinary(ref teBytes);
+            string teStr = $"0x{Converters.ByteArrayToString(teBytes, (int)teByteLength)}";
 
+            var query = new JObject { { "method", "author_submitAndWatchExtrinsic"}, { "params", new JArray { teStr } } };
 
+            // Send == Subscribe callback to completion
+            return Subscribe(query, (json) => {
+                callback(json.ToString());
+            });
         }
 
-        public GenericExtrinsic PendingExtrinsics()
+        public GenericExtrinsic[] PendingExtrinsics(int bufferSize)
         {
-            throw new NotImplementedException();
+            var query = new JObject { { "method", "author_pendingExtrinsics" }, { "params", new JArray { } } };
+            JObject response = _jsonRpc.Request(query);
+
+            int count = 0;
+            GenericExtrinsic[] genericExtrinsic = new GenericExtrinsic[bufferSize];
+
+            var items = JsonConvert.DeserializeObject(response["result"].ToString()) as JArray;
+
+            foreach (var e in items.Values())
+            {
+                if (count < genericExtrinsic.Length)
+                {
+                    genericExtrinsic[count] = new GenericExtrinsic();
+
+                    string estr = e.ToString().Substring(2);
+                    genericExtrinsic[count].Length = (ulong)Scale.DecodeCompactInteger(ref estr).Value;
+
+                    // Signature version
+                    genericExtrinsic[count].Signature.Version = (byte)Converters.FromHex(estr.Substring(0, 2));
+                    estr = estr.Substring(2);
+
+                    // Signer public key
+                    var pk = Converters.FromHex(estr.Substring(2, Consts.SR25519_PUBLIC_SIZE * 2));
+                    genericExtrinsic[count].Signature.SignerPublicKey = pk.ToByteArray();
+                    estr = estr.Substring(Consts.SR25519_PUBLIC_SIZE * 2 + 2);
+
+                    // Signature
+                    var sig = Converters.FromHex(estr.Substring(0, Consts.SR25519_SIGNATURE_SIZE * 2));
+                    genericExtrinsic[count].Signature.Sr25519Signature = sig.ToByteArray();
+                    estr = estr.Substring(Consts.SR25519_SIGNATURE_SIZE * 2);
+
+                    // nonce
+                    genericExtrinsic[count].Signature.Nonce = Scale.DecodeCompactInteger(ref estr).Value;
+
+                    // Era
+                    byte eraInt = (byte)Converters.FromHex(estr.Substring(0, 2));
+                    if (eraInt != 0)
+                        genericExtrinsic[count].Signature.Era = ExtrinsicEra.MORTAL_ERA;
+                    else
+                        genericExtrinsic[count].Signature.Era = ExtrinsicEra.IMMORTAL_ERA;
+                    estr = estr.Substring(2);
+
+                    // Method - module index
+                    genericExtrinsic[count].Method.ModuleIndex = (byte)Converters.FromHex(estr.Substring(0, 2));
+                    estr = estr.Substring(2);
+
+                    // Method - call index
+                    genericExtrinsic[count].Method.MethodIndex = (byte)Converters.FromHex(estr.Substring(0, 2));
+                    estr = estr.Substring(2);
+
+                    // Method - bytes
+                    genericExtrinsic[count].Method.MethodBytes = estr;
+
+                    // Encode signer address to base58
+                    PublicKey pubk = new PublicKey();
+                    pubk.Bytes = genericExtrinsic[count].Signature.SignerPublicKey;
+                    genericExtrinsic[count].SignerAddress = _protocolParams.Metadata.GetAddrFromPublicKey(pubk);
+                }
+                count++;
+            }
+
+            return genericExtrinsic;
         }
 
-        public string SubmitExtrinsic(byte[] encodedMethodBytes, string module, string method, string sender, string privateKey)
+        private string ExtrinsicQueryString(byte[] encodedMethodBytes, string module, string method, Address sender, string privateKey)
         {
-            throw new NotImplementedException();
+            _logger.Info("=== Started Invoking Extrinsic ===");
+
+            // Get account Nonce
+            var nonce = GetAccountNonce(sender);
+            var compactNonce = Scale.EncodeCompactInteger(nonce);
+            _logger.Info($"sender nonce: {nonce}");
+
+            byte[] mmBuf = new byte[3];
+            // Module + Method
+            var absoluteIndex = _protocolParams.Metadata.GetModuleIndex(module, false);
+            mmBuf[0] = (byte)_protocolParams.Metadata.GetModuleIndex(module, true);
+            mmBuf[1] = (byte)_protocolParams.Metadata.GetCallMethodIndex(absoluteIndex, method);
+
+            // Address separator
+            mmBuf[2] = Consts.ADDRESS_SEPARATOR;
+
+            Extrinsic ce = new Extrinsic();
+
+            var completeMessage = new byte[encodedMethodBytes.Length + 3];
+            mmBuf.CopyTo(completeMessage.AsMemory());
+            encodedMethodBytes.CopyTo(completeMessage.AsMemory(3));
+
+            // memcpy(completeMessage + 3, encodedMethodBytes, encodedMethodBytesSize);
+
+            ce.Signature.Version = Consts.SIGNATURE_VERSION;
+            var senderPK = _protocolParams.Metadata.GetPublicKeyFromAddr(sender);
+            ce.Signature.SignerPublicKey = senderPK.Bytes;
+            ce.Signature.Nonce = nonce;
+            ce.Signature.Era = ExtrinsicEra.IMMORTAL_ERA;
+
+            // Format signature payload
+            SignaturePayload sp = new SignaturePayload();
+            sp.Nonce = nonce;
+
+            sp.MethodBytesLength = encodedMethodBytes.Length + 3;
+            sp.MethodBytes = completeMessage;
+            sp.Era = ExtrinsicEra.IMMORTAL_ERA;
+            sp.AuthoringBlockHash = _protocolParams.GenesisBlockHash;
+
+            // Serialize and Sign payload
+            var signaturePayloadBytes = new byte[Consts.MAX_METHOD_BYTES_SZ];
+            long payloadLength = sp.SerializeBinary(ref signaturePayloadBytes);
+
+            var secretKeyVec = Converters.StringToByteArray(privateKey);
+
+            // p/invoke version
+            var kp = new SR25519Keypair(ce.Signature.SignerPublicKey, secretKeyVec);
+            var sig = SR25519.Sign(signaturePayloadBytes, (ulong)payloadLength, kp);
+            ce.Signature.Sr25519Signature = sig;
+
+            //// adopted version
+            //var sr25519 = new Sr25519();
+            //var message = signaturePayloadBytes.AsMemory().Slice(0, (int)payloadLength).ToArray();
+            //var sig2 = sr25519.Sign(secretKeyVec, te.Signature.SignerPublicKey, message);
+            //te.Signature.Sr25519Signature = sig2.ToBytes();
+
+            // Copy signature bytes to transaction
+            ce.Signature.Sr25519Signature = sig;
+            var length = Consts.DEFAULT_FIXED_EXSTRINSIC_SIZE + encodedMethodBytes.Length;
+            var compactLength = Scale.EncodeCompactInteger(length);
+
+            /////////////////////////////////////////
+            // Serialize message signature and write to buffer
+
+            long writtenLength = 0;
+            var buf = new byte[2048];
+            var buf2 = new List<byte>();
+
+            // Length
+            writtenLength += Scale.WriteCompactToBuf(compactLength, ref buf, writtenLength);
+
+            // Signature version
+            buf[writtenLength++] = ce.Signature.Version;
+
+            // Address separator
+            buf[writtenLength++] = Consts.ADDRESS_SEPARATOR;
+
+            // Signer public key
+            ce.Signature.SignerPublicKey.CopyTo(buf.AsMemory((int)writtenLength));
+
+            writtenLength += Consts.SR25519_PUBLIC_SIZE;
+
+            // SR25519 Signature
+            ce.Signature.Sr25519Signature.CopyTo(buf.AsMemory((int)writtenLength));
+            writtenLength += Consts.SR25519_SIGNATURE_SIZE;
+
+            // Nonce
+            writtenLength += Scale.WriteCompactToBuf(compactNonce, ref buf, writtenLength);
+
+            // Extrinsic Era
+            buf[writtenLength++] = (byte)ce.Signature.Era;
+
+            // Serialize and send transaction
+            var teBytes = new byte[Consts.MAX_METHOD_BYTES_SZ];
+            teBytes = buf;
+            completeMessage.AsMemory().CopyTo(teBytes.AsMemory((int)writtenLength));
+
+            long teByteLength = writtenLength + encodedMethodBytes.Length + 3;
+            return $"0x{Converters.ByteArrayToString(teBytes, (int)teByteLength)}";
+        }
+
+        public string SubmitExtrinsic(byte[] encodedMethodBytes, string module, string method, Address sender, string privateKey)
+        {
+            string teStr = ExtrinsicQueryString(encodedMethodBytes, module, method, sender, privateKey);
+
+            var query = new JObject { { "method", "author_submitExtrinsic" }, { "params", new JArray { teStr } } };
+            var response = _jsonRpc.Request(query);
+
+            return response.ToString();
+        }
+
+        public int SubmitAndSubcribeExtrinsic(byte[] encodedMethodBytes, string module, string method, Address sender, string privateKey, Action<string> callback)
+        {
+            string teStr = ExtrinsicQueryString(encodedMethodBytes, module, method, sender, privateKey);
+
+            var query = new JObject { { "method", "author_submitAndWatchExtrinsic" }, { "params", new JArray { teStr } } };
+
+            // Send == Subscribe callback to completion
+            return Subscribe(query, (json) => {
+                callback(json.ToString());
+            });
         }
 
         public bool RemoveExtrinsic(string extrinsicHash)
         {
-            throw new NotImplementedException();
+            var query = new JObject { { "method", "author_removeExtrinsic" }, { "params", new JArray { extrinsicHash } } };
+            var response = _jsonRpc.Request(query);
+
+            if (response == null)
+                throw new ApplicationException("Not supported");
+
+            return false;
+        }
+
+        public int SubscribeAccountNonce(Address address, Action<BigInteger> callback)
+        {
+            var storageKey = _protocolParams.Metadata.GetAddressStorageKey(_protocolParams.FreeBalanceHasher,
+                address, "System AccountNonce");
+
+            _logger.Info($"Nonce subscription storageKey: {storageKey}");
+
+            JObject subscribeQuery = new JObject { { "method", "state_subscribeStorage" }, { "params", new JArray { new JArray { storageKey } } } };
+
+            return Subscribe(subscribeQuery, (json) => {
+                var result = Converters.FromHex(json["result"]["changes"][0][1].ToString().Substring(2));
+                callback(result);
+            });
         }
     }
 }

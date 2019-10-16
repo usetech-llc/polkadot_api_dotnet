@@ -7,8 +7,8 @@
     {
         public Hasher FreeBalanceHasher { get; set; }
         public string FreeBalancePrefix { get; set; }
-        public int BalanceModuleIndex { get; set; }
-        public int TransferMethodIndex { get; set; }
+        public byte BalanceModuleIndex { get; set; }
+        public byte TransferMethodIndex { get; set; }
         public byte[] GenesisBlockHash { get; set; }
         public Metadata Metadata { get; set; }
     }

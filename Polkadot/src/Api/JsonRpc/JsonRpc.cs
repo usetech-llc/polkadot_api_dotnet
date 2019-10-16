@@ -153,7 +153,17 @@
                 // cut off protocol body
                 BufferBlock<JObject> resp;
                 _responses.TryGetValue((int)requestId, out resp);
-                resp?.SendAsync(JObject.FromObject(new { result = json["result"].ToString() }));
+                JObject result = null;
+                try
+                {
+                    result = JObject.FromObject(new { result = json["result"].ToString() });
+                }
+                catch(Exception e)
+                {
+                    _logger.Error($"error while processing response: requestId - {requestId};   {json.ToString()}");
+                }
+
+                resp?.SendAsync(result);
             }
             else
 

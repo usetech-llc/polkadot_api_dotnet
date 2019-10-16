@@ -11,6 +11,11 @@
         public const int STORAGE_KEY_BYTELENGTH = 32;
         public const int PUBLIC_KEY_LENGTH = 32;
 
+        public const int SR25519_PUBLIC_SIZE = 32;
+        public const int SR25519_SIGNATURE_SIZE = 64;
+        public const byte ADDRESS_SEPARATOR = 0xFF;
+        public const int ADDRESS_LENGTH = 48;
+
         public const string STORAGE_TYPE_ADDRESS = "AccountId";
         public const string STORAGE_TYPE_BLOCK_NUMBER = "BlockNumber";
         public const string STORAGE_TYPE_U32 = "u32";
@@ -19,5 +24,11 @@
         public const string STORAGE_TYPE_REFERENDUM_INDEX = "ReferendumIndex";
         public const string STORAGE_TYPE_HASH = "Hash";
         public const string STORAGE_TYPE_PARACHAIN_ID = "ParaId";
+
+        public const byte SIGNATURE_VERSION = 0x81;
+        public const long BLOCK_HASH_SIZE = 32;
+        public const int MAX_METHOD_BYTES_SZ = 2048;
+
+        public static int DEFAULT_FIXED_EXSTRINSIC_SIZE = 103;
     }
 }

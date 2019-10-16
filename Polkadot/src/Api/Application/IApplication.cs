@@ -1,7 +1,9 @@
 ﻿namespace Polkadot.Api
 {
     using System;
+    using System.Numerics;
     using Polkadot.Data;
+    using Polkadot.DataStructs;
     using Polkadot.DataStructs.Metadata;
 
     public interface IApplication : IDisposable
@@ -9,6 +11,13 @@
         int Connect(string node_url = "");
 
         void Disconnect();
+
+        /// <summary>
+        /// Retreives the current nonce for specific address
+        /// </summary>
+        /// <param name="address"> the address to get nonce for </param>
+        /// <returns> address nonce </returns>
+        BigInteger GetAccountNonce(Address address);
 
         /// <summary>
         /// Call 4 methods and put them together in a single object
@@ -190,9 +199,29 @@
         /// <param name="recipient"> address that will receive the transfer </param>
         /// <param name="amount"> amount (in femto DOTs) to transfer </param>
         /// <param name="callback"> delegate that will receive operation updates </param>
-        void SignAndSendTransfer(string sender, string privateKey, string recipient, ulong amount, Action<string> callback);
+        int SignAndSendTransfer(string sender, string privateKey, string recipient, BigInteger amount, Action<string> callback);
 
-        GenericExtrinsic PendingExtrinsics();
+        /// <summary>
+        /// Returns all pending extrinsics
+        /// </summary>
+        /// <param name="bufferSize"> size of preallocated array </param>
+        /// <returns> 
+        ///     Extrinsics received from the node (may be greater than buffer size, in which case items with
+        ///     indexes greater than bufferSize are not returned) 
+        /// </returns>
+        GenericExtrinsic[] PendingExtrinsics(int bufferSize);
+
+        /// <summary>
+        /// Subscribe to nonce updates for a given address. Only one subscription at a time per address is allowed. If
+        /// a subscription already exists for the same address, old subscription will be discarded and replaced with the new
+        /// one.Until unsubscribeNonce method is called with the same address, the API will be receiving updates and
+        /// forwarding them to subscribed object/function.Only unsubscribeNonce will physically unsubscribe from WebSocket
+        /// endpoint updates.
+        /// </summary>
+        /// <param name="address"> address to receive nonce updates for </param>
+        /// <param name="callback"> delegate expression that will receive nonce updates </param>
+        /// <returns> operation result </returns>
+        int SubscribeAccountNonce(Address address, Action<BigInteger> callback);
 
         /// <summary>
         /// Submit a fully formatted extrinsic for block inclusion
@@ -203,7 +232,7 @@
         /// <param name="sender"> sender address </param>
         /// <param name="privateKey"> sender private key </param>
         /// <returns> Extrinsic hash </returns>
-        string SubmitExtrinsic(byte[] encodedMethodBytes, string module, string method, string sender, string privateKey);
+        string SubmitExtrinsic(byte[] encodedMethodBytes, string module, string method, Address sender, string privateKey);
 
         /// <summary>
         /// Remove given extrinsic from the pool and temporarily ban it to prevent reimporting
@@ -254,9 +283,28 @@
         int SubscribeRuntimeVersion(Action<RuntimeVersion> callback);
 
         /// <summary>
+        /// Submit and subscribe a fully formatted extrinsic for block inclusion
+        /// </summary>
+        /// <param name="encodedMethodBytes"> encoded extrintic parametrs </param>
+        /// <param name="module"> invokable module name </param>
+        /// <param name="method"> invokable method name</param>
+        /// <param name="sender"> sender address </param>
+        /// <param name="privateKey">  sender private key </param>
+        /// <param name="callback"> expression that will receive operation updates </param>
+        /// <returns></returns>
+        int SubmitAndSubcribeExtrinsic(byte[] encodedMethodBytes,
+                                        string module, string method, Address sender, string privateKey,
+                                       Action<string> callback);
+
+        /// <summary>
         /// Unsubscribe from WebSocket endpoint and stop receiving updates with most recent Runtime Version.
         /// </summary>
         /// <param name="id"> Subscription id </param>
         void UnsubscribeRuntimeVersion(int id);
+
+        /// <summary>
+        /// Unsubscribe from WebSocket endpoint and stop receiving updates for address nonce.
+        /// </summary>
+        void UnsubscribeAccountNonce(int id);
     }
 }

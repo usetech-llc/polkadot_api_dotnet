@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Polkadot\Polkadot.csproj" />
-    <ProjectReference Include="..\Schnorrkel\Schnorrkel.csproj" />
   </ItemGroup>
 
   <ItemGroup>

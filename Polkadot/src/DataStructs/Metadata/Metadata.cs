@@ -2,6 +2,7 @@
 {
     using Extensions.Data;
     using Polkadot.Api;
+    using Polkadot.Utils;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -27,6 +28,7 @@
         {
             // Find the module index in metadata
             int moduleIndex = -1;
+            int emptyCount = 0;
 
             if (_metadata.Version == 4)
             {
@@ -38,13 +40,29 @@
                         moduleIndex = module.ind;
                         break;
                     }
+                    else if (!HasMethods(module.ind) && skipZeroCalls)
+                    {
+                        emptyCount++;
+                    }
                 }
-                return skipZeroCalls
-                    ? moduleIndex - md.Module.Where(item => item.Name.Equals(string.Empty, StringComparison.InvariantCultureIgnoreCase)).Count()
-                    : moduleIndex;
+                //return skipZeroCalls
+                //    ? moduleIndex - md.Module.Where(item => item.Name.Equals(string.Empty, StringComparison.InvariantCultureIgnoreCase)).Count()
+                //    : moduleIndex;
             }
 
-            return moduleIndex;
+            return moduleIndex - emptyCount;
+        }
+
+        public bool HasMethods(int moduleIndex)
+        {
+            bool result = true;
+            if (_metadata.Version == 4)
+            {
+                var md = _metadata as MetadataV4;
+                result = md.Module[moduleIndex].Call != null;
+            }
+
+            return result;
         }
 
         public int GetStorageMethodIndex(int moduleIndex, string funcName)
@@ -103,6 +121,34 @@
         public string GetPlainStorageKey(Hasher hasher, string prefix)
         {
             return GetStorageKey(hasher, Encoding.ASCII.GetBytes(prefix), prefix.Length);
+        }
+
+        public string GetAddrFromPublicKey(PublicKey pubKey)
+        {
+            var plainAddr = new byte[1024];
+            Array.Fill<byte>(plainAddr, 0x2A);
+            pubKey.Bytes.CopyTo(plainAddr.AsMemory(1));
+
+            // Add control sum
+            // Add SS58RPE prefix
+            var ssPrefixed = new byte[Consts.SR25519_PUBLIC_SIZE + 8];
+            var ssPrefixed1 = new byte[] { 0x53, 0x53, 0x35, 0x38, 0x50, 0x52, 0x45 };
+            ssPrefixed1.CopyTo(ssPrefixed, 0);
+            plainAddr.AsSpan(0, Consts.SR25519_PUBLIC_SIZE + 1).CopyTo(ssPrefixed.AsSpan(7));
+
+         //   var blake2bHashed = new byte[1024];
+
+            //  blake2(blake2bHashed, 64, ssPrefixed, SR25519_PUBLIC_SIZE + 8, NULL, 0);
+            var blake2bHashed = Blake2Core.Blake2B.ComputeHash(ssPrefixed, 0, Consts.SR25519_PUBLIC_SIZE + 8);
+            plainAddr[1 + Consts.PUBLIC_KEY_LENGTH] = blake2bHashed[0];
+            plainAddr[2 + Consts.PUBLIC_KEY_LENGTH] = blake2bHashed[1];
+
+            var addrCh = SimpleBase.Base58.Bitcoin.Encode(plainAddr).ToArray();
+
+            // EncodeBase58(plainAddr, SR25519_PUBLIC_SIZE + 3, addrCh);
+            //  string result((char*) addrCh);
+
+            return new string(addrCh);
         }
 
         public string GetAddressStorageKey(Hasher hasher, Address address, string prefix)
