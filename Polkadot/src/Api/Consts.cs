@@ -30,5 +30,11 @@
         public const int MAX_METHOD_BYTES_SZ = 2048;
 
         public static int DEFAULT_FIXED_EXSTRINSIC_SIZE = 103;
+
+
+        // lastLengthChange storage subscription hash
+        public const string LAST_LENGTH_CHANGE_SUBSCRIPTION = "0xe781aa1e06ea53e01a4e129e0496764e";
+        // sessionLenth storage subscription hash
+        public const string SESSION_LENGTH_SUBSCRIPTION = "0xd9c94b41dc87728ebf0a966d2e9ad9c0";
     }
 }

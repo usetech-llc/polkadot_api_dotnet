@@ -6,9 +6,10 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Numerics;
     using System.Text;
 
-    public class Metadata 
+    public class Metadata
     {
         public int MetadataVersion { get; private set; }
         private MetadataV4 _MDV4 { get; set; }
@@ -19,9 +20,14 @@
             _metadata = metadata;
         }
 
-        public T GetMetadata<T>() where T: MetadataBase
-        {   
+        public T GetMetadata<T>() where T : MetadataBase
+        {
             return _metadata as T;
+        }
+
+        public int GetMetadataVersion()
+        {
+            return _metadata.Version;
         }
 
         public int GetModuleIndex(string moduleName, bool skipZeroCalls)
@@ -116,6 +122,28 @@
             }
 
             throw new ApplicationException($"Module + State variable not found: {moduleIndex}:{varIndex}");
+        }
+
+        public BigInteger GetConst(string module, string constName)
+        {
+            BigInteger value = -1;
+            var babeModuleIndex = GetModuleIndex(module, false);
+
+            if (_metadata.Version == 7)
+            {
+                //var md = MetadataV7 
+                //for (int i = 0; i < Consts.COLLECTION_SIZE; ++i)
+                //{
+                //    var moduleConst = _protocolParams.Metadata.GetConst();
+                //    if (strcmp(moduleConst.name, constName.c_str()) == 0)
+                //    {
+                //        value = fromHex < long long> (moduleConst.value, false);
+                //        break;
+                //    }
+                //}
+            }
+
+            return value;
         }
 
         public string GetPlainStorageKey(Hasher hasher, string prefix)

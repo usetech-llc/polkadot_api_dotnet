@@ -5,6 +5,7 @@
     using Polkadot.Data;
     using Polkadot.DataStructs;
     using Polkadot.DataStructs.Metadata;
+    using Polkadot.src.DataStructs;
 
     public interface IApplication : IDisposable
     {
@@ -202,6 +203,40 @@
         int SignAndSendTransfer(string sender, string privateKey, string recipient, BigInteger amount, Action<string> callback);
 
         /// <summary>
+        /// Subscribe to era and session. Only one subscription at a time is allowed. If a subscription already
+        ///  exists, old subscription will be discarded and replaced with the new one.Until subscribeEraAndSession method is
+        ///  called, the API will be receiving updates and forwarding them to subscribed object/function.Only
+        ///  unsubscribeBlockNumber will physically unsubscribe from WebSocket endpoint updates.
+        /// </summary>
+        /// <param name="callback"> expression that will receive updates </param>
+        /// <returns> operation result </returns>
+        int SubscribeEraAndSession(Action<Era, SessionOrEpoch> callback);
+
+        /// <summary>
+        /// Subscribe to most recent value updates for a given storage key. Only one subscription at a time per address is
+        ///     allowed. If a subscription already exists for the same storage key, old subscription will be discarded and
+        ///     replaced with the new one. Until unsubscribeStorage method is called with the same storage key, the API will be
+        ///     receiving updates and forwarding them to subscribed object/function. Only unsubscribeStorage will physically
+        ///     unsubscribe from WebSocket endpoint updates.
+        /// </summary>
+        /// <param name="key"> storage key to receive updates for (e.g. "0x66F795B8D457430EDDA717C3CBA459B9") </param>
+        /// <param name="callback"> expression that will received </param>
+        /// <returns> Subscription id </returns>
+        int SubscribeStorage(string key, Action<string> callback);
+
+        /// <summary>
+        /// Subscribe to most recent balance for a given address. Only one subscription at a time per address is allowed. If
+        ///     a subscription already exists for the same address, old subscription will be discarded and replaced with the new
+        ///     one. Until unsubscribeBalance method is called with the same address, the API will be receiving updates and
+        ///     forwarding them to subscribed object/function.Only unsubscribeBalance will physically unsubscribe from WebSocket
+        ///     endpoint updates.
+        /// </summary>
+        /// <param name="address"> address to receive balance updates for </param>
+        /// <param name="callback">  expression that will receive balance updates </param>
+        /// <returns> Subscription id </returns>
+        int SubscribeBalance(string address, Action<BigInteger> callback);
+
+        /// <summary>
         /// Returns all pending extrinsics
         /// </summary>
         /// <param name="bufferSize"> size of preallocated array </param>
@@ -305,6 +340,25 @@
         /// <summary>
         /// Unsubscribe from WebSocket endpoint and stop receiving updates for address nonce.
         /// </summary>
+        /// <param name="id"> Subscription id </param>
         void UnsubscribeAccountNonce(int id);
+
+        /// <summary>
+        /// Unsubscribe from WebSocket endpoint and stop receiving updates with era and session.
+        /// </summary>
+        /// <param name="id"> Subscription id </param>
+        void UnsubscribeEraAndSession(int id);
+
+        /// <summary>
+        /// Unsubscribe from WebSocket endpoint and stop receiving updates for address balance.
+        /// </summary>
+        /// <param name="id"> Subscription id </param>
+        void UnsubscribeStorage(int id);
+
+        /// <summary>
+        /// Unsubscribe from WebSocket endpoint and stop receiving updates for address balance.
+        /// </summary>
+        /// <param name="id"> Subscription id </param>
+        void UnsubscribeBalance(int id);
     }
 }

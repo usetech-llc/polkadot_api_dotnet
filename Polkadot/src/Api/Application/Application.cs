@@ -14,6 +14,7 @@
     using Polkadot.DataStructs;
     using Polkadot.DataStructs.Metadata;
     using Polkadot.Source.Utils;
+    using Polkadot.src.DataStructs;
     using Polkadot.Utils;
     using sr25519_dotnet.lib;
     using sr25519_dotnet.lib.Models;
@@ -31,16 +32,25 @@
         private ConcurrentDictionary<int, UpdateDelegate> _subscriptionHandlers = new ConcurrentDictionary<int, UpdateDelegate>();
         private ProtocolParameters _protocolParams;
 
+        // Era/epoch/session subscription storage hashes and data
+        private string _storageKeyCurrentEra;
+        private string _storageKeySessionsPerEra;
+        private string _storageKeyCurrentSessionIndex;
+        private string _storageKeyBabeGenesisSlot;
+        private string _storageKeyBabeCurrentSlot;
+        private BigInteger _babeEpochDuration;
+        private BigInteger _sessionsPerEra;
+        private string _storageKeyBabeEpochIndex;
+        private bool _isEpoch; // True, if epochs should be used instead of sessions
 
-
-        private T Deserialize<T, C>(JObject json) 
+        private T Deserialize<T, C>(JObject json)
             where C : IParseFactory<T>, new()
         {
             try
             {
                 return (new C()).Parse(json);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 var message = "Cannot deserialize data " + e.Message;
                 _logger.Error(message);
@@ -84,8 +94,38 @@
             else
                 _logger.Info("FreeBalance hash function is Blake2-256");
 
-            _logger.Info($"Balances module index: {_protocolParams.BalanceModuleIndex}" );
-            _logger.Info($"Transfer call index: {_protocolParams.TransferMethodIndex}" );
+            _logger.Info($"Balances module index: {_protocolParams.BalanceModuleIndex}");
+            _logger.Info($"Transfer call index: {_protocolParams.TransferMethodIndex}");
+
+            // Calculate storage hashes
+            _storageKeyCurrentEra = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, "Staking CurrentEra");
+
+            _storageKeySessionsPerEra =
+                _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, "Staking SessionsPerEra");
+
+            _storageKeyCurrentSessionIndex =
+                _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, "Session CurrentIndex");
+
+            try
+            {
+                _storageKeyBabeGenesisSlot = GetKeys("", "Babe", "GenesisSlot");
+                _storageKeyBabeCurrentSlot = GetKeys("", "Babe", "CurrentSlot");
+                _storageKeyBabeEpochIndex = GetKeys("", "Babe", "EpochIndex");
+                _sessionsPerEra = _protocolParams.Metadata.GetConst("Staking", "SessionsPerEra");
+                _babeEpochDuration = _protocolParams.Metadata.GetConst("Babe", "EpochDuration");
+            }
+            catch (ApplicationException)
+            {
+                // Expected exception if Babe module is not present (e.g. Alexander network)
+            }
+
+            // Detect if epochs or sessions should be used
+            _isEpoch = _storageKeyBabeGenesisSlot != null;
+            if (_isEpoch)
+                _logger.Info("Using epochs");
+            else
+                _logger.Info("Using sessions");
+
 
             return result;
         }
@@ -102,19 +142,20 @@
 
         public SystemInfo GetSystemInfo()
         {
-            JObject systemNameQuery = JObject.FromObject( new { method = "system_name", @params = new JArray { } } );
+            JObject systemNameQuery = JObject.FromObject(new { method = "system_name", @params = new JArray { } });
             JObject systemNameJson = _jsonRpc.Request(systemNameQuery);
 
-            JObject systemChainQuery = new JObject { { "method", "system_chain"}, { "params", new JArray{ } } };
+            JObject systemChainQuery = new JObject { { "method", "system_chain" }, { "params", new JArray { } } };
             JObject systemChainJson = _jsonRpc.Request(systemChainQuery);
 
-            JObject systemVersionQuery = new JObject { { "method", "system_version"}, { "params", new JArray{ } } };
+            JObject systemVersionQuery = new JObject { { "method", "system_version" }, { "params", new JArray { } } };
             JObject systemVersionJson = _jsonRpc.Request(systemVersionQuery);
 
-            JObject systemPropertiesQuery = new JObject { { "method", "system_properties"}, { "params", new JArray { } } };
+            JObject systemPropertiesQuery = new JObject { { "method", "system_properties" }, { "params", new JArray { } } };
             JObject systemPropertiesJson = _jsonRpc.Request(systemPropertiesQuery);
 
-            JObject completeJson = JObject.FromObject( new {
+            JObject completeJson = JObject.FromObject(new
+            {
                 item0 = systemNameJson["result"],
                 item1 = systemChainJson["result"],
                 item2 = systemVersionJson["result"],
@@ -131,7 +172,8 @@
             bool done = false;
             BigInteger result = 0;
 
-            var subId = SubscribeAccountNonce(address, (nonce) => {
+            var subId = SubscribeAccountNonce(address, (nonce) =>
+            {
                 result = nonce;
                 done = true;
             });
@@ -148,7 +190,7 @@
             if (param != null)
                 prm = new JArray { param.BlockNumber };
 
-            JObject query = new JObject { { "method", "chain_getBlockHash"}, { "params", prm} };
+            JObject query = new JObject { { "method", "chain_getBlockHash" }, { "params", prm } };
 
             JObject response = _jsonRpc.Request(query);
 
@@ -160,7 +202,7 @@
             JArray prm = new JArray { };
             if (param != null)
                 prm = new JArray { param.BlockHash };
-            JObject query = new JObject { { "method", "chain_getRuntimeVersion" }, { "params", prm} };
+            JObject query = new JObject { { "method", "chain_getRuntimeVersion" }, { "params", prm } };
 
             JObject response = _jsonRpc.Request(query);
 
@@ -377,7 +419,8 @@
         {
             JObject subscribeQuery = new JObject { { "method", "chain_subscribeNewHead" }, { "params", new JArray { } } };
 
-            return Subscribe(subscribeQuery, (json) => {
+            return Subscribe(subscribeQuery, (json) =>
+            {
                 var test = json["result"]["number"].ToString().Substring(2);
                 var blockNumber = long.Parse(test, NumberStyles.HexNumber);
                 callback(blockNumber);
@@ -388,7 +431,8 @@
         {
             JObject subscribeQuery = new JObject { { "method", "state_subscribeRuntimeVersion" }, { "params", new JArray { } } };
 
-            return Subscribe(subscribeQuery, (json) => {
+            return Subscribe(subscribeQuery, (json) =>
+            {
                 var rtv = Deserialize<RuntimeVersion, ParseRuntimeVersion>(json);
                 callback(rtv);
             });
@@ -424,6 +468,32 @@
         public void UnsubscribeAccountNonce(int id)
         {
             RemoveSubscription(id, "state_unsubscribeStorage");
+        }
+
+        public void UnsubscribeEraAndSession(int id)
+        {
+            RemoveSubscription(id, "state_unsubscribeStorage");
+        }
+
+        public void UnsubscribeBalance(int id)
+        {
+            RemoveSubscription(id, "state_subscribeStorage");
+        }
+
+        public void UnsubscribeStorage(int id)
+        {
+            if (_subscriptionHandlers.ContainsKey(id))
+            {
+                JObject unsubscribeQuery = new JObject { { "method", "state_unsubscribeStorage" }, { "params", new JArray { id } } };
+                _jsonRpc.Request(unsubscribeQuery);
+
+                lock (_subscriptionHandlers)
+                {
+                    _subscriptionHandlers.TryRemove(id, out _);
+                }
+
+                _logger.Info($"Unsubscribed from subscription ID: {id}");
+            }
         }
 
         public void HandleWsMessage(int subscriptionId, JObject message)
@@ -512,10 +582,11 @@
             long teByteLength = te.SerializeBinary(ref teBytes);
             string teStr = $"0x{Converters.ByteArrayToString(teBytes, (int)teByteLength)}";
 
-            var query = new JObject { { "method", "author_submitAndWatchExtrinsic"}, { "params", new JArray { teStr } } };
+            var query = new JObject { { "method", "author_submitAndWatchExtrinsic" }, { "params", new JArray { teStr } } };
 
             // Send == Subscribe callback to completion
-            return Subscribe(query, (json) => {
+            return Subscribe(query, (json) =>
+            {
                 callback(json.ToString());
             });
         }
@@ -706,7 +777,8 @@
             var query = new JObject { { "method", "author_submitAndWatchExtrinsic" }, { "params", new JArray { teStr } } };
 
             // Send == Subscribe callback to completion
-            return Subscribe(query, (json) => {
+            return Subscribe(query, (json) =>
+            {
                 callback(json.ToString());
             });
         }
@@ -731,9 +803,145 @@
 
             JObject subscribeQuery = new JObject { { "method", "state_subscribeStorage" }, { "params", new JArray { new JArray { storageKey } } } };
 
-            return Subscribe(subscribeQuery, (json) => {
+            return Subscribe(subscribeQuery, (json) =>
+            {
                 var result = Converters.FromHex(json["result"]["changes"][0][1].ToString().Substring(2));
                 callback(result);
+            });
+        }
+
+        public int SubscribeStorage(string key, Action<string> callback)
+        {
+            // Subscribe to websocket
+            var subscribeQuery =
+                    new JObject { { "method", "state_subscribeStorage" }, { "params", new JArray { new JArray { key } } } };
+
+            return Subscribe(subscribeQuery, (json) =>
+            {
+                callback(json["result"]["changes"][0][1].ToString());
+            });
+        }
+
+        public int SubscribeEraAndSession(Action<Era, SessionOrEpoch> callback)
+        {
+            long _bestBlockNum = 0;
+            bool done = false;
+            var sbnId = SubscribeBlockNumber(new Action<long>((blockNum) =>
+            {
+                _bestBlockNum = blockNum;
+                done = true;
+            }));
+
+            while (!done)
+            {
+                Thread.SpinWait(1500);
+            }
+
+            // era and session subscription
+            JArray _params;
+            if (_isEpoch)
+            {
+                _params =
+                    new JArray { new JArray { _storageKeyBabeEpochIndex, _storageKeyBabeGenesisSlot, _storageKeyBabeCurrentSlot } };
+            }
+            else
+            {
+                _params =
+                    new JArray {
+                            new JArray {
+                                Consts.LAST_LENGTH_CHANGE_SUBSCRIPTION, Consts.SESSION_LENGTH_SUBSCRIPTION, _storageKeyCurrentEra,
+                                            _storageKeySessionsPerEra, _storageKeyCurrentSessionIndex}
+                        };
+            }
+
+            // Subscribe to websocket
+            JObject subscribeQuery = new JObject { { "method", "state_subscribeStorage" }, { "params", _params } };
+
+            return Subscribe(subscribeQuery, (json) =>
+            {
+                var message = json["result"];
+
+                if (_isEpoch)
+                {
+                    BigInteger epochIndex = 0, epochOrGenesisStartSlot = 0, currentSlot = 0;
+
+                    if (message["changes"][0][1] != null)
+                        epochIndex = Converters.FromHex(message["changes"][0][1].ToString(), false);
+                    if (message["changes"][1][1] != null)
+                        epochOrGenesisStartSlot = Converters.FromHex(message["changes"][1][1].ToString(), false);
+                    if (message["changes"][2][1] != null)
+                        currentSlot = Converters.FromHex(message["changes"][2][1].ToString(), false);
+
+                    var epochStartSlot = _babeEpochDuration * epochIndex + epochOrGenesisStartSlot;
+                    var sessionProgress = currentSlot - epochStartSlot;
+                    var eraProgress = epochIndex % _sessionsPerEra * _babeEpochDuration + sessionProgress;
+                    var eraDuration = _sessionsPerEra * _babeEpochDuration;
+
+                    Era era;
+                    era.EraProgress = eraProgress;
+                    era.EraLength = _sessionsPerEra * _babeEpochDuration;
+                    SessionOrEpoch session = new SessionOrEpoch
+                    {
+                        IsEpoch = _isEpoch,
+                        EpochProgress = sessionProgress,
+                        EpochLength = _babeEpochDuration
+                    };
+
+                    callback(era, session);
+
+                }
+                else
+                {
+                    BigInteger lastLengthChange = 0, sessionLength = 0, currentEra = 0, sessionsPerEra = 0,
+                              currentIndexSubcription = 0;
+
+                    if (message["changes"][0][1] != null)
+                        lastLengthChange = Converters.FromHex(message["changes"][0][1].ToString(), false);
+                    if (message["changes"][1][1] != null)
+                        sessionLength = Converters.FromHex(message["changes"][1][1].ToString(), false);
+                    if (message["changes"][2][1] != null)
+                        currentEra = Converters.FromHex(message["changes"][2][1].ToString(), false);
+                    if (message["changes"][3][1] != null)
+                        sessionsPerEra = Converters.FromHex(message["changes"][3][1].ToString(), false);
+                    if (message["changes"][4][1] != null)
+                        currentIndexSubcription = Converters.FromHex(message["changes"][4][1].ToString(), false);
+
+                    if (lastLengthChange > 0 && sessionLength > 0 && currentEra > 0 && sessionsPerEra > 0 &&
+                        currentIndexSubcription > 0)
+                    {
+                        var sessionProgress = (_bestBlockNum - lastLengthChange + sessionLength) % sessionLength;
+                        var eraProgress = currentIndexSubcription % sessionsPerEra * sessionLength + sessionProgress;
+
+                        Era era;
+                        era.EraProgress = eraProgress;
+                        era.EraLength = sessionsPerEra * sessionLength;
+                        SessionOrEpoch session = new SessionOrEpoch
+                        {
+                            IsEpoch = _isEpoch,
+                            SessionProgress = sessionProgress,
+                            SessionLength = sessionLength
+                        };
+
+                        callback(era, session);
+                    }
+                }
+
+                UnsubscribeBlockNumber(sbnId);
+            });
+        }
+
+        public int SubscribeBalance(string address, Action<BigInteger> callback)
+        {
+            string storageKey =
+                       _protocolParams.Metadata.GetAddressStorageKey(_protocolParams.FreeBalanceHasher, 
+                       new Address(address), "Balances FreeBalance");
+
+            var subscribeQuery =
+                new JObject { { "method", "state_subscribeStorage"}, { "params", new JArray { new JArray { storageKey} } } };
+
+            return Subscribe(subscribeQuery, (json) =>
+            {
+                callback(BigInteger.Parse(json["result"]["changes"][0][1].ToString().Substring(2), NumberStyles.HexNumber));
             });
         }
     }
