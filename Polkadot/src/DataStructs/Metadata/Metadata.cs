@@ -12,7 +12,7 @@
     public class Metadata
     {
         public int MetadataVersion { get; private set; }
-        private MetadataV4 _MDV4 { get; set; }
+        //private MetadataV4 _MDV4 { get; set; }
         private readonly MetadataBase _metadata;
 
         public Metadata(MetadataBase metadata)
@@ -36,6 +36,23 @@
             int moduleIndex = -1;
             int emptyCount = 0;
 
+            if (_metadata.Version == 7)
+            {
+                var md = _metadata as MetadataV7;
+                foreach (var module in md.Module.Select((item, ind) => new { item, ind }))
+                {
+                    if (module.item.Name.Equals(moduleName, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        moduleIndex = module.ind;
+                        break;
+                    }
+                    else if (!HasMethods(module.ind) && skipZeroCalls)
+                    {
+                        emptyCount++;
+                    }
+                }
+            }
+
             if (_metadata.Version == 4)
             {
                 var md = _metadata as MetadataV4;
@@ -51,9 +68,6 @@
                         emptyCount++;
                     }
                 }
-                //return skipZeroCalls
-                //    ? moduleIndex - md.Module.Where(item => item.Name.Equals(string.Empty, StringComparison.InvariantCultureIgnoreCase)).Count()
-                //    : moduleIndex;
             }
 
             return moduleIndex - emptyCount;
@@ -62,6 +76,13 @@
         public bool HasMethods(int moduleIndex)
         {
             bool result = true;
+
+            if (_metadata.Version == 7)
+            {
+                var md = _metadata as MetadataV7;
+                result = md.Module[moduleIndex].Call != null;
+            }
+
             if (_metadata.Version == 4)
             {
                 var md = _metadata as MetadataV4;
@@ -74,6 +95,21 @@
         public int GetStorageMethodIndex(int moduleIndex, string funcName)
         {
             int methodIndex = -1;
+
+            if (_metadata.Version == 7)
+            {
+                var md = _metadata as MetadataV7;
+                var module = md.Module.ElementAtOrDefault(moduleIndex);
+
+                foreach (var storage in module.Storage.Items.Select((item, ind) => new { item, ind }))
+                {
+                    if (storage.item.Name.Equals(funcName, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        methodIndex = storage.ind;
+                        break;
+                    }
+                }
+            }
 
             if (_metadata.Version == 4)
             {
@@ -96,6 +132,21 @@
         {
             int methodIndex = -1;
 
+            if (_metadata.Version == 7)
+            {
+                var md = _metadata as MetadataV7;
+                var module = md.Module.ElementAtOrDefault(moduleIndex);
+
+                foreach (var call in module.Call.Select((item, ind) => new { item, ind }))
+                {
+                    if (call.item.Name.Equals(funcName, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        methodIndex = call.ind;
+                        break;
+                    }
+                }
+            }
+
             if (_metadata.Version == 4)
             {
                 var md = _metadata as MetadataV4;
@@ -115,6 +166,12 @@
 
         public bool IsStateVariablePlain(int moduleIndex, int varIndex)
         {
+            if (_metadata.Version == 7)
+            {
+                var md = _metadata as MetadataV7;
+                return md.Module[moduleIndex].Storage.Items[varIndex].Type.Type == 0;
+            }
+
             if (_metadata.Version == 4)
             {
                 var md = _metadata as MetadataV4;
@@ -131,16 +188,15 @@
 
             if (_metadata.Version == 7)
             {
-                //var md = MetadataV7 
-                //for (int i = 0; i < Consts.COLLECTION_SIZE; ++i)
-                //{
-                //    var moduleConst = _protocolParams.Metadata.GetConst();
-                //    if (strcmp(moduleConst.name, constName.c_str()) == 0)
-                //    {
-                //        value = fromHex < long long> (moduleConst.value, false);
-                //        break;
-                //    }
-                //}
+                var md = _metadata as MetadataV7;
+                foreach(var item in md.Module[babeModuleIndex].Cons)
+                {
+                    if (item.Name.Equals(constName))
+                    {
+                        value = Converters.FromHex(item.Value, false);
+                        break;
+                    }
+                }
             }
 
             return value;

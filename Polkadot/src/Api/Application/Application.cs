@@ -58,6 +58,22 @@
             }
         }
 
+        private bool TryDeserialize<T, C>(JObject json, out T buffer)
+                where C : IParseFactory<T>, new()
+                where T: new()
+        {
+            buffer = new T();
+            try
+            {
+                buffer = (new C()).Parse(json);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
         public Application(ILogger logger, IJsonRpc jsonRpc)
         {
             _logger = logger;
@@ -218,7 +234,13 @@
 
             JObject response = _jsonRpc.Request(query);
 
-            return Deserialize<MetadataV4, ParseMetadataV4>(response);
+            if (TryDeserialize<MetadataV4, ParseMetadataV4>(response, out MetadataV4 md4))
+                return md4;
+
+            if (TryDeserialize<MetadataV7, ParseMetadataV7>(response, out MetadataV7 md7))
+                return md7;
+
+            return null;
         }
 
         public SignedBlock GetBlock(GetBlockParams param)
