@@ -30,7 +30,7 @@ namespace PolkaTest
 
             using (var _instance = new Application(logger, jsonrpc))
             {
-                _instance.Connect();
+               // _instance.Connect();
                 var result = _instance.GetRuntimeVersion(
                     new GetRuntimeVersionParams
                     {
@@ -67,7 +67,7 @@ namespace PolkaTest
                 output.WriteLine($"SpecName:            {result.SpecName}");
                 output.WriteLine($"SpecVersion:         {result.SpecVersion}");
 
-                _instance.Disconnect();
+              //  _instance.Disconnect();
             }
         }
     }
