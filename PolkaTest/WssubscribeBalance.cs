@@ -1,6 +1,7 @@
 namespace PolkaTest
 {
     using Polkadot.Api;
+    using System;
     using Xunit;
     using Xunit.Abstractions;
     using System.Threading;
@@ -30,6 +31,7 @@ namespace PolkaTest
                 BigInteger balanceResult = maxValue;
                 var sid = app.SubscribeBalance(addr, (balance) => {
                     output.WriteLine($"Balance: {balance}");
+                    Console.WriteLine($"\nBalance: {balance}\n");
                     balanceResult = balance;
                     doneS = true;
                 });

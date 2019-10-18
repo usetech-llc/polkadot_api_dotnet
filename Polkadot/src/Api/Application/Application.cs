@@ -499,12 +499,12 @@
 
         public void UnsubscribeBalance(int id)
         {
-            RemoveSubscription(id, "state_subscribeStorage");
+            RemoveSubscription(id, "state_unsubscribeStorage");
         }
 
         public void UnsubscribeStorage(int id)
         {
-            RemoveSubscription(id, "state_subscribeStorage");
+            RemoveSubscription(id, "state_unsubscribeStorage");
         }
 
         public void HandleWsMessage(int subscriptionId, JObject message)
@@ -944,7 +944,7 @@
         public int SubscribeBalance(string address, Action<BigInteger> callback)
         {
             string storageKey =
-                       _protocolParams.Metadata.GetAddressStorageKey(_protocolParams.FreeBalanceHasher, 
+                       _protocolParams.Metadata.GetAddressStorageKey(_protocolParams.FreeBalanceHasher,
                        new Address(address), "Balances FreeBalance");
 
             var subscribeQuery =
