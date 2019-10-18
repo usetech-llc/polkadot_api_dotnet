@@ -2,8 +2,8 @@
 
 ## Milestones
 
-[Milestone 1](https://github.com/usetech-llc/polkadot_api_dotnet/blob/master/doc/demo_milestone1.md)
-Milestone 2
+- [Milestone 1](https://github.com/usetech-llc/polkadot_api_dotnet/blob/master/doc/demo_milestone1.md)
+- [Milestone 2](https://github.com/usetech-llc/polkadot_api_dotnet/blob/master/doc/demo_milestone2.md)
 
 ## Requirements
 
