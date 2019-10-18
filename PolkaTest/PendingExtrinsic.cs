@@ -34,6 +34,11 @@ namespace PolkaTest
                     output.WriteLine($"Signature: {item.Signature}");
                     output.WriteLine($"Method: {item.Method}");
                     output.WriteLine($"Length: {item.Length}");
+
+                    Console.WriteLine($"SignerAddress: {item.SignerAddress}");
+                    Console.WriteLine($"Signature: {item.Signature}");
+                    Console.WriteLine($"Method: {item.Method}");
+                    Console.WriteLine($"Length: {item.Length}");
                 }
 
                 app.Disconnect();

@@ -213,43 +213,84 @@ Era: 14395 /  14400
 
 ## Deliverable 6
 
+### One transaction type is supported with dedicated API call - sending DOTs to another address
+This is manual test because testDOTs will be consumed and a private key is required. Change directory to /src/SignAndSendTransferTest project and execute the following. If you need assistance with a working private key and addresses, please let me (Greg) know, I will provide you the key pair.
+
+- Transaction is serialized and prepared (formatted) appropriately for signing
+- Transaction can be signed with provided private key
+- Cryptogram can be sent to the substrate node to be processed and included in the blockchain
+- Command line tool is provided to execute all milestone deliverables
+
+```
+# cd /src/SignAndSendTransferTest
+# dotnet build
+# dotnet run <sender address> <recipient address> <amount in fDOTs> <sender private key (hex)>
+```
+
+Expect output such as:
+```
+...
+2019-10-18 12:47:26.1334|INFO|Polkadot.Logger|Message body {
+  "id": 5,
+  "jsonrpc": "2.0",
+  "method": "author_submitAndWatchExtrinsic",
+  "params": [
+    "0x250281FF5E8135DC17F025CA044780631EF89.....D79DF6ACA044DF12BA9B727110FEBF95BFF2D0C0104"
+  ]
+}
+...
+
+2019-10-18 12:47:26.4346|INFO|Polkadot.Logger|Message received: {"jsonrpc":"2.0","method":"author_extrinsicUpdate","params":{"result":"ready","subscription":45421}}
+{
+  "result": "ready",
+  "subscription": 45421
+}
+...
+```
+
+Also, feel free to check the address on [Polkascan](https://polkascan.io).
+
+
 ### Support following RPC methods
 #### author_submitExtrinsic
+Change directory to /src/SubmitExtrinsicTest project and execute the following.
 ```
+# cd /src/SubmitExtrinsicTest
+# dotnet build
+# dotnet run <sender address> <recipient address> <amount in fDOTs> <sender private key (hex)>
+
+
+
+
 TBD
+
 ```
 
 #### author_pendingExtrinsics
+
+
 ```
-TBD
+# cd /src/PolkaTest
+# dotnet test --filter PendingExtrinsic
+
+...
+2019-10-18 13:24:07.2158|INFO|Polkadot.Logger|Message body {
+  "id": 3,
+  "jsonrpc": "2.0",
+  "method": "author_pendingExtrinsics",
+  "params": []
+}
+2019-10-18 13:24:07.2158|INFO|Polkadot.Logger|Message 3 was sent
+2019-10-18 13:24:07.5535|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":["0x8d0281ff66adb5ec78edf4c64dac3970609c8c0c7cc1d69c0bec3f37f4b4677b2feb3b05a26b243bc322192ff5f56f9c679.....09a955c1ca5ecb6a822ff5d210420e2c15000506"],"id":3}
+...
+SignerAddress: ykriwdQ4WKNedoD6R...NwWknTqRY1F
+Signature: Polkadot.Api.Signature
+Method: Polkadot.Api.GenericMethod
+Length: 163
+...
 ```
 
 #### author_removeExtrinsic
-```
-TBD
-```
-
-### One transaction type is supported with dedicated API call - sending DOTs to another address
-```
-TBD
-```
-
-### Transaction is serialized and prepared (formatted) appropriately for signing
-```
-TBD
-```
-
-### Transaction can be signed with provided private key
-```
-TBD
-```
-
-### Cryptogram can be sent to the substrate node to be processed and included in the blockchain
-```
-TBD
-```
-
-### Support following WebSocket subscriptions with author_extrinsicUpdate
 ```
 TBD
 ```
@@ -260,5 +301,38 @@ TBD
 ### API and example full documentation
 
 ### Cleanup project files, ensure all tests pass
+The following commits include pre-release code cleanup:
+```
+a312542 - WIP - Milestone 2
+41dca9c - fix UnsubscribeStorage
+e5b780d - Added debug output for acceptance testing
+6833dd8 - Fixed compiler warnings
+
+```
+
 
 ### API library is packaged as a zip archive with DLL files that can be used without compilation on Windows.
+
+## Extra Deliverables
+
+### Kusama Metadata support
+Execute command and watch for the following output, especially "Unsing epochs" string that indicates that Kusama epochs are detected:
+```
+# dotnet test --filter GetMetadataV7
+
+...
+2019-10-18 10:48:30.6602|INFO|Polkadot.Logger|Connected to wss://kusama-rpc.polkadot.io/
+...
+2019-10-18 10:48:31.0296|INFO|Polkadot.Logger|Message body {
+  "id": 2,
+  "jsonrpc": "2.0",
+  "method": "state_getMetadata",
+  "params": []
+}
+...
+2019-10-18 10:48:38.8470|INFO|Polkadot.Logger|FreeBalance hash function is xxHash
+2019-10-18 10:48:38.8470|INFO|Polkadot.Logger|Balances module index: 4
+2019-10-18 10:48:38.8470|INFO|Polkadot.Logger|Transfer call index: 0
+2019-10-18 10:48:38.8519|INFO|Polkadot.Logger|Using epochs
+...
+```
