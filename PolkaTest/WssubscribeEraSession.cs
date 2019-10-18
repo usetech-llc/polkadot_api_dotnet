@@ -1,6 +1,7 @@
 namespace PolkaTest
 {
     using Polkadot.Api;
+    using System;
     using Xunit;
     using Xunit.Abstractions;
     using System.Threading;
@@ -33,6 +34,7 @@ namespace PolkaTest
                 BigInteger epochProgress = -1;
 
                 output.WriteLine($"--- Alexander ---");
+                Console.WriteLine($"--- Alexander ---");
                 app.Connect();
 
                 var id = app.SubscribeEraAndSession((era, session) => {
@@ -40,12 +42,15 @@ namespace PolkaTest
                     if (session.IsEpoch)
                     {
                         output.WriteLine($"Epoch: {session.EpochProgress}  /  {session.EpochLength }");
+                        Console.WriteLine($"\nEpoch: {session.EpochProgress}  /  {session.EpochLength }");
                     }
                     else
                     {
                         output.WriteLine($"Session: {session.SessionProgress}  / {session.SessionLength}");
+                        Console.WriteLine($"\nSession: {session.SessionProgress}  / {session.SessionLength}");
                     }
                     output.WriteLine($"Era: {era.EraProgress} /  {era.EraLength} ");
+                    Console.WriteLine($"Era: {era.EraProgress} /  {era.EraLength} \n");
 
                     eraLength = era.EraLength;
                     eraProgress = era.EraProgress;
@@ -87,7 +92,7 @@ namespace PolkaTest
 
                 // Unsubscribe and close connection
                 app.UnsubscribeEraAndSession(id);
-              
+
             }
 
             // Kusama test
@@ -104,6 +109,7 @@ namespace PolkaTest
                 BigInteger epochProgress = -1;
 
                 output.WriteLine($"--- Kusama ---");
+                Console.WriteLine($"--- Kusama ---");
                 app.Connect("wss://kusama-rpc.polkadot.io/");
 
                 var id = app.SubscribeEraAndSession((era, session) => {
@@ -111,12 +117,15 @@ namespace PolkaTest
                     if (session.IsEpoch)
                     {
                         output.WriteLine($"Epoch: {session.EpochProgress}  /  {session.EpochLength }");
+                        Console.WriteLine($"\nEpoch: {session.EpochProgress}  /  {session.EpochLength }");
                     }
                     else
                     {
                         output.WriteLine($"Session: {session.SessionProgress}  / {session.SessionLength}");
+                        Console.WriteLine($"\nSession: {session.SessionProgress}  / {session.SessionLength}");
                     }
                     output.WriteLine($"Era: {era.EraProgress} /  {era.EraLength} ");
+                    Console.WriteLine($"Era: {era.EraProgress} /  {era.EraLength} \n");
 
                     eraLength = era.EraLength;
                     eraProgress = era.EraProgress;
