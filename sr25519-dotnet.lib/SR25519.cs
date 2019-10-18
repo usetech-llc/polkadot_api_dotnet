@@ -3,6 +3,7 @@ using System;
 using sr25519_dotnet.lib.Interop;
 using System.Text;
 using sr25519_dotnet.lib.Exceptions;
+using System.Runtime.InteropServices;
 
 namespace sr25519_dotnet.lib
 {
@@ -136,9 +137,19 @@ namespace sr25519_dotnet.lib
         {
             var signature = new byte[Constants.SR25519_SIGNATURE_SIZE];
 
-            Bindings.Sign(
-                signature, keypair.Public,
-                keypair.Secret, message, messageLen);
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Bindings.SignSo(
+                    signature, keypair.Public,
+                    keypair.Secret, message, messageLen);
+            }
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Bindings.Sign(
+                    signature, keypair.Public,
+                    keypair.Secret, message, messageLen);
+            }
 
             return signature;
         }

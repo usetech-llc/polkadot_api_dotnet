@@ -67,6 +67,23 @@ namespace sr25519_dotnet.lib.Interop
         [Out] byte[] keypair_out, byte[] seed);
 
         /// <summary>
+        /// Sign a message. Linux
+        /// </summary>
+        /// <param name="signature_out"></param>
+        /// <param name="public_ptr"></param>
+        /// <param name="secret_ptr"></param>
+        /// <param name="message_ptr"></param>
+        /// <param name="message_length"></param>
+        [DllImport("libsr25519crust",
+            CallingConvention = CallingConvention.Cdecl,
+            ExactSpelling = true,
+            EntryPoint = "sr25519_sign",
+            SetLastError = true)]
+        internal static extern void SignSo(
+            [Out] byte[] signature_out, byte[] public_ptr, byte[] secret_ptr,
+            byte[] message_ptr, ulong message_length);
+
+        /// <summary>
         /// Sign a message.
         /// </summary>
         /// <param name="signature_out"></param>

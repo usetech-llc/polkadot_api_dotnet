@@ -7,10 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="libsr25519crust.so" />
     <None Remove="sr25519crust.dll" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="libsr25519crust.so">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="sr25519crust.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
