@@ -65,9 +65,9 @@
             // build request
             JObject request = JObject.FromObject(
                 new {
-                    id = query.Id, 
-                    jsonrpc = _jsonRpcParams.JsonrpcVersion, 
-                    method = jsonMap["method"], 
+                    id = query.Id,
+                    jsonrpc = _jsonRpcParams.JsonrpcVersion,
+                    method = jsonMap["method"],
                     @params = jsonMap["params"]
                 }
             );
@@ -158,7 +158,7 @@
                 {
                     result = JObject.FromObject(new { result = json["result"].ToString() });
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
                     _logger.Error($"error while processing response: requestId - {requestId};   {json.ToString()}");
                 }

@@ -68,7 +68,7 @@
                 buffer = (new C()).Parse(json);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
