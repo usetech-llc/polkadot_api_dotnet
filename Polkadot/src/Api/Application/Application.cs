@@ -504,18 +504,7 @@
 
         public void UnsubscribeStorage(int id)
         {
-            if (_subscriptionHandlers.ContainsKey(id))
-            {
-                JObject unsubscribeQuery = new JObject { { "method", "state_unsubscribeStorage" }, { "params", new JArray { id } } };
-                _jsonRpc.Request(unsubscribeQuery);
-
-                lock (_subscriptionHandlers)
-                {
-                    _subscriptionHandlers.TryRemove(id, out _);
-                }
-
-                _logger.Info($"Unsubscribed from subscription ID: {id}");
-            }
+            RemoveSubscription(id, "state_subscribeStorage");
         }
 
         public void HandleWsMessage(int subscriptionId, JObject message)
