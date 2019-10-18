@@ -1,6 +1,7 @@
 namespace PolkaTest
 {
     using Polkadot.Api;
+    using System;
     using Xunit;
     using Xunit.Abstractions;
     using Polkadot.Data;
@@ -31,6 +32,8 @@ namespace PolkaTest
                 var actualKey = app.GetKeys(prm.ToString(), module, variable);
 
                 output.WriteLine($"Storage key for prefix {module} {variable} for address {address} : {actualKey}");
+                Console.WriteLine($"\nStorage key for prefix {module} {variable} for address {address} : {actualKey}\n");
+
                 app.Disconnect();
             }
         }

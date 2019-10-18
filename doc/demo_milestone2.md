@@ -26,7 +26,32 @@ Now you are connected to a running docker container with API built. You can exec
 
 #### state_getKeys
 ```
-TBD
+# dotnet test --filter GetKeys
+Test run for /src/PolkaTest/bin/Debug/netcoreapp2.2/PolkaTest.dll(.NETCoreApp,Version=v2.2)
+Microsoft (R) Test Execution Command Line Tool Version 16.2.0-preview-20190606-02
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+2019-10-18 08:16:08.9086|INFO|Polkadot.Logger|Connected to wss://alex.unfrastructure.io/public/ws
+2019-10-18 08:16:09.2710|INFO|Polkadot.Logger|Message body {
+  "id": 1,
+  "jsonrpc": "2.0",
+  "method": "state_getMetadata",
+  "params": []
+}
+2019-10-18 08:16:09.2710|INFO|Polkadot.Logger|Message 1 was sent
+2019-10-18 08:16:10.2364|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":"0x6d65746103441873797374656d1853797374656d012c304163636f756e744e6f6e6365010130543a3a4163636f756e744964.....06f6c64206b657920697320737570706c6965642e","id":1}
+2019-10-18 08:16:10.2434|INFO|Polkadot.Logger|Message received: {"jsonrpc":"2.0","result":"0x6d65746103441873797374656d1853797374656d012c304163636f756e744e6f6e6365010130543a3a4163636f756e744964205.....06f6c64206b657920697320737570706c6965642e","id":1}
+2019-10-18 08:16:11.1379|INFO|Polkadot.Logger|FreeBalance hash function is xxHash
+2019-10-18 08:16:11.1382|INFO|Polkadot.Logger|Balances module index: 5
+2019-10-18 08:16:11.1382|INFO|Polkadot.Logger|Transfer call index: 0
+2019-10-18 08:16:11.4731|INFO|Polkadot.Logger|Connection close
+
+Test Run Successful.
+Total tests: 1
+     Passed: 1
+ Total time: 6.4180 Seconds
+
 ```
 
 #### state_getStorage (and alias state_getStorageAt)
