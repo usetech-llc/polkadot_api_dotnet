@@ -29,10 +29,6 @@ namespace ExtrinsicTest
 
                 using (IApplication app = PolkaApi.GetAppication())
                 {
-
-                    // Submit extrinsic and watch
-                    bool done = false;
-
                     // Receiving address public key
                     var pk = AddressUtils.GetPublicKeyFromAddr(recipientAddr);
 
@@ -43,17 +39,19 @@ namespace ExtrinsicTest
                     pk.Bytes.CopyTo(buf.AsMemory());
                     compactAmount.Bytes.CopyTo(buf.AsMemory(pk.Bytes.Length));
 
-                    var callback = new Action<string>((str) => {
-                        Console.WriteLine($"Response json:  {str}");
-                        done = true;
-                    });
-
                     app.Connect();
-                    var result = app.SubmitAndSubcribeExtrinsic(buf, "balances", "transfer", new Address(senderAddr), senderPrivateKeyStr, callback);
+                    var exHash = app.SubmitExtrinsic(buf, "balances", "transfer", new Address(senderAddr), senderPrivateKeyStr);
 
-                    while (!done)
+                    Console.WriteLine($"Sent extrinsic with hash: {exHash} ");
+                    Console.WriteLine("Now let's try to cancel it... ");
+
+                    try
                     {
-                        Thread.SpinWait(500);
+                        app.RemoveExtrinsic(exHash);
+                    }
+                    catch (ApplicationException)
+                    {
+                        Console.WriteLine("Yeah, looks like canceling is not yet supported");
                     }
 
                     app.Disconnect();
