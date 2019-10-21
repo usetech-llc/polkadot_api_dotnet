@@ -728,7 +728,7 @@
 
             // Copy signature bytes to transaction
             ce.Signature.Sr25519Signature = sig;
-            var length = Consts.DEFAULT_FIXED_EXSTRINSIC_SIZE + encodedMethodBytes.Length;
+            var length = Consts.DEFAULT_FIXED_EXSTRINSIC_SIZE + encodedMethodBytes.Length + compactNonce.Length - 1;
             var compactLength = Scale.EncodeCompactInteger(length);
 
             /////////////////////////////////////////
