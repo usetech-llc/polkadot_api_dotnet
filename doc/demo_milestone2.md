@@ -259,12 +259,22 @@ Change directory to /src/SubmitExtrinsicTest project and execute the following.
 # dotnet build
 # dotnet run <sender address> <recipient address> <amount in fDOTs> <sender private key (hex)>
 
-
-
-
-TBD
-
+...
+2019-10-18 14:24:06.3976|INFO|Polkadot.Logger|Message body {
+  "id": 5,
+  "jsonrpc": "2.0",
+  "method": "author_submitExtrinsic",
+  "params": [
+    "0x350281FFD678B3E00C4238888BBF08DBBE1D7DE77C3F1.....496CB696EB8F2167A2B933620EB6505070010A5D4E8"
+  ]
+}
+2019-10-18 14:24:06.3976|INFO|Polkadot.Logger|Message 5 was sent
+2019-10-18 14:24:06.7787|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","result":"0xb9af12a1043b12b49093d654bf58af6f1aa70e3098b3249766edd6c5359e7e4c","id":5}
+...
 ```
+
+Effectively, SubmitExtrinsic test does the same thing as SignAndSendTransfer, but with a different method. This can be seen in the [code for this test](https://github.com/usetech-llc/polkadot_api_dotnet/blob/master/SubmitExtrinsicTest/Program.cs).
+
 
 #### author_pendingExtrinsics
 
@@ -291,8 +301,35 @@ Length: 163
 ```
 
 #### author_removeExtrinsic
+Seems like this method is currently not supported, so the only result we get is "Method not found":
 ```
-TBD
+# cd /src/RemoveExtrinsicTest/
+# dotnet build
+# dotnet run <sender address> <recipient address> <amount in fDOTs> <sender private key (hex)>
+
+...
+Now let's try to cancel it...
+2019-10-21 12:40:15.7561|INFO|Polkadot.Logger|Message body {
+  "id": 6,
+  "jsonrpc": "2.0",
+  "method": "author_removeExtrinsic",
+  "params": [
+    "{\n  \"result\": \"0xa00f591b1e0c60a09fc6e37bd0687cced73eec7adc637f080a3315c310bc1683\"\n}"
+  ]
+}
+2019-10-21 12:40:15.7561|INFO|Polkadot.Logger|Message 6 was sent
+2019-10-21 12:40:16.0520|INFO|Polkadot.Logger|WS Received Message: {"jsonrpc":"2.0","error":{"code":-32601,"message":"Method not found"},"id":6}
+2019-10-21 12:40:16.0520|INFO|Polkadot.Logger|Message received: {"jsonrpc":"2.0","error":{"code":-32601,"message":"Method not found"},"id":6}
+2019-10-21 12:40:16.0653|ERROR|Polkadot.Logger|error while processing response: requestId - 6;   {
+  "jsonrpc": "2.0",
+  "error": {
+    "code": -32601,
+    "message": "Method not found"
+  },
+  "id": 6
+}
+Yeah, looks like canceling is not yet supported
+...
 ```
 
 
@@ -307,11 +344,14 @@ a312542 - WIP - Milestone 2
 41dca9c - fix UnsubscribeStorage
 e5b780d - Added debug output for acceptance testing
 6833dd8 - Fixed compiler warnings
-
+a005e01 - WIP - milestone deliverables 2
+23f6ab2 - Submit extrinsic nonce length fix
 ```
 
-
 ### API library is packaged as a zip archive with DLL files that can be used without compilation on Windows.
+
+See release files in this repository
+
 
 ## Extra Deliverables
 
