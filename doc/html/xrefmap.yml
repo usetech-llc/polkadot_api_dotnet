@@ -71,6 +71,19 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.Application.Dispose
   nameWithType: Application.Dispose
+- uid: Polkadot.Api.Application.GetAccountNonce(Polkadot.DataStructs.Address)
+  name: GetAccountNonce(Address)
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_GetAccountNonce_Polkadot_DataStructs_Address_
+  commentId: M:Polkadot.Api.Application.GetAccountNonce(Polkadot.DataStructs.Address)
+  fullName: Polkadot.Api.Application.GetAccountNonce(Polkadot.DataStructs.Address)
+  nameWithType: Application.GetAccountNonce(Address)
+- uid: Polkadot.Api.Application.GetAccountNonce*
+  name: GetAccountNonce
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_GetAccountNonce_
+  commentId: Overload:Polkadot.Api.Application.GetAccountNonce
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.GetAccountNonce
+  nameWithType: Application.GetAccountNonce
 - uid: Polkadot.Api.Application.GetBlock(Polkadot.Data.GetBlockParams)
   name: GetBlock(GetBlockParams)
   href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_GetBlock_Polkadot_Data_GetBlockParams_
@@ -266,6 +279,19 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.Application.GetStorageSize
   nameWithType: Application.GetStorageSize
+- uid: Polkadot.Api.Application.GetSystemHealth
+  name: GetSystemHealth()
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_GetSystemHealth
+  commentId: M:Polkadot.Api.Application.GetSystemHealth
+  fullName: Polkadot.Api.Application.GetSystemHealth()
+  nameWithType: Application.GetSystemHealth()
+- uid: Polkadot.Api.Application.GetSystemHealth*
+  name: GetSystemHealth
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_GetSystemHealth_
+  commentId: Overload:Polkadot.Api.Application.GetSystemHealth
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.GetSystemHealth
+  nameWithType: Application.GetSystemHealth
 - uid: Polkadot.Api.Application.GetSystemInfo
   name: GetSystemInfo()
   href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_GetSystemInfo
@@ -279,6 +305,19 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.Application.GetSystemInfo
   nameWithType: Application.GetSystemInfo
+- uid: Polkadot.Api.Application.GetSystemPeers
+  name: GetSystemPeers()
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_GetSystemPeers
+  commentId: M:Polkadot.Api.Application.GetSystemPeers
+  fullName: Polkadot.Api.Application.GetSystemPeers()
+  nameWithType: Application.GetSystemPeers()
+- uid: Polkadot.Api.Application.GetSystemPeers*
+  name: GetSystemPeers
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_GetSystemPeers_
+  commentId: Overload:Polkadot.Api.Application.GetSystemPeers
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.GetSystemPeers
+  nameWithType: Application.GetSystemPeers
 - uid: Polkadot.Api.Application.HandleWsMessage(System.Int32,Newtonsoft.Json.Linq.JObject)
   name: HandleWsMessage(Int32, JObject)
   href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_HandleWsMessage_System_Int32_Newtonsoft_Json_Linq_JObject_
@@ -292,6 +331,19 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.Application.HandleWsMessage
   nameWithType: Application.HandleWsMessage
+- uid: Polkadot.Api.Application.PendingExtrinsics(System.Int32)
+  name: PendingExtrinsics(Int32)
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_PendingExtrinsics_System_Int32_
+  commentId: M:Polkadot.Api.Application.PendingExtrinsics(System.Int32)
+  fullName: Polkadot.Api.Application.PendingExtrinsics(System.Int32)
+  nameWithType: Application.PendingExtrinsics(Int32)
+- uid: Polkadot.Api.Application.PendingExtrinsics*
+  name: PendingExtrinsics
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_PendingExtrinsics_
+  commentId: Overload:Polkadot.Api.Application.PendingExtrinsics
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.PendingExtrinsics
+  nameWithType: Application.PendingExtrinsics
 - uid: Polkadot.Api.Application.QueryStorage(System.String,System.String,System.String,System.Int32)
   name: QueryStorage(String, String, String, Int32)
   href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_QueryStorage_System_String_System_String_System_String_System_Int32_
@@ -305,6 +357,99 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.Application.QueryStorage
   nameWithType: Application.QueryStorage
+- uid: Polkadot.Api.Application.RemoveExtrinsic(System.String)
+  name: RemoveExtrinsic(String)
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_RemoveExtrinsic_System_String_
+  commentId: M:Polkadot.Api.Application.RemoveExtrinsic(System.String)
+  fullName: Polkadot.Api.Application.RemoveExtrinsic(System.String)
+  nameWithType: Application.RemoveExtrinsic(String)
+- uid: Polkadot.Api.Application.RemoveExtrinsic*
+  name: RemoveExtrinsic
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_RemoveExtrinsic_
+  commentId: Overload:Polkadot.Api.Application.RemoveExtrinsic
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.RemoveExtrinsic
+  nameWithType: Application.RemoveExtrinsic
+- uid: Polkadot.Api.Application.SignAndSendTransfer(System.String,System.String,System.String,System.Numerics.BigInteger,System.Action{System.String})
+  name: SignAndSendTransfer(String, String, String, BigInteger, Action<String>)
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SignAndSendTransfer_System_String_System_String_System_String_System_Numerics_BigInteger_System_Action_System_String__
+  commentId: M:Polkadot.Api.Application.SignAndSendTransfer(System.String,System.String,System.String,System.Numerics.BigInteger,System.Action{System.String})
+  name.vb: SignAndSendTransfer(String, String, String, BigInteger, Action(Of String))
+  fullName: Polkadot.Api.Application.SignAndSendTransfer(System.String, System.String, System.String, System.Numerics.BigInteger, System.Action<System.String>)
+  fullName.vb: Polkadot.Api.Application.SignAndSendTransfer(System.String, System.String, System.String, System.Numerics.BigInteger, System.Action(Of System.String))
+  nameWithType: Application.SignAndSendTransfer(String, String, String, BigInteger, Action<String>)
+  nameWithType.vb: Application.SignAndSendTransfer(String, String, String, BigInteger, Action(Of String))
+- uid: Polkadot.Api.Application.SignAndSendTransfer*
+  name: SignAndSendTransfer
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SignAndSendTransfer_
+  commentId: Overload:Polkadot.Api.Application.SignAndSendTransfer
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.SignAndSendTransfer
+  nameWithType: Application.SignAndSendTransfer
+- uid: Polkadot.Api.Application.SubmitAndSubcribeExtrinsic(System.Byte[],System.String,System.String,Polkadot.DataStructs.Address,System.String,System.Action{System.String})
+  name: SubmitAndSubcribeExtrinsic(Byte[], String, String, Address, String, Action<String>)
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SubmitAndSubcribeExtrinsic_System_Byte___System_String_System_String_Polkadot_DataStructs_Address_System_String_System_Action_System_String__
+  commentId: M:Polkadot.Api.Application.SubmitAndSubcribeExtrinsic(System.Byte[],System.String,System.String,Polkadot.DataStructs.Address,System.String,System.Action{System.String})
+  name.vb: SubmitAndSubcribeExtrinsic(Byte(), String, String, Address, String, Action(Of String))
+  fullName: Polkadot.Api.Application.SubmitAndSubcribeExtrinsic(System.Byte[], System.String, System.String, Polkadot.DataStructs.Address, System.String, System.Action<System.String>)
+  fullName.vb: Polkadot.Api.Application.SubmitAndSubcribeExtrinsic(System.Byte(), System.String, System.String, Polkadot.DataStructs.Address, System.String, System.Action(Of System.String))
+  nameWithType: Application.SubmitAndSubcribeExtrinsic(Byte[], String, String, Address, String, Action<String>)
+  nameWithType.vb: Application.SubmitAndSubcribeExtrinsic(Byte(), String, String, Address, String, Action(Of String))
+- uid: Polkadot.Api.Application.SubmitAndSubcribeExtrinsic*
+  name: SubmitAndSubcribeExtrinsic
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SubmitAndSubcribeExtrinsic_
+  commentId: Overload:Polkadot.Api.Application.SubmitAndSubcribeExtrinsic
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.SubmitAndSubcribeExtrinsic
+  nameWithType: Application.SubmitAndSubcribeExtrinsic
+- uid: Polkadot.Api.Application.SubmitExtrinsic(System.Byte[],System.String,System.String,Polkadot.DataStructs.Address,System.String)
+  name: SubmitExtrinsic(Byte[], String, String, Address, String)
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SubmitExtrinsic_System_Byte___System_String_System_String_Polkadot_DataStructs_Address_System_String_
+  commentId: M:Polkadot.Api.Application.SubmitExtrinsic(System.Byte[],System.String,System.String,Polkadot.DataStructs.Address,System.String)
+  name.vb: SubmitExtrinsic(Byte(), String, String, Address, String)
+  fullName: Polkadot.Api.Application.SubmitExtrinsic(System.Byte[], System.String, System.String, Polkadot.DataStructs.Address, System.String)
+  fullName.vb: Polkadot.Api.Application.SubmitExtrinsic(System.Byte(), System.String, System.String, Polkadot.DataStructs.Address, System.String)
+  nameWithType: Application.SubmitExtrinsic(Byte[], String, String, Address, String)
+  nameWithType.vb: Application.SubmitExtrinsic(Byte(), String, String, Address, String)
+- uid: Polkadot.Api.Application.SubmitExtrinsic*
+  name: SubmitExtrinsic
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SubmitExtrinsic_
+  commentId: Overload:Polkadot.Api.Application.SubmitExtrinsic
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.SubmitExtrinsic
+  nameWithType: Application.SubmitExtrinsic
+- uid: Polkadot.Api.Application.SubscribeAccountNonce(Polkadot.DataStructs.Address,System.Action{System.Numerics.BigInteger})
+  name: SubscribeAccountNonce(Address, Action<BigInteger>)
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SubscribeAccountNonce_Polkadot_DataStructs_Address_System_Action_System_Numerics_BigInteger__
+  commentId: M:Polkadot.Api.Application.SubscribeAccountNonce(Polkadot.DataStructs.Address,System.Action{System.Numerics.BigInteger})
+  name.vb: SubscribeAccountNonce(Address, Action(Of BigInteger))
+  fullName: Polkadot.Api.Application.SubscribeAccountNonce(Polkadot.DataStructs.Address, System.Action<System.Numerics.BigInteger>)
+  fullName.vb: Polkadot.Api.Application.SubscribeAccountNonce(Polkadot.DataStructs.Address, System.Action(Of System.Numerics.BigInteger))
+  nameWithType: Application.SubscribeAccountNonce(Address, Action<BigInteger>)
+  nameWithType.vb: Application.SubscribeAccountNonce(Address, Action(Of BigInteger))
+- uid: Polkadot.Api.Application.SubscribeAccountNonce*
+  name: SubscribeAccountNonce
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SubscribeAccountNonce_
+  commentId: Overload:Polkadot.Api.Application.SubscribeAccountNonce
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.SubscribeAccountNonce
+  nameWithType: Application.SubscribeAccountNonce
+- uid: Polkadot.Api.Application.SubscribeBalance(System.String,System.Action{System.Numerics.BigInteger})
+  name: SubscribeBalance(String, Action<BigInteger>)
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SubscribeBalance_System_String_System_Action_System_Numerics_BigInteger__
+  commentId: M:Polkadot.Api.Application.SubscribeBalance(System.String,System.Action{System.Numerics.BigInteger})
+  name.vb: SubscribeBalance(String, Action(Of BigInteger))
+  fullName: Polkadot.Api.Application.SubscribeBalance(System.String, System.Action<System.Numerics.BigInteger>)
+  fullName.vb: Polkadot.Api.Application.SubscribeBalance(System.String, System.Action(Of System.Numerics.BigInteger))
+  nameWithType: Application.SubscribeBalance(String, Action<BigInteger>)
+  nameWithType.vb: Application.SubscribeBalance(String, Action(Of BigInteger))
+- uid: Polkadot.Api.Application.SubscribeBalance*
+  name: SubscribeBalance
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SubscribeBalance_
+  commentId: Overload:Polkadot.Api.Application.SubscribeBalance
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.SubscribeBalance
+  nameWithType: Application.SubscribeBalance
 - uid: Polkadot.Api.Application.SubscribeBlockNumber(System.Action{System.Int64})
   name: SubscribeBlockNumber(Action<Int64>)
   href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SubscribeBlockNumber_System_Action_System_Int64__
@@ -321,6 +466,22 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.Application.SubscribeBlockNumber
   nameWithType: Application.SubscribeBlockNumber
+- uid: Polkadot.Api.Application.SubscribeEraAndSession(System.Action{Polkadot.src.DataStructs.Era,Polkadot.src.DataStructs.SessionOrEpoch})
+  name: SubscribeEraAndSession(Action<Era, SessionOrEpoch>)
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SubscribeEraAndSession_System_Action_Polkadot_src_DataStructs_Era_Polkadot_src_DataStructs_SessionOrEpoch__
+  commentId: M:Polkadot.Api.Application.SubscribeEraAndSession(System.Action{Polkadot.src.DataStructs.Era,Polkadot.src.DataStructs.SessionOrEpoch})
+  name.vb: SubscribeEraAndSession(Action(Of Era, SessionOrEpoch))
+  fullName: Polkadot.Api.Application.SubscribeEraAndSession(System.Action<Polkadot.src.DataStructs.Era, Polkadot.src.DataStructs.SessionOrEpoch>)
+  fullName.vb: Polkadot.Api.Application.SubscribeEraAndSession(System.Action(Of Polkadot.src.DataStructs.Era, Polkadot.src.DataStructs.SessionOrEpoch))
+  nameWithType: Application.SubscribeEraAndSession(Action<Era, SessionOrEpoch>)
+  nameWithType.vb: Application.SubscribeEraAndSession(Action(Of Era, SessionOrEpoch))
+- uid: Polkadot.Api.Application.SubscribeEraAndSession*
+  name: SubscribeEraAndSession
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SubscribeEraAndSession_
+  commentId: Overload:Polkadot.Api.Application.SubscribeEraAndSession
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.SubscribeEraAndSession
+  nameWithType: Application.SubscribeEraAndSession
 - uid: Polkadot.Api.Application.SubscribeRuntimeVersion(System.Action{Polkadot.Data.RuntimeVersion})
   name: SubscribeRuntimeVersion(Action<RuntimeVersion>)
   href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SubscribeRuntimeVersion_System_Action_Polkadot_Data_RuntimeVersion__
@@ -337,6 +498,48 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.Application.SubscribeRuntimeVersion
   nameWithType: Application.SubscribeRuntimeVersion
+- uid: Polkadot.Api.Application.SubscribeStorage(System.String,System.Action{System.String})
+  name: SubscribeStorage(String, Action<String>)
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SubscribeStorage_System_String_System_Action_System_String__
+  commentId: M:Polkadot.Api.Application.SubscribeStorage(System.String,System.Action{System.String})
+  name.vb: SubscribeStorage(String, Action(Of String))
+  fullName: Polkadot.Api.Application.SubscribeStorage(System.String, System.Action<System.String>)
+  fullName.vb: Polkadot.Api.Application.SubscribeStorage(System.String, System.Action(Of System.String))
+  nameWithType: Application.SubscribeStorage(String, Action<String>)
+  nameWithType.vb: Application.SubscribeStorage(String, Action(Of String))
+- uid: Polkadot.Api.Application.SubscribeStorage*
+  name: SubscribeStorage
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_SubscribeStorage_
+  commentId: Overload:Polkadot.Api.Application.SubscribeStorage
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.SubscribeStorage
+  nameWithType: Application.SubscribeStorage
+- uid: Polkadot.Api.Application.UnsubscribeAccountNonce(System.Int32)
+  name: UnsubscribeAccountNonce(Int32)
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_UnsubscribeAccountNonce_System_Int32_
+  commentId: M:Polkadot.Api.Application.UnsubscribeAccountNonce(System.Int32)
+  fullName: Polkadot.Api.Application.UnsubscribeAccountNonce(System.Int32)
+  nameWithType: Application.UnsubscribeAccountNonce(Int32)
+- uid: Polkadot.Api.Application.UnsubscribeAccountNonce*
+  name: UnsubscribeAccountNonce
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_UnsubscribeAccountNonce_
+  commentId: Overload:Polkadot.Api.Application.UnsubscribeAccountNonce
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.UnsubscribeAccountNonce
+  nameWithType: Application.UnsubscribeAccountNonce
+- uid: Polkadot.Api.Application.UnsubscribeBalance(System.Int32)
+  name: UnsubscribeBalance(Int32)
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_UnsubscribeBalance_System_Int32_
+  commentId: M:Polkadot.Api.Application.UnsubscribeBalance(System.Int32)
+  fullName: Polkadot.Api.Application.UnsubscribeBalance(System.Int32)
+  nameWithType: Application.UnsubscribeBalance(Int32)
+- uid: Polkadot.Api.Application.UnsubscribeBalance*
+  name: UnsubscribeBalance
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_UnsubscribeBalance_
+  commentId: Overload:Polkadot.Api.Application.UnsubscribeBalance
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.UnsubscribeBalance
+  nameWithType: Application.UnsubscribeBalance
 - uid: Polkadot.Api.Application.UnsubscribeBlockNumber(System.Int32)
   name: UnsubscribeBlockNumber(Int32)
   href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_UnsubscribeBlockNumber_System_Int32_
@@ -350,6 +553,19 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.Application.UnsubscribeBlockNumber
   nameWithType: Application.UnsubscribeBlockNumber
+- uid: Polkadot.Api.Application.UnsubscribeEraAndSession(System.Int32)
+  name: UnsubscribeEraAndSession(Int32)
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_UnsubscribeEraAndSession_System_Int32_
+  commentId: M:Polkadot.Api.Application.UnsubscribeEraAndSession(System.Int32)
+  fullName: Polkadot.Api.Application.UnsubscribeEraAndSession(System.Int32)
+  nameWithType: Application.UnsubscribeEraAndSession(Int32)
+- uid: Polkadot.Api.Application.UnsubscribeEraAndSession*
+  name: UnsubscribeEraAndSession
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_UnsubscribeEraAndSession_
+  commentId: Overload:Polkadot.Api.Application.UnsubscribeEraAndSession
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.UnsubscribeEraAndSession
+  nameWithType: Application.UnsubscribeEraAndSession
 - uid: Polkadot.Api.Application.UnsubscribeRuntimeVersion(System.Int32)
   name: UnsubscribeRuntimeVersion(Int32)
   href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_UnsubscribeRuntimeVersion_System_Int32_
@@ -363,18 +579,67 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.Application.UnsubscribeRuntimeVersion
   nameWithType: Application.UnsubscribeRuntimeVersion
+- uid: Polkadot.Api.Application.UnsubscribeStorage(System.Int32)
+  name: UnsubscribeStorage(Int32)
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_UnsubscribeStorage_System_Int32_
+  commentId: M:Polkadot.Api.Application.UnsubscribeStorage(System.Int32)
+  fullName: Polkadot.Api.Application.UnsubscribeStorage(System.Int32)
+  nameWithType: Application.UnsubscribeStorage(Int32)
+- uid: Polkadot.Api.Application.UnsubscribeStorage*
+  name: UnsubscribeStorage
+  href: docfx/api/Polkadot.Api.Application.html#Polkadot_Api_Application_UnsubscribeStorage_
+  commentId: Overload:Polkadot.Api.Application.UnsubscribeStorage
+  isSpec: "True"
+  fullName: Polkadot.Api.Application.UnsubscribeStorage
+  nameWithType: Application.UnsubscribeStorage
 - uid: Polkadot.Api.Consts
   name: Consts
   href: docfx/api/Polkadot.Api.Consts.html
   commentId: T:Polkadot.Api.Consts
   fullName: Polkadot.Api.Consts
   nameWithType: Consts
+- uid: Polkadot.Api.Consts.ADDRESS_LENGTH
+  name: ADDRESS_LENGTH
+  href: docfx/api/Polkadot.Api.Consts.html#Polkadot_Api_Consts_ADDRESS_LENGTH
+  commentId: F:Polkadot.Api.Consts.ADDRESS_LENGTH
+  fullName: Polkadot.Api.Consts.ADDRESS_LENGTH
+  nameWithType: Consts.ADDRESS_LENGTH
+- uid: Polkadot.Api.Consts.ADDRESS_SEPARATOR
+  name: ADDRESS_SEPARATOR
+  href: docfx/api/Polkadot.Api.Consts.html#Polkadot_Api_Consts_ADDRESS_SEPARATOR
+  commentId: F:Polkadot.Api.Consts.ADDRESS_SEPARATOR
+  fullName: Polkadot.Api.Consts.ADDRESS_SEPARATOR
+  nameWithType: Consts.ADDRESS_SEPARATOR
+- uid: Polkadot.Api.Consts.BLOCK_HASH_SIZE
+  name: BLOCK_HASH_SIZE
+  href: docfx/api/Polkadot.Api.Consts.html#Polkadot_Api_Consts_BLOCK_HASH_SIZE
+  commentId: F:Polkadot.Api.Consts.BLOCK_HASH_SIZE
+  fullName: Polkadot.Api.Consts.BLOCK_HASH_SIZE
+  nameWithType: Consts.BLOCK_HASH_SIZE
 - uid: Polkadot.Api.Consts.CertFileName
   name: CertFileName
   href: docfx/api/Polkadot.Api.Consts.html#Polkadot_Api_Consts_CertFileName
   commentId: F:Polkadot.Api.Consts.CertFileName
   fullName: Polkadot.Api.Consts.CertFileName
   nameWithType: Consts.CertFileName
+- uid: Polkadot.Api.Consts.DEFAULT_FIXED_EXSTRINSIC_SIZE
+  name: DEFAULT_FIXED_EXSTRINSIC_SIZE
+  href: docfx/api/Polkadot.Api.Consts.html#Polkadot_Api_Consts_DEFAULT_FIXED_EXSTRINSIC_SIZE
+  commentId: F:Polkadot.Api.Consts.DEFAULT_FIXED_EXSTRINSIC_SIZE
+  fullName: Polkadot.Api.Consts.DEFAULT_FIXED_EXSTRINSIC_SIZE
+  nameWithType: Consts.DEFAULT_FIXED_EXSTRINSIC_SIZE
+- uid: Polkadot.Api.Consts.LAST_LENGTH_CHANGE_SUBSCRIPTION
+  name: LAST_LENGTH_CHANGE_SUBSCRIPTION
+  href: docfx/api/Polkadot.Api.Consts.html#Polkadot_Api_Consts_LAST_LENGTH_CHANGE_SUBSCRIPTION
+  commentId: F:Polkadot.Api.Consts.LAST_LENGTH_CHANGE_SUBSCRIPTION
+  fullName: Polkadot.Api.Consts.LAST_LENGTH_CHANGE_SUBSCRIPTION
+  nameWithType: Consts.LAST_LENGTH_CHANGE_SUBSCRIPTION
+- uid: Polkadot.Api.Consts.MAX_METHOD_BYTES_SZ
+  name: MAX_METHOD_BYTES_SZ
+  href: docfx/api/Polkadot.Api.Consts.html#Polkadot_Api_Consts_MAX_METHOD_BYTES_SZ
+  commentId: F:Polkadot.Api.Consts.MAX_METHOD_BYTES_SZ
+  fullName: Polkadot.Api.Consts.MAX_METHOD_BYTES_SZ
+  nameWithType: Consts.MAX_METHOD_BYTES_SZ
 - uid: Polkadot.Api.Consts.PAPI_OK
   name: PAPI_OK
   href: docfx/api/Polkadot.Api.Consts.html#Polkadot_Api_Consts_PAPI_OK
@@ -393,6 +658,30 @@ references:
   commentId: F:Polkadot.Api.Consts.RESPONSE_TIMEOUT_S
   fullName: Polkadot.Api.Consts.RESPONSE_TIMEOUT_S
   nameWithType: Consts.RESPONSE_TIMEOUT_S
+- uid: Polkadot.Api.Consts.SESSION_LENGTH_SUBSCRIPTION
+  name: SESSION_LENGTH_SUBSCRIPTION
+  href: docfx/api/Polkadot.Api.Consts.html#Polkadot_Api_Consts_SESSION_LENGTH_SUBSCRIPTION
+  commentId: F:Polkadot.Api.Consts.SESSION_LENGTH_SUBSCRIPTION
+  fullName: Polkadot.Api.Consts.SESSION_LENGTH_SUBSCRIPTION
+  nameWithType: Consts.SESSION_LENGTH_SUBSCRIPTION
+- uid: Polkadot.Api.Consts.SIGNATURE_VERSION
+  name: SIGNATURE_VERSION
+  href: docfx/api/Polkadot.Api.Consts.html#Polkadot_Api_Consts_SIGNATURE_VERSION
+  commentId: F:Polkadot.Api.Consts.SIGNATURE_VERSION
+  fullName: Polkadot.Api.Consts.SIGNATURE_VERSION
+  nameWithType: Consts.SIGNATURE_VERSION
+- uid: Polkadot.Api.Consts.SR25519_PUBLIC_SIZE
+  name: SR25519_PUBLIC_SIZE
+  href: docfx/api/Polkadot.Api.Consts.html#Polkadot_Api_Consts_SR25519_PUBLIC_SIZE
+  commentId: F:Polkadot.Api.Consts.SR25519_PUBLIC_SIZE
+  fullName: Polkadot.Api.Consts.SR25519_PUBLIC_SIZE
+  nameWithType: Consts.SR25519_PUBLIC_SIZE
+- uid: Polkadot.Api.Consts.SR25519_SIGNATURE_SIZE
+  name: SR25519_SIGNATURE_SIZE
+  href: docfx/api/Polkadot.Api.Consts.html#Polkadot_Api_Consts_SR25519_SIGNATURE_SIZE
+  commentId: F:Polkadot.Api.Consts.SR25519_SIGNATURE_SIZE
+  fullName: Polkadot.Api.Consts.SR25519_SIGNATURE_SIZE
+  nameWithType: Consts.SR25519_SIGNATURE_SIZE
 - uid: Polkadot.Api.Consts.STORAGE_KEY_BYTELENGTH
   name: STORAGE_KEY_BYTELENGTH
   href: docfx/api/Polkadot.Api.Consts.html#Polkadot_Api_Consts_STORAGE_KEY_BYTELENGTH
@@ -459,6 +748,133 @@ references:
   commentId: F:Polkadot.Api.Consts.WssConnectionString
   fullName: Polkadot.Api.Consts.WssConnectionString
   nameWithType: Consts.WssConnectionString
+- uid: Polkadot.Api.Extrinsic
+  name: Extrinsic
+  href: docfx/api/Polkadot.Api.Extrinsic.html
+  commentId: T:Polkadot.Api.Extrinsic
+  fullName: Polkadot.Api.Extrinsic
+  nameWithType: Extrinsic
+- uid: Polkadot.Api.Extrinsic.#ctor
+  name: Extrinsic()
+  href: docfx/api/Polkadot.Api.Extrinsic.html#Polkadot_Api_Extrinsic__ctor
+  commentId: M:Polkadot.Api.Extrinsic.#ctor
+  fullName: Polkadot.Api.Extrinsic.Extrinsic()
+  nameWithType: Extrinsic.Extrinsic()
+- uid: Polkadot.Api.Extrinsic.#ctor*
+  name: Extrinsic
+  href: docfx/api/Polkadot.Api.Extrinsic.html#Polkadot_Api_Extrinsic__ctor_
+  commentId: Overload:Polkadot.Api.Extrinsic.#ctor
+  isSpec: "True"
+  fullName: Polkadot.Api.Extrinsic.Extrinsic
+  nameWithType: Extrinsic.Extrinsic
+- uid: Polkadot.Api.Extrinsic.Length
+  name: Length
+  href: docfx/api/Polkadot.Api.Extrinsic.html#Polkadot_Api_Extrinsic_Length
+  commentId: P:Polkadot.Api.Extrinsic.Length
+  fullName: Polkadot.Api.Extrinsic.Length
+  nameWithType: Extrinsic.Length
+- uid: Polkadot.Api.Extrinsic.Length*
+  name: Length
+  href: docfx/api/Polkadot.Api.Extrinsic.html#Polkadot_Api_Extrinsic_Length_
+  commentId: Overload:Polkadot.Api.Extrinsic.Length
+  isSpec: "True"
+  fullName: Polkadot.Api.Extrinsic.Length
+  nameWithType: Extrinsic.Length
+- uid: Polkadot.Api.Extrinsic.Signature
+  name: Signature
+  href: docfx/api/Polkadot.Api.Extrinsic.html#Polkadot_Api_Extrinsic_Signature
+  commentId: P:Polkadot.Api.Extrinsic.Signature
+  fullName: Polkadot.Api.Extrinsic.Signature
+  nameWithType: Extrinsic.Signature
+- uid: Polkadot.Api.Extrinsic.Signature*
+  name: Signature
+  href: docfx/api/Polkadot.Api.Extrinsic.html#Polkadot_Api_Extrinsic_Signature_
+  commentId: Overload:Polkadot.Api.Extrinsic.Signature
+  isSpec: "True"
+  fullName: Polkadot.Api.Extrinsic.Signature
+  nameWithType: Extrinsic.Signature
+- uid: Polkadot.Api.ExtrinsicEra
+  name: ExtrinsicEra
+  href: docfx/api/Polkadot.Api.ExtrinsicEra.html
+  commentId: T:Polkadot.Api.ExtrinsicEra
+  fullName: Polkadot.Api.ExtrinsicEra
+  nameWithType: ExtrinsicEra
+- uid: Polkadot.Api.ExtrinsicEra.IMMORTAL_ERA
+  name: IMMORTAL_ERA
+  href: docfx/api/Polkadot.Api.ExtrinsicEra.html#Polkadot_Api_ExtrinsicEra_IMMORTAL_ERA
+  commentId: F:Polkadot.Api.ExtrinsicEra.IMMORTAL_ERA
+  fullName: Polkadot.Api.ExtrinsicEra.IMMORTAL_ERA
+  nameWithType: ExtrinsicEra.IMMORTAL_ERA
+- uid: Polkadot.Api.ExtrinsicEra.MORTAL_ERA
+  name: MORTAL_ERA
+  href: docfx/api/Polkadot.Api.ExtrinsicEra.html#Polkadot_Api_ExtrinsicEra_MORTAL_ERA
+  commentId: F:Polkadot.Api.ExtrinsicEra.MORTAL_ERA
+  fullName: Polkadot.Api.ExtrinsicEra.MORTAL_ERA
+  nameWithType: ExtrinsicEra.MORTAL_ERA
+- uid: Polkadot.Api.GenericExtrinsic
+  name: GenericExtrinsic
+  href: docfx/api/Polkadot.Api.GenericExtrinsic.html
+  commentId: T:Polkadot.Api.GenericExtrinsic
+  fullName: Polkadot.Api.GenericExtrinsic
+  nameWithType: GenericExtrinsic
+- uid: Polkadot.Api.GenericExtrinsic.#ctor
+  name: GenericExtrinsic()
+  href: docfx/api/Polkadot.Api.GenericExtrinsic.html#Polkadot_Api_GenericExtrinsic__ctor
+  commentId: M:Polkadot.Api.GenericExtrinsic.#ctor
+  fullName: Polkadot.Api.GenericExtrinsic.GenericExtrinsic()
+  nameWithType: GenericExtrinsic.GenericExtrinsic()
+- uid: Polkadot.Api.GenericExtrinsic.#ctor*
+  name: GenericExtrinsic
+  href: docfx/api/Polkadot.Api.GenericExtrinsic.html#Polkadot_Api_GenericExtrinsic__ctor_
+  commentId: Overload:Polkadot.Api.GenericExtrinsic.#ctor
+  isSpec: "True"
+  fullName: Polkadot.Api.GenericExtrinsic.GenericExtrinsic
+  nameWithType: GenericExtrinsic.GenericExtrinsic
+- uid: Polkadot.Api.GenericExtrinsic.Method
+  name: Method
+  href: docfx/api/Polkadot.Api.GenericExtrinsic.html#Polkadot_Api_GenericExtrinsic_Method
+  commentId: P:Polkadot.Api.GenericExtrinsic.Method
+  fullName: Polkadot.Api.GenericExtrinsic.Method
+  nameWithType: GenericExtrinsic.Method
+- uid: Polkadot.Api.GenericExtrinsic.Method*
+  name: Method
+  href: docfx/api/Polkadot.Api.GenericExtrinsic.html#Polkadot_Api_GenericExtrinsic_Method_
+  commentId: Overload:Polkadot.Api.GenericExtrinsic.Method
+  isSpec: "True"
+  fullName: Polkadot.Api.GenericExtrinsic.Method
+  nameWithType: GenericExtrinsic.Method
+- uid: Polkadot.Api.GenericExtrinsic.SignerAddress
+  name: SignerAddress
+  href: docfx/api/Polkadot.Api.GenericExtrinsic.html#Polkadot_Api_GenericExtrinsic_SignerAddress
+  commentId: P:Polkadot.Api.GenericExtrinsic.SignerAddress
+  fullName: Polkadot.Api.GenericExtrinsic.SignerAddress
+  nameWithType: GenericExtrinsic.SignerAddress
+- uid: Polkadot.Api.GenericExtrinsic.SignerAddress*
+  name: SignerAddress
+  href: docfx/api/Polkadot.Api.GenericExtrinsic.html#Polkadot_Api_GenericExtrinsic_SignerAddress_
+  commentId: Overload:Polkadot.Api.GenericExtrinsic.SignerAddress
+  isSpec: "True"
+  fullName: Polkadot.Api.GenericExtrinsic.SignerAddress
+  nameWithType: GenericExtrinsic.SignerAddress
+- uid: Polkadot.Api.GenericMethod
+  name: GenericMethod
+  href: docfx/api/Polkadot.Api.GenericMethod.html
+  commentId: T:Polkadot.Api.GenericMethod
+  fullName: Polkadot.Api.GenericMethod
+  nameWithType: GenericMethod
+- uid: Polkadot.Api.GenericMethod.MethodBytes
+  name: MethodBytes
+  href: docfx/api/Polkadot.Api.GenericMethod.html#Polkadot_Api_GenericMethod_MethodBytes
+  commentId: P:Polkadot.Api.GenericMethod.MethodBytes
+  fullName: Polkadot.Api.GenericMethod.MethodBytes
+  nameWithType: GenericMethod.MethodBytes
+- uid: Polkadot.Api.GenericMethod.MethodBytes*
+  name: MethodBytes
+  href: docfx/api/Polkadot.Api.GenericMethod.html#Polkadot_Api_GenericMethod_MethodBytes_
+  commentId: Overload:Polkadot.Api.GenericMethod.MethodBytes
+  isSpec: "True"
+  fullName: Polkadot.Api.GenericMethod.MethodBytes
+  nameWithType: GenericMethod.MethodBytes
 - uid: Polkadot.Api.IApplication
   name: IApplication
   href: docfx/api/Polkadot.Api.IApplication.html
@@ -491,6 +907,19 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.IApplication.Disconnect
   nameWithType: IApplication.Disconnect
+- uid: Polkadot.Api.IApplication.GetAccountNonce(Polkadot.DataStructs.Address)
+  name: GetAccountNonce(Address)
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_GetAccountNonce_Polkadot_DataStructs_Address_
+  commentId: M:Polkadot.Api.IApplication.GetAccountNonce(Polkadot.DataStructs.Address)
+  fullName: Polkadot.Api.IApplication.GetAccountNonce(Polkadot.DataStructs.Address)
+  nameWithType: IApplication.GetAccountNonce(Address)
+- uid: Polkadot.Api.IApplication.GetAccountNonce*
+  name: GetAccountNonce
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_GetAccountNonce_
+  commentId: Overload:Polkadot.Api.IApplication.GetAccountNonce
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.GetAccountNonce
+  nameWithType: IApplication.GetAccountNonce
 - uid: Polkadot.Api.IApplication.GetBlock(Polkadot.Data.GetBlockParams)
   name: GetBlock(GetBlockParams)
   href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_GetBlock_Polkadot_Data_GetBlockParams_
@@ -686,6 +1115,19 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.IApplication.GetStorageSize
   nameWithType: IApplication.GetStorageSize
+- uid: Polkadot.Api.IApplication.GetSystemHealth
+  name: GetSystemHealth()
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_GetSystemHealth
+  commentId: M:Polkadot.Api.IApplication.GetSystemHealth
+  fullName: Polkadot.Api.IApplication.GetSystemHealth()
+  nameWithType: IApplication.GetSystemHealth()
+- uid: Polkadot.Api.IApplication.GetSystemHealth*
+  name: GetSystemHealth
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_GetSystemHealth_
+  commentId: Overload:Polkadot.Api.IApplication.GetSystemHealth
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.GetSystemHealth
+  nameWithType: IApplication.GetSystemHealth
 - uid: Polkadot.Api.IApplication.GetSystemInfo
   name: GetSystemInfo()
   href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_GetSystemInfo
@@ -699,6 +1141,32 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.IApplication.GetSystemInfo
   nameWithType: IApplication.GetSystemInfo
+- uid: Polkadot.Api.IApplication.GetSystemPeers
+  name: GetSystemPeers()
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_GetSystemPeers
+  commentId: M:Polkadot.Api.IApplication.GetSystemPeers
+  fullName: Polkadot.Api.IApplication.GetSystemPeers()
+  nameWithType: IApplication.GetSystemPeers()
+- uid: Polkadot.Api.IApplication.GetSystemPeers*
+  name: GetSystemPeers
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_GetSystemPeers_
+  commentId: Overload:Polkadot.Api.IApplication.GetSystemPeers
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.GetSystemPeers
+  nameWithType: IApplication.GetSystemPeers
+- uid: Polkadot.Api.IApplication.PendingExtrinsics(System.Int32)
+  name: PendingExtrinsics(Int32)
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_PendingExtrinsics_System_Int32_
+  commentId: M:Polkadot.Api.IApplication.PendingExtrinsics(System.Int32)
+  fullName: Polkadot.Api.IApplication.PendingExtrinsics(System.Int32)
+  nameWithType: IApplication.PendingExtrinsics(Int32)
+- uid: Polkadot.Api.IApplication.PendingExtrinsics*
+  name: PendingExtrinsics
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_PendingExtrinsics_
+  commentId: Overload:Polkadot.Api.IApplication.PendingExtrinsics
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.PendingExtrinsics
+  nameWithType: IApplication.PendingExtrinsics
 - uid: Polkadot.Api.IApplication.QueryStorage(System.String,System.String,System.String,System.Int32)
   name: QueryStorage(String, String, String, Int32)
   href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_QueryStorage_System_String_System_String_System_String_System_Int32_
@@ -712,6 +1180,99 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.IApplication.QueryStorage
   nameWithType: IApplication.QueryStorage
+- uid: Polkadot.Api.IApplication.RemoveExtrinsic(System.String)
+  name: RemoveExtrinsic(String)
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_RemoveExtrinsic_System_String_
+  commentId: M:Polkadot.Api.IApplication.RemoveExtrinsic(System.String)
+  fullName: Polkadot.Api.IApplication.RemoveExtrinsic(System.String)
+  nameWithType: IApplication.RemoveExtrinsic(String)
+- uid: Polkadot.Api.IApplication.RemoveExtrinsic*
+  name: RemoveExtrinsic
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_RemoveExtrinsic_
+  commentId: Overload:Polkadot.Api.IApplication.RemoveExtrinsic
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.RemoveExtrinsic
+  nameWithType: IApplication.RemoveExtrinsic
+- uid: Polkadot.Api.IApplication.SignAndSendTransfer(System.String,System.String,System.String,System.Numerics.BigInteger,System.Action{System.String})
+  name: SignAndSendTransfer(String, String, String, BigInteger, Action<String>)
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SignAndSendTransfer_System_String_System_String_System_String_System_Numerics_BigInteger_System_Action_System_String__
+  commentId: M:Polkadot.Api.IApplication.SignAndSendTransfer(System.String,System.String,System.String,System.Numerics.BigInteger,System.Action{System.String})
+  name.vb: SignAndSendTransfer(String, String, String, BigInteger, Action(Of String))
+  fullName: Polkadot.Api.IApplication.SignAndSendTransfer(System.String, System.String, System.String, System.Numerics.BigInteger, System.Action<System.String>)
+  fullName.vb: Polkadot.Api.IApplication.SignAndSendTransfer(System.String, System.String, System.String, System.Numerics.BigInteger, System.Action(Of System.String))
+  nameWithType: IApplication.SignAndSendTransfer(String, String, String, BigInteger, Action<String>)
+  nameWithType.vb: IApplication.SignAndSendTransfer(String, String, String, BigInteger, Action(Of String))
+- uid: Polkadot.Api.IApplication.SignAndSendTransfer*
+  name: SignAndSendTransfer
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SignAndSendTransfer_
+  commentId: Overload:Polkadot.Api.IApplication.SignAndSendTransfer
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.SignAndSendTransfer
+  nameWithType: IApplication.SignAndSendTransfer
+- uid: Polkadot.Api.IApplication.SubmitAndSubcribeExtrinsic(System.Byte[],System.String,System.String,Polkadot.DataStructs.Address,System.String,System.Action{System.String})
+  name: SubmitAndSubcribeExtrinsic(Byte[], String, String, Address, String, Action<String>)
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubmitAndSubcribeExtrinsic_System_Byte___System_String_System_String_Polkadot_DataStructs_Address_System_String_System_Action_System_String__
+  commentId: M:Polkadot.Api.IApplication.SubmitAndSubcribeExtrinsic(System.Byte[],System.String,System.String,Polkadot.DataStructs.Address,System.String,System.Action{System.String})
+  name.vb: SubmitAndSubcribeExtrinsic(Byte(), String, String, Address, String, Action(Of String))
+  fullName: Polkadot.Api.IApplication.SubmitAndSubcribeExtrinsic(System.Byte[], System.String, System.String, Polkadot.DataStructs.Address, System.String, System.Action<System.String>)
+  fullName.vb: Polkadot.Api.IApplication.SubmitAndSubcribeExtrinsic(System.Byte(), System.String, System.String, Polkadot.DataStructs.Address, System.String, System.Action(Of System.String))
+  nameWithType: IApplication.SubmitAndSubcribeExtrinsic(Byte[], String, String, Address, String, Action<String>)
+  nameWithType.vb: IApplication.SubmitAndSubcribeExtrinsic(Byte(), String, String, Address, String, Action(Of String))
+- uid: Polkadot.Api.IApplication.SubmitAndSubcribeExtrinsic*
+  name: SubmitAndSubcribeExtrinsic
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubmitAndSubcribeExtrinsic_
+  commentId: Overload:Polkadot.Api.IApplication.SubmitAndSubcribeExtrinsic
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.SubmitAndSubcribeExtrinsic
+  nameWithType: IApplication.SubmitAndSubcribeExtrinsic
+- uid: Polkadot.Api.IApplication.SubmitExtrinsic(System.Byte[],System.String,System.String,Polkadot.DataStructs.Address,System.String)
+  name: SubmitExtrinsic(Byte[], String, String, Address, String)
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubmitExtrinsic_System_Byte___System_String_System_String_Polkadot_DataStructs_Address_System_String_
+  commentId: M:Polkadot.Api.IApplication.SubmitExtrinsic(System.Byte[],System.String,System.String,Polkadot.DataStructs.Address,System.String)
+  name.vb: SubmitExtrinsic(Byte(), String, String, Address, String)
+  fullName: Polkadot.Api.IApplication.SubmitExtrinsic(System.Byte[], System.String, System.String, Polkadot.DataStructs.Address, System.String)
+  fullName.vb: Polkadot.Api.IApplication.SubmitExtrinsic(System.Byte(), System.String, System.String, Polkadot.DataStructs.Address, System.String)
+  nameWithType: IApplication.SubmitExtrinsic(Byte[], String, String, Address, String)
+  nameWithType.vb: IApplication.SubmitExtrinsic(Byte(), String, String, Address, String)
+- uid: Polkadot.Api.IApplication.SubmitExtrinsic*
+  name: SubmitExtrinsic
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubmitExtrinsic_
+  commentId: Overload:Polkadot.Api.IApplication.SubmitExtrinsic
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.SubmitExtrinsic
+  nameWithType: IApplication.SubmitExtrinsic
+- uid: Polkadot.Api.IApplication.SubscribeAccountNonce(Polkadot.DataStructs.Address,System.Action{System.Numerics.BigInteger})
+  name: SubscribeAccountNonce(Address, Action<BigInteger>)
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubscribeAccountNonce_Polkadot_DataStructs_Address_System_Action_System_Numerics_BigInteger__
+  commentId: M:Polkadot.Api.IApplication.SubscribeAccountNonce(Polkadot.DataStructs.Address,System.Action{System.Numerics.BigInteger})
+  name.vb: SubscribeAccountNonce(Address, Action(Of BigInteger))
+  fullName: Polkadot.Api.IApplication.SubscribeAccountNonce(Polkadot.DataStructs.Address, System.Action<System.Numerics.BigInteger>)
+  fullName.vb: Polkadot.Api.IApplication.SubscribeAccountNonce(Polkadot.DataStructs.Address, System.Action(Of System.Numerics.BigInteger))
+  nameWithType: IApplication.SubscribeAccountNonce(Address, Action<BigInteger>)
+  nameWithType.vb: IApplication.SubscribeAccountNonce(Address, Action(Of BigInteger))
+- uid: Polkadot.Api.IApplication.SubscribeAccountNonce*
+  name: SubscribeAccountNonce
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubscribeAccountNonce_
+  commentId: Overload:Polkadot.Api.IApplication.SubscribeAccountNonce
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.SubscribeAccountNonce
+  nameWithType: IApplication.SubscribeAccountNonce
+- uid: Polkadot.Api.IApplication.SubscribeBalance(System.String,System.Action{System.Numerics.BigInteger})
+  name: SubscribeBalance(String, Action<BigInteger>)
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubscribeBalance_System_String_System_Action_System_Numerics_BigInteger__
+  commentId: M:Polkadot.Api.IApplication.SubscribeBalance(System.String,System.Action{System.Numerics.BigInteger})
+  name.vb: SubscribeBalance(String, Action(Of BigInteger))
+  fullName: Polkadot.Api.IApplication.SubscribeBalance(System.String, System.Action<System.Numerics.BigInteger>)
+  fullName.vb: Polkadot.Api.IApplication.SubscribeBalance(System.String, System.Action(Of System.Numerics.BigInteger))
+  nameWithType: IApplication.SubscribeBalance(String, Action<BigInteger>)
+  nameWithType.vb: IApplication.SubscribeBalance(String, Action(Of BigInteger))
+- uid: Polkadot.Api.IApplication.SubscribeBalance*
+  name: SubscribeBalance
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubscribeBalance_
+  commentId: Overload:Polkadot.Api.IApplication.SubscribeBalance
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.SubscribeBalance
+  nameWithType: IApplication.SubscribeBalance
 - uid: Polkadot.Api.IApplication.SubscribeBlockNumber(System.Action{System.Int64})
   name: SubscribeBlockNumber(Action<Int64>)
   href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubscribeBlockNumber_System_Action_System_Int64__
@@ -728,6 +1289,22 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.IApplication.SubscribeBlockNumber
   nameWithType: IApplication.SubscribeBlockNumber
+- uid: Polkadot.Api.IApplication.SubscribeEraAndSession(System.Action{Polkadot.src.DataStructs.Era,Polkadot.src.DataStructs.SessionOrEpoch})
+  name: SubscribeEraAndSession(Action<Era, SessionOrEpoch>)
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubscribeEraAndSession_System_Action_Polkadot_src_DataStructs_Era_Polkadot_src_DataStructs_SessionOrEpoch__
+  commentId: M:Polkadot.Api.IApplication.SubscribeEraAndSession(System.Action{Polkadot.src.DataStructs.Era,Polkadot.src.DataStructs.SessionOrEpoch})
+  name.vb: SubscribeEraAndSession(Action(Of Era, SessionOrEpoch))
+  fullName: Polkadot.Api.IApplication.SubscribeEraAndSession(System.Action<Polkadot.src.DataStructs.Era, Polkadot.src.DataStructs.SessionOrEpoch>)
+  fullName.vb: Polkadot.Api.IApplication.SubscribeEraAndSession(System.Action(Of Polkadot.src.DataStructs.Era, Polkadot.src.DataStructs.SessionOrEpoch))
+  nameWithType: IApplication.SubscribeEraAndSession(Action<Era, SessionOrEpoch>)
+  nameWithType.vb: IApplication.SubscribeEraAndSession(Action(Of Era, SessionOrEpoch))
+- uid: Polkadot.Api.IApplication.SubscribeEraAndSession*
+  name: SubscribeEraAndSession
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubscribeEraAndSession_
+  commentId: Overload:Polkadot.Api.IApplication.SubscribeEraAndSession
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.SubscribeEraAndSession
+  nameWithType: IApplication.SubscribeEraAndSession
 - uid: Polkadot.Api.IApplication.SubscribeRuntimeVersion(System.Action{Polkadot.Data.RuntimeVersion})
   name: SubscribeRuntimeVersion(Action<RuntimeVersion>)
   href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubscribeRuntimeVersion_System_Action_Polkadot_Data_RuntimeVersion__
@@ -744,6 +1321,48 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.IApplication.SubscribeRuntimeVersion
   nameWithType: IApplication.SubscribeRuntimeVersion
+- uid: Polkadot.Api.IApplication.SubscribeStorage(System.String,System.Action{System.String})
+  name: SubscribeStorage(String, Action<String>)
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubscribeStorage_System_String_System_Action_System_String__
+  commentId: M:Polkadot.Api.IApplication.SubscribeStorage(System.String,System.Action{System.String})
+  name.vb: SubscribeStorage(String, Action(Of String))
+  fullName: Polkadot.Api.IApplication.SubscribeStorage(System.String, System.Action<System.String>)
+  fullName.vb: Polkadot.Api.IApplication.SubscribeStorage(System.String, System.Action(Of System.String))
+  nameWithType: IApplication.SubscribeStorage(String, Action<String>)
+  nameWithType.vb: IApplication.SubscribeStorage(String, Action(Of String))
+- uid: Polkadot.Api.IApplication.SubscribeStorage*
+  name: SubscribeStorage
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_SubscribeStorage_
+  commentId: Overload:Polkadot.Api.IApplication.SubscribeStorage
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.SubscribeStorage
+  nameWithType: IApplication.SubscribeStorage
+- uid: Polkadot.Api.IApplication.UnsubscribeAccountNonce(System.Int32)
+  name: UnsubscribeAccountNonce(Int32)
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_UnsubscribeAccountNonce_System_Int32_
+  commentId: M:Polkadot.Api.IApplication.UnsubscribeAccountNonce(System.Int32)
+  fullName: Polkadot.Api.IApplication.UnsubscribeAccountNonce(System.Int32)
+  nameWithType: IApplication.UnsubscribeAccountNonce(Int32)
+- uid: Polkadot.Api.IApplication.UnsubscribeAccountNonce*
+  name: UnsubscribeAccountNonce
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_UnsubscribeAccountNonce_
+  commentId: Overload:Polkadot.Api.IApplication.UnsubscribeAccountNonce
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.UnsubscribeAccountNonce
+  nameWithType: IApplication.UnsubscribeAccountNonce
+- uid: Polkadot.Api.IApplication.UnsubscribeBalance(System.Int32)
+  name: UnsubscribeBalance(Int32)
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_UnsubscribeBalance_System_Int32_
+  commentId: M:Polkadot.Api.IApplication.UnsubscribeBalance(System.Int32)
+  fullName: Polkadot.Api.IApplication.UnsubscribeBalance(System.Int32)
+  nameWithType: IApplication.UnsubscribeBalance(Int32)
+- uid: Polkadot.Api.IApplication.UnsubscribeBalance*
+  name: UnsubscribeBalance
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_UnsubscribeBalance_
+  commentId: Overload:Polkadot.Api.IApplication.UnsubscribeBalance
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.UnsubscribeBalance
+  nameWithType: IApplication.UnsubscribeBalance
 - uid: Polkadot.Api.IApplication.UnsubscribeBlockNumber(System.Int32)
   name: UnsubscribeBlockNumber(Int32)
   href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_UnsubscribeBlockNumber_System_Int32_
@@ -757,6 +1376,19 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.IApplication.UnsubscribeBlockNumber
   nameWithType: IApplication.UnsubscribeBlockNumber
+- uid: Polkadot.Api.IApplication.UnsubscribeEraAndSession(System.Int32)
+  name: UnsubscribeEraAndSession(Int32)
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_UnsubscribeEraAndSession_System_Int32_
+  commentId: M:Polkadot.Api.IApplication.UnsubscribeEraAndSession(System.Int32)
+  fullName: Polkadot.Api.IApplication.UnsubscribeEraAndSession(System.Int32)
+  nameWithType: IApplication.UnsubscribeEraAndSession(Int32)
+- uid: Polkadot.Api.IApplication.UnsubscribeEraAndSession*
+  name: UnsubscribeEraAndSession
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_UnsubscribeEraAndSession_
+  commentId: Overload:Polkadot.Api.IApplication.UnsubscribeEraAndSession
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.UnsubscribeEraAndSession
+  nameWithType: IApplication.UnsubscribeEraAndSession
 - uid: Polkadot.Api.IApplication.UnsubscribeRuntimeVersion(System.Int32)
   name: UnsubscribeRuntimeVersion(Int32)
   href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_UnsubscribeRuntimeVersion_System_Int32_
@@ -770,6 +1402,19 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.IApplication.UnsubscribeRuntimeVersion
   nameWithType: IApplication.UnsubscribeRuntimeVersion
+- uid: Polkadot.Api.IApplication.UnsubscribeStorage(System.Int32)
+  name: UnsubscribeStorage(Int32)
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_UnsubscribeStorage_System_Int32_
+  commentId: M:Polkadot.Api.IApplication.UnsubscribeStorage(System.Int32)
+  fullName: Polkadot.Api.IApplication.UnsubscribeStorage(System.Int32)
+  nameWithType: IApplication.UnsubscribeStorage(Int32)
+- uid: Polkadot.Api.IApplication.UnsubscribeStorage*
+  name: UnsubscribeStorage
+  href: docfx/api/Polkadot.Api.IApplication.html#Polkadot_Api_IApplication_UnsubscribeStorage_
+  commentId: Overload:Polkadot.Api.IApplication.UnsubscribeStorage
+  isSpec: "True"
+  fullName: Polkadot.Api.IApplication.UnsubscribeStorage
+  nameWithType: IApplication.UnsubscribeStorage
 - uid: Polkadot.Api.IJsonRpc
   name: IJsonRpc
   href: docfx/api/Polkadot.Api.IJsonRpc.html
@@ -1130,6 +1775,77 @@ references:
   isSpec: "True"
   fullName: Polkadot.Api.PolkaApi.GetAppication
   nameWithType: PolkaApi.GetAppication
+- uid: Polkadot.Api.Signature
+  name: Signature
+  href: docfx/api/Polkadot.Api.Signature.html
+  commentId: T:Polkadot.Api.Signature
+  fullName: Polkadot.Api.Signature
+  nameWithType: Signature
+- uid: Polkadot.Api.Signature.Era
+  name: Era
+  href: docfx/api/Polkadot.Api.Signature.html#Polkadot_Api_Signature_Era
+  commentId: P:Polkadot.Api.Signature.Era
+  fullName: Polkadot.Api.Signature.Era
+  nameWithType: Signature.Era
+- uid: Polkadot.Api.Signature.Era*
+  name: Era
+  href: docfx/api/Polkadot.Api.Signature.html#Polkadot_Api_Signature_Era_
+  commentId: Overload:Polkadot.Api.Signature.Era
+  isSpec: "True"
+  fullName: Polkadot.Api.Signature.Era
+  nameWithType: Signature.Era
+- uid: Polkadot.Api.Signature.Nonce
+  name: Nonce
+  href: docfx/api/Polkadot.Api.Signature.html#Polkadot_Api_Signature_Nonce
+  commentId: P:Polkadot.Api.Signature.Nonce
+  fullName: Polkadot.Api.Signature.Nonce
+  nameWithType: Signature.Nonce
+- uid: Polkadot.Api.Signature.Nonce*
+  name: Nonce
+  href: docfx/api/Polkadot.Api.Signature.html#Polkadot_Api_Signature_Nonce_
+  commentId: Overload:Polkadot.Api.Signature.Nonce
+  isSpec: "True"
+  fullName: Polkadot.Api.Signature.Nonce
+  nameWithType: Signature.Nonce
+- uid: Polkadot.Api.Signature.SignerPublicKey
+  name: SignerPublicKey
+  href: docfx/api/Polkadot.Api.Signature.html#Polkadot_Api_Signature_SignerPublicKey
+  commentId: P:Polkadot.Api.Signature.SignerPublicKey
+  fullName: Polkadot.Api.Signature.SignerPublicKey
+  nameWithType: Signature.SignerPublicKey
+- uid: Polkadot.Api.Signature.SignerPublicKey*
+  name: SignerPublicKey
+  href: docfx/api/Polkadot.Api.Signature.html#Polkadot_Api_Signature_SignerPublicKey_
+  commentId: Overload:Polkadot.Api.Signature.SignerPublicKey
+  isSpec: "True"
+  fullName: Polkadot.Api.Signature.SignerPublicKey
+  nameWithType: Signature.SignerPublicKey
+- uid: Polkadot.Api.Signature.Sr25519Signature
+  name: Sr25519Signature
+  href: docfx/api/Polkadot.Api.Signature.html#Polkadot_Api_Signature_Sr25519Signature
+  commentId: P:Polkadot.Api.Signature.Sr25519Signature
+  fullName: Polkadot.Api.Signature.Sr25519Signature
+  nameWithType: Signature.Sr25519Signature
+- uid: Polkadot.Api.Signature.Sr25519Signature*
+  name: Sr25519Signature
+  href: docfx/api/Polkadot.Api.Signature.html#Polkadot_Api_Signature_Sr25519Signature_
+  commentId: Overload:Polkadot.Api.Signature.Sr25519Signature
+  isSpec: "True"
+  fullName: Polkadot.Api.Signature.Sr25519Signature
+  nameWithType: Signature.Sr25519Signature
+- uid: Polkadot.Api.Signature.Version
+  name: Version
+  href: docfx/api/Polkadot.Api.Signature.html#Polkadot_Api_Signature_Version
+  commentId: P:Polkadot.Api.Signature.Version
+  fullName: Polkadot.Api.Signature.Version
+  nameWithType: Signature.Version
+- uid: Polkadot.Api.Signature.Version*
+  name: Version
+  href: docfx/api/Polkadot.Api.Signature.html#Polkadot_Api_Signature_Version_
+  commentId: Overload:Polkadot.Api.Signature.Version
+  isSpec: "True"
+  fullName: Polkadot.Api.Signature.Version
+  nameWithType: Signature.Version
 - uid: Polkadot.Api.Wsclient
   name: Wsclient
   href: docfx/api/Polkadot.Api.Wsclient.html
@@ -1387,6 +2103,154 @@ references:
   isSpec: "True"
   fullName: Polkadot.Data.BlockHeader.StateRoot
   nameWithType: BlockHeader.StateRoot
+- uid: Polkadot.Data.ConnectedPeer
+  name: ConnectedPeer
+  href: docfx/api/Polkadot.Data.ConnectedPeer.html
+  commentId: T:Polkadot.Data.ConnectedPeer
+  fullName: Polkadot.Data.ConnectedPeer
+  nameWithType: ConnectedPeer
+- uid: Polkadot.Data.ConnectedPeer.ConnectedPeerInfo
+  name: ConnectedPeerInfo
+  href: docfx/api/Polkadot.Data.ConnectedPeer.html#Polkadot_Data_ConnectedPeer_ConnectedPeerInfo
+  commentId: P:Polkadot.Data.ConnectedPeer.ConnectedPeerInfo
+  fullName: Polkadot.Data.ConnectedPeer.ConnectedPeerInfo
+  nameWithType: ConnectedPeer.ConnectedPeerInfo
+- uid: Polkadot.Data.ConnectedPeer.ConnectedPeerInfo*
+  name: ConnectedPeerInfo
+  href: docfx/api/Polkadot.Data.ConnectedPeer.html#Polkadot_Data_ConnectedPeer_ConnectedPeerInfo_
+  commentId: Overload:Polkadot.Data.ConnectedPeer.ConnectedPeerInfo
+  isSpec: "True"
+  fullName: Polkadot.Data.ConnectedPeer.ConnectedPeerInfo
+  nameWithType: ConnectedPeer.ConnectedPeerInfo
+- uid: Polkadot.Data.ConnectedPeer.Key
+  name: Key
+  href: docfx/api/Polkadot.Data.ConnectedPeer.html#Polkadot_Data_ConnectedPeer_Key
+  commentId: P:Polkadot.Data.ConnectedPeer.Key
+  fullName: Polkadot.Data.ConnectedPeer.Key
+  nameWithType: ConnectedPeer.Key
+- uid: Polkadot.Data.ConnectedPeer.Key*
+  name: Key
+  href: docfx/api/Polkadot.Data.ConnectedPeer.html#Polkadot_Data_ConnectedPeer_Key_
+  commentId: Overload:Polkadot.Data.ConnectedPeer.Key
+  isSpec: "True"
+  fullName: Polkadot.Data.ConnectedPeer.Key
+  nameWithType: ConnectedPeer.Key
+- uid: Polkadot.Data.ConnectedPeerInfo
+  name: ConnectedPeerInfo
+  href: docfx/api/Polkadot.Data.ConnectedPeerInfo.html
+  commentId: T:Polkadot.Data.ConnectedPeerInfo
+  fullName: Polkadot.Data.ConnectedPeerInfo
+  nameWithType: ConnectedPeerInfo
+- uid: Polkadot.Data.ConnectedPeerInfo.Enabled
+  name: Enabled
+  href: docfx/api/Polkadot.Data.ConnectedPeerInfo.html#Polkadot_Data_ConnectedPeerInfo_Enabled
+  commentId: P:Polkadot.Data.ConnectedPeerInfo.Enabled
+  fullName: Polkadot.Data.ConnectedPeerInfo.Enabled
+  nameWithType: ConnectedPeerInfo.Enabled
+- uid: Polkadot.Data.ConnectedPeerInfo.Enabled*
+  name: Enabled
+  href: docfx/api/Polkadot.Data.ConnectedPeerInfo.html#Polkadot_Data_ConnectedPeerInfo_Enabled_
+  commentId: Overload:Polkadot.Data.ConnectedPeerInfo.Enabled
+  isSpec: "True"
+  fullName: Polkadot.Data.ConnectedPeerInfo.Enabled
+  nameWithType: ConnectedPeerInfo.Enabled
+- uid: Polkadot.Data.ConnectedPeerInfo.Endpoint
+  name: Endpoint
+  href: docfx/api/Polkadot.Data.ConnectedPeerInfo.html#Polkadot_Data_ConnectedPeerInfo_Endpoint
+  commentId: P:Polkadot.Data.ConnectedPeerInfo.Endpoint
+  fullName: Polkadot.Data.ConnectedPeerInfo.Endpoint
+  nameWithType: ConnectedPeerInfo.Endpoint
+- uid: Polkadot.Data.ConnectedPeerInfo.Endpoint*
+  name: Endpoint
+  href: docfx/api/Polkadot.Data.ConnectedPeerInfo.html#Polkadot_Data_ConnectedPeerInfo_Endpoint_
+  commentId: Overload:Polkadot.Data.ConnectedPeerInfo.Endpoint
+  isSpec: "True"
+  fullName: Polkadot.Data.ConnectedPeerInfo.Endpoint
+  nameWithType: ConnectedPeerInfo.Endpoint
+- uid: Polkadot.Data.ConnectedPeerInfo.KnownAddresses
+  name: KnownAddresses
+  href: docfx/api/Polkadot.Data.ConnectedPeerInfo.html#Polkadot_Data_ConnectedPeerInfo_KnownAddresses
+  commentId: P:Polkadot.Data.ConnectedPeerInfo.KnownAddresses
+  fullName: Polkadot.Data.ConnectedPeerInfo.KnownAddresses
+  nameWithType: ConnectedPeerInfo.KnownAddresses
+- uid: Polkadot.Data.ConnectedPeerInfo.KnownAddresses*
+  name: KnownAddresses
+  href: docfx/api/Polkadot.Data.ConnectedPeerInfo.html#Polkadot_Data_ConnectedPeerInfo_KnownAddresses_
+  commentId: Overload:Polkadot.Data.ConnectedPeerInfo.KnownAddresses
+  isSpec: "True"
+  fullName: Polkadot.Data.ConnectedPeerInfo.KnownAddresses
+  nameWithType: ConnectedPeerInfo.KnownAddresses
+- uid: Polkadot.Data.ConnectedPeerInfo.LatestPingTime
+  name: LatestPingTime
+  href: docfx/api/Polkadot.Data.ConnectedPeerInfo.html#Polkadot_Data_ConnectedPeerInfo_LatestPingTime
+  commentId: P:Polkadot.Data.ConnectedPeerInfo.LatestPingTime
+  fullName: Polkadot.Data.ConnectedPeerInfo.LatestPingTime
+  nameWithType: ConnectedPeerInfo.LatestPingTime
+- uid: Polkadot.Data.ConnectedPeerInfo.LatestPingTime*
+  name: LatestPingTime
+  href: docfx/api/Polkadot.Data.ConnectedPeerInfo.html#Polkadot_Data_ConnectedPeerInfo_LatestPingTime_
+  commentId: Overload:Polkadot.Data.ConnectedPeerInfo.LatestPingTime
+  isSpec: "True"
+  fullName: Polkadot.Data.ConnectedPeerInfo.LatestPingTime
+  nameWithType: ConnectedPeerInfo.LatestPingTime
+- uid: Polkadot.Data.ConnectedPeerInfo.Open
+  name: Open
+  href: docfx/api/Polkadot.Data.ConnectedPeerInfo.html#Polkadot_Data_ConnectedPeerInfo_Open
+  commentId: P:Polkadot.Data.ConnectedPeerInfo.Open
+  fullName: Polkadot.Data.ConnectedPeerInfo.Open
+  nameWithType: ConnectedPeerInfo.Open
+- uid: Polkadot.Data.ConnectedPeerInfo.Open*
+  name: Open
+  href: docfx/api/Polkadot.Data.ConnectedPeerInfo.html#Polkadot_Data_ConnectedPeerInfo_Open_
+  commentId: Overload:Polkadot.Data.ConnectedPeerInfo.Open
+  isSpec: "True"
+  fullName: Polkadot.Data.ConnectedPeerInfo.Open
+  nameWithType: ConnectedPeerInfo.Open
+- uid: Polkadot.Data.ConnectedPeerInfo.VersionString
+  name: VersionString
+  href: docfx/api/Polkadot.Data.ConnectedPeerInfo.html#Polkadot_Data_ConnectedPeerInfo_VersionString
+  commentId: P:Polkadot.Data.ConnectedPeerInfo.VersionString
+  fullName: Polkadot.Data.ConnectedPeerInfo.VersionString
+  nameWithType: ConnectedPeerInfo.VersionString
+- uid: Polkadot.Data.ConnectedPeerInfo.VersionString*
+  name: VersionString
+  href: docfx/api/Polkadot.Data.ConnectedPeerInfo.html#Polkadot_Data_ConnectedPeerInfo_VersionString_
+  commentId: Overload:Polkadot.Data.ConnectedPeerInfo.VersionString
+  isSpec: "True"
+  fullName: Polkadot.Data.ConnectedPeerInfo.VersionString
+  nameWithType: ConnectedPeerInfo.VersionString
+- uid: Polkadot.Data.ConnectedPeerTime
+  name: ConnectedPeerTime
+  href: docfx/api/Polkadot.Data.ConnectedPeerTime.html
+  commentId: T:Polkadot.Data.ConnectedPeerTime
+  fullName: Polkadot.Data.ConnectedPeerTime
+  nameWithType: ConnectedPeerTime
+- uid: Polkadot.Data.ConnectedPeerTime.Nanos
+  name: Nanos
+  href: docfx/api/Polkadot.Data.ConnectedPeerTime.html#Polkadot_Data_ConnectedPeerTime_Nanos
+  commentId: P:Polkadot.Data.ConnectedPeerTime.Nanos
+  fullName: Polkadot.Data.ConnectedPeerTime.Nanos
+  nameWithType: ConnectedPeerTime.Nanos
+- uid: Polkadot.Data.ConnectedPeerTime.Nanos*
+  name: Nanos
+  href: docfx/api/Polkadot.Data.ConnectedPeerTime.html#Polkadot_Data_ConnectedPeerTime_Nanos_
+  commentId: Overload:Polkadot.Data.ConnectedPeerTime.Nanos
+  isSpec: "True"
+  fullName: Polkadot.Data.ConnectedPeerTime.Nanos
+  nameWithType: ConnectedPeerTime.Nanos
+- uid: Polkadot.Data.ConnectedPeerTime.Secs
+  name: Secs
+  href: docfx/api/Polkadot.Data.ConnectedPeerTime.html#Polkadot_Data_ConnectedPeerTime_Secs
+  commentId: P:Polkadot.Data.ConnectedPeerTime.Secs
+  fullName: Polkadot.Data.ConnectedPeerTime.Secs
+  nameWithType: ConnectedPeerTime.Secs
+- uid: Polkadot.Data.ConnectedPeerTime.Secs*
+  name: Secs
+  href: docfx/api/Polkadot.Data.ConnectedPeerTime.html#Polkadot_Data_ConnectedPeerTime_Secs_
+  commentId: Overload:Polkadot.Data.ConnectedPeerTime.Secs
+  isSpec: "True"
+  fullName: Polkadot.Data.ConnectedPeerTime.Secs
+  nameWithType: ConnectedPeerTime.Secs
 - uid: Polkadot.Data.DigestItem
   name: DigestItem
   href: docfx/api/Polkadot.Data.DigestItem.html
@@ -1467,6 +2331,25 @@ references:
   commentId: F:Polkadot.Data.DigestItemKey.SealV0
   fullName: Polkadot.Data.DigestItemKey.SealV0
   nameWithType: DigestItemKey.SealV0
+- uid: Polkadot.Data.Endpoint
+  name: Endpoint
+  href: docfx/api/Polkadot.Data.Endpoint.html
+  commentId: T:Polkadot.Data.Endpoint
+  fullName: Polkadot.Data.Endpoint
+  nameWithType: Endpoint
+- uid: Polkadot.Data.Endpoint.Dialing
+  name: Dialing
+  href: docfx/api/Polkadot.Data.Endpoint.html#Polkadot_Data_Endpoint_Dialing
+  commentId: P:Polkadot.Data.Endpoint.Dialing
+  fullName: Polkadot.Data.Endpoint.Dialing
+  nameWithType: Endpoint.Dialing
+- uid: Polkadot.Data.Endpoint.Dialing*
+  name: Dialing
+  href: docfx/api/Polkadot.Data.Endpoint.html#Polkadot_Data_Endpoint_Dialing_
+  commentId: Overload:Polkadot.Data.Endpoint.Dialing
+  isSpec: "True"
+  fullName: Polkadot.Data.Endpoint.Dialing
+  nameWithType: Endpoint.Dialing
 - uid: Polkadot.Data.FinalHead
   name: FinalHead
   href: docfx/api/Polkadot.Data.FinalHead.html
@@ -1561,6 +2444,264 @@ references:
   commentId: T:Polkadot.Data.NetworkState
   fullName: Polkadot.Data.NetworkState
   nameWithType: NetworkState
+- uid: Polkadot.Data.NetworkState.AverageDownloadPerSec
+  name: AverageDownloadPerSec
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_AverageDownloadPerSec
+  commentId: P:Polkadot.Data.NetworkState.AverageDownloadPerSec
+  fullName: Polkadot.Data.NetworkState.AverageDownloadPerSec
+  nameWithType: NetworkState.AverageDownloadPerSec
+- uid: Polkadot.Data.NetworkState.AverageDownloadPerSec*
+  name: AverageDownloadPerSec
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_AverageDownloadPerSec_
+  commentId: Overload:Polkadot.Data.NetworkState.AverageDownloadPerSec
+  isSpec: "True"
+  fullName: Polkadot.Data.NetworkState.AverageDownloadPerSec
+  nameWithType: NetworkState.AverageDownloadPerSec
+- uid: Polkadot.Data.NetworkState.AverageUploadPerSec
+  name: AverageUploadPerSec
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_AverageUploadPerSec
+  commentId: P:Polkadot.Data.NetworkState.AverageUploadPerSec
+  fullName: Polkadot.Data.NetworkState.AverageUploadPerSec
+  nameWithType: NetworkState.AverageUploadPerSec
+- uid: Polkadot.Data.NetworkState.AverageUploadPerSec*
+  name: AverageUploadPerSec
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_AverageUploadPerSec_
+  commentId: Overload:Polkadot.Data.NetworkState.AverageUploadPerSec
+  isSpec: "True"
+  fullName: Polkadot.Data.NetworkState.AverageUploadPerSec
+  nameWithType: NetworkState.AverageUploadPerSec
+- uid: Polkadot.Data.NetworkState.ConnectedPeers
+  name: ConnectedPeers
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_ConnectedPeers
+  commentId: P:Polkadot.Data.NetworkState.ConnectedPeers
+  fullName: Polkadot.Data.NetworkState.ConnectedPeers
+  nameWithType: NetworkState.ConnectedPeers
+- uid: Polkadot.Data.NetworkState.ConnectedPeers*
+  name: ConnectedPeers
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_ConnectedPeers_
+  commentId: Overload:Polkadot.Data.NetworkState.ConnectedPeers
+  isSpec: "True"
+  fullName: Polkadot.Data.NetworkState.ConnectedPeers
+  nameWithType: NetworkState.ConnectedPeers
+- uid: Polkadot.Data.NetworkState.ExternalAddresses
+  name: ExternalAddresses
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_ExternalAddresses
+  commentId: P:Polkadot.Data.NetworkState.ExternalAddresses
+  fullName: Polkadot.Data.NetworkState.ExternalAddresses
+  nameWithType: NetworkState.ExternalAddresses
+- uid: Polkadot.Data.NetworkState.ExternalAddresses*
+  name: ExternalAddresses
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_ExternalAddresses_
+  commentId: Overload:Polkadot.Data.NetworkState.ExternalAddresses
+  isSpec: "True"
+  fullName: Polkadot.Data.NetworkState.ExternalAddresses
+  nameWithType: NetworkState.ExternalAddresses
+- uid: Polkadot.Data.NetworkState.ListenedAddresses
+  name: ListenedAddresses
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_ListenedAddresses
+  commentId: P:Polkadot.Data.NetworkState.ListenedAddresses
+  fullName: Polkadot.Data.NetworkState.ListenedAddresses
+  nameWithType: NetworkState.ListenedAddresses
+- uid: Polkadot.Data.NetworkState.ListenedAddresses*
+  name: ListenedAddresses
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_ListenedAddresses_
+  commentId: Overload:Polkadot.Data.NetworkState.ListenedAddresses
+  isSpec: "True"
+  fullName: Polkadot.Data.NetworkState.ListenedAddresses
+  nameWithType: NetworkState.ListenedAddresses
+- uid: Polkadot.Data.NetworkState.NotConnectedPeers
+  name: NotConnectedPeers
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_NotConnectedPeers
+  commentId: P:Polkadot.Data.NetworkState.NotConnectedPeers
+  fullName: Polkadot.Data.NetworkState.NotConnectedPeers
+  nameWithType: NetworkState.NotConnectedPeers
+- uid: Polkadot.Data.NetworkState.NotConnectedPeers*
+  name: NotConnectedPeers
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_NotConnectedPeers_
+  commentId: Overload:Polkadot.Data.NetworkState.NotConnectedPeers
+  isSpec: "True"
+  fullName: Polkadot.Data.NetworkState.NotConnectedPeers
+  nameWithType: NetworkState.NotConnectedPeers
+- uid: Polkadot.Data.NetworkState.PeerId
+  name: PeerId
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_PeerId
+  commentId: P:Polkadot.Data.NetworkState.PeerId
+  fullName: Polkadot.Data.NetworkState.PeerId
+  nameWithType: NetworkState.PeerId
+- uid: Polkadot.Data.NetworkState.PeerId*
+  name: PeerId
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_PeerId_
+  commentId: Overload:Polkadot.Data.NetworkState.PeerId
+  isSpec: "True"
+  fullName: Polkadot.Data.NetworkState.PeerId
+  nameWithType: NetworkState.PeerId
+- uid: Polkadot.Data.NetworkState.Peerset
+  name: Peerset
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_Peerset
+  commentId: P:Polkadot.Data.NetworkState.Peerset
+  fullName: Polkadot.Data.NetworkState.Peerset
+  nameWithType: NetworkState.Peerset
+- uid: Polkadot.Data.NetworkState.Peerset*
+  name: Peerset
+  href: docfx/api/Polkadot.Data.NetworkState.html#Polkadot_Data_NetworkState_Peerset_
+  commentId: Overload:Polkadot.Data.NetworkState.Peerset
+  isSpec: "True"
+  fullName: Polkadot.Data.NetworkState.Peerset
+  nameWithType: NetworkState.Peerset
+- uid: Polkadot.Data.NotConnectedPeer
+  name: NotConnectedPeer
+  href: docfx/api/Polkadot.Data.NotConnectedPeer.html
+  commentId: T:Polkadot.Data.NotConnectedPeer
+  fullName: Polkadot.Data.NotConnectedPeer
+  nameWithType: NotConnectedPeer
+- uid: Polkadot.Data.NotConnectedPeer.Key
+  name: Key
+  href: docfx/api/Polkadot.Data.NotConnectedPeer.html#Polkadot_Data_NotConnectedPeer_Key
+  commentId: P:Polkadot.Data.NotConnectedPeer.Key
+  fullName: Polkadot.Data.NotConnectedPeer.Key
+  nameWithType: NotConnectedPeer.Key
+- uid: Polkadot.Data.NotConnectedPeer.Key*
+  name: Key
+  href: docfx/api/Polkadot.Data.NotConnectedPeer.html#Polkadot_Data_NotConnectedPeer_Key_
+  commentId: Overload:Polkadot.Data.NotConnectedPeer.Key
+  isSpec: "True"
+  fullName: Polkadot.Data.NotConnectedPeer.Key
+  nameWithType: NotConnectedPeer.Key
+- uid: Polkadot.Data.NotConnectedPeer.NotConnectedPeerInfo
+  name: NotConnectedPeerInfo
+  href: docfx/api/Polkadot.Data.NotConnectedPeer.html#Polkadot_Data_NotConnectedPeer_NotConnectedPeerInfo
+  commentId: P:Polkadot.Data.NotConnectedPeer.NotConnectedPeerInfo
+  fullName: Polkadot.Data.NotConnectedPeer.NotConnectedPeerInfo
+  nameWithType: NotConnectedPeer.NotConnectedPeerInfo
+- uid: Polkadot.Data.NotConnectedPeer.NotConnectedPeerInfo*
+  name: NotConnectedPeerInfo
+  href: docfx/api/Polkadot.Data.NotConnectedPeer.html#Polkadot_Data_NotConnectedPeer_NotConnectedPeerInfo_
+  commentId: Overload:Polkadot.Data.NotConnectedPeer.NotConnectedPeerInfo
+  isSpec: "True"
+  fullName: Polkadot.Data.NotConnectedPeer.NotConnectedPeerInfo
+  nameWithType: NotConnectedPeer.NotConnectedPeerInfo
+- uid: Polkadot.Data.NotConnectedPeerInfo
+  name: NotConnectedPeerInfo
+  href: docfx/api/Polkadot.Data.NotConnectedPeerInfo.html
+  commentId: T:Polkadot.Data.NotConnectedPeerInfo
+  fullName: Polkadot.Data.NotConnectedPeerInfo
+  nameWithType: NotConnectedPeerInfo
+- uid: Polkadot.Data.NotConnectedPeerInfo.KnownAddresses
+  name: KnownAddresses
+  href: docfx/api/Polkadot.Data.NotConnectedPeerInfo.html#Polkadot_Data_NotConnectedPeerInfo_KnownAddresses
+  commentId: P:Polkadot.Data.NotConnectedPeerInfo.KnownAddresses
+  fullName: Polkadot.Data.NotConnectedPeerInfo.KnownAddresses
+  nameWithType: NotConnectedPeerInfo.KnownAddresses
+- uid: Polkadot.Data.NotConnectedPeerInfo.KnownAddresses*
+  name: KnownAddresses
+  href: docfx/api/Polkadot.Data.NotConnectedPeerInfo.html#Polkadot_Data_NotConnectedPeerInfo_KnownAddresses_
+  commentId: Overload:Polkadot.Data.NotConnectedPeerInfo.KnownAddresses
+  isSpec: "True"
+  fullName: Polkadot.Data.NotConnectedPeerInfo.KnownAddresses
+  nameWithType: NotConnectedPeerInfo.KnownAddresses
+- uid: Polkadot.Data.PeerInfo
+  name: PeerInfo
+  href: docfx/api/Polkadot.Data.PeerInfo.html
+  commentId: T:Polkadot.Data.PeerInfo
+  fullName: Polkadot.Data.PeerInfo
+  nameWithType: PeerInfo
+- uid: Polkadot.Data.PeerInfo.BestHash
+  name: BestHash
+  href: docfx/api/Polkadot.Data.PeerInfo.html#Polkadot_Data_PeerInfo_BestHash
+  commentId: P:Polkadot.Data.PeerInfo.BestHash
+  fullName: Polkadot.Data.PeerInfo.BestHash
+  nameWithType: PeerInfo.BestHash
+- uid: Polkadot.Data.PeerInfo.BestHash*
+  name: BestHash
+  href: docfx/api/Polkadot.Data.PeerInfo.html#Polkadot_Data_PeerInfo_BestHash_
+  commentId: Overload:Polkadot.Data.PeerInfo.BestHash
+  isSpec: "True"
+  fullName: Polkadot.Data.PeerInfo.BestHash
+  nameWithType: PeerInfo.BestHash
+- uid: Polkadot.Data.PeerInfo.BestNumber
+  name: BestNumber
+  href: docfx/api/Polkadot.Data.PeerInfo.html#Polkadot_Data_PeerInfo_BestNumber
+  commentId: P:Polkadot.Data.PeerInfo.BestNumber
+  fullName: Polkadot.Data.PeerInfo.BestNumber
+  nameWithType: PeerInfo.BestNumber
+- uid: Polkadot.Data.PeerInfo.BestNumber*
+  name: BestNumber
+  href: docfx/api/Polkadot.Data.PeerInfo.html#Polkadot_Data_PeerInfo_BestNumber_
+  commentId: Overload:Polkadot.Data.PeerInfo.BestNumber
+  isSpec: "True"
+  fullName: Polkadot.Data.PeerInfo.BestNumber
+  nameWithType: PeerInfo.BestNumber
+- uid: Polkadot.Data.PeerInfo.PeerId
+  name: PeerId
+  href: docfx/api/Polkadot.Data.PeerInfo.html#Polkadot_Data_PeerInfo_PeerId
+  commentId: P:Polkadot.Data.PeerInfo.PeerId
+  fullName: Polkadot.Data.PeerInfo.PeerId
+  nameWithType: PeerInfo.PeerId
+- uid: Polkadot.Data.PeerInfo.PeerId*
+  name: PeerId
+  href: docfx/api/Polkadot.Data.PeerInfo.html#Polkadot_Data_PeerInfo_PeerId_
+  commentId: Overload:Polkadot.Data.PeerInfo.PeerId
+  isSpec: "True"
+  fullName: Polkadot.Data.PeerInfo.PeerId
+  nameWithType: PeerInfo.PeerId
+- uid: Polkadot.Data.PeerInfo.ProtocolVersion
+  name: ProtocolVersion
+  href: docfx/api/Polkadot.Data.PeerInfo.html#Polkadot_Data_PeerInfo_ProtocolVersion
+  commentId: P:Polkadot.Data.PeerInfo.ProtocolVersion
+  fullName: Polkadot.Data.PeerInfo.ProtocolVersion
+  nameWithType: PeerInfo.ProtocolVersion
+- uid: Polkadot.Data.PeerInfo.ProtocolVersion*
+  name: ProtocolVersion
+  href: docfx/api/Polkadot.Data.PeerInfo.html#Polkadot_Data_PeerInfo_ProtocolVersion_
+  commentId: Overload:Polkadot.Data.PeerInfo.ProtocolVersion
+  isSpec: "True"
+  fullName: Polkadot.Data.PeerInfo.ProtocolVersion
+  nameWithType: PeerInfo.ProtocolVersion
+- uid: Polkadot.Data.PeerInfo.Roles
+  name: Roles
+  href: docfx/api/Polkadot.Data.PeerInfo.html#Polkadot_Data_PeerInfo_Roles
+  commentId: P:Polkadot.Data.PeerInfo.Roles
+  fullName: Polkadot.Data.PeerInfo.Roles
+  nameWithType: PeerInfo.Roles
+- uid: Polkadot.Data.PeerInfo.Roles*
+  name: Roles
+  href: docfx/api/Polkadot.Data.PeerInfo.html#Polkadot_Data_PeerInfo_Roles_
+  commentId: Overload:Polkadot.Data.PeerInfo.Roles
+  isSpec: "True"
+  fullName: Polkadot.Data.PeerInfo.Roles
+  nameWithType: PeerInfo.Roles
+- uid: Polkadot.Data.PeersInfo
+  name: PeersInfo
+  href: docfx/api/Polkadot.Data.PeersInfo.html
+  commentId: T:Polkadot.Data.PeersInfo
+  fullName: Polkadot.Data.PeersInfo
+  nameWithType: PeersInfo
+- uid: Polkadot.Data.PeersInfo.Count
+  name: Count
+  href: docfx/api/Polkadot.Data.PeersInfo.html#Polkadot_Data_PeersInfo_Count
+  commentId: P:Polkadot.Data.PeersInfo.Count
+  fullName: Polkadot.Data.PeersInfo.Count
+  nameWithType: PeersInfo.Count
+- uid: Polkadot.Data.PeersInfo.Count*
+  name: Count
+  href: docfx/api/Polkadot.Data.PeersInfo.html#Polkadot_Data_PeersInfo_Count_
+  commentId: Overload:Polkadot.Data.PeersInfo.Count
+  isSpec: "True"
+  fullName: Polkadot.Data.PeersInfo.Count
+  nameWithType: PeersInfo.Count
+- uid: Polkadot.Data.PeersInfo.Peers
+  name: Peers
+  href: docfx/api/Polkadot.Data.PeersInfo.html#Polkadot_Data_PeersInfo_Peers
+  commentId: P:Polkadot.Data.PeersInfo.Peers
+  fullName: Polkadot.Data.PeersInfo.Peers
+  nameWithType: PeersInfo.Peers
+- uid: Polkadot.Data.PeersInfo.Peers*
+  name: Peers
+  href: docfx/api/Polkadot.Data.PeersInfo.html#Polkadot_Data_PeersInfo_Peers_
+  commentId: Overload:Polkadot.Data.PeersInfo.Peers
+  isSpec: "True"
+  fullName: Polkadot.Data.PeersInfo.Peers
+  nameWithType: PeersInfo.Peers
 - uid: Polkadot.Data.RuntimeVersion
   name: RuntimeVersion
   href: docfx/api/Polkadot.Data.RuntimeVersion.html
@@ -1722,6 +2863,51 @@ references:
   isSpec: "True"
   fullName: Polkadot.Data.StorageItem.Value
   nameWithType: StorageItem.Value
+- uid: Polkadot.Data.SystemHealth
+  name: SystemHealth
+  href: docfx/api/Polkadot.Data.SystemHealth.html
+  commentId: T:Polkadot.Data.SystemHealth
+  fullName: Polkadot.Data.SystemHealth
+  nameWithType: SystemHealth
+- uid: Polkadot.Data.SystemHealth.IsSyncing
+  name: IsSyncing
+  href: docfx/api/Polkadot.Data.SystemHealth.html#Polkadot_Data_SystemHealth_IsSyncing
+  commentId: P:Polkadot.Data.SystemHealth.IsSyncing
+  fullName: Polkadot.Data.SystemHealth.IsSyncing
+  nameWithType: SystemHealth.IsSyncing
+- uid: Polkadot.Data.SystemHealth.IsSyncing*
+  name: IsSyncing
+  href: docfx/api/Polkadot.Data.SystemHealth.html#Polkadot_Data_SystemHealth_IsSyncing_
+  commentId: Overload:Polkadot.Data.SystemHealth.IsSyncing
+  isSpec: "True"
+  fullName: Polkadot.Data.SystemHealth.IsSyncing
+  nameWithType: SystemHealth.IsSyncing
+- uid: Polkadot.Data.SystemHealth.Peers
+  name: Peers
+  href: docfx/api/Polkadot.Data.SystemHealth.html#Polkadot_Data_SystemHealth_Peers
+  commentId: P:Polkadot.Data.SystemHealth.Peers
+  fullName: Polkadot.Data.SystemHealth.Peers
+  nameWithType: SystemHealth.Peers
+- uid: Polkadot.Data.SystemHealth.Peers*
+  name: Peers
+  href: docfx/api/Polkadot.Data.SystemHealth.html#Polkadot_Data_SystemHealth_Peers_
+  commentId: Overload:Polkadot.Data.SystemHealth.Peers
+  isSpec: "True"
+  fullName: Polkadot.Data.SystemHealth.Peers
+  nameWithType: SystemHealth.Peers
+- uid: Polkadot.Data.SystemHealth.ShouldHavePeers
+  name: ShouldHavePeers
+  href: docfx/api/Polkadot.Data.SystemHealth.html#Polkadot_Data_SystemHealth_ShouldHavePeers
+  commentId: P:Polkadot.Data.SystemHealth.ShouldHavePeers
+  fullName: Polkadot.Data.SystemHealth.ShouldHavePeers
+  nameWithType: SystemHealth.ShouldHavePeers
+- uid: Polkadot.Data.SystemHealth.ShouldHavePeers*
+  name: ShouldHavePeers
+  href: docfx/api/Polkadot.Data.SystemHealth.html#Polkadot_Data_SystemHealth_ShouldHavePeers_
+  commentId: Overload:Polkadot.Data.SystemHealth.ShouldHavePeers
+  isSpec: "True"
+  fullName: Polkadot.Data.SystemHealth.ShouldHavePeers
+  nameWithType: SystemHealth.ShouldHavePeers
 - uid: Polkadot.Data.SystemInfo
   name: SystemInfo
   href: docfx/api/Polkadot.Data.SystemInfo.html
@@ -1850,6 +3036,44 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataFactory.Metadata.ParseMetadataV4.Parse
   nameWithType: ParseMetadataV4.Parse
+- uid: Polkadot.DataFactory.Metadata.ParseMetadataV7
+  name: ParseMetadataV7
+  href: docfx/api/Polkadot.DataFactory.Metadata.ParseMetadataV7.html
+  commentId: T:Polkadot.DataFactory.Metadata.ParseMetadataV7
+  fullName: Polkadot.DataFactory.Metadata.ParseMetadataV7
+  nameWithType: ParseMetadataV7
+- uid: Polkadot.DataFactory.Metadata.ParseMetadataV7.Parse(Newtonsoft.Json.Linq.JObject)
+  name: Parse(JObject)
+  href: docfx/api/Polkadot.DataFactory.Metadata.ParseMetadataV7.html#Polkadot_DataFactory_Metadata_ParseMetadataV7_Parse_Newtonsoft_Json_Linq_JObject_
+  commentId: M:Polkadot.DataFactory.Metadata.ParseMetadataV7.Parse(Newtonsoft.Json.Linq.JObject)
+  fullName: Polkadot.DataFactory.Metadata.ParseMetadataV7.Parse(Newtonsoft.Json.Linq.JObject)
+  nameWithType: ParseMetadataV7.Parse(JObject)
+- uid: Polkadot.DataFactory.Metadata.ParseMetadataV7.Parse*
+  name: Parse
+  href: docfx/api/Polkadot.DataFactory.Metadata.ParseMetadataV7.html#Polkadot_DataFactory_Metadata_ParseMetadataV7_Parse_
+  commentId: Overload:Polkadot.DataFactory.Metadata.ParseMetadataV7.Parse
+  isSpec: "True"
+  fullName: Polkadot.DataFactory.Metadata.ParseMetadataV7.Parse
+  nameWithType: ParseMetadataV7.Parse
+- uid: Polkadot.DataFactory.Metadata.ParseMetadataV8
+  name: ParseMetadataV8
+  href: docfx/api/Polkadot.DataFactory.Metadata.ParseMetadataV8.html
+  commentId: T:Polkadot.DataFactory.Metadata.ParseMetadataV8
+  fullName: Polkadot.DataFactory.Metadata.ParseMetadataV8
+  nameWithType: ParseMetadataV8
+- uid: Polkadot.DataFactory.Metadata.ParseMetadataV8.Parse(Newtonsoft.Json.Linq.JObject)
+  name: Parse(JObject)
+  href: docfx/api/Polkadot.DataFactory.Metadata.ParseMetadataV8.html#Polkadot_DataFactory_Metadata_ParseMetadataV8_Parse_Newtonsoft_Json_Linq_JObject_
+  commentId: M:Polkadot.DataFactory.Metadata.ParseMetadataV8.Parse(Newtonsoft.Json.Linq.JObject)
+  fullName: Polkadot.DataFactory.Metadata.ParseMetadataV8.Parse(Newtonsoft.Json.Linq.JObject)
+  nameWithType: ParseMetadataV8.Parse(JObject)
+- uid: Polkadot.DataFactory.Metadata.ParseMetadataV8.Parse*
+  name: Parse
+  href: docfx/api/Polkadot.DataFactory.Metadata.ParseMetadataV8.html#Polkadot_DataFactory_Metadata_ParseMetadataV8_Parse_
+  commentId: Overload:Polkadot.DataFactory.Metadata.ParseMetadataV8.Parse
+  isSpec: "True"
+  fullName: Polkadot.DataFactory.Metadata.ParseMetadataV8.Parse
+  nameWithType: ParseMetadataV8.Parse
 - uid: Polkadot.DataFactory.ParseBlock
   name: ParseBlock
   href: docfx/api/Polkadot.DataFactory.ParseBlock.html
@@ -1926,6 +3150,44 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataFactory.ParseFinalizedHead.Parse
   nameWithType: ParseFinalizedHead.Parse
+- uid: Polkadot.DataFactory.ParseNetworkState
+  name: ParseNetworkState
+  href: docfx/api/Polkadot.DataFactory.ParseNetworkState.html
+  commentId: T:Polkadot.DataFactory.ParseNetworkState
+  fullName: Polkadot.DataFactory.ParseNetworkState
+  nameWithType: ParseNetworkState
+- uid: Polkadot.DataFactory.ParseNetworkState.Parse(Newtonsoft.Json.Linq.JObject)
+  name: Parse(JObject)
+  href: docfx/api/Polkadot.DataFactory.ParseNetworkState.html#Polkadot_DataFactory_ParseNetworkState_Parse_Newtonsoft_Json_Linq_JObject_
+  commentId: M:Polkadot.DataFactory.ParseNetworkState.Parse(Newtonsoft.Json.Linq.JObject)
+  fullName: Polkadot.DataFactory.ParseNetworkState.Parse(Newtonsoft.Json.Linq.JObject)
+  nameWithType: ParseNetworkState.Parse(JObject)
+- uid: Polkadot.DataFactory.ParseNetworkState.Parse*
+  name: Parse
+  href: docfx/api/Polkadot.DataFactory.ParseNetworkState.html#Polkadot_DataFactory_ParseNetworkState_Parse_
+  commentId: Overload:Polkadot.DataFactory.ParseNetworkState.Parse
+  isSpec: "True"
+  fullName: Polkadot.DataFactory.ParseNetworkState.Parse
+  nameWithType: ParseNetworkState.Parse
+- uid: Polkadot.DataFactory.ParsePeersInfo
+  name: ParsePeersInfo
+  href: docfx/api/Polkadot.DataFactory.ParsePeersInfo.html
+  commentId: T:Polkadot.DataFactory.ParsePeersInfo
+  fullName: Polkadot.DataFactory.ParsePeersInfo
+  nameWithType: ParsePeersInfo
+- uid: Polkadot.DataFactory.ParsePeersInfo.Parse(Newtonsoft.Json.Linq.JObject)
+  name: Parse(JObject)
+  href: docfx/api/Polkadot.DataFactory.ParsePeersInfo.html#Polkadot_DataFactory_ParsePeersInfo_Parse_Newtonsoft_Json_Linq_JObject_
+  commentId: M:Polkadot.DataFactory.ParsePeersInfo.Parse(Newtonsoft.Json.Linq.JObject)
+  fullName: Polkadot.DataFactory.ParsePeersInfo.Parse(Newtonsoft.Json.Linq.JObject)
+  nameWithType: ParsePeersInfo.Parse(JObject)
+- uid: Polkadot.DataFactory.ParsePeersInfo.Parse*
+  name: Parse
+  href: docfx/api/Polkadot.DataFactory.ParsePeersInfo.html#Polkadot_DataFactory_ParsePeersInfo_Parse_
+  commentId: Overload:Polkadot.DataFactory.ParsePeersInfo.Parse
+  isSpec: "True"
+  fullName: Polkadot.DataFactory.ParsePeersInfo.Parse
+  nameWithType: ParsePeersInfo.Parse
 - uid: Polkadot.DataFactory.ParseRuntimeVersion
   name: ParseRuntimeVersion
   href: docfx/api/Polkadot.DataFactory.ParseRuntimeVersion.html
@@ -1945,6 +3207,25 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataFactory.ParseRuntimeVersion.Parse
   nameWithType: ParseRuntimeVersion.Parse
+- uid: Polkadot.DataFactory.ParseSystemHealth
+  name: ParseSystemHealth
+  href: docfx/api/Polkadot.DataFactory.ParseSystemHealth.html
+  commentId: T:Polkadot.DataFactory.ParseSystemHealth
+  fullName: Polkadot.DataFactory.ParseSystemHealth
+  nameWithType: ParseSystemHealth
+- uid: Polkadot.DataFactory.ParseSystemHealth.Parse(Newtonsoft.Json.Linq.JObject)
+  name: Parse(JObject)
+  href: docfx/api/Polkadot.DataFactory.ParseSystemHealth.html#Polkadot_DataFactory_ParseSystemHealth_Parse_Newtonsoft_Json_Linq_JObject_
+  commentId: M:Polkadot.DataFactory.ParseSystemHealth.Parse(Newtonsoft.Json.Linq.JObject)
+  fullName: Polkadot.DataFactory.ParseSystemHealth.Parse(Newtonsoft.Json.Linq.JObject)
+  nameWithType: ParseSystemHealth.Parse(JObject)
+- uid: Polkadot.DataFactory.ParseSystemHealth.Parse*
+  name: Parse
+  href: docfx/api/Polkadot.DataFactory.ParseSystemHealth.html#Polkadot_DataFactory_ParseSystemHealth_Parse_
+  commentId: Overload:Polkadot.DataFactory.ParseSystemHealth.Parse
+  isSpec: "True"
+  fullName: Polkadot.DataFactory.ParseSystemHealth.Parse
+  nameWithType: ParseSystemHealth.Parse
 - uid: Polkadot.DataFactory.ParseSystemInfo
   name: ParseSystemInfo
   href: docfx/api/Polkadot.DataFactory.ParseSystemInfo.html
@@ -1976,6 +3257,25 @@ references:
   commentId: T:Polkadot.DataStructs.Address
   fullName: Polkadot.DataStructs.Address
   nameWithType: Address
+- uid: Polkadot.DataStructs.Address.#ctor
+  name: Address()
+  href: docfx/api/Polkadot.DataStructs.Address.html#Polkadot_DataStructs_Address__ctor
+  commentId: M:Polkadot.DataStructs.Address.#ctor
+  fullName: Polkadot.DataStructs.Address.Address()
+  nameWithType: Address.Address()
+- uid: Polkadot.DataStructs.Address.#ctor(System.String)
+  name: Address(String)
+  href: docfx/api/Polkadot.DataStructs.Address.html#Polkadot_DataStructs_Address__ctor_System_String_
+  commentId: M:Polkadot.DataStructs.Address.#ctor(System.String)
+  fullName: Polkadot.DataStructs.Address.Address(System.String)
+  nameWithType: Address.Address(String)
+- uid: Polkadot.DataStructs.Address.#ctor*
+  name: Address
+  href: docfx/api/Polkadot.DataStructs.Address.html#Polkadot_DataStructs_Address__ctor_
+  commentId: Overload:Polkadot.DataStructs.Address.#ctor
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Address.Address
+  nameWithType: Address.Address
 - uid: Polkadot.DataStructs.Address.Symbols
   name: Symbols
   href: docfx/api/Polkadot.DataStructs.Address.html#Polkadot_DataStructs_Address_Symbols
@@ -1989,6 +3289,38 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataStructs.Address.Symbols
   nameWithType: Address.Symbols
+- uid: Polkadot.DataStructs.Extrinsic
+  name: Extrinsic
+  href: docfx/api/Polkadot.DataStructs.Extrinsic.html
+  commentId: T:Polkadot.DataStructs.Extrinsic
+  fullName: Polkadot.DataStructs.Extrinsic
+  nameWithType: Extrinsic
+- uid: Polkadot.DataStructs.Extrinsic.Length
+  name: Length
+  href: docfx/api/Polkadot.DataStructs.Extrinsic.html#Polkadot_DataStructs_Extrinsic_Length
+  commentId: P:Polkadot.DataStructs.Extrinsic.Length
+  fullName: Polkadot.DataStructs.Extrinsic.Length
+  nameWithType: Extrinsic.Length
+- uid: Polkadot.DataStructs.Extrinsic.Length*
+  name: Length
+  href: docfx/api/Polkadot.DataStructs.Extrinsic.html#Polkadot_DataStructs_Extrinsic_Length_
+  commentId: Overload:Polkadot.DataStructs.Extrinsic.Length
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Extrinsic.Length
+  nameWithType: Extrinsic.Length
+- uid: Polkadot.DataStructs.Extrinsic.Signature
+  name: Signature
+  href: docfx/api/Polkadot.DataStructs.Extrinsic.html#Polkadot_DataStructs_Extrinsic_Signature
+  commentId: P:Polkadot.DataStructs.Extrinsic.Signature
+  fullName: Polkadot.DataStructs.Extrinsic.Signature
+  nameWithType: Extrinsic.Signature
+- uid: Polkadot.DataStructs.Extrinsic.Signature*
+  name: Signature
+  href: docfx/api/Polkadot.DataStructs.Extrinsic.html#Polkadot_DataStructs_Extrinsic_Signature_
+  commentId: Overload:Polkadot.DataStructs.Extrinsic.Signature
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Extrinsic.Signature
+  nameWithType: Extrinsic.Signature
 - uid: Polkadot.DataStructs.Hasher
   name: Hasher
   href: docfx/api/Polkadot.DataStructs.Hasher.html
@@ -2058,6 +3390,244 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataStructs.Metadata.CallV4.Name
   nameWithType: CallV4.Name
+- uid: Polkadot.DataStructs.Metadata.CallV7
+  name: CallV7
+  href: docfx/api/Polkadot.DataStructs.Metadata.CallV7.html
+  commentId: T:Polkadot.DataStructs.Metadata.CallV7
+  fullName: Polkadot.DataStructs.Metadata.CallV7
+  nameWithType: CallV7
+- uid: Polkadot.DataStructs.Metadata.CallV7.Args
+  name: Args
+  href: docfx/api/Polkadot.DataStructs.Metadata.CallV7.html#Polkadot_DataStructs_Metadata_CallV7_Args
+  commentId: P:Polkadot.DataStructs.Metadata.CallV7.Args
+  fullName: Polkadot.DataStructs.Metadata.CallV7.Args
+  nameWithType: CallV7.Args
+- uid: Polkadot.DataStructs.Metadata.CallV7.Args*
+  name: Args
+  href: docfx/api/Polkadot.DataStructs.Metadata.CallV7.html#Polkadot_DataStructs_Metadata_CallV7_Args_
+  commentId: Overload:Polkadot.DataStructs.Metadata.CallV7.Args
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.CallV7.Args
+  nameWithType: CallV7.Args
+- uid: Polkadot.DataStructs.Metadata.CallV7.Documentation
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.CallV7.html#Polkadot_DataStructs_Metadata_CallV7_Documentation
+  commentId: P:Polkadot.DataStructs.Metadata.CallV7.Documentation
+  fullName: Polkadot.DataStructs.Metadata.CallV7.Documentation
+  nameWithType: CallV7.Documentation
+- uid: Polkadot.DataStructs.Metadata.CallV7.Documentation*
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.CallV7.html#Polkadot_DataStructs_Metadata_CallV7_Documentation_
+  commentId: Overload:Polkadot.DataStructs.Metadata.CallV7.Documentation
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.CallV7.Documentation
+  nameWithType: CallV7.Documentation
+- uid: Polkadot.DataStructs.Metadata.CallV7.Name
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.CallV7.html#Polkadot_DataStructs_Metadata_CallV7_Name
+  commentId: P:Polkadot.DataStructs.Metadata.CallV7.Name
+  fullName: Polkadot.DataStructs.Metadata.CallV7.Name
+  nameWithType: CallV7.Name
+- uid: Polkadot.DataStructs.Metadata.CallV7.Name*
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.CallV7.html#Polkadot_DataStructs_Metadata_CallV7_Name_
+  commentId: Overload:Polkadot.DataStructs.Metadata.CallV7.Name
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.CallV7.Name
+  nameWithType: CallV7.Name
+- uid: Polkadot.DataStructs.Metadata.CallV8
+  name: CallV8
+  href: docfx/api/Polkadot.DataStructs.Metadata.CallV8.html
+  commentId: T:Polkadot.DataStructs.Metadata.CallV8
+  fullName: Polkadot.DataStructs.Metadata.CallV8
+  nameWithType: CallV8
+- uid: Polkadot.DataStructs.Metadata.CallV8.Args
+  name: Args
+  href: docfx/api/Polkadot.DataStructs.Metadata.CallV8.html#Polkadot_DataStructs_Metadata_CallV8_Args
+  commentId: P:Polkadot.DataStructs.Metadata.CallV8.Args
+  fullName: Polkadot.DataStructs.Metadata.CallV8.Args
+  nameWithType: CallV8.Args
+- uid: Polkadot.DataStructs.Metadata.CallV8.Args*
+  name: Args
+  href: docfx/api/Polkadot.DataStructs.Metadata.CallV8.html#Polkadot_DataStructs_Metadata_CallV8_Args_
+  commentId: Overload:Polkadot.DataStructs.Metadata.CallV8.Args
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.CallV8.Args
+  nameWithType: CallV8.Args
+- uid: Polkadot.DataStructs.Metadata.CallV8.Documentation
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.CallV8.html#Polkadot_DataStructs_Metadata_CallV8_Documentation
+  commentId: P:Polkadot.DataStructs.Metadata.CallV8.Documentation
+  fullName: Polkadot.DataStructs.Metadata.CallV8.Documentation
+  nameWithType: CallV8.Documentation
+- uid: Polkadot.DataStructs.Metadata.CallV8.Documentation*
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.CallV8.html#Polkadot_DataStructs_Metadata_CallV8_Documentation_
+  commentId: Overload:Polkadot.DataStructs.Metadata.CallV8.Documentation
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.CallV8.Documentation
+  nameWithType: CallV8.Documentation
+- uid: Polkadot.DataStructs.Metadata.CallV8.Name
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.CallV8.html#Polkadot_DataStructs_Metadata_CallV8_Name
+  commentId: P:Polkadot.DataStructs.Metadata.CallV8.Name
+  fullName: Polkadot.DataStructs.Metadata.CallV8.Name
+  nameWithType: CallV8.Name
+- uid: Polkadot.DataStructs.Metadata.CallV8.Name*
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.CallV8.html#Polkadot_DataStructs_Metadata_CallV8_Name_
+  commentId: Overload:Polkadot.DataStructs.Metadata.CallV8.Name
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.CallV8.Name
+  nameWithType: CallV8.Name
+- uid: Polkadot.DataStructs.Metadata.ConstV7
+  name: ConstV7
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV7.html
+  commentId: T:Polkadot.DataStructs.Metadata.ConstV7
+  fullName: Polkadot.DataStructs.Metadata.ConstV7
+  nameWithType: ConstV7
+- uid: Polkadot.DataStructs.Metadata.ConstV7.Documentation
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV7.html#Polkadot_DataStructs_Metadata_ConstV7_Documentation
+  commentId: P:Polkadot.DataStructs.Metadata.ConstV7.Documentation
+  fullName: Polkadot.DataStructs.Metadata.ConstV7.Documentation
+  nameWithType: ConstV7.Documentation
+- uid: Polkadot.DataStructs.Metadata.ConstV7.Documentation*
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV7.html#Polkadot_DataStructs_Metadata_ConstV7_Documentation_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ConstV7.Documentation
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ConstV7.Documentation
+  nameWithType: ConstV7.Documentation
+- uid: Polkadot.DataStructs.Metadata.ConstV7.Name
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV7.html#Polkadot_DataStructs_Metadata_ConstV7_Name
+  commentId: P:Polkadot.DataStructs.Metadata.ConstV7.Name
+  fullName: Polkadot.DataStructs.Metadata.ConstV7.Name
+  nameWithType: ConstV7.Name
+- uid: Polkadot.DataStructs.Metadata.ConstV7.Name*
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV7.html#Polkadot_DataStructs_Metadata_ConstV7_Name_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ConstV7.Name
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ConstV7.Name
+  nameWithType: ConstV7.Name
+- uid: Polkadot.DataStructs.Metadata.ConstV7.Type
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV7.html#Polkadot_DataStructs_Metadata_ConstV7_Type
+  commentId: P:Polkadot.DataStructs.Metadata.ConstV7.Type
+  fullName: Polkadot.DataStructs.Metadata.ConstV7.Type
+  nameWithType: ConstV7.Type
+- uid: Polkadot.DataStructs.Metadata.ConstV7.Type*
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV7.html#Polkadot_DataStructs_Metadata_ConstV7_Type_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ConstV7.Type
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ConstV7.Type
+  nameWithType: ConstV7.Type
+- uid: Polkadot.DataStructs.Metadata.ConstV7.Value
+  name: Value
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV7.html#Polkadot_DataStructs_Metadata_ConstV7_Value
+  commentId: P:Polkadot.DataStructs.Metadata.ConstV7.Value
+  fullName: Polkadot.DataStructs.Metadata.ConstV7.Value
+  nameWithType: ConstV7.Value
+- uid: Polkadot.DataStructs.Metadata.ConstV7.Value*
+  name: Value
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV7.html#Polkadot_DataStructs_Metadata_ConstV7_Value_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ConstV7.Value
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ConstV7.Value
+  nameWithType: ConstV7.Value
+- uid: Polkadot.DataStructs.Metadata.ConstV8
+  name: ConstV8
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV8.html
+  commentId: T:Polkadot.DataStructs.Metadata.ConstV8
+  fullName: Polkadot.DataStructs.Metadata.ConstV8
+  nameWithType: ConstV8
+- uid: Polkadot.DataStructs.Metadata.ConstV8.Documentation
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV8.html#Polkadot_DataStructs_Metadata_ConstV8_Documentation
+  commentId: P:Polkadot.DataStructs.Metadata.ConstV8.Documentation
+  fullName: Polkadot.DataStructs.Metadata.ConstV8.Documentation
+  nameWithType: ConstV8.Documentation
+- uid: Polkadot.DataStructs.Metadata.ConstV8.Documentation*
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV8.html#Polkadot_DataStructs_Metadata_ConstV8_Documentation_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ConstV8.Documentation
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ConstV8.Documentation
+  nameWithType: ConstV8.Documentation
+- uid: Polkadot.DataStructs.Metadata.ConstV8.Name
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV8.html#Polkadot_DataStructs_Metadata_ConstV8_Name
+  commentId: P:Polkadot.DataStructs.Metadata.ConstV8.Name
+  fullName: Polkadot.DataStructs.Metadata.ConstV8.Name
+  nameWithType: ConstV8.Name
+- uid: Polkadot.DataStructs.Metadata.ConstV8.Name*
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV8.html#Polkadot_DataStructs_Metadata_ConstV8_Name_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ConstV8.Name
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ConstV8.Name
+  nameWithType: ConstV8.Name
+- uid: Polkadot.DataStructs.Metadata.ConstV8.Type
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV8.html#Polkadot_DataStructs_Metadata_ConstV8_Type
+  commentId: P:Polkadot.DataStructs.Metadata.ConstV8.Type
+  fullName: Polkadot.DataStructs.Metadata.ConstV8.Type
+  nameWithType: ConstV8.Type
+- uid: Polkadot.DataStructs.Metadata.ConstV8.Type*
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV8.html#Polkadot_DataStructs_Metadata_ConstV8_Type_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ConstV8.Type
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ConstV8.Type
+  nameWithType: ConstV8.Type
+- uid: Polkadot.DataStructs.Metadata.ConstV8.Value
+  name: Value
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV8.html#Polkadot_DataStructs_Metadata_ConstV8_Value
+  commentId: P:Polkadot.DataStructs.Metadata.ConstV8.Value
+  fullName: Polkadot.DataStructs.Metadata.ConstV8.Value
+  nameWithType: ConstV8.Value
+- uid: Polkadot.DataStructs.Metadata.ConstV8.Value*
+  name: Value
+  href: docfx/api/Polkadot.DataStructs.Metadata.ConstV8.html#Polkadot_DataStructs_Metadata_ConstV8_Value_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ConstV8.Value
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ConstV8.Value
+  nameWithType: ConstV8.Value
+- uid: Polkadot.DataStructs.Metadata.ErrorV8
+  name: ErrorV8
+  href: docfx/api/Polkadot.DataStructs.Metadata.ErrorV8.html
+  commentId: T:Polkadot.DataStructs.Metadata.ErrorV8
+  fullName: Polkadot.DataStructs.Metadata.ErrorV8
+  nameWithType: ErrorV8
+- uid: Polkadot.DataStructs.Metadata.ErrorV8.Documentation
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.ErrorV8.html#Polkadot_DataStructs_Metadata_ErrorV8_Documentation
+  commentId: P:Polkadot.DataStructs.Metadata.ErrorV8.Documentation
+  fullName: Polkadot.DataStructs.Metadata.ErrorV8.Documentation
+  nameWithType: ErrorV8.Documentation
+- uid: Polkadot.DataStructs.Metadata.ErrorV8.Documentation*
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.ErrorV8.html#Polkadot_DataStructs_Metadata_ErrorV8_Documentation_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ErrorV8.Documentation
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ErrorV8.Documentation
+  nameWithType: ErrorV8.Documentation
+- uid: Polkadot.DataStructs.Metadata.ErrorV8.Name
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.ErrorV8.html#Polkadot_DataStructs_Metadata_ErrorV8_Name
+  commentId: P:Polkadot.DataStructs.Metadata.ErrorV8.Name
+  fullName: Polkadot.DataStructs.Metadata.ErrorV8.Name
+  nameWithType: ErrorV8.Name
+- uid: Polkadot.DataStructs.Metadata.ErrorV8.Name*
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.ErrorV8.html#Polkadot_DataStructs_Metadata_ErrorV8_Name_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ErrorV8.Name
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ErrorV8.Name
+  nameWithType: ErrorV8.Name
 - uid: Polkadot.DataStructs.Metadata.EventArgV4
   name: EventArgV4
   href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV4.html
@@ -2103,6 +3673,96 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataStructs.Metadata.EventArgV4.Name
   nameWithType: EventArgV4.Name
+- uid: Polkadot.DataStructs.Metadata.EventArgV7
+  name: EventArgV7
+  href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV7.html
+  commentId: T:Polkadot.DataStructs.Metadata.EventArgV7
+  fullName: Polkadot.DataStructs.Metadata.EventArgV7
+  nameWithType: EventArgV7
+- uid: Polkadot.DataStructs.Metadata.EventArgV7.Args
+  name: Args
+  href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV7.html#Polkadot_DataStructs_Metadata_EventArgV7_Args
+  commentId: P:Polkadot.DataStructs.Metadata.EventArgV7.Args
+  fullName: Polkadot.DataStructs.Metadata.EventArgV7.Args
+  nameWithType: EventArgV7.Args
+- uid: Polkadot.DataStructs.Metadata.EventArgV7.Args*
+  name: Args
+  href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV7.html#Polkadot_DataStructs_Metadata_EventArgV7_Args_
+  commentId: Overload:Polkadot.DataStructs.Metadata.EventArgV7.Args
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.EventArgV7.Args
+  nameWithType: EventArgV7.Args
+- uid: Polkadot.DataStructs.Metadata.EventArgV7.Documentation
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV7.html#Polkadot_DataStructs_Metadata_EventArgV7_Documentation
+  commentId: P:Polkadot.DataStructs.Metadata.EventArgV7.Documentation
+  fullName: Polkadot.DataStructs.Metadata.EventArgV7.Documentation
+  nameWithType: EventArgV7.Documentation
+- uid: Polkadot.DataStructs.Metadata.EventArgV7.Documentation*
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV7.html#Polkadot_DataStructs_Metadata_EventArgV7_Documentation_
+  commentId: Overload:Polkadot.DataStructs.Metadata.EventArgV7.Documentation
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.EventArgV7.Documentation
+  nameWithType: EventArgV7.Documentation
+- uid: Polkadot.DataStructs.Metadata.EventArgV7.Name
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV7.html#Polkadot_DataStructs_Metadata_EventArgV7_Name
+  commentId: P:Polkadot.DataStructs.Metadata.EventArgV7.Name
+  fullName: Polkadot.DataStructs.Metadata.EventArgV7.Name
+  nameWithType: EventArgV7.Name
+- uid: Polkadot.DataStructs.Metadata.EventArgV7.Name*
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV7.html#Polkadot_DataStructs_Metadata_EventArgV7_Name_
+  commentId: Overload:Polkadot.DataStructs.Metadata.EventArgV7.Name
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.EventArgV7.Name
+  nameWithType: EventArgV7.Name
+- uid: Polkadot.DataStructs.Metadata.EventArgV8
+  name: EventArgV8
+  href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV8.html
+  commentId: T:Polkadot.DataStructs.Metadata.EventArgV8
+  fullName: Polkadot.DataStructs.Metadata.EventArgV8
+  nameWithType: EventArgV8
+- uid: Polkadot.DataStructs.Metadata.EventArgV8.Args
+  name: Args
+  href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV8.html#Polkadot_DataStructs_Metadata_EventArgV8_Args
+  commentId: P:Polkadot.DataStructs.Metadata.EventArgV8.Args
+  fullName: Polkadot.DataStructs.Metadata.EventArgV8.Args
+  nameWithType: EventArgV8.Args
+- uid: Polkadot.DataStructs.Metadata.EventArgV8.Args*
+  name: Args
+  href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV8.html#Polkadot_DataStructs_Metadata_EventArgV8_Args_
+  commentId: Overload:Polkadot.DataStructs.Metadata.EventArgV8.Args
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.EventArgV8.Args
+  nameWithType: EventArgV8.Args
+- uid: Polkadot.DataStructs.Metadata.EventArgV8.Documentation
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV8.html#Polkadot_DataStructs_Metadata_EventArgV8_Documentation
+  commentId: P:Polkadot.DataStructs.Metadata.EventArgV8.Documentation
+  fullName: Polkadot.DataStructs.Metadata.EventArgV8.Documentation
+  nameWithType: EventArgV8.Documentation
+- uid: Polkadot.DataStructs.Metadata.EventArgV8.Documentation*
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV8.html#Polkadot_DataStructs_Metadata_EventArgV8_Documentation_
+  commentId: Overload:Polkadot.DataStructs.Metadata.EventArgV8.Documentation
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.EventArgV8.Documentation
+  nameWithType: EventArgV8.Documentation
+- uid: Polkadot.DataStructs.Metadata.EventArgV8.Name
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV8.html#Polkadot_DataStructs_Metadata_EventArgV8_Name
+  commentId: P:Polkadot.DataStructs.Metadata.EventArgV8.Name
+  fullName: Polkadot.DataStructs.Metadata.EventArgV8.Name
+  nameWithType: EventArgV8.Name
+- uid: Polkadot.DataStructs.Metadata.EventArgV8.Name*
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.EventArgV8.html#Polkadot_DataStructs_Metadata_EventArgV8_Name_
+  commentId: Overload:Polkadot.DataStructs.Metadata.EventArgV8.Name
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.EventArgV8.Name
+  nameWithType: EventArgV8.Name
 - uid: Polkadot.DataStructs.Metadata.FunctionCallArgV4
   name: FunctionCallArgV4
   href: docfx/api/Polkadot.DataStructs.Metadata.FunctionCallArgV4.html
@@ -2135,6 +3795,70 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataStructs.Metadata.FunctionCallArgV4.Type
   nameWithType: FunctionCallArgV4.Type
+- uid: Polkadot.DataStructs.Metadata.FunctionCallArgV7
+  name: FunctionCallArgV7
+  href: docfx/api/Polkadot.DataStructs.Metadata.FunctionCallArgV7.html
+  commentId: T:Polkadot.DataStructs.Metadata.FunctionCallArgV7
+  fullName: Polkadot.DataStructs.Metadata.FunctionCallArgV7
+  nameWithType: FunctionCallArgV7
+- uid: Polkadot.DataStructs.Metadata.FunctionCallArgV7.Name
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.FunctionCallArgV7.html#Polkadot_DataStructs_Metadata_FunctionCallArgV7_Name
+  commentId: P:Polkadot.DataStructs.Metadata.FunctionCallArgV7.Name
+  fullName: Polkadot.DataStructs.Metadata.FunctionCallArgV7.Name
+  nameWithType: FunctionCallArgV7.Name
+- uid: Polkadot.DataStructs.Metadata.FunctionCallArgV7.Name*
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.FunctionCallArgV7.html#Polkadot_DataStructs_Metadata_FunctionCallArgV7_Name_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FunctionCallArgV7.Name
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FunctionCallArgV7.Name
+  nameWithType: FunctionCallArgV7.Name
+- uid: Polkadot.DataStructs.Metadata.FunctionCallArgV7.Type
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.FunctionCallArgV7.html#Polkadot_DataStructs_Metadata_FunctionCallArgV7_Type
+  commentId: P:Polkadot.DataStructs.Metadata.FunctionCallArgV7.Type
+  fullName: Polkadot.DataStructs.Metadata.FunctionCallArgV7.Type
+  nameWithType: FunctionCallArgV7.Type
+- uid: Polkadot.DataStructs.Metadata.FunctionCallArgV7.Type*
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.FunctionCallArgV7.html#Polkadot_DataStructs_Metadata_FunctionCallArgV7_Type_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FunctionCallArgV7.Type
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FunctionCallArgV7.Type
+  nameWithType: FunctionCallArgV7.Type
+- uid: Polkadot.DataStructs.Metadata.FunctionCallArgV8
+  name: FunctionCallArgV8
+  href: docfx/api/Polkadot.DataStructs.Metadata.FunctionCallArgV8.html
+  commentId: T:Polkadot.DataStructs.Metadata.FunctionCallArgV8
+  fullName: Polkadot.DataStructs.Metadata.FunctionCallArgV8
+  nameWithType: FunctionCallArgV8
+- uid: Polkadot.DataStructs.Metadata.FunctionCallArgV8.Name
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.FunctionCallArgV8.html#Polkadot_DataStructs_Metadata_FunctionCallArgV8_Name
+  commentId: P:Polkadot.DataStructs.Metadata.FunctionCallArgV8.Name
+  fullName: Polkadot.DataStructs.Metadata.FunctionCallArgV8.Name
+  nameWithType: FunctionCallArgV8.Name
+- uid: Polkadot.DataStructs.Metadata.FunctionCallArgV8.Name*
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.FunctionCallArgV8.html#Polkadot_DataStructs_Metadata_FunctionCallArgV8_Name_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FunctionCallArgV8.Name
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FunctionCallArgV8.Name
+  nameWithType: FunctionCallArgV8.Name
+- uid: Polkadot.DataStructs.Metadata.FunctionCallArgV8.Type
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.FunctionCallArgV8.html#Polkadot_DataStructs_Metadata_FunctionCallArgV8_Type
+  commentId: P:Polkadot.DataStructs.Metadata.FunctionCallArgV8.Type
+  fullName: Polkadot.DataStructs.Metadata.FunctionCallArgV8.Type
+  nameWithType: FunctionCallArgV8.Type
+- uid: Polkadot.DataStructs.Metadata.FunctionCallArgV8.Type*
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.FunctionCallArgV8.html#Polkadot_DataStructs_Metadata_FunctionCallArgV8_Type_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FunctionCallArgV8.Type
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FunctionCallArgV8.Type
+  nameWithType: FunctionCallArgV8.Type
 - uid: Polkadot.DataStructs.Metadata.FuncTypeV4
   name: FuncTypeV4
   href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV4.html
@@ -2193,6 +3917,200 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataStructs.Metadata.FuncTypeV4.Type
   nameWithType: FuncTypeV4.Type
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7
+  name: FuncTypeV7
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html
+  commentId: T:Polkadot.DataStructs.Metadata.FuncTypeV7
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7
+  nameWithType: FuncTypeV7
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7.Hasher
+  name: Hasher
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html#Polkadot_DataStructs_Metadata_FuncTypeV7_Hasher
+  commentId: P:Polkadot.DataStructs.Metadata.FuncTypeV7.Hasher
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7.Hasher
+  nameWithType: FuncTypeV7.Hasher
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7.Hasher*
+  name: Hasher
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html#Polkadot_DataStructs_Metadata_FuncTypeV7_Hasher_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FuncTypeV7.Hasher
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7.Hasher
+  nameWithType: FuncTypeV7.Hasher
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7.IsLinked
+  name: IsLinked
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html#Polkadot_DataStructs_Metadata_FuncTypeV7_IsLinked
+  commentId: P:Polkadot.DataStructs.Metadata.FuncTypeV7.IsLinked
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7.IsLinked
+  nameWithType: FuncTypeV7.IsLinked
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7.IsLinked*
+  name: IsLinked
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html#Polkadot_DataStructs_Metadata_FuncTypeV7_IsLinked_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FuncTypeV7.IsLinked
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7.IsLinked
+  nameWithType: FuncTypeV7.IsLinked
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7.Key1
+  name: Key1
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html#Polkadot_DataStructs_Metadata_FuncTypeV7_Key1
+  commentId: P:Polkadot.DataStructs.Metadata.FuncTypeV7.Key1
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7.Key1
+  nameWithType: FuncTypeV7.Key1
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7.Key1*
+  name: Key1
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html#Polkadot_DataStructs_Metadata_FuncTypeV7_Key1_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FuncTypeV7.Key1
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7.Key1
+  nameWithType: FuncTypeV7.Key1
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7.Key2
+  name: Key2
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html#Polkadot_DataStructs_Metadata_FuncTypeV7_Key2
+  commentId: P:Polkadot.DataStructs.Metadata.FuncTypeV7.Key2
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7.Key2
+  nameWithType: FuncTypeV7.Key2
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7.Key2*
+  name: Key2
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html#Polkadot_DataStructs_Metadata_FuncTypeV7_Key2_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FuncTypeV7.Key2
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7.Key2
+  nameWithType: FuncTypeV7.Key2
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7.Key2hasher
+  name: Key2hasher
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html#Polkadot_DataStructs_Metadata_FuncTypeV7_Key2hasher
+  commentId: P:Polkadot.DataStructs.Metadata.FuncTypeV7.Key2hasher
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7.Key2hasher
+  nameWithType: FuncTypeV7.Key2hasher
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7.Key2hasher*
+  name: Key2hasher
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html#Polkadot_DataStructs_Metadata_FuncTypeV7_Key2hasher_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FuncTypeV7.Key2hasher
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7.Key2hasher
+  nameWithType: FuncTypeV7.Key2hasher
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7.Type
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html#Polkadot_DataStructs_Metadata_FuncTypeV7_Type
+  commentId: P:Polkadot.DataStructs.Metadata.FuncTypeV7.Type
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7.Type
+  nameWithType: FuncTypeV7.Type
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7.Type*
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html#Polkadot_DataStructs_Metadata_FuncTypeV7_Type_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FuncTypeV7.Type
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7.Type
+  nameWithType: FuncTypeV7.Type
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7.Value
+  name: Value
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html#Polkadot_DataStructs_Metadata_FuncTypeV7_Value
+  commentId: P:Polkadot.DataStructs.Metadata.FuncTypeV7.Value
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7.Value
+  nameWithType: FuncTypeV7.Value
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV7.Value*
+  name: Value
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV7.html#Polkadot_DataStructs_Metadata_FuncTypeV7_Value_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FuncTypeV7.Value
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV7.Value
+  nameWithType: FuncTypeV7.Value
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8
+  name: FuncTypeV8
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html
+  commentId: T:Polkadot.DataStructs.Metadata.FuncTypeV8
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8
+  nameWithType: FuncTypeV8
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8.Hasher
+  name: Hasher
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html#Polkadot_DataStructs_Metadata_FuncTypeV8_Hasher
+  commentId: P:Polkadot.DataStructs.Metadata.FuncTypeV8.Hasher
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8.Hasher
+  nameWithType: FuncTypeV8.Hasher
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8.Hasher*
+  name: Hasher
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html#Polkadot_DataStructs_Metadata_FuncTypeV8_Hasher_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FuncTypeV8.Hasher
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8.Hasher
+  nameWithType: FuncTypeV8.Hasher
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8.IsLinked
+  name: IsLinked
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html#Polkadot_DataStructs_Metadata_FuncTypeV8_IsLinked
+  commentId: P:Polkadot.DataStructs.Metadata.FuncTypeV8.IsLinked
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8.IsLinked
+  nameWithType: FuncTypeV8.IsLinked
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8.IsLinked*
+  name: IsLinked
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html#Polkadot_DataStructs_Metadata_FuncTypeV8_IsLinked_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FuncTypeV8.IsLinked
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8.IsLinked
+  nameWithType: FuncTypeV8.IsLinked
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8.Key1
+  name: Key1
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html#Polkadot_DataStructs_Metadata_FuncTypeV8_Key1
+  commentId: P:Polkadot.DataStructs.Metadata.FuncTypeV8.Key1
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8.Key1
+  nameWithType: FuncTypeV8.Key1
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8.Key1*
+  name: Key1
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html#Polkadot_DataStructs_Metadata_FuncTypeV8_Key1_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FuncTypeV8.Key1
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8.Key1
+  nameWithType: FuncTypeV8.Key1
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8.Key2
+  name: Key2
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html#Polkadot_DataStructs_Metadata_FuncTypeV8_Key2
+  commentId: P:Polkadot.DataStructs.Metadata.FuncTypeV8.Key2
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8.Key2
+  nameWithType: FuncTypeV8.Key2
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8.Key2*
+  name: Key2
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html#Polkadot_DataStructs_Metadata_FuncTypeV8_Key2_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FuncTypeV8.Key2
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8.Key2
+  nameWithType: FuncTypeV8.Key2
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8.Key2hasher
+  name: Key2hasher
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html#Polkadot_DataStructs_Metadata_FuncTypeV8_Key2hasher
+  commentId: P:Polkadot.DataStructs.Metadata.FuncTypeV8.Key2hasher
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8.Key2hasher
+  nameWithType: FuncTypeV8.Key2hasher
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8.Key2hasher*
+  name: Key2hasher
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html#Polkadot_DataStructs_Metadata_FuncTypeV8_Key2hasher_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FuncTypeV8.Key2hasher
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8.Key2hasher
+  nameWithType: FuncTypeV8.Key2hasher
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8.Type
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html#Polkadot_DataStructs_Metadata_FuncTypeV8_Type
+  commentId: P:Polkadot.DataStructs.Metadata.FuncTypeV8.Type
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8.Type
+  nameWithType: FuncTypeV8.Type
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8.Type*
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html#Polkadot_DataStructs_Metadata_FuncTypeV8_Type_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FuncTypeV8.Type
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8.Type
+  nameWithType: FuncTypeV8.Type
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8.Value
+  name: Value
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html#Polkadot_DataStructs_Metadata_FuncTypeV8_Value
+  commentId: P:Polkadot.DataStructs.Metadata.FuncTypeV8.Value
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8.Value
+  nameWithType: FuncTypeV8.Value
+- uid: Polkadot.DataStructs.Metadata.FuncTypeV8.Value*
+  name: Value
+  href: docfx/api/Polkadot.DataStructs.Metadata.FuncTypeV8.html#Polkadot_DataStructs_Metadata_FuncTypeV8_Value_
+  commentId: Overload:Polkadot.DataStructs.Metadata.FuncTypeV8.Value
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.FuncTypeV8.Value
+  nameWithType: FuncTypeV8.Value
 - uid: Polkadot.DataStructs.Metadata.Metadata
   name: Metadata
   href: docfx/api/Polkadot.DataStructs.Metadata.Metadata.html
@@ -2225,6 +4143,19 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataStructs.Metadata.Metadata.GetAddressStorageKey
   nameWithType: Metadata.GetAddressStorageKey
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetAddrFromPublicKey(Polkadot.DataStructs.PublicKey)
+  name: GetAddrFromPublicKey(PublicKey)
+  href: docfx/api/Polkadot.DataStructs.Metadata.Metadata.html#Polkadot_DataStructs_Metadata_Metadata_GetAddrFromPublicKey_Polkadot_DataStructs_PublicKey_
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.GetAddrFromPublicKey(Polkadot.DataStructs.PublicKey)
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetAddrFromPublicKey(Polkadot.DataStructs.PublicKey)
+  nameWithType: Metadata.GetAddrFromPublicKey(PublicKey)
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetAddrFromPublicKey*
+  name: GetAddrFromPublicKey
+  href: docfx/api/Polkadot.DataStructs.Metadata.Metadata.html#Polkadot_DataStructs_Metadata_Metadata_GetAddrFromPublicKey_
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.GetAddrFromPublicKey
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetAddrFromPublicKey
+  nameWithType: Metadata.GetAddrFromPublicKey
 - uid: Polkadot.DataStructs.Metadata.Metadata.GetCallMethodIndex(System.Int32,System.String)
   name: GetCallMethodIndex(Int32, String)
   href: docfx/api/Polkadot.DataStructs.Metadata.Metadata.html#Polkadot_DataStructs_Metadata_Metadata_GetCallMethodIndex_System_Int32_System_String_
@@ -2238,6 +4169,19 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataStructs.Metadata.Metadata.GetCallMethodIndex
   nameWithType: Metadata.GetCallMethodIndex
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetConst(System.String,System.String)
+  name: GetConst(String, String)
+  href: docfx/api/Polkadot.DataStructs.Metadata.Metadata.html#Polkadot_DataStructs_Metadata_Metadata_GetConst_System_String_System_String_
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.GetConst(System.String,System.String)
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetConst(System.String, System.String)
+  nameWithType: Metadata.GetConst(String, String)
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetConst*
+  name: GetConst
+  href: docfx/api/Polkadot.DataStructs.Metadata.Metadata.html#Polkadot_DataStructs_Metadata_Metadata_GetConst_
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.GetConst
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetConst
+  nameWithType: Metadata.GetConst
 - uid: Polkadot.DataStructs.Metadata.Metadata.GetFuncHasher(System.String,System.String)
   name: GetFuncHasher(String, String)
   href: docfx/api/Polkadot.DataStructs.Metadata.Metadata.html#Polkadot_DataStructs_Metadata_Metadata_GetFuncHasher_System_String_System_String_
@@ -2283,6 +4227,19 @@ references:
   fullName.vb: Polkadot.DataStructs.Metadata.Metadata.GetMetadata(Of T)()
   nameWithType: Metadata.GetMetadata<T>()
   nameWithType.vb: Metadata.GetMetadata(Of T)()
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetMetadataVersion
+  name: GetMetadataVersion()
+  href: docfx/api/Polkadot.DataStructs.Metadata.Metadata.html#Polkadot_DataStructs_Metadata_Metadata_GetMetadataVersion
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.GetMetadataVersion
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetMetadataVersion()
+  nameWithType: Metadata.GetMetadataVersion()
+- uid: Polkadot.DataStructs.Metadata.Metadata.GetMetadataVersion*
+  name: GetMetadataVersion
+  href: docfx/api/Polkadot.DataStructs.Metadata.Metadata.html#Polkadot_DataStructs_Metadata_Metadata_GetMetadataVersion_
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.GetMetadataVersion
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.Metadata.GetMetadataVersion
+  nameWithType: Metadata.GetMetadataVersion
 - uid: Polkadot.DataStructs.Metadata.Metadata.GetModuleIndex(System.String,System.Boolean)
   name: GetModuleIndex(String, Boolean)
   href: docfx/api/Polkadot.DataStructs.Metadata.Metadata.html#Polkadot_DataStructs_Metadata_Metadata_GetModuleIndex_System_String_System_Boolean_
@@ -2351,6 +4308,19 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataStructs.Metadata.Metadata.GetStorageMethodIndex
   nameWithType: Metadata.GetStorageMethodIndex
+- uid: Polkadot.DataStructs.Metadata.Metadata.HasMethods(System.Int32)
+  name: HasMethods(Int32)
+  href: docfx/api/Polkadot.DataStructs.Metadata.Metadata.html#Polkadot_DataStructs_Metadata_Metadata_HasMethods_System_Int32_
+  commentId: M:Polkadot.DataStructs.Metadata.Metadata.HasMethods(System.Int32)
+  fullName: Polkadot.DataStructs.Metadata.Metadata.HasMethods(System.Int32)
+  nameWithType: Metadata.HasMethods(Int32)
+- uid: Polkadot.DataStructs.Metadata.Metadata.HasMethods*
+  name: HasMethods
+  href: docfx/api/Polkadot.DataStructs.Metadata.Metadata.html#Polkadot_DataStructs_Metadata_Metadata_HasMethods_
+  commentId: Overload:Polkadot.DataStructs.Metadata.Metadata.HasMethods
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.Metadata.HasMethods
+  nameWithType: Metadata.HasMethods
 - uid: Polkadot.DataStructs.Metadata.Metadata.IsStateVariablePlain(System.Int32,System.Int32)
   name: IsStateVariablePlain(Int32, Int32)
   href: docfx/api/Polkadot.DataStructs.Metadata.Metadata.html#Polkadot_DataStructs_Metadata_Metadata_IsStateVariablePlain_System_Int32_System_Int32_
@@ -2428,6 +4398,70 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataStructs.Metadata.MetadataV4.Module
   nameWithType: MetadataV4.Module
+- uid: Polkadot.DataStructs.Metadata.MetadataV7
+  name: MetadataV7
+  href: docfx/api/Polkadot.DataStructs.Metadata.MetadataV7.html
+  commentId: T:Polkadot.DataStructs.Metadata.MetadataV7
+  fullName: Polkadot.DataStructs.Metadata.MetadataV7
+  nameWithType: MetadataV7
+- uid: Polkadot.DataStructs.Metadata.MetadataV7.#ctor
+  name: MetadataV7()
+  href: docfx/api/Polkadot.DataStructs.Metadata.MetadataV7.html#Polkadot_DataStructs_Metadata_MetadataV7__ctor
+  commentId: M:Polkadot.DataStructs.Metadata.MetadataV7.#ctor
+  fullName: Polkadot.DataStructs.Metadata.MetadataV7.MetadataV7()
+  nameWithType: MetadataV7.MetadataV7()
+- uid: Polkadot.DataStructs.Metadata.MetadataV7.#ctor*
+  name: MetadataV7
+  href: docfx/api/Polkadot.DataStructs.Metadata.MetadataV7.html#Polkadot_DataStructs_Metadata_MetadataV7__ctor_
+  commentId: Overload:Polkadot.DataStructs.Metadata.MetadataV7.#ctor
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.MetadataV7.MetadataV7
+  nameWithType: MetadataV7.MetadataV7
+- uid: Polkadot.DataStructs.Metadata.MetadataV7.Module
+  name: Module
+  href: docfx/api/Polkadot.DataStructs.Metadata.MetadataV7.html#Polkadot_DataStructs_Metadata_MetadataV7_Module
+  commentId: P:Polkadot.DataStructs.Metadata.MetadataV7.Module
+  fullName: Polkadot.DataStructs.Metadata.MetadataV7.Module
+  nameWithType: MetadataV7.Module
+- uid: Polkadot.DataStructs.Metadata.MetadataV7.Module*
+  name: Module
+  href: docfx/api/Polkadot.DataStructs.Metadata.MetadataV7.html#Polkadot_DataStructs_Metadata_MetadataV7_Module_
+  commentId: Overload:Polkadot.DataStructs.Metadata.MetadataV7.Module
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.MetadataV7.Module
+  nameWithType: MetadataV7.Module
+- uid: Polkadot.DataStructs.Metadata.MetadataV8
+  name: MetadataV8
+  href: docfx/api/Polkadot.DataStructs.Metadata.MetadataV8.html
+  commentId: T:Polkadot.DataStructs.Metadata.MetadataV8
+  fullName: Polkadot.DataStructs.Metadata.MetadataV8
+  nameWithType: MetadataV8
+- uid: Polkadot.DataStructs.Metadata.MetadataV8.#ctor
+  name: MetadataV8()
+  href: docfx/api/Polkadot.DataStructs.Metadata.MetadataV8.html#Polkadot_DataStructs_Metadata_MetadataV8__ctor
+  commentId: M:Polkadot.DataStructs.Metadata.MetadataV8.#ctor
+  fullName: Polkadot.DataStructs.Metadata.MetadataV8.MetadataV8()
+  nameWithType: MetadataV8.MetadataV8()
+- uid: Polkadot.DataStructs.Metadata.MetadataV8.#ctor*
+  name: MetadataV8
+  href: docfx/api/Polkadot.DataStructs.Metadata.MetadataV8.html#Polkadot_DataStructs_Metadata_MetadataV8__ctor_
+  commentId: Overload:Polkadot.DataStructs.Metadata.MetadataV8.#ctor
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.MetadataV8.MetadataV8
+  nameWithType: MetadataV8.MetadataV8
+- uid: Polkadot.DataStructs.Metadata.MetadataV8.Module
+  name: Module
+  href: docfx/api/Polkadot.DataStructs.Metadata.MetadataV8.html#Polkadot_DataStructs_Metadata_MetadataV8_Module
+  commentId: P:Polkadot.DataStructs.Metadata.MetadataV8.Module
+  fullName: Polkadot.DataStructs.Metadata.MetadataV8.Module
+  nameWithType: MetadataV8.Module
+- uid: Polkadot.DataStructs.Metadata.MetadataV8.Module*
+  name: Module
+  href: docfx/api/Polkadot.DataStructs.Metadata.MetadataV8.html#Polkadot_DataStructs_Metadata_MetadataV8_Module_
+  commentId: Overload:Polkadot.DataStructs.Metadata.MetadataV8.Module
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.MetadataV8.Module
+  nameWithType: MetadataV8.Module
 - uid: Polkadot.DataStructs.Metadata.ModuleV4
   name: ModuleV4
   href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV4.html
@@ -2512,6 +4546,251 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataStructs.Metadata.ModuleV4.Storage
   nameWithType: ModuleV4.Storage
+- uid: Polkadot.DataStructs.Metadata.ModuleV7
+  name: ModuleV7
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV7.html
+  commentId: T:Polkadot.DataStructs.Metadata.ModuleV7
+  fullName: Polkadot.DataStructs.Metadata.ModuleV7
+  nameWithType: ModuleV7
+- uid: Polkadot.DataStructs.Metadata.ModuleV7.#ctor
+  name: ModuleV7()
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV7.html#Polkadot_DataStructs_Metadata_ModuleV7__ctor
+  commentId: M:Polkadot.DataStructs.Metadata.ModuleV7.#ctor
+  fullName: Polkadot.DataStructs.Metadata.ModuleV7.ModuleV7()
+  nameWithType: ModuleV7.ModuleV7()
+- uid: Polkadot.DataStructs.Metadata.ModuleV7.#ctor*
+  name: ModuleV7
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV7.html#Polkadot_DataStructs_Metadata_ModuleV7__ctor_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ModuleV7.#ctor
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ModuleV7.ModuleV7
+  nameWithType: ModuleV7.ModuleV7
+- uid: Polkadot.DataStructs.Metadata.ModuleV7.Call
+  name: Call
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV7.html#Polkadot_DataStructs_Metadata_ModuleV7_Call
+  commentId: P:Polkadot.DataStructs.Metadata.ModuleV7.Call
+  fullName: Polkadot.DataStructs.Metadata.ModuleV7.Call
+  nameWithType: ModuleV7.Call
+- uid: Polkadot.DataStructs.Metadata.ModuleV7.Call*
+  name: Call
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV7.html#Polkadot_DataStructs_Metadata_ModuleV7_Call_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ModuleV7.Call
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ModuleV7.Call
+  nameWithType: ModuleV7.Call
+- uid: Polkadot.DataStructs.Metadata.ModuleV7.Cons
+  name: Cons
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV7.html#Polkadot_DataStructs_Metadata_ModuleV7_Cons
+  commentId: P:Polkadot.DataStructs.Metadata.ModuleV7.Cons
+  fullName: Polkadot.DataStructs.Metadata.ModuleV7.Cons
+  nameWithType: ModuleV7.Cons
+- uid: Polkadot.DataStructs.Metadata.ModuleV7.Cons*
+  name: Cons
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV7.html#Polkadot_DataStructs_Metadata_ModuleV7_Cons_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ModuleV7.Cons
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ModuleV7.Cons
+  nameWithType: ModuleV7.Cons
+- uid: Polkadot.DataStructs.Metadata.ModuleV7.Ev
+  name: Ev
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV7.html#Polkadot_DataStructs_Metadata_ModuleV7_Ev
+  commentId: P:Polkadot.DataStructs.Metadata.ModuleV7.Ev
+  fullName: Polkadot.DataStructs.Metadata.ModuleV7.Ev
+  nameWithType: ModuleV7.Ev
+- uid: Polkadot.DataStructs.Metadata.ModuleV7.Ev*
+  name: Ev
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV7.html#Polkadot_DataStructs_Metadata_ModuleV7_Ev_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ModuleV7.Ev
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ModuleV7.Ev
+  nameWithType: ModuleV7.Ev
+- uid: Polkadot.DataStructs.Metadata.ModuleV7.Name
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV7.html#Polkadot_DataStructs_Metadata_ModuleV7_Name
+  commentId: P:Polkadot.DataStructs.Metadata.ModuleV7.Name
+  fullName: Polkadot.DataStructs.Metadata.ModuleV7.Name
+  nameWithType: ModuleV7.Name
+- uid: Polkadot.DataStructs.Metadata.ModuleV7.Name*
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV7.html#Polkadot_DataStructs_Metadata_ModuleV7_Name_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ModuleV7.Name
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ModuleV7.Name
+  nameWithType: ModuleV7.Name
+- uid: Polkadot.DataStructs.Metadata.ModuleV7.Storage
+  name: Storage
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV7.html#Polkadot_DataStructs_Metadata_ModuleV7_Storage
+  commentId: P:Polkadot.DataStructs.Metadata.ModuleV7.Storage
+  fullName: Polkadot.DataStructs.Metadata.ModuleV7.Storage
+  nameWithType: ModuleV7.Storage
+- uid: Polkadot.DataStructs.Metadata.ModuleV7.Storage*
+  name: Storage
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV7.html#Polkadot_DataStructs_Metadata_ModuleV7_Storage_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ModuleV7.Storage
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ModuleV7.Storage
+  nameWithType: ModuleV7.Storage
+- uid: Polkadot.DataStructs.Metadata.ModuleV8
+  name: ModuleV8
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html
+  commentId: T:Polkadot.DataStructs.Metadata.ModuleV8
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8
+  nameWithType: ModuleV8
+- uid: Polkadot.DataStructs.Metadata.ModuleV8.#ctor
+  name: ModuleV8()
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html#Polkadot_DataStructs_Metadata_ModuleV8__ctor
+  commentId: M:Polkadot.DataStructs.Metadata.ModuleV8.#ctor
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8.ModuleV8()
+  nameWithType: ModuleV8.ModuleV8()
+- uid: Polkadot.DataStructs.Metadata.ModuleV8.#ctor*
+  name: ModuleV8
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html#Polkadot_DataStructs_Metadata_ModuleV8__ctor_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ModuleV8.#ctor
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8.ModuleV8
+  nameWithType: ModuleV8.ModuleV8
+- uid: Polkadot.DataStructs.Metadata.ModuleV8.Call
+  name: Call
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html#Polkadot_DataStructs_Metadata_ModuleV8_Call
+  commentId: P:Polkadot.DataStructs.Metadata.ModuleV8.Call
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8.Call
+  nameWithType: ModuleV8.Call
+- uid: Polkadot.DataStructs.Metadata.ModuleV8.Call*
+  name: Call
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html#Polkadot_DataStructs_Metadata_ModuleV8_Call_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ModuleV8.Call
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8.Call
+  nameWithType: ModuleV8.Call
+- uid: Polkadot.DataStructs.Metadata.ModuleV8.Cons
+  name: Cons
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html#Polkadot_DataStructs_Metadata_ModuleV8_Cons
+  commentId: P:Polkadot.DataStructs.Metadata.ModuleV8.Cons
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8.Cons
+  nameWithType: ModuleV8.Cons
+- uid: Polkadot.DataStructs.Metadata.ModuleV8.Cons*
+  name: Cons
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html#Polkadot_DataStructs_Metadata_ModuleV8_Cons_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ModuleV8.Cons
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8.Cons
+  nameWithType: ModuleV8.Cons
+- uid: Polkadot.DataStructs.Metadata.ModuleV8.Errors
+  name: Errors
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html#Polkadot_DataStructs_Metadata_ModuleV8_Errors
+  commentId: P:Polkadot.DataStructs.Metadata.ModuleV8.Errors
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8.Errors
+  nameWithType: ModuleV8.Errors
+- uid: Polkadot.DataStructs.Metadata.ModuleV8.Errors*
+  name: Errors
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html#Polkadot_DataStructs_Metadata_ModuleV8_Errors_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ModuleV8.Errors
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8.Errors
+  nameWithType: ModuleV8.Errors
+- uid: Polkadot.DataStructs.Metadata.ModuleV8.Ev
+  name: Ev
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html#Polkadot_DataStructs_Metadata_ModuleV8_Ev
+  commentId: P:Polkadot.DataStructs.Metadata.ModuleV8.Ev
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8.Ev
+  nameWithType: ModuleV8.Ev
+- uid: Polkadot.DataStructs.Metadata.ModuleV8.Ev*
+  name: Ev
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html#Polkadot_DataStructs_Metadata_ModuleV8_Ev_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ModuleV8.Ev
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8.Ev
+  nameWithType: ModuleV8.Ev
+- uid: Polkadot.DataStructs.Metadata.ModuleV8.Name
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html#Polkadot_DataStructs_Metadata_ModuleV8_Name
+  commentId: P:Polkadot.DataStructs.Metadata.ModuleV8.Name
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8.Name
+  nameWithType: ModuleV8.Name
+- uid: Polkadot.DataStructs.Metadata.ModuleV8.Name*
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html#Polkadot_DataStructs_Metadata_ModuleV8_Name_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ModuleV8.Name
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8.Name
+  nameWithType: ModuleV8.Name
+- uid: Polkadot.DataStructs.Metadata.ModuleV8.Storage
+  name: Storage
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html#Polkadot_DataStructs_Metadata_ModuleV8_Storage
+  commentId: P:Polkadot.DataStructs.Metadata.ModuleV8.Storage
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8.Storage
+  nameWithType: ModuleV8.Storage
+- uid: Polkadot.DataStructs.Metadata.ModuleV8.Storage*
+  name: Storage
+  href: docfx/api/Polkadot.DataStructs.Metadata.ModuleV8.html#Polkadot_DataStructs_Metadata_ModuleV8_Storage_
+  commentId: Overload:Polkadot.DataStructs.Metadata.ModuleV8.Storage
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.ModuleV8.Storage
+  nameWithType: ModuleV8.Storage
+- uid: Polkadot.DataStructs.Metadata.StorageCollectionV7
+  name: StorageCollectionV7
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageCollectionV7.html
+  commentId: T:Polkadot.DataStructs.Metadata.StorageCollectionV7
+  fullName: Polkadot.DataStructs.Metadata.StorageCollectionV7
+  nameWithType: StorageCollectionV7
+- uid: Polkadot.DataStructs.Metadata.StorageCollectionV7.Items
+  name: Items
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageCollectionV7.html#Polkadot_DataStructs_Metadata_StorageCollectionV7_Items
+  commentId: P:Polkadot.DataStructs.Metadata.StorageCollectionV7.Items
+  fullName: Polkadot.DataStructs.Metadata.StorageCollectionV7.Items
+  nameWithType: StorageCollectionV7.Items
+- uid: Polkadot.DataStructs.Metadata.StorageCollectionV7.Items*
+  name: Items
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageCollectionV7.html#Polkadot_DataStructs_Metadata_StorageCollectionV7_Items_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageCollectionV7.Items
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageCollectionV7.Items
+  nameWithType: StorageCollectionV7.Items
+- uid: Polkadot.DataStructs.Metadata.StorageCollectionV7.Prefix
+  name: Prefix
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageCollectionV7.html#Polkadot_DataStructs_Metadata_StorageCollectionV7_Prefix
+  commentId: P:Polkadot.DataStructs.Metadata.StorageCollectionV7.Prefix
+  fullName: Polkadot.DataStructs.Metadata.StorageCollectionV7.Prefix
+  nameWithType: StorageCollectionV7.Prefix
+- uid: Polkadot.DataStructs.Metadata.StorageCollectionV7.Prefix*
+  name: Prefix
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageCollectionV7.html#Polkadot_DataStructs_Metadata_StorageCollectionV7_Prefix_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageCollectionV7.Prefix
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageCollectionV7.Prefix
+  nameWithType: StorageCollectionV7.Prefix
+- uid: Polkadot.DataStructs.Metadata.StorageCollectionV8
+  name: StorageCollectionV8
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageCollectionV8.html
+  commentId: T:Polkadot.DataStructs.Metadata.StorageCollectionV8
+  fullName: Polkadot.DataStructs.Metadata.StorageCollectionV8
+  nameWithType: StorageCollectionV8
+- uid: Polkadot.DataStructs.Metadata.StorageCollectionV8.Items
+  name: Items
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageCollectionV8.html#Polkadot_DataStructs_Metadata_StorageCollectionV8_Items
+  commentId: P:Polkadot.DataStructs.Metadata.StorageCollectionV8.Items
+  fullName: Polkadot.DataStructs.Metadata.StorageCollectionV8.Items
+  nameWithType: StorageCollectionV8.Items
+- uid: Polkadot.DataStructs.Metadata.StorageCollectionV8.Items*
+  name: Items
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageCollectionV8.html#Polkadot_DataStructs_Metadata_StorageCollectionV8_Items_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageCollectionV8.Items
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageCollectionV8.Items
+  nameWithType: StorageCollectionV8.Items
+- uid: Polkadot.DataStructs.Metadata.StorageCollectionV8.Prefix
+  name: Prefix
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageCollectionV8.html#Polkadot_DataStructs_Metadata_StorageCollectionV8_Prefix
+  commentId: P:Polkadot.DataStructs.Metadata.StorageCollectionV8.Prefix
+  fullName: Polkadot.DataStructs.Metadata.StorageCollectionV8.Prefix
+  nameWithType: StorageCollectionV8.Prefix
+- uid: Polkadot.DataStructs.Metadata.StorageCollectionV8.Prefix*
+  name: Prefix
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageCollectionV8.html#Polkadot_DataStructs_Metadata_StorageCollectionV8_Prefix_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageCollectionV8.Prefix
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageCollectionV8.Prefix
+  nameWithType: StorageCollectionV8.Prefix
 - uid: Polkadot.DataStructs.Metadata.StorageV4
   name: StorageV4
   href: docfx/api/Polkadot.DataStructs.Metadata.StorageV4.html
@@ -2583,6 +4862,206 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataStructs.Metadata.StorageV4.Type
   nameWithType: StorageV4.Type
+- uid: Polkadot.DataStructs.Metadata.StorageV7
+  name: StorageV7
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV7.html
+  commentId: T:Polkadot.DataStructs.Metadata.StorageV7
+  fullName: Polkadot.DataStructs.Metadata.StorageV7
+  nameWithType: StorageV7
+- uid: Polkadot.DataStructs.Metadata.StorageV7.Documentation
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV7.html#Polkadot_DataStructs_Metadata_StorageV7_Documentation
+  commentId: P:Polkadot.DataStructs.Metadata.StorageV7.Documentation
+  fullName: Polkadot.DataStructs.Metadata.StorageV7.Documentation
+  nameWithType: StorageV7.Documentation
+- uid: Polkadot.DataStructs.Metadata.StorageV7.Documentation*
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV7.html#Polkadot_DataStructs_Metadata_StorageV7_Documentation_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageV7.Documentation
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageV7.Documentation
+  nameWithType: StorageV7.Documentation
+- uid: Polkadot.DataStructs.Metadata.StorageV7.Fallback
+  name: Fallback
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV7.html#Polkadot_DataStructs_Metadata_StorageV7_Fallback
+  commentId: P:Polkadot.DataStructs.Metadata.StorageV7.Fallback
+  fullName: Polkadot.DataStructs.Metadata.StorageV7.Fallback
+  nameWithType: StorageV7.Fallback
+- uid: Polkadot.DataStructs.Metadata.StorageV7.Fallback*
+  name: Fallback
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV7.html#Polkadot_DataStructs_Metadata_StorageV7_Fallback_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageV7.Fallback
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageV7.Fallback
+  nameWithType: StorageV7.Fallback
+- uid: Polkadot.DataStructs.Metadata.StorageV7.Modifier
+  name: Modifier
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV7.html#Polkadot_DataStructs_Metadata_StorageV7_Modifier
+  commentId: P:Polkadot.DataStructs.Metadata.StorageV7.Modifier
+  fullName: Polkadot.DataStructs.Metadata.StorageV7.Modifier
+  nameWithType: StorageV7.Modifier
+- uid: Polkadot.DataStructs.Metadata.StorageV7.Modifier*
+  name: Modifier
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV7.html#Polkadot_DataStructs_Metadata_StorageV7_Modifier_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageV7.Modifier
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageV7.Modifier
+  nameWithType: StorageV7.Modifier
+- uid: Polkadot.DataStructs.Metadata.StorageV7.Name
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV7.html#Polkadot_DataStructs_Metadata_StorageV7_Name
+  commentId: P:Polkadot.DataStructs.Metadata.StorageV7.Name
+  fullName: Polkadot.DataStructs.Metadata.StorageV7.Name
+  nameWithType: StorageV7.Name
+- uid: Polkadot.DataStructs.Metadata.StorageV7.Name*
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV7.html#Polkadot_DataStructs_Metadata_StorageV7_Name_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageV7.Name
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageV7.Name
+  nameWithType: StorageV7.Name
+- uid: Polkadot.DataStructs.Metadata.StorageV7.Prefix
+  name: Prefix
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV7.html#Polkadot_DataStructs_Metadata_StorageV7_Prefix
+  commentId: P:Polkadot.DataStructs.Metadata.StorageV7.Prefix
+  fullName: Polkadot.DataStructs.Metadata.StorageV7.Prefix
+  nameWithType: StorageV7.Prefix
+- uid: Polkadot.DataStructs.Metadata.StorageV7.Prefix*
+  name: Prefix
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV7.html#Polkadot_DataStructs_Metadata_StorageV7_Prefix_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageV7.Prefix
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageV7.Prefix
+  nameWithType: StorageV7.Prefix
+- uid: Polkadot.DataStructs.Metadata.StorageV7.Type
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV7.html#Polkadot_DataStructs_Metadata_StorageV7_Type
+  commentId: P:Polkadot.DataStructs.Metadata.StorageV7.Type
+  fullName: Polkadot.DataStructs.Metadata.StorageV7.Type
+  nameWithType: StorageV7.Type
+- uid: Polkadot.DataStructs.Metadata.StorageV7.Type*
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV7.html#Polkadot_DataStructs_Metadata_StorageV7_Type_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageV7.Type
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageV7.Type
+  nameWithType: StorageV7.Type
+- uid: Polkadot.DataStructs.Metadata.StorageV8
+  name: StorageV8
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV8.html
+  commentId: T:Polkadot.DataStructs.Metadata.StorageV8
+  fullName: Polkadot.DataStructs.Metadata.StorageV8
+  nameWithType: StorageV8
+- uid: Polkadot.DataStructs.Metadata.StorageV8.Documentation
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV8.html#Polkadot_DataStructs_Metadata_StorageV8_Documentation
+  commentId: P:Polkadot.DataStructs.Metadata.StorageV8.Documentation
+  fullName: Polkadot.DataStructs.Metadata.StorageV8.Documentation
+  nameWithType: StorageV8.Documentation
+- uid: Polkadot.DataStructs.Metadata.StorageV8.Documentation*
+  name: Documentation
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV8.html#Polkadot_DataStructs_Metadata_StorageV8_Documentation_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageV8.Documentation
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageV8.Documentation
+  nameWithType: StorageV8.Documentation
+- uid: Polkadot.DataStructs.Metadata.StorageV8.Fallback
+  name: Fallback
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV8.html#Polkadot_DataStructs_Metadata_StorageV8_Fallback
+  commentId: P:Polkadot.DataStructs.Metadata.StorageV8.Fallback
+  fullName: Polkadot.DataStructs.Metadata.StorageV8.Fallback
+  nameWithType: StorageV8.Fallback
+- uid: Polkadot.DataStructs.Metadata.StorageV8.Fallback*
+  name: Fallback
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV8.html#Polkadot_DataStructs_Metadata_StorageV8_Fallback_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageV8.Fallback
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageV8.Fallback
+  nameWithType: StorageV8.Fallback
+- uid: Polkadot.DataStructs.Metadata.StorageV8.Modifier
+  name: Modifier
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV8.html#Polkadot_DataStructs_Metadata_StorageV8_Modifier
+  commentId: P:Polkadot.DataStructs.Metadata.StorageV8.Modifier
+  fullName: Polkadot.DataStructs.Metadata.StorageV8.Modifier
+  nameWithType: StorageV8.Modifier
+- uid: Polkadot.DataStructs.Metadata.StorageV8.Modifier*
+  name: Modifier
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV8.html#Polkadot_DataStructs_Metadata_StorageV8_Modifier_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageV8.Modifier
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageV8.Modifier
+  nameWithType: StorageV8.Modifier
+- uid: Polkadot.DataStructs.Metadata.StorageV8.Name
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV8.html#Polkadot_DataStructs_Metadata_StorageV8_Name
+  commentId: P:Polkadot.DataStructs.Metadata.StorageV8.Name
+  fullName: Polkadot.DataStructs.Metadata.StorageV8.Name
+  nameWithType: StorageV8.Name
+- uid: Polkadot.DataStructs.Metadata.StorageV8.Name*
+  name: Name
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV8.html#Polkadot_DataStructs_Metadata_StorageV8_Name_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageV8.Name
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageV8.Name
+  nameWithType: StorageV8.Name
+- uid: Polkadot.DataStructs.Metadata.StorageV8.Prefix
+  name: Prefix
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV8.html#Polkadot_DataStructs_Metadata_StorageV8_Prefix
+  commentId: P:Polkadot.DataStructs.Metadata.StorageV8.Prefix
+  fullName: Polkadot.DataStructs.Metadata.StorageV8.Prefix
+  nameWithType: StorageV8.Prefix
+- uid: Polkadot.DataStructs.Metadata.StorageV8.Prefix*
+  name: Prefix
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV8.html#Polkadot_DataStructs_Metadata_StorageV8_Prefix_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageV8.Prefix
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageV8.Prefix
+  nameWithType: StorageV8.Prefix
+- uid: Polkadot.DataStructs.Metadata.StorageV8.Type
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV8.html#Polkadot_DataStructs_Metadata_StorageV8_Type
+  commentId: P:Polkadot.DataStructs.Metadata.StorageV8.Type
+  fullName: Polkadot.DataStructs.Metadata.StorageV8.Type
+  nameWithType: StorageV8.Type
+- uid: Polkadot.DataStructs.Metadata.StorageV8.Type*
+  name: Type
+  href: docfx/api/Polkadot.DataStructs.Metadata.StorageV8.html#Polkadot_DataStructs_Metadata_StorageV8_Type_
+  commentId: Overload:Polkadot.DataStructs.Metadata.StorageV8.Type
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Metadata.StorageV8.Type
+  nameWithType: StorageV8.Type
+- uid: Polkadot.DataStructs.Method
+  name: Method
+  href: docfx/api/Polkadot.DataStructs.Method.html
+  commentId: T:Polkadot.DataStructs.Method
+  fullName: Polkadot.DataStructs.Method
+  nameWithType: Method
+- uid: Polkadot.DataStructs.Method.MethodIndex
+  name: MethodIndex
+  href: docfx/api/Polkadot.DataStructs.Method.html#Polkadot_DataStructs_Method_MethodIndex
+  commentId: P:Polkadot.DataStructs.Method.MethodIndex
+  fullName: Polkadot.DataStructs.Method.MethodIndex
+  nameWithType: Method.MethodIndex
+- uid: Polkadot.DataStructs.Method.MethodIndex*
+  name: MethodIndex
+  href: docfx/api/Polkadot.DataStructs.Method.html#Polkadot_DataStructs_Method_MethodIndex_
+  commentId: Overload:Polkadot.DataStructs.Method.MethodIndex
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Method.MethodIndex
+  nameWithType: Method.MethodIndex
+- uid: Polkadot.DataStructs.Method.ModuleIndex
+  name: ModuleIndex
+  href: docfx/api/Polkadot.DataStructs.Method.html#Polkadot_DataStructs_Method_ModuleIndex
+  commentId: P:Polkadot.DataStructs.Method.ModuleIndex
+  fullName: Polkadot.DataStructs.Method.ModuleIndex
+  nameWithType: Method.ModuleIndex
+- uid: Polkadot.DataStructs.Method.ModuleIndex*
+  name: ModuleIndex
+  href: docfx/api/Polkadot.DataStructs.Method.html#Polkadot_DataStructs_Method_ModuleIndex_
+  commentId: Overload:Polkadot.DataStructs.Method.ModuleIndex
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.Method.ModuleIndex
+  nameWithType: Method.ModuleIndex
 - uid: Polkadot.DataStructs.PublicKey
   name: PublicKey
   href: docfx/api/Polkadot.DataStructs.PublicKey.html
@@ -2602,6 +5081,182 @@ references:
   isSpec: "True"
   fullName: Polkadot.DataStructs.PublicKey.Bytes
   nameWithType: PublicKey.Bytes
+- uid: Polkadot.DataStructs.SignaturePayload
+  name: SignaturePayload
+  href: docfx/api/Polkadot.DataStructs.SignaturePayload.html
+  commentId: T:Polkadot.DataStructs.SignaturePayload
+  fullName: Polkadot.DataStructs.SignaturePayload
+  nameWithType: SignaturePayload
+- uid: Polkadot.DataStructs.SignaturePayload.AuthoringBlockHash
+  name: AuthoringBlockHash
+  href: docfx/api/Polkadot.DataStructs.SignaturePayload.html#Polkadot_DataStructs_SignaturePayload_AuthoringBlockHash
+  commentId: P:Polkadot.DataStructs.SignaturePayload.AuthoringBlockHash
+  fullName: Polkadot.DataStructs.SignaturePayload.AuthoringBlockHash
+  nameWithType: SignaturePayload.AuthoringBlockHash
+- uid: Polkadot.DataStructs.SignaturePayload.AuthoringBlockHash*
+  name: AuthoringBlockHash
+  href: docfx/api/Polkadot.DataStructs.SignaturePayload.html#Polkadot_DataStructs_SignaturePayload_AuthoringBlockHash_
+  commentId: Overload:Polkadot.DataStructs.SignaturePayload.AuthoringBlockHash
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.SignaturePayload.AuthoringBlockHash
+  nameWithType: SignaturePayload.AuthoringBlockHash
+- uid: Polkadot.DataStructs.SignaturePayload.Era
+  name: Era
+  href: docfx/api/Polkadot.DataStructs.SignaturePayload.html#Polkadot_DataStructs_SignaturePayload_Era
+  commentId: P:Polkadot.DataStructs.SignaturePayload.Era
+  fullName: Polkadot.DataStructs.SignaturePayload.Era
+  nameWithType: SignaturePayload.Era
+- uid: Polkadot.DataStructs.SignaturePayload.Era*
+  name: Era
+  href: docfx/api/Polkadot.DataStructs.SignaturePayload.html#Polkadot_DataStructs_SignaturePayload_Era_
+  commentId: Overload:Polkadot.DataStructs.SignaturePayload.Era
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.SignaturePayload.Era
+  nameWithType: SignaturePayload.Era
+- uid: Polkadot.DataStructs.SignaturePayload.MethodBytes
+  name: MethodBytes
+  href: docfx/api/Polkadot.DataStructs.SignaturePayload.html#Polkadot_DataStructs_SignaturePayload_MethodBytes
+  commentId: P:Polkadot.DataStructs.SignaturePayload.MethodBytes
+  fullName: Polkadot.DataStructs.SignaturePayload.MethodBytes
+  nameWithType: SignaturePayload.MethodBytes
+- uid: Polkadot.DataStructs.SignaturePayload.MethodBytes*
+  name: MethodBytes
+  href: docfx/api/Polkadot.DataStructs.SignaturePayload.html#Polkadot_DataStructs_SignaturePayload_MethodBytes_
+  commentId: Overload:Polkadot.DataStructs.SignaturePayload.MethodBytes
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.SignaturePayload.MethodBytes
+  nameWithType: SignaturePayload.MethodBytes
+- uid: Polkadot.DataStructs.SignaturePayload.MethodBytesLength
+  name: MethodBytesLength
+  href: docfx/api/Polkadot.DataStructs.SignaturePayload.html#Polkadot_DataStructs_SignaturePayload_MethodBytesLength
+  commentId: P:Polkadot.DataStructs.SignaturePayload.MethodBytesLength
+  fullName: Polkadot.DataStructs.SignaturePayload.MethodBytesLength
+  nameWithType: SignaturePayload.MethodBytesLength
+- uid: Polkadot.DataStructs.SignaturePayload.MethodBytesLength*
+  name: MethodBytesLength
+  href: docfx/api/Polkadot.DataStructs.SignaturePayload.html#Polkadot_DataStructs_SignaturePayload_MethodBytesLength_
+  commentId: Overload:Polkadot.DataStructs.SignaturePayload.MethodBytesLength
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.SignaturePayload.MethodBytesLength
+  nameWithType: SignaturePayload.MethodBytesLength
+- uid: Polkadot.DataStructs.SignaturePayload.Nonce
+  name: Nonce
+  href: docfx/api/Polkadot.DataStructs.SignaturePayload.html#Polkadot_DataStructs_SignaturePayload_Nonce
+  commentId: P:Polkadot.DataStructs.SignaturePayload.Nonce
+  fullName: Polkadot.DataStructs.SignaturePayload.Nonce
+  nameWithType: SignaturePayload.Nonce
+- uid: Polkadot.DataStructs.SignaturePayload.Nonce*
+  name: Nonce
+  href: docfx/api/Polkadot.DataStructs.SignaturePayload.html#Polkadot_DataStructs_SignaturePayload_Nonce_
+  commentId: Overload:Polkadot.DataStructs.SignaturePayload.Nonce
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.SignaturePayload.Nonce
+  nameWithType: SignaturePayload.Nonce
+- uid: Polkadot.DataStructs.SignaturePayload.SerializeBinary(System.Byte[]@)
+  name: SerializeBinary(ref Byte[])
+  href: docfx/api/Polkadot.DataStructs.SignaturePayload.html#Polkadot_DataStructs_SignaturePayload_SerializeBinary_System_Byte____
+  commentId: M:Polkadot.DataStructs.SignaturePayload.SerializeBinary(System.Byte[]@)
+  name.vb: SerializeBinary(ByRef Byte())
+  fullName: Polkadot.DataStructs.SignaturePayload.SerializeBinary(ref System.Byte[])
+  fullName.vb: Polkadot.DataStructs.SignaturePayload.SerializeBinary(ByRef System.Byte())
+  nameWithType: SignaturePayload.SerializeBinary(ref Byte[])
+  nameWithType.vb: SignaturePayload.SerializeBinary(ByRef Byte())
+- uid: Polkadot.DataStructs.SignaturePayload.SerializeBinary*
+  name: SerializeBinary
+  href: docfx/api/Polkadot.DataStructs.SignaturePayload.html#Polkadot_DataStructs_SignaturePayload_SerializeBinary_
+  commentId: Overload:Polkadot.DataStructs.SignaturePayload.SerializeBinary
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.SignaturePayload.SerializeBinary
+  nameWithType: SignaturePayload.SerializeBinary
+- uid: Polkadot.DataStructs.TransferExtrinsic
+  name: TransferExtrinsic
+  href: docfx/api/Polkadot.DataStructs.TransferExtrinsic.html
+  commentId: T:Polkadot.DataStructs.TransferExtrinsic
+  fullName: Polkadot.DataStructs.TransferExtrinsic
+  nameWithType: TransferExtrinsic
+- uid: Polkadot.DataStructs.TransferExtrinsic.#ctor
+  name: TransferExtrinsic()
+  href: docfx/api/Polkadot.DataStructs.TransferExtrinsic.html#Polkadot_DataStructs_TransferExtrinsic__ctor
+  commentId: M:Polkadot.DataStructs.TransferExtrinsic.#ctor
+  fullName: Polkadot.DataStructs.TransferExtrinsic.TransferExtrinsic()
+  nameWithType: TransferExtrinsic.TransferExtrinsic()
+- uid: Polkadot.DataStructs.TransferExtrinsic.#ctor*
+  name: TransferExtrinsic
+  href: docfx/api/Polkadot.DataStructs.TransferExtrinsic.html#Polkadot_DataStructs_TransferExtrinsic__ctor_
+  commentId: Overload:Polkadot.DataStructs.TransferExtrinsic.#ctor
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.TransferExtrinsic.TransferExtrinsic
+  nameWithType: TransferExtrinsic.TransferExtrinsic
+- uid: Polkadot.DataStructs.TransferExtrinsic.Method
+  name: Method
+  href: docfx/api/Polkadot.DataStructs.TransferExtrinsic.html#Polkadot_DataStructs_TransferExtrinsic_Method
+  commentId: P:Polkadot.DataStructs.TransferExtrinsic.Method
+  fullName: Polkadot.DataStructs.TransferExtrinsic.Method
+  nameWithType: TransferExtrinsic.Method
+- uid: Polkadot.DataStructs.TransferExtrinsic.Method*
+  name: Method
+  href: docfx/api/Polkadot.DataStructs.TransferExtrinsic.html#Polkadot_DataStructs_TransferExtrinsic_Method_
+  commentId: Overload:Polkadot.DataStructs.TransferExtrinsic.Method
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.TransferExtrinsic.Method
+  nameWithType: TransferExtrinsic.Method
+- uid: Polkadot.DataStructs.TransferExtrinsic.SerializeBinary(System.Byte[]@)
+  name: SerializeBinary(ref Byte[])
+  href: docfx/api/Polkadot.DataStructs.TransferExtrinsic.html#Polkadot_DataStructs_TransferExtrinsic_SerializeBinary_System_Byte____
+  commentId: M:Polkadot.DataStructs.TransferExtrinsic.SerializeBinary(System.Byte[]@)
+  name.vb: SerializeBinary(ByRef Byte())
+  fullName: Polkadot.DataStructs.TransferExtrinsic.SerializeBinary(ref System.Byte[])
+  fullName.vb: Polkadot.DataStructs.TransferExtrinsic.SerializeBinary(ByRef System.Byte())
+  nameWithType: TransferExtrinsic.SerializeBinary(ref Byte[])
+  nameWithType.vb: TransferExtrinsic.SerializeBinary(ByRef Byte())
+- uid: Polkadot.DataStructs.TransferExtrinsic.SerializeBinary*
+  name: SerializeBinary
+  href: docfx/api/Polkadot.DataStructs.TransferExtrinsic.html#Polkadot_DataStructs_TransferExtrinsic_SerializeBinary_
+  commentId: Overload:Polkadot.DataStructs.TransferExtrinsic.SerializeBinary
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.TransferExtrinsic.SerializeBinary
+  nameWithType: TransferExtrinsic.SerializeBinary
+- uid: Polkadot.DataStructs.TransferExtrinsic.SerializeMethodBinary(System.Byte[]@,System.Int64)
+  name: SerializeMethodBinary(ref Byte[], Int64)
+  href: docfx/api/Polkadot.DataStructs.TransferExtrinsic.html#Polkadot_DataStructs_TransferExtrinsic_SerializeMethodBinary_System_Byte____System_Int64_
+  commentId: M:Polkadot.DataStructs.TransferExtrinsic.SerializeMethodBinary(System.Byte[]@,System.Int64)
+  name.vb: SerializeMethodBinary(ByRef Byte(), Int64)
+  fullName: Polkadot.DataStructs.TransferExtrinsic.SerializeMethodBinary(ref System.Byte[], System.Int64)
+  fullName.vb: Polkadot.DataStructs.TransferExtrinsic.SerializeMethodBinary(ByRef System.Byte(), System.Int64)
+  nameWithType: TransferExtrinsic.SerializeMethodBinary(ref Byte[], Int64)
+  nameWithType.vb: TransferExtrinsic.SerializeMethodBinary(ByRef Byte(), Int64)
+- uid: Polkadot.DataStructs.TransferExtrinsic.SerializeMethodBinary*
+  name: SerializeMethodBinary
+  href: docfx/api/Polkadot.DataStructs.TransferExtrinsic.html#Polkadot_DataStructs_TransferExtrinsic_SerializeMethodBinary_
+  commentId: Overload:Polkadot.DataStructs.TransferExtrinsic.SerializeMethodBinary
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.TransferExtrinsic.SerializeMethodBinary
+  nameWithType: TransferExtrinsic.SerializeMethodBinary
+- uid: Polkadot.DataStructs.TransferMethod
+  name: TransferMethod
+  href: docfx/api/Polkadot.DataStructs.TransferMethod.html
+  commentId: T:Polkadot.DataStructs.TransferMethod
+  fullName: Polkadot.DataStructs.TransferMethod
+  nameWithType: TransferMethod
+- uid: Polkadot.DataStructs.TransferMethod.Amount
+  name: Amount
+  href: docfx/api/Polkadot.DataStructs.TransferMethod.html#Polkadot_DataStructs_TransferMethod_Amount
+  commentId: F:Polkadot.DataStructs.TransferMethod.Amount
+  fullName: Polkadot.DataStructs.TransferMethod.Amount
+  nameWithType: TransferMethod.Amount
+- uid: Polkadot.DataStructs.TransferMethod.ReceiverPublicKey
+  name: ReceiverPublicKey
+  href: docfx/api/Polkadot.DataStructs.TransferMethod.html#Polkadot_DataStructs_TransferMethod_ReceiverPublicKey
+  commentId: P:Polkadot.DataStructs.TransferMethod.ReceiverPublicKey
+  fullName: Polkadot.DataStructs.TransferMethod.ReceiverPublicKey
+  nameWithType: TransferMethod.ReceiverPublicKey
+- uid: Polkadot.DataStructs.TransferMethod.ReceiverPublicKey*
+  name: ReceiverPublicKey
+  href: docfx/api/Polkadot.DataStructs.TransferMethod.html#Polkadot_DataStructs_TransferMethod_ReceiverPublicKey_
+  commentId: Overload:Polkadot.DataStructs.TransferMethod.ReceiverPublicKey
+  isSpec: "True"
+  fullName: Polkadot.DataStructs.TransferMethod.ReceiverPublicKey
+  nameWithType: TransferMethod.ReceiverPublicKey
 - uid: Polkadot.ILogger
   name: ILogger
   href: docfx/api/Polkadot.ILogger.html
@@ -2817,6 +5472,38 @@ references:
   commentId: T:Polkadot.Source.Utils.Scale
   fullName: Polkadot.Source.Utils.Scale
   nameWithType: Scale
+- uid: Polkadot.Source.Utils.Scale.CompactIntegerLEBytes
+  name: Scale.CompactIntegerLEBytes
+  href: docfx/api/Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.html
+  commentId: T:Polkadot.Source.Utils.Scale.CompactIntegerLEBytes
+  fullName: Polkadot.Source.Utils.Scale.CompactIntegerLEBytes
+  nameWithType: Scale.CompactIntegerLEBytes
+- uid: Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.Bytes
+  name: Bytes
+  href: docfx/api/Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.html#Polkadot_Source_Utils_Scale_CompactIntegerLEBytes_Bytes
+  commentId: P:Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.Bytes
+  fullName: Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.Bytes
+  nameWithType: Scale.CompactIntegerLEBytes.Bytes
+- uid: Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.Bytes*
+  name: Bytes
+  href: docfx/api/Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.html#Polkadot_Source_Utils_Scale_CompactIntegerLEBytes_Bytes_
+  commentId: Overload:Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.Bytes
+  isSpec: "True"
+  fullName: Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.Bytes
+  nameWithType: Scale.CompactIntegerLEBytes.Bytes
+- uid: Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.Length
+  name: Length
+  href: docfx/api/Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.html#Polkadot_Source_Utils_Scale_CompactIntegerLEBytes_Length
+  commentId: P:Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.Length
+  fullName: Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.Length
+  nameWithType: Scale.CompactIntegerLEBytes.Length
+- uid: Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.Length*
+  name: Length
+  href: docfx/api/Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.html#Polkadot_Source_Utils_Scale_CompactIntegerLEBytes_Length_
+  commentId: Overload:Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.Length
+  isSpec: "True"
+  fullName: Polkadot.Source.Utils.Scale.CompactIntegerLEBytes.Length
+  nameWithType: Scale.CompactIntegerLEBytes.Length
 - uid: Polkadot.Source.Utils.Scale.DecodeCompactInteger(System.String@)
   name: DecodeCompactInteger(ref String)
   href: docfx/api/Polkadot.Source.Utils.Scale.html#Polkadot_Source_Utils_Scale_DecodeCompactInteger_System_String__
@@ -2833,6 +5520,19 @@ references:
   isSpec: "True"
   fullName: Polkadot.Source.Utils.Scale.DecodeCompactInteger
   nameWithType: Scale.DecodeCompactInteger
+- uid: Polkadot.Source.Utils.Scale.EncodeCompactInteger(System.Numerics.BigInteger)
+  name: EncodeCompactInteger(BigInteger)
+  href: docfx/api/Polkadot.Source.Utils.Scale.html#Polkadot_Source_Utils_Scale_EncodeCompactInteger_System_Numerics_BigInteger_
+  commentId: M:Polkadot.Source.Utils.Scale.EncodeCompactInteger(System.Numerics.BigInteger)
+  fullName: Polkadot.Source.Utils.Scale.EncodeCompactInteger(System.Numerics.BigInteger)
+  nameWithType: Scale.EncodeCompactInteger(BigInteger)
+- uid: Polkadot.Source.Utils.Scale.EncodeCompactInteger*
+  name: EncodeCompactInteger
+  href: docfx/api/Polkadot.Source.Utils.Scale.html#Polkadot_Source_Utils_Scale_EncodeCompactInteger_
+  commentId: Overload:Polkadot.Source.Utils.Scale.EncodeCompactInteger
+  isSpec: "True"
+  fullName: Polkadot.Source.Utils.Scale.EncodeCompactInteger
+  nameWithType: Scale.EncodeCompactInteger
 - uid: Polkadot.Source.Utils.Scale.ExtractString(System.String@,System.Int32)
   name: ExtractString(ref String, Int32)
   href: docfx/api/Polkadot.Source.Utils.Scale.html#Polkadot_Source_Utils_Scale_ExtractString_System_String__System_Int32_
@@ -2890,6 +5590,131 @@ references:
   isSpec: "True"
   fullName: Polkadot.Source.Utils.Scale.NextWord
   nameWithType: Scale.NextWord
+- uid: Polkadot.Source.Utils.Scale.WriteCompactToBuf(Polkadot.Source.Utils.Scale.CompactIntegerLEBytes,System.Byte[]@,System.Int64)
+  name: WriteCompactToBuf(Scale.CompactIntegerLEBytes, ref Byte[], Int64)
+  href: docfx/api/Polkadot.Source.Utils.Scale.html#Polkadot_Source_Utils_Scale_WriteCompactToBuf_Polkadot_Source_Utils_Scale_CompactIntegerLEBytes_System_Byte____System_Int64_
+  commentId: M:Polkadot.Source.Utils.Scale.WriteCompactToBuf(Polkadot.Source.Utils.Scale.CompactIntegerLEBytes,System.Byte[]@,System.Int64)
+  name.vb: WriteCompactToBuf(Scale.CompactIntegerLEBytes, ByRef Byte(), Int64)
+  fullName: Polkadot.Source.Utils.Scale.WriteCompactToBuf(Polkadot.Source.Utils.Scale.CompactIntegerLEBytes, ref System.Byte[], System.Int64)
+  fullName.vb: Polkadot.Source.Utils.Scale.WriteCompactToBuf(Polkadot.Source.Utils.Scale.CompactIntegerLEBytes, ByRef System.Byte(), System.Int64)
+  nameWithType: Scale.WriteCompactToBuf(Scale.CompactIntegerLEBytes, ref Byte[], Int64)
+  nameWithType.vb: Scale.WriteCompactToBuf(Scale.CompactIntegerLEBytes, ByRef Byte(), Int64)
+- uid: Polkadot.Source.Utils.Scale.WriteCompactToBuf*
+  name: WriteCompactToBuf
+  href: docfx/api/Polkadot.Source.Utils.Scale.html#Polkadot_Source_Utils_Scale_WriteCompactToBuf_
+  commentId: Overload:Polkadot.Source.Utils.Scale.WriteCompactToBuf
+  isSpec: "True"
+  fullName: Polkadot.Source.Utils.Scale.WriteCompactToBuf
+  nameWithType: Scale.WriteCompactToBuf
+- uid: Polkadot.src.DataStructs
+  name: Polkadot.src.DataStructs
+  href: docfx/api/Polkadot.src.DataStructs.html
+  commentId: N:Polkadot.src.DataStructs
+  fullName: Polkadot.src.DataStructs
+  nameWithType: Polkadot.src.DataStructs
+- uid: Polkadot.src.DataStructs.Era
+  name: Era
+  href: docfx/api/Polkadot.src.DataStructs.Era.html
+  commentId: T:Polkadot.src.DataStructs.Era
+  fullName: Polkadot.src.DataStructs.Era
+  nameWithType: Era
+- uid: Polkadot.src.DataStructs.Era.EraLength
+  name: EraLength
+  href: docfx/api/Polkadot.src.DataStructs.Era.html#Polkadot_src_DataStructs_Era_EraLength
+  commentId: P:Polkadot.src.DataStructs.Era.EraLength
+  fullName: Polkadot.src.DataStructs.Era.EraLength
+  nameWithType: Era.EraLength
+- uid: Polkadot.src.DataStructs.Era.EraLength*
+  name: EraLength
+  href: docfx/api/Polkadot.src.DataStructs.Era.html#Polkadot_src_DataStructs_Era_EraLength_
+  commentId: Overload:Polkadot.src.DataStructs.Era.EraLength
+  isSpec: "True"
+  fullName: Polkadot.src.DataStructs.Era.EraLength
+  nameWithType: Era.EraLength
+- uid: Polkadot.src.DataStructs.Era.EraProgress
+  name: EraProgress
+  href: docfx/api/Polkadot.src.DataStructs.Era.html#Polkadot_src_DataStructs_Era_EraProgress
+  commentId: P:Polkadot.src.DataStructs.Era.EraProgress
+  fullName: Polkadot.src.DataStructs.Era.EraProgress
+  nameWithType: Era.EraProgress
+- uid: Polkadot.src.DataStructs.Era.EraProgress*
+  name: EraProgress
+  href: docfx/api/Polkadot.src.DataStructs.Era.html#Polkadot_src_DataStructs_Era_EraProgress_
+  commentId: Overload:Polkadot.src.DataStructs.Era.EraProgress
+  isSpec: "True"
+  fullName: Polkadot.src.DataStructs.Era.EraProgress
+  nameWithType: Era.EraProgress
+- uid: Polkadot.src.DataStructs.SessionOrEpoch
+  name: SessionOrEpoch
+  href: docfx/api/Polkadot.src.DataStructs.SessionOrEpoch.html
+  commentId: T:Polkadot.src.DataStructs.SessionOrEpoch
+  fullName: Polkadot.src.DataStructs.SessionOrEpoch
+  nameWithType: SessionOrEpoch
+- uid: Polkadot.src.DataStructs.SessionOrEpoch.EpochLength
+  name: EpochLength
+  href: docfx/api/Polkadot.src.DataStructs.SessionOrEpoch.html#Polkadot_src_DataStructs_SessionOrEpoch_EpochLength
+  commentId: P:Polkadot.src.DataStructs.SessionOrEpoch.EpochLength
+  fullName: Polkadot.src.DataStructs.SessionOrEpoch.EpochLength
+  nameWithType: SessionOrEpoch.EpochLength
+- uid: Polkadot.src.DataStructs.SessionOrEpoch.EpochLength*
+  name: EpochLength
+  href: docfx/api/Polkadot.src.DataStructs.SessionOrEpoch.html#Polkadot_src_DataStructs_SessionOrEpoch_EpochLength_
+  commentId: Overload:Polkadot.src.DataStructs.SessionOrEpoch.EpochLength
+  isSpec: "True"
+  fullName: Polkadot.src.DataStructs.SessionOrEpoch.EpochLength
+  nameWithType: SessionOrEpoch.EpochLength
+- uid: Polkadot.src.DataStructs.SessionOrEpoch.EpochProgress
+  name: EpochProgress
+  href: docfx/api/Polkadot.src.DataStructs.SessionOrEpoch.html#Polkadot_src_DataStructs_SessionOrEpoch_EpochProgress
+  commentId: P:Polkadot.src.DataStructs.SessionOrEpoch.EpochProgress
+  fullName: Polkadot.src.DataStructs.SessionOrEpoch.EpochProgress
+  nameWithType: SessionOrEpoch.EpochProgress
+- uid: Polkadot.src.DataStructs.SessionOrEpoch.EpochProgress*
+  name: EpochProgress
+  href: docfx/api/Polkadot.src.DataStructs.SessionOrEpoch.html#Polkadot_src_DataStructs_SessionOrEpoch_EpochProgress_
+  commentId: Overload:Polkadot.src.DataStructs.SessionOrEpoch.EpochProgress
+  isSpec: "True"
+  fullName: Polkadot.src.DataStructs.SessionOrEpoch.EpochProgress
+  nameWithType: SessionOrEpoch.EpochProgress
+- uid: Polkadot.src.DataStructs.SessionOrEpoch.IsEpoch
+  name: IsEpoch
+  href: docfx/api/Polkadot.src.DataStructs.SessionOrEpoch.html#Polkadot_src_DataStructs_SessionOrEpoch_IsEpoch
+  commentId: P:Polkadot.src.DataStructs.SessionOrEpoch.IsEpoch
+  fullName: Polkadot.src.DataStructs.SessionOrEpoch.IsEpoch
+  nameWithType: SessionOrEpoch.IsEpoch
+- uid: Polkadot.src.DataStructs.SessionOrEpoch.IsEpoch*
+  name: IsEpoch
+  href: docfx/api/Polkadot.src.DataStructs.SessionOrEpoch.html#Polkadot_src_DataStructs_SessionOrEpoch_IsEpoch_
+  commentId: Overload:Polkadot.src.DataStructs.SessionOrEpoch.IsEpoch
+  isSpec: "True"
+  fullName: Polkadot.src.DataStructs.SessionOrEpoch.IsEpoch
+  nameWithType: SessionOrEpoch.IsEpoch
+- uid: Polkadot.src.DataStructs.SessionOrEpoch.SessionLength
+  name: SessionLength
+  href: docfx/api/Polkadot.src.DataStructs.SessionOrEpoch.html#Polkadot_src_DataStructs_SessionOrEpoch_SessionLength
+  commentId: P:Polkadot.src.DataStructs.SessionOrEpoch.SessionLength
+  fullName: Polkadot.src.DataStructs.SessionOrEpoch.SessionLength
+  nameWithType: SessionOrEpoch.SessionLength
+- uid: Polkadot.src.DataStructs.SessionOrEpoch.SessionLength*
+  name: SessionLength
+  href: docfx/api/Polkadot.src.DataStructs.SessionOrEpoch.html#Polkadot_src_DataStructs_SessionOrEpoch_SessionLength_
+  commentId: Overload:Polkadot.src.DataStructs.SessionOrEpoch.SessionLength
+  isSpec: "True"
+  fullName: Polkadot.src.DataStructs.SessionOrEpoch.SessionLength
+  nameWithType: SessionOrEpoch.SessionLength
+- uid: Polkadot.src.DataStructs.SessionOrEpoch.SessionProgress
+  name: SessionProgress
+  href: docfx/api/Polkadot.src.DataStructs.SessionOrEpoch.html#Polkadot_src_DataStructs_SessionOrEpoch_SessionProgress
+  commentId: P:Polkadot.src.DataStructs.SessionOrEpoch.SessionProgress
+  fullName: Polkadot.src.DataStructs.SessionOrEpoch.SessionProgress
+  nameWithType: SessionOrEpoch.SessionProgress
+- uid: Polkadot.src.DataStructs.SessionOrEpoch.SessionProgress*
+  name: SessionProgress
+  href: docfx/api/Polkadot.src.DataStructs.SessionOrEpoch.html#Polkadot_src_DataStructs_SessionOrEpoch_SessionProgress_
+  commentId: Overload:Polkadot.src.DataStructs.SessionOrEpoch.SessionProgress
+  isSpec: "True"
+  fullName: Polkadot.src.DataStructs.SessionOrEpoch.SessionProgress
+  nameWithType: SessionOrEpoch.SessionProgress
 - uid: Polkadot.Test
   name: Polkadot.Test
   href: docfx/api/Polkadot.Test.html
@@ -3032,3 +5857,95 @@ references:
   isSpec: "True"
   fullName: Polkadot.Test.MockJsonRpc.UnsubscribeWs
   nameWithType: MockJsonRpc.UnsubscribeWs
+- uid: Polkadot.Utils
+  name: Polkadot.Utils
+  href: docfx/api/Polkadot.Utils.html
+  commentId: N:Polkadot.Utils
+  fullName: Polkadot.Utils
+  nameWithType: Polkadot.Utils
+- uid: Polkadot.Utils.AddressUtils
+  name: AddressUtils
+  href: docfx/api/Polkadot.Utils.AddressUtils.html
+  commentId: T:Polkadot.Utils.AddressUtils
+  fullName: Polkadot.Utils.AddressUtils
+  nameWithType: AddressUtils
+- uid: Polkadot.Utils.AddressUtils.GetPublicKeyFromAddr(Polkadot.DataStructs.Address)
+  name: GetPublicKeyFromAddr(Address)
+  href: docfx/api/Polkadot.Utils.AddressUtils.html#Polkadot_Utils_AddressUtils_GetPublicKeyFromAddr_Polkadot_DataStructs_Address_
+  commentId: M:Polkadot.Utils.AddressUtils.GetPublicKeyFromAddr(Polkadot.DataStructs.Address)
+  fullName: Polkadot.Utils.AddressUtils.GetPublicKeyFromAddr(Polkadot.DataStructs.Address)
+  nameWithType: AddressUtils.GetPublicKeyFromAddr(Address)
+- uid: Polkadot.Utils.AddressUtils.GetPublicKeyFromAddr(System.String)
+  name: GetPublicKeyFromAddr(String)
+  href: docfx/api/Polkadot.Utils.AddressUtils.html#Polkadot_Utils_AddressUtils_GetPublicKeyFromAddr_System_String_
+  commentId: M:Polkadot.Utils.AddressUtils.GetPublicKeyFromAddr(System.String)
+  fullName: Polkadot.Utils.AddressUtils.GetPublicKeyFromAddr(System.String)
+  nameWithType: AddressUtils.GetPublicKeyFromAddr(String)
+- uid: Polkadot.Utils.AddressUtils.GetPublicKeyFromAddr*
+  name: GetPublicKeyFromAddr
+  href: docfx/api/Polkadot.Utils.AddressUtils.html#Polkadot_Utils_AddressUtils_GetPublicKeyFromAddr_
+  commentId: Overload:Polkadot.Utils.AddressUtils.GetPublicKeyFromAddr
+  isSpec: "True"
+  fullName: Polkadot.Utils.AddressUtils.GetPublicKeyFromAddr
+  nameWithType: AddressUtils.GetPublicKeyFromAddr
+- uid: Polkadot.Utils.Converters
+  name: Converters
+  href: docfx/api/Polkadot.Utils.Converters.html
+  commentId: T:Polkadot.Utils.Converters
+  fullName: Polkadot.Utils.Converters
+  nameWithType: Converters
+- uid: Polkadot.Utils.Converters.ByteArrayToString(System.Byte[],System.Int32)
+  name: ByteArrayToString(Byte[], Int32)
+  href: docfx/api/Polkadot.Utils.Converters.html#Polkadot_Utils_Converters_ByteArrayToString_System_Byte___System_Int32_
+  commentId: M:Polkadot.Utils.Converters.ByteArrayToString(System.Byte[],System.Int32)
+  name.vb: ByteArrayToString(Byte(), Int32)
+  fullName: Polkadot.Utils.Converters.ByteArrayToString(System.Byte[], System.Int32)
+  fullName.vb: Polkadot.Utils.Converters.ByteArrayToString(System.Byte(), System.Int32)
+  nameWithType: Converters.ByteArrayToString(Byte[], Int32)
+  nameWithType.vb: Converters.ByteArrayToString(Byte(), Int32)
+- uid: Polkadot.Utils.Converters.ByteArrayToString*
+  name: ByteArrayToString
+  href: docfx/api/Polkadot.Utils.Converters.html#Polkadot_Utils_Converters_ByteArrayToString_
+  commentId: Overload:Polkadot.Utils.Converters.ByteArrayToString
+  isSpec: "True"
+  fullName: Polkadot.Utils.Converters.ByteArrayToString
+  nameWithType: Converters.ByteArrayToString
+- uid: Polkadot.Utils.Converters.FromHex(System.String,System.Boolean)
+  name: FromHex(String, Boolean)
+  href: docfx/api/Polkadot.Utils.Converters.html#Polkadot_Utils_Converters_FromHex_System_String_System_Boolean_
+  commentId: M:Polkadot.Utils.Converters.FromHex(System.String,System.Boolean)
+  fullName: Polkadot.Utils.Converters.FromHex(System.String, System.Boolean)
+  nameWithType: Converters.FromHex(String, Boolean)
+- uid: Polkadot.Utils.Converters.FromHex*
+  name: FromHex
+  href: docfx/api/Polkadot.Utils.Converters.html#Polkadot_Utils_Converters_FromHex_
+  commentId: Overload:Polkadot.Utils.Converters.FromHex
+  isSpec: "True"
+  fullName: Polkadot.Utils.Converters.FromHex
+  nameWithType: Converters.FromHex
+- uid: Polkadot.Utils.Converters.FromHexByte(System.String)
+  name: FromHexByte(String)
+  href: docfx/api/Polkadot.Utils.Converters.html#Polkadot_Utils_Converters_FromHexByte_System_String_
+  commentId: M:Polkadot.Utils.Converters.FromHexByte(System.String)
+  fullName: Polkadot.Utils.Converters.FromHexByte(System.String)
+  nameWithType: Converters.FromHexByte(String)
+- uid: Polkadot.Utils.Converters.FromHexByte*
+  name: FromHexByte
+  href: docfx/api/Polkadot.Utils.Converters.html#Polkadot_Utils_Converters_FromHexByte_
+  commentId: Overload:Polkadot.Utils.Converters.FromHexByte
+  isSpec: "True"
+  fullName: Polkadot.Utils.Converters.FromHexByte
+  nameWithType: Converters.FromHexByte
+- uid: Polkadot.Utils.Converters.StringToByteArray(System.String)
+  name: StringToByteArray(String)
+  href: docfx/api/Polkadot.Utils.Converters.html#Polkadot_Utils_Converters_StringToByteArray_System_String_
+  commentId: M:Polkadot.Utils.Converters.StringToByteArray(System.String)
+  fullName: Polkadot.Utils.Converters.StringToByteArray(System.String)
+  nameWithType: Converters.StringToByteArray(String)
+- uid: Polkadot.Utils.Converters.StringToByteArray*
+  name: StringToByteArray
+  href: docfx/api/Polkadot.Utils.Converters.html#Polkadot_Utils_Converters_StringToByteArray_
+  commentId: Overload:Polkadot.Utils.Converters.StringToByteArray
+  isSpec: "True"
+  fullName: Polkadot.Utils.Converters.StringToByteArray
+  nameWithType: Converters.StringToByteArray
