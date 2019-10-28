@@ -240,6 +240,9 @@
             if (TryDeserialize<MetadataV7, ParseMetadataV7>(response, out MetadataV7 md7))
                 return md7;
 
+            if (TryDeserialize<MetadataV8, ParseMetadataV8>(response, out MetadataV8 md8))
+                return md8;
+
             return null;
         }
 

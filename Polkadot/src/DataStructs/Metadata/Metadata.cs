@@ -12,7 +12,6 @@
     public class Metadata
     {
         public int MetadataVersion { get; private set; }
-        //private MetadataV4 _MDV4 { get; set; }
         private readonly MetadataBase _metadata;
 
         public Metadata(MetadataBase metadata)
@@ -36,17 +35,21 @@
             int moduleIndex = -1;
             int emptyCount = 0;
 
-            if (_metadata.Version == 7)
+            var kusamaBase = _metadata.Version == 8 || _metadata.Version == 7;
+
+            if (kusamaBase)
             {
-                var md = _metadata as MetadataV7;
-                foreach (var module in md.Module.Select((item, ind) => new { item, ind }))
+                var md = _metadata as dynamic;
+
+                var modules = md.Module;
+                for (var ind = 0; ind < modules.Length; ind++)
                 {
-                    if (module.item.Name.Equals(moduleName, StringComparison.InvariantCultureIgnoreCase))
+                    if (modules[ind].Name.Equals(moduleName, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        moduleIndex = module.ind;
+                        moduleIndex = ind;
                         break;
                     }
-                    else if (!HasMethods(module.ind) && skipZeroCalls)
+                    else if (!HasMethods(ind) && skipZeroCalls)
                     {
                         emptyCount++;
                     }
@@ -77,9 +80,11 @@
         {
             bool result = true;
 
-            if (_metadata.Version == 7)
+            var kusamaBase = _metadata.Version == 8 || _metadata.Version == 7;
+
+            if (kusamaBase)
             {
-                var md = _metadata as MetadataV7;
+                var md = _metadata as dynamic;
                 result = md.Module[moduleIndex].Call != null;
             }
 
@@ -96,16 +101,19 @@
         {
             int methodIndex = -1;
 
-            if (_metadata.Version == 7)
-            {
-                var md = _metadata as MetadataV7;
-                var module = md.Module.ElementAtOrDefault(moduleIndex);
+            var kusamaBase = _metadata.Version == 8 || _metadata.Version == 7;
 
-                foreach (var storage in module.Storage.Items.Select((item, ind) => new { item, ind }))
+            if (kusamaBase)
+            {
+                var md = _metadata as dynamic;
+                var module = md.Module[moduleIndex];
+
+                for(var ind = 0; ind < module.Storage.Items.Length; ind++)
                 {
-                    if (storage.item.Name.Equals(funcName, StringComparison.InvariantCultureIgnoreCase))
+                    var storage = module.Storage.Items[ind];
+                    if (storage.Name.Equals(funcName, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        methodIndex = storage.ind;
+                        methodIndex = ind;
                         break;
                     }
                 }
@@ -132,16 +140,19 @@
         {
             int methodIndex = -1;
 
-            if (_metadata.Version == 7)
-            {
-                var md = _metadata as MetadataV7;
-                var module = md.Module.ElementAtOrDefault(moduleIndex);
+            var kusamaBase = _metadata.Version == 8 || _metadata.Version == 7;
 
-                foreach (var call in module.Call.Select((item, ind) => new { item, ind }))
+            if (kusamaBase)
+            {
+                var md = _metadata as dynamic;
+                var module = md.Module[moduleIndex];
+
+                for (var ind = 0; ind < module.Call.Length; ind++)
                 {
-                    if (call.item.Name.Equals(funcName, StringComparison.InvariantCultureIgnoreCase))
+                    var call = module.Call[ind];
+                    if (call.Name.Equals(funcName, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        methodIndex = call.ind;
+                        methodIndex = ind;
                         break;
                     }
                 }
@@ -150,7 +161,7 @@
             if (_metadata.Version == 4)
             {
                 var md = _metadata as MetadataV4;
-                var module = md.Module.ElementAtOrDefault(moduleIndex);
+                var module = md.Module[moduleIndex];
 
                 foreach (var call in module.Call.Select((item, ind) => new { item, ind }))
                 {
@@ -166,9 +177,11 @@
 
         public bool IsStateVariablePlain(int moduleIndex, int varIndex)
         {
-            if (_metadata.Version == 7)
+            var kusamaBase = _metadata.Version == 8 || _metadata.Version == 7;
+
+            if (kusamaBase)
             {
-                var md = _metadata as MetadataV7;
+                var md = _metadata as dynamic;
                 return md.Module[moduleIndex].Storage.Items[varIndex].Type.Type == 0;
             }
 
@@ -186,10 +199,12 @@
             BigInteger value = -1;
             var babeModuleIndex = GetModuleIndex(module, false);
 
-            if (_metadata.Version == 7)
+            var kusamaBase = _metadata.Version == 8 || _metadata.Version == 7;
+
+            if (kusamaBase)
             {
-                var md = _metadata as MetadataV7;
-                foreach(var item in md.Module[babeModuleIndex].Cons)
+                var md = _metadata as dynamic;
+                foreach (var item in md.Module[babeModuleIndex].Cons)
                 {
                     if (item.Name.Equals(constName))
                     {

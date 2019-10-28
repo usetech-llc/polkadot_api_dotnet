@@ -7,11 +7,11 @@ namespace PolkaTest
     using System;
 
     [Collection("Sequential")]
-    public class GetMetadataV7
+    public class GetMetadataV8
     {
         private readonly ITestOutputHelper output;
 
-        public GetMetadataV7(ITestOutputHelper output)
+        public GetMetadataV8(ITestOutputHelper output)
         {
             this.output = output;
         }
