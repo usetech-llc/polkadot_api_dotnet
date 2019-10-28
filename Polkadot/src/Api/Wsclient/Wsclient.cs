@@ -6,6 +6,7 @@
     using System.Security.Cryptography.X509Certificates;
     using System.Net.Security;
     using System.Linq;
+    using WebSocketSharp;
 
     public class Wsclient : IWebSocketClient
     {
@@ -51,7 +52,7 @@
 
         public void Disconnect()
         {
-            _wss.Close();
+            _wss.Close(CloseStatusCode.Away);
             _logger.Info($"Connection close");
         }
 

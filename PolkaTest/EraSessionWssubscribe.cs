@@ -9,11 +9,11 @@ namespace PolkaTest
     using System.Numerics;
 
     [Collection("Sequential")]
-    public class WssubscribeEraSession
+    public class EraSessionWssubscribe
     {
         private readonly ITestOutputHelper output;
 
-        public WssubscribeEraSession(ITestOutputHelper output)
+        public EraSessionWssubscribe(ITestOutputHelper output)
         {
             this.output = output;
         }
@@ -21,6 +21,8 @@ namespace PolkaTest
         [Fact]
         public void Ok()
         {
+            Thread.Sleep(10000);
+
             using (IApplication app = PolkaApi.GetAppication())
             {
                 // Subscribe to block number updates

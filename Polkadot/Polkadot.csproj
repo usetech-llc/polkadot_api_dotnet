@@ -13,10 +13,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="StrobeNet.sln" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Blake2Core" Version="1.0.0" />
     <PackageReference Include="docfx.console" Version="2.45.1">
       <PrivateAssets>all</PrivateAssets>
