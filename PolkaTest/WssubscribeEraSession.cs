@@ -92,8 +92,10 @@ namespace PolkaTest
 
                 // Unsubscribe and close connection
                 app.UnsubscribeEraAndSession(id);
-
+                app.Disconnect();
             }
+
+            Thread.Sleep(10000);
 
             // Kusama test
             using (IApplication app = PolkaApi.GetAppication())
@@ -167,7 +169,7 @@ namespace PolkaTest
 
                 // Unsubscribe and close connection
                 app.UnsubscribeEraAndSession(id);
-
+                app.Disconnect();
             }
         }
     }
