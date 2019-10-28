@@ -40,6 +40,7 @@ $ docker run -it --rm polkanet /bin/bash
 # dotnet test
 ```
 
+
 ### Building of documentation
 
 Edit Polkadot.csproj file and add "build;" in the docfx section like here:
