@@ -1,6 +1,6 @@
 # Manual Demos - Milestone 2
 
-Milestone 2 deliverables are tagged as [milestone2](https://github.com/usetech-llc/polkadot_api_dotnet/tree/milestone2)
+SR25519 deliverables are located in master branch of this repository.
 
 ### Build and run Docker image
 
@@ -19,10 +19,16 @@ Now you are connected to a running docker container with API built. You can exec
 # dotnet test --filter <test name>
 ```
 
+### Sign message and verify using Polkadot Web UI 
 
-## Deliverable 4
 
-### Support following RPC methods
+
+
+
+
+
+
+
 
 #### state_getKeys
 Execute command and watch for the following output:
