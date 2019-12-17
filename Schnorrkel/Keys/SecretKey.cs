@@ -3,7 +3,7 @@
     using Schnorrkel.Scalars;
     using System;
 
-    public struct SecretKey
+    internal struct SecretKey
     {
         /// Actual public key represented as a scalar.
         public Scalar key;

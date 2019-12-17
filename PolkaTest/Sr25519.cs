@@ -6,9 +6,8 @@ namespace PolkaTest
     using System.Text;
     using System.IO;
     using System;
-    //using Schnorrkel.Signed;
-    //using Schnorrkel.Merlin;
-    //using Schnorrkel;
+    using Schnorrkel;
+    using Polkadot.Utils;
 
     public class Sr25519Test
     {
@@ -19,91 +18,22 @@ namespace PolkaTest
             this.output = output;
         }
 
-        //public string PrintByteArray(byte[] bytes)
-        //{
-        //    var sb = new StringBuilder("new byte[] { ");
-        //    foreach (var b in bytes)
-        //    {
-        //        sb.Append(b + ", ");
-        //    }
-        //    sb.Append("}");
-        //    return sb.ToString();
-        //}
-
-        //public byte[] GetFileContent(string filename)
-        //{
-        //    return File.ReadAllBytes(filename);
-        //}
-
-        //public class Hardcoded : RandomGenerator
-        //{
-        //    private byte[] _res;
-        //    public Hardcoded(byte[] validResult)
-        //    {
-        //        _res = validResult;
-        //    }
-
-        //    public override void FillBytes(ref byte[] dst)
-        //    {
-        //        dst = new byte[] { 77, 196, 92, 65, 167, 196, 215, 23, 222, 26, 136, 164, 123, 67, 115, 78, 178, 96, 208, 59, 8, 157, 203, 111, 157, 87, 69, 105, 155, 61, 111, 153 };
-        //    }
-
-        //    public byte[] Result()
-        //    {
-        //        return _res;
-        //    }
-        //}
-
         [Fact]
         public void Ok()
         {
-            //string prjPath2 = AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf("bin"));
-            //var sk11 = File.ReadAllBytes($"J://projects//schnorrkel//testSig");
-            //var sdfdsf = sk11.PrintByteArray(); 
-            //////
-            //string prjPath = AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf("bin"));
+            // Version 0.1.1
+            var signaturePayloadBytes = new byte[Consts.MAX_METHOD_BYTES_SZ];
+            var rnd = new Random();
+            rnd.NextBytes(signaturePayloadBytes);
+            long payloadLength = Consts.MAX_METHOD_BYTES_SZ;
 
-            //// set 1
-            //var sk1 = File.ReadAllBytes($"{prjPath}//TestData//secret1");
-            //var pk1 = File.ReadAllBytes($"{prjPath}//TestData//public1");
-            //var sn1 = File.ReadAllBytes($"{prjPath}//TestData//nonce1");
-            //var res1 = File.ReadAllBytes($"{prjPath}//TestData//result1");
+            byte[] signerPublicKey = Converters.StringToByteArray("0xd678b3e00c4238888bbf08dbbe1d7de77c3f1ca1fc71a5a283770f06f7cd1205");
+            byte[] secretKeyVec = Converters.StringToByteArray("0xa81056d713af1ff17b599e60d287952e89301b5208324a0529b62dc7369c745defc9c8dd67b7c59b201bc164163a8978d40010c22743db142a47f2e064480d4b");
 
-            //var rg1 = new Hardcoded(res1);
+            var message = signaturePayloadBytes.AsMemory().Slice(0, (int)payloadLength).ToArray();
+            var sig2 = Sr25519v011.SignSimple(signerPublicKey, secretKeyVec, message);
 
-            //var sr25519TestCtx = new Sr25519(new SchnorrkelSettings
-            //{
-            //    RandomGenerator = rg1,
-            //    SigningContextMessage = "good"
-            //});
-
-            //var skBytes = new byte[64];
-            //sk1.CopyTo(skBytes, 0);
-            //sn1.CopyTo(skBytes, 32);
-
-            //var result = sr25519TestCtx.Sign(skBytes, pk1, Encoding.UTF8.GetBytes("test message"));
-            //Assert.True(result.ToBytes().Equal(rg1.Result()));
-
-            //// set 2
-            //var sk2 = File.ReadAllBytes($"{prjPath}//TestData//secret2");
-            //var sn2 = File.ReadAllBytes($"{prjPath}//TestData//nonce2");
-            //var pk2 = File.ReadAllBytes($"{prjPath}//TestData//public2");
-            //var res2 = File.ReadAllBytes($"{prjPath}//TestData//result2");
-
-            //var rg2 = new Hardcoded(res2);
-
-            //var sr25519TestCtx2 = new Sr25519(new SchnorrkelSettings
-            //{
-            //    RandomGenerator = rg1,
-            //    SigningContextMessage = "good"
-            //});
-
-            //var skBytes2 = new byte[64];
-            //sk2.CopyTo(skBytes2, 0);
-            //sn2.CopyTo(skBytes2, 32);
-
-            //var result2 = sr25519TestCtx2.Sign(skBytes2, pk2, Encoding.UTF8.GetBytes("test message"));
-            //Assert.True(result2.ToBytes().Equal(rg2.Result()));
+            Assert.True(Sr25519v011.Verify(sig2, signerPublicKey, message));
         }
     }
 }

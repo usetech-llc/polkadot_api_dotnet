@@ -4,7 +4,7 @@
     using Schnorrkel.Ristretto;
     using Schnorrkel.Scalars;
 
-    public class SigningTranscript
+    internal class SigningTranscript
     {
         SigningTranscriptOperation _operations;
         ISigningContext _context;

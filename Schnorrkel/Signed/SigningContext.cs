@@ -3,7 +3,7 @@
     using System;
     using Schnorrkel.Merlin;
 
-    public interface ISigningContext
+    internal interface ISigningContext
     {
         Transcript Bytes(byte[] data);
         Transcript GetTranscript();
@@ -12,7 +12,7 @@
         Transcript Hash512();
     }
 
-    public class SigningContext011 : ISigningContext
+    internal class SigningContext011 : ISigningContext
     {
         public Transcript ts;
 
@@ -56,7 +56,7 @@
         }
     }
 
-    public class SigningContext085 : ISigningContext
+    internal class SigningContext085 : ISigningContext
     {
         public Transcript ts;
 

@@ -19,10 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Polkadot\Polkadot.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="TestData\" />
+    <ProjectReference Include="..\Schnorrkel\Schnorrkel.csproj" />
   </ItemGroup>
 
 </Project>

@@ -16,8 +16,7 @@
     using Polkadot.Source.Utils;
     using Polkadot.src.DataStructs;
     using Polkadot.Utils;
-    using sr25519_dotnet.lib;
-    using sr25519_dotnet.lib.Models;
+    using Schnorrkel;
 
     //using Schnorrkel;
 
@@ -580,16 +579,8 @@
 
             byte[] secretKeyVec = Converters.StringToByteArray(privateKey);
 
-            // p/invoke version
-            var kp = new SR25519Keypair(te.Signature.SignerPublicKey, secretKeyVec);
-            var sig = SR25519.Sign(signaturePayloadBytes, (ulong)payloadLength, kp);
-            te.Signature.Sr25519Signature = sig;
-
-            //// adopted version
-            //var sr25519 = new Sr25519();
-            //var message = signaturePayloadBytes.AsMemory().Slice(0, (int)payloadLength).ToArray();
-            //var sig2 = sr25519.Sign(secretKeyVec, te.Signature.SignerPublicKey, message);
-            //te.Signature.Sr25519Signature = sig2.ToBytes();
+            var message = signaturePayloadBytes.AsMemory().Slice(0, (int)payloadLength).ToArray();
+            var sig = Sr25519v011.SignSimple(te.Signature.SignerPublicKey, secretKeyVec, message);
 
             // Serialize and send transaction
             var teBytes = new byte[Consts.MAX_METHOD_BYTES_SZ];
@@ -718,16 +709,9 @@
 
             var secretKeyVec = Converters.StringToByteArray(privateKey);
 
-            // p/invoke version
-            var kp = new SR25519Keypair(ce.Signature.SignerPublicKey, secretKeyVec);
-            var sig = SR25519.Sign(signaturePayloadBytes, (ulong)payloadLength, kp);
+            var message = signaturePayloadBytes.AsMemory().Slice(0, (int)payloadLength).ToArray();
+            var sig = Sr25519v011.SignSimple(ce.Signature.SignerPublicKey, secretKeyVec, message);
             ce.Signature.Sr25519Signature = sig;
-
-            //// adopted version
-            //var sr25519 = new Sr25519();
-            //var message = signaturePayloadBytes.AsMemory().Slice(0, (int)payloadLength).ToArray();
-            //var sig2 = sr25519.Sign(secretKeyVec, te.Signature.SignerPublicKey, message);
-            //te.Signature.Sr25519Signature = sig2.ToBytes();
 
             // Copy signature bytes to transaction
             ce.Signature.Sr25519Signature = sig;

@@ -6,7 +6,7 @@
     using System.Text;
     using StrobeNet;
 
-    public class Transcript
+    internal class Transcript
     {
         public Strobe _obj { get; private set; }
         private const string MERLIN_PROTOCOL_LABEL = "Merlin v1.0";
@@ -210,7 +210,7 @@
         }
     }
 
-    public class TranscriptRngBuilder
+    internal class TranscriptRngBuilder
     {
         public Transcript _strobe { get; private set; }
 
@@ -247,7 +247,7 @@
         public abstract void FillBytes(ref byte[] dst);
     }
 
-    public class TranscriptRng : RandomGenerator
+    internal class TranscriptRng : RandomGenerator
     {
         static Random _rnd;
         public Transcript _strobe { get; private set; }

@@ -16,7 +16,7 @@
             _rng = settings.RandomGenerator;
         }
 
-        public Signature Sign(SigningTranscript st, SecretKey secretKey, PublicKey publicKey)
+        internal Signature Sign(SigningTranscript st, SecretKey secretKey, PublicKey publicKey)
         {
             return Sign(st, secretKey, publicKey, _rng);
         }
@@ -63,7 +63,7 @@
             return sig.ToBytes011();
         }
 
-        public static bool Verify(SigningTranscript st, Signature sig, PublicKey publicKey)
+        internal static bool Verify(SigningTranscript st, Signature sig, PublicKey publicKey)
         {
             st.SetProtocolName(GetStrBytes("Schnorr-sig"));
             st.CommitPoint(GetStrBytes("pk"), publicKey.Key);
@@ -77,7 +77,7 @@
             return new RistrettoPoint(R).Compress().Equals(sig.R);
         }
 
-        public static Signature Sign(SigningTranscript st, SecretKey secretKey, PublicKey publicKey, RandomGenerator rng)
+        internal static Signature Sign(SigningTranscript st, SecretKey secretKey, PublicKey publicKey, RandomGenerator rng)
         {
             st.SetProtocolName(GetStrBytes("Schnorr-sig"));
             st.CommitPoint(GetStrBytes("pk"), publicKey.Key);

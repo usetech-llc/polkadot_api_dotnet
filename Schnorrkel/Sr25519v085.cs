@@ -29,7 +29,7 @@
             return sig.ToBytes();
         }
 
-        public static Signature Sign(SigningTranscript st, SecretKey secretKey, PublicKey publicKey, RandomGenerator rng)
+        internal static Signature Sign(SigningTranscript st, SecretKey secretKey, PublicKey publicKey, RandomGenerator rng)
         {
             st.SetProtocolName(GetStrBytes("Schnorr-sig"));
             st.CommitPoint(GetStrBytes("sign:pk"), publicKey.Key);

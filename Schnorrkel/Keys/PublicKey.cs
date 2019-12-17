@@ -3,7 +3,7 @@ using Schnorrkel.Ristretto;
 
 namespace Schnorrkel
 {
-    public class PublicKey
+    internal class PublicKey
     {
         public byte[] Key { get; }
 
