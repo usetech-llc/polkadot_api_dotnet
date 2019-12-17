@@ -581,6 +581,7 @@
 
             var message = signaturePayloadBytes.AsMemory().Slice(0, (int)payloadLength).ToArray();
             var sig = Sr25519v011.SignSimple(te.Signature.SignerPublicKey, secretKeyVec, message);
+            te.Signature.Sr25519Signature = sig;
 
             // Serialize and send transaction
             var teBytes = new byte[Consts.MAX_METHOD_BYTES_SZ];
