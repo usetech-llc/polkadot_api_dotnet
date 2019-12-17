@@ -21,7 +21,7 @@ namespace PolkaTest
         [Fact]
         public void Ok()
         {
-            const payloadSize = 20;
+            const long payloadSize = 20;
 
             // Version 0.1.1
             var signaturePayloadBytes = new byte[payloadSize];
