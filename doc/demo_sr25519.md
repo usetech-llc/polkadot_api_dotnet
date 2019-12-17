@@ -20,7 +20,10 @@ Now you are connected to a running docker container with API built. You can exec
 ```
 
 ### Sign message and verify using Polkadot Web UI 
+```
+# dotnet test --filter sr25519
 
+```
 
 
 

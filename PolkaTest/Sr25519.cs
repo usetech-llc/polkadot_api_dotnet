@@ -33,17 +33,17 @@ namespace PolkaTest
             var message = signaturePayloadBytes.AsMemory().Slice(0, (int)payloadLength).ToArray();
             var sig2 = Sr25519v011.SignSimple(signerPublicKey, secretKeyVec, message);
 
-            Output.WriteLine("Message: 0x");
+            output.WriteLine("Message: 0x");
             for (var i=0; i<Consts.MAX_METHOD_BYTES_SZ; i++) {
-                Output.Write($"{signaturePayloadBytes[i]:02X}");
+                output.Write($"{signaturePayloadBytes[i]:02X}");
             }
-            Output.WriteLine("");
+            output.WriteLine("");
 
-            Output.WriteLine("Signature: 0x");
+            output.WriteLine("Signature: 0x");
             for (var i=0; i<sig2.Length; i++) {
-                Output.Write($"{sig2[i]:02X}");
+                otput.Write($"{sig2[i]:02X}");
             }
-            Output.WriteLine("");
+            output.WriteLine("");
 
 
             Assert.True(Sr25519v011.Verify(sig2, signerPublicKey, message));
