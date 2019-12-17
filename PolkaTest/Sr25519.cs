@@ -35,13 +35,13 @@ namespace PolkaTest
 
             output.WriteLine("Message: 0x");
             for (var i=0; i<Consts.MAX_METHOD_BYTES_SZ; i++) {
-                output.Write($"{signaturePayloadBytes[i]:02X}");
+                Console.Write($"{signaturePayloadBytes[i]:02X}");
             }
             output.WriteLine("");
 
             output.WriteLine("Signature: 0x");
             for (var i=0; i<sig2.Length; i++) {
-                otput.Write($"{sig2[i]:02X}");
+                Console.Write($"{sig2[i]:02X}");
             }
             output.WriteLine("");
 
