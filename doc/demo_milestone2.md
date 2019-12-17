@@ -355,10 +355,10 @@ See release files in this repository
 
 ## Extra Deliverables
 
-### Kusama Metadata support
+### Kusama Metadata V8 support
 Execute command and watch for the following output, especially "Unsing epochs" string that indicates that Kusama epochs are detected:
 ```
-# dotnet test --filter GetMetadataV7
+# dotnet test --filter GetMetadataV8
 
 ...
 2019-10-18 10:48:30.6602|INFO|Polkadot.Logger|Connected to wss://kusama-rpc.polkadot.io/
