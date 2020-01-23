@@ -18,18 +18,18 @@
     using Polkadot.Utils;
     using Schnorrkel;
 
-    //using Schnorrkel;
-
     public class Application : IApplication, IWebSocketMessageObserver
     {
         private ILogger _logger;
         private IJsonRpc _jsonRpc;
 
+        private MetadataBase _metadataCache;
+
         private Object _subscriptionLock = new Object();
         private ConcurrentDictionary<int, JObject> _pendingSubscriptionUpdates = new ConcurrentDictionary<int, JObject>();
         private delegate void UpdateDelegate(JObject update);
         private ConcurrentDictionary<int, UpdateDelegate> _subscriptionHandlers = new ConcurrentDictionary<int, UpdateDelegate>();
-        private ProtocolParameters _protocolParams;
+        public ProtocolParameters _protocolParams;
 
         // Era/epoch/session subscription storage hashes and data
         private string _storageKeyCurrentEra;
@@ -224,8 +224,11 @@
             return Deserialize<RuntimeVersion, ParseRuntimeVersion>(response);
         }
 
-        public MetadataBase GetMetadata(GetMetadataParams param)
+        public MetadataBase GetMetadata(GetMetadataParams param, bool force = false)
         {
+            if (_metadataCache != null && !force)
+                return _metadataCache;
+
             JArray prm = new JArray { };
             if (param != null)
                 prm = new JArray { param.BlockHash };
@@ -233,14 +236,25 @@
 
             JObject response = _jsonRpc.Request(query);
 
+            
+
             if (TryDeserialize<MetadataV4, ParseMetadataV4>(response, out MetadataV4 md4))
+            {
+                _metadataCache = md4;
                 return md4;
+            }
 
             if (TryDeserialize<MetadataV7, ParseMetadataV7>(response, out MetadataV7 md7))
+            {
+                _metadataCache = md7;
                 return md7;
+            }
 
             if (TryDeserialize<MetadataV8, ParseMetadataV8>(response, out MetadataV8 md8))
+            {
+                _metadataCache = md8;
                 return md8;
+            }
 
             return null;
         }

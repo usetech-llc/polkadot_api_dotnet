@@ -29,6 +29,45 @@
             return _metadata.Version;
         }
 
+        public FunctionCallArgV8[] GetModuleCallParamsByIds(int moduleIndex, int callIndex)
+        {
+            var md = _metadata as dynamic;
+            int mi = 0;
+            int i = 0;
+
+            do
+            {
+                if (md.Module[i].Call != null)// && md.Module[i].Call[0].Name != null)
+                {
+                    mi++;
+                }
+                i++;
+            }
+            while (mi != moduleIndex);
+
+            return md.Module[i].Call[callIndex].Args;
+        }
+
+        public Tuple<string, string> GetModuleCallNameByIds(int moduleIndex, int callIndex)
+        {
+            var md = _metadata as dynamic;
+            int mi = 0;
+            int i = 0;
+
+            do
+            {
+                if (md.Module[i].Call != null)// && md.Module[i].Call[0].Name != null)
+                {
+                    mi++;
+                }
+                i++;
+            }
+            while (mi != moduleIndex);
+
+            dynamic item = md.Module[i].Call[callIndex];
+            return new Tuple<string, string>(md.Module[i].Name, item.Name);
+        }
+
         public int GetModuleIndex(string moduleName, bool skipZeroCalls)
         {
             // Find the module index in metadata

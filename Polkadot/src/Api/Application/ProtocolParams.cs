@@ -3,7 +3,7 @@
     using Polkadot.DataStructs;
     using Polkadot.DataStructs.Metadata;
 
-    internal class ProtocolParameters
+    public class ProtocolParameters
     {
         public Hasher FreeBalanceHasher { get; set; }
         public string FreeBalancePrefix { get; set; }

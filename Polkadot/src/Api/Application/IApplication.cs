@@ -74,9 +74,10 @@
         /// <summary>
         ///  Retreives the runtime metadata for specific block
         /// </summary>
-        /// <param name="param"> struct with blockHash 64 diget number in hex format </param>
+        /// <param name="param"> (optional) struct with blockHash 64 diget number in hex format </param>
+        /// <param name="force"> (default false) use cache </param>
         /// <returns> Metadata struct with result </returns>
-        MetadataBase GetMetadata(GetMetadataParams param);
+        MetadataBase GetMetadata(GetMetadataParams param, bool force = false);
 
         /// <summary>
         ///  Generates storage key for a certain Module and State variable defined by parameter and prefix. Parameter is a JSON
