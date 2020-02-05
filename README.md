@@ -52,3 +52,7 @@ Edit Polkadot.csproj file and add "build;" in the docfx section like here:
 ```
 
 Now when project is rebuilt, the docuemntation will be updated.
+
+### Special Thanks
+
+We thank Gautam Dhameja for sharing the source code for C-Rust bindings for SR25519 Rust library, which enabled our end-to-end testing and validation of our sr25519 implementations.
