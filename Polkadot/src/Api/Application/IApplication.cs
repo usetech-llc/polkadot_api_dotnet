@@ -9,7 +9,7 @@
 
     public interface IApplication : IDisposable
     {
-        int Connect(string node_url = "");
+        int Connect(string node_url = "", string metadataBlockHash = null);
 
         void Disconnect();
 

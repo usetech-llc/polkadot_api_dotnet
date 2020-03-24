@@ -80,7 +80,7 @@
             _protocolParams = new ProtocolParameters();
         }
 
-        public int Connect(string node_url = "")
+        public int Connect(string node_url = "", string metadataBlockHash = null)
         {
             int result = Consts.PAPI_OK;
 
@@ -97,7 +97,9 @@
             }
 
             // Read metadata for head block and initialize protocol parameters
-            _protocolParams.Metadata = new Metadata(GetMetadata(null));
+            var meta = metadataBlockHash != null ? new GetMetadataParams { BlockHash = metadataBlockHash } : null;
+
+            _protocolParams.Metadata = new Metadata(GetMetadata(meta));
             _protocolParams.FreeBalanceHasher = _protocolParams.Metadata.GetFuncHasher("Balances", "FreeBalance");
             _protocolParams.FreeBalancePrefix = "Balances FreeBalance";
             _protocolParams.BalanceModuleIndex = (byte)_protocolParams.Metadata.GetModuleIndex("Balances", true);
