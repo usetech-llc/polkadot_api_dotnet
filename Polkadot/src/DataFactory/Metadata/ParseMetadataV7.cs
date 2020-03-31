@@ -110,6 +110,10 @@ namespace Polkadot.DataFactory.Metadata
                 moduleList.Add(module);
             }
             result.Module = moduleList.ToArray();
+
+            if (str != string.Empty)
+                throw new Exception("Wrong metadata version");
+
             return result;
         }
 

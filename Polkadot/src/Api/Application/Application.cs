@@ -238,8 +238,6 @@
 
             JObject response = _jsonRpc.Request(query);
 
-            
-
             if (TryDeserialize<MetadataV4, ParseMetadataV4>(response, out MetadataV4 md4))
             {
                 _metadataCache = md4;
@@ -256,6 +254,12 @@
             {
                 _metadataCache = md8;
                 return md8;
+            }
+
+            if (TryDeserialize<MetadataV11, ParseMetadataV11>(response, out MetadataV11 md11))
+            {
+                _metadataCache = md11;
+                return md11;
             }
 
             return null;

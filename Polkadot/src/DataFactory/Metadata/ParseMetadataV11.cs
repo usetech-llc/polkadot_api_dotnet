@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using Polkadot.DataStructs.Metadata;
@@ -7,9 +8,9 @@ using Polkadot.Source.Utils;
 
 namespace Polkadot.DataFactory.Metadata
 {
-    public class ParseMetadataV8 : IParseFactory<MetadataV8>
+    public class ParseMetadataV11 : IParseFactory<MetadataV11>
     {
-        public MetadataV8 Parse(JObject json)
+        public MetadataV11 Parse(JObject json)
         {
             var str = json["result"].ToString().Substring(2);
             // magic bytes
@@ -19,14 +20,14 @@ namespace Polkadot.DataFactory.Metadata
             var magic4 = Scale.NextByte(ref str);
             var magic5 = Scale.NextByte(ref str);
 
-            var result = new MetadataV8();
+            var result = new MetadataV11();
 
-            var moduleList = new List<ModuleV8>();
+            var moduleList = new List<ModuleV11>();
             var mLen = Scale.DecodeCompactInteger(ref str);
 
             for (var moduleIndex = 0; moduleIndex < mLen.Value; moduleIndex++)
             {
-                var module = new ModuleV8();
+                var module = new ModuleV11();
 
                 // get module name
                 var moduleNameLen = Scale.DecodeCompactInteger(ref str);
@@ -37,8 +38,8 @@ namespace Polkadot.DataFactory.Metadata
                 var storageIsset = Scale.NextByte(ref str);
                 if (storageIsset != 0)
                 {
-                    module.Storage = new StorageCollectionV8();
-                    var storageList = new List<StorageV8>();
+                    module.Storage = new StorageCollectionV11();
+                    var storageList = new List<StorageV11>();
 
                     // get StorageCollection name
                     var storageNameLen = Scale.DecodeCompactInteger(ref str);
@@ -47,12 +48,12 @@ namespace Polkadot.DataFactory.Metadata
                     var storageLen = Scale.DecodeCompactInteger(ref str);
                     if (storageLen.Value == 0)
                     {
-                        storageList.Add(new StorageV8());
+                        storageList.Add(new StorageV11());
                     }
 
                     for (int i = 0; i < storageLen.Value; i++)
                     {
-                        storageList.Add(GetStorageV8(ref str));
+                        storageList.Add(GetStorageV11(ref str));
                     }
 
                     module.Storage.Items = storageList.ToArray();
@@ -63,16 +64,16 @@ namespace Polkadot.DataFactory.Metadata
                 var callsIsset = Scale.NextByte(ref str);
                 if (callsIsset != 0)
                 {
-                    var callList = new List<CallV8>();
+                    var callList = new List<CallV11>();
                     var callsCount = Scale.DecodeCompactInteger(ref str);
                     if (callsCount.Value == 0)
                     {
-                        callList.Add(new CallV8());
+                        callList.Add(new CallV11());
                     }
 
                     for (int i = 0; i < callsCount.Value; i++)
                     {
-                        callList.Add(GetCallV8(ref str));
+                        callList.Add(GetCallV11(ref str));
                     }
                     module.Call = callList.ToArray();
                 }
@@ -82,17 +83,17 @@ namespace Polkadot.DataFactory.Metadata
                 var eventsIsset = Scale.NextByte(ref str);
                 if (eventsIsset != 0)
                 {
-                    var eventList = new List<EventArgV8>();
+                    var eventList = new List<EventArgV11>();
                     var eventsCount = Scale.DecodeCompactInteger(ref str);
 
                     if (eventsCount.Value == 0)
                     {
-                        eventList.Add(new EventArgV8());
+                        eventList.Add(new EventArgV11());
                     }
 
                     for (int i = 0; i < eventsCount.Value; i++)
                     {
-                        eventList.Add(GetEventV8(ref str));
+                        eventList.Add(GetEventV11(ref str));
                     }
 
                     module.Ev = eventList.ToArray();
@@ -100,19 +101,19 @@ namespace Polkadot.DataFactory.Metadata
 
                 // ---------- Consts
                 var constsCount = Scale.DecodeCompactInteger(ref str);
-                var constsList = new List<ConstV8>();
+                var constsList = new List<ConstV11>();
                 for (int i = 0; i < constsCount.Value; i++)
                 {
-                     constsList.Add(GetConstV8(ref str));
+                     constsList.Add(GetConstV11(ref str));
                 }
                 module.Cons = constsList.ToArray();
 
                 // ---------- Errors
                 var errorsCount = Scale.DecodeCompactInteger(ref str);
-                var errorsList = new List<ErrorV8>();
+                var errorsList = new List<ErrorV11>();
                 for (int i = 0; i < errorsCount.Value; i++)
                 {
-                    errorsList.Add(GetErrorV8(ref str));
+                    errorsList.Add(GetErrorV11(ref str));
                 }
                 module.Errors = errorsList.ToArray();
 
@@ -120,15 +121,30 @@ namespace Polkadot.DataFactory.Metadata
             }
             result.Module = moduleList.ToArray();
 
+            // get signed extensions
+            var eLen = Scale.DecodeCompactInteger(ref str);
+            for (var extrinsicIndex = 0; extrinsicIndex < eLen.Value; extrinsicIndex++)
+            {
+                var itemsLen = Scale.DecodeCompactInteger(ref str);
+                var extrinsicExt = new List<string>();
+                for (var itemIndex = 0; itemIndex < itemsLen.Value; itemIndex++)
+                {
+                    var nameLen = Scale.DecodeCompactInteger(ref str);
+                    var name = Scale.ExtractString(ref str, nameLen.Value);
+                    extrinsicExt.Add(name);
+                }
+                result.ExtrinsicExtension = extrinsicExt.ToArray();
+            }
+
             if (str != string.Empty)
                 throw new Exception("Wrong metadata version");
 
             return result;
         }
 
-        private ErrorV8 GetErrorV8(ref string str)
+        private ErrorV11 GetErrorV11(ref string str)
         {
-            var errors = new ErrorV8();
+            var errors = new ErrorV11();
 
             // extract name
             var nameLen = Scale.DecodeCompactInteger(ref str);
@@ -159,9 +175,9 @@ namespace Polkadot.DataFactory.Metadata
             return errors;
         }
 
-        private EventArgV8 GetEventV8(ref string str)
+        private EventArgV11 GetEventV11(ref string str)
         {
-            var ea = new EventArgV8();
+            var ea = new EventArgV11();
 
             var callNameLen = Scale.DecodeCompactInteger(ref str);
             ea.Name = Scale.ExtractString(ref str, callNameLen.Value);
@@ -189,19 +205,19 @@ namespace Polkadot.DataFactory.Metadata
             return ea;
         }
 
-        private CallV8 GetCallV8(ref string str)
+        private CallV11 GetCallV11(ref string str)
         {
-            var call = new CallV8();
+            var call = new CallV11();
 
             var callNameLen = Scale.DecodeCompactInteger(ref str);
             call.Name = Scale.ExtractString(ref str, callNameLen.Value);
 
             // args count
-            var argList = new List<FunctionCallArgV8>();
+            var argList = new List<FunctionCallArgV11>();
             var args = Scale.DecodeCompactInteger(ref str);
             for (var i = 0; i < args.Value; i++)
             {
-                var fca = new FunctionCallArgV8();
+                var fca = new FunctionCallArgV11();
                 var argNameLen = Scale.DecodeCompactInteger(ref str);
                 fca.Name = Scale.ExtractString(ref str, argNameLen.Value);
 
@@ -226,9 +242,9 @@ namespace Polkadot.DataFactory.Metadata
             return call;
         }
 
-        private StorageV8 GetStorageV8(ref string str)
+        private StorageV11 GetStorageV11(ref string str)
         {
-            var storage = new StorageV8();
+            var storage = new StorageV11();
 
             var storageNameLen = Scale.DecodeCompactInteger(ref str);
             storage.Name = Scale.ExtractString(ref str, storageNameLen.Value);
@@ -236,7 +252,7 @@ namespace Polkadot.DataFactory.Metadata
             storage.Modifier = Scale.NextByte(ref str);
             var hasSecondType = Scale.NextByte(ref str);
 
-            storage.Type = new FuncTypeV8
+            storage.Type = new FuncTypeV11
             {
                 Type = hasSecondType != 0 ? Scale.NextByte(ref str) : (uint)0
             };
@@ -294,9 +310,9 @@ namespace Polkadot.DataFactory.Metadata
             return storage;
         }
 
-        private ConstV8 GetConstV8(ref string str)
+        private ConstV11 GetConstV11(ref string str)
         {
-            var consts = new ConstV8();
+            var consts = new ConstV11();
 
             // extract name
             var nameLen = Scale.DecodeCompactInteger(ref str);
