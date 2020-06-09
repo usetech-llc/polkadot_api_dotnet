@@ -45,7 +45,7 @@
         public static ulong AsU64(BigInteger bi)
         {
             var ba = bi.ToByteArray();
-            return ba.Length >= 8 ? BitConverter.ToUInt64(ba.AsSpan(0, 8)) : (ulong)(long)bi;
+            return ba.Length >= 8 ? BitConverter.ToUInt64(ba.AsSpan(0, 8).ToArray(), 0) : (ulong)(long)bi;
         }
 
         public static FieldElement51 FromBytes(byte[] bytes)

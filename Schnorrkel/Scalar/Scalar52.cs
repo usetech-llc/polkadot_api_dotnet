@@ -51,7 +51,7 @@
         public static ulong AsU64(BigInteger bi)
         {
             var ba = bi.ToByteArray();
-            return ba.Length >= 8 ? BitConverter.ToUInt64(ba.AsSpan(0, 8)) : (ulong)(long)bi;
+            return ba.Length >= 8 ? BitConverter.ToUInt64(ba.AsSpan(0, 8).ToArray(), 0) : (ulong)(long)bi;
         }
 
         private static byte AsU8(ulong num)
@@ -96,12 +96,13 @@
 
         public static ulong[] GetU64Data(byte[] data)
         {
+            var dataSpan = data.AsSpan();
             var result = new List<ulong>
             {
-                BitConverter.ToUInt64(data.Take(8).ToArray()),
-                BitConverter.ToUInt64(data.Skip(8).Take(8).ToArray()),
-                BitConverter.ToUInt64(data.Skip(16).Take(8).ToArray()),
-                BitConverter.ToUInt64(data.TakeLast(8).ToArray()),
+                BitConverter.ToUInt64(dataSpan[..8].ToArray(), 0),
+                BitConverter.ToUInt64(dataSpan[8..16].ToArray(), 0),
+                BitConverter.ToUInt64(dataSpan[16..24].ToArray(), 0),
+                BitConverter.ToUInt64(dataSpan[..^8].ToArray(), 0),
                 0
             };
 
