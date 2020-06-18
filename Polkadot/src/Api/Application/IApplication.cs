@@ -9,7 +9,7 @@
 
     public interface IApplication : IDisposable
     {
-        int Connect(string node_url = "");
+        int Connect(string node_url = "", string metadataBlockHash = null);
 
         void Disconnect();
 
@@ -93,7 +93,9 @@
         /// <param name="module"> module (as in metadata)</param>
         /// <param name="variable"> state variable (as in metadata for given module)</param>
         /// <returns> Storage key </returns>
-        string GetKeys(string jsonPrm, string module, string variable);
+        string GetKeys<T>(T prm, string module, string variable) where T : ITypeCreate;
+
+        string GetKeys(string module, string variable);
 
         /// <summary>
         ///  Reads storage for a certain Module and State variable defined by parameter and prefix.Parameter is a JSON
@@ -109,7 +111,9 @@
         /// <param name="module"> module (as in metadata)</param>
         /// <param name="variable"> state variable (as in metadata for given module)</param>
         /// <returns> Storage content </returns>
-        string GetStorage(string jsonPrm, string module, string variable);
+        string GetStorage(string module, string variable);
+
+        string GetStorage<T>(T prm, string module, string variable) where T : ITypeCreate;
 
         /// <summary>
         /// Returns storage hash of given State Variable for a given Module defined by parameter.
@@ -125,7 +129,9 @@
         /// <param name="module"> module (as in metadata)</param>
         /// <param name="variable"> state variable (as in metadata for given module)</param>
         /// <returns> Storage hash </returns>
-        string GetStorageHash(string jsonPrm, string module, string variable);
+        string GetStorageHash<T>(T prm, string module, string variable) where T : ITypeCreate;
+
+        string GetStorageHash(string module, string variable);
 
         /// <summary>
         /// Returns storage size for a given State Variable for a given Module defined by parameter.
@@ -141,7 +147,9 @@
         /// <param name="module"> module (as in metadata)</param>
         /// <param name="variable"> state variable (as in metadata for given module)</param>
         /// <returns> Storage size </returns>
-        int GetStorageSize(string jsonPrm, string module, string variable);
+        int GetStorageSize<T>(T prm, string module, string variable) where T : ITypeCreate;
+
+        int GetStorageSize(string module, string variable);
 
         /// <summary>
         /// Calls storage_getChildKeys RPC method with given child storage key and storage key
@@ -201,7 +209,7 @@
         /// <param name="recipient"> address that will receive the transfer </param>
         /// <param name="amount"> amount (in femto DOTs) to transfer </param>
         /// <param name="callback"> delegate that will receive operation updates </param>
-        int SignAndSendTransfer(string sender, string privateKey, string recipient, BigInteger amount, Action<string> callback);
+        string SignAndSendTransfer(string sender, string privateKey, string recipient, BigInteger amount, Action<string> callback);
 
         /// <summary>
         /// Subscribe to era and session. Only one subscription at a time is allowed. If a subscription already
@@ -211,7 +219,7 @@
         /// </summary>
         /// <param name="callback"> expression that will receive updates </param>
         /// <returns> operation result </returns>
-        int SubscribeEraAndSession(Action<Era, SessionOrEpoch> callback);
+        string SubscribeEraAndSession(Action<Era, SessionOrEpoch> callback);
 
         /// <summary>
         /// Subscribe to most recent value updates for a given storage key. Only one subscription at a time per address is
@@ -223,7 +231,7 @@
         /// <param name="key"> storage key to receive updates for (e.g. "0x66F795B8D457430EDDA717C3CBA459B9") </param>
         /// <param name="callback"> expression that will received </param>
         /// <returns> Subscription id </returns>
-        int SubscribeStorage(string key, Action<string> callback);
+        string SubscribeStorage(string key, Action<string> callback);
 
         /// <summary>
         /// Subscribe to most recent balance for a given address. Only one subscription at a time per address is allowed. If
@@ -235,7 +243,7 @@
         /// <param name="address"> address to receive balance updates for </param>
         /// <param name="callback">  expression that will receive balance updates </param>
         /// <returns> Subscription id </returns>
-        int SubscribeBalance(string address, Action<BigInteger> callback);
+        string SubscribeBalance(string address, Action<BigInteger> callback);
 
         /// <summary>
         /// Returns all pending extrinsics
@@ -257,7 +265,7 @@
         /// <param name="address"> address to receive nonce updates for </param>
         /// <param name="callback"> delegate expression that will receive nonce updates </param>
         /// <returns> operation result </returns>
-        int SubscribeAccountNonce(Address address, Action<BigInteger> callback);
+        string SubscribeAccountNonce(Address address, Action<BigInteger> callback);
 
         /// <summary>
         /// Submit a fully formatted extrinsic for block inclusion
@@ -295,14 +303,14 @@
         /// </summary>
         /// <param name="callback"> callback - delegate that will receive updates</param>
         /// <returns> operation result </returns>
-        int SubscribeBlockNumber(Action<long> callback);
+        string SubscribeBlockNumber(Action<long> callback);
 
         /// <summary>
         /// Unsubscribe from WebSocket endpoint and stop receiving updates with most recent block number.
         /// </summary>
         /// <param name="id"> Subscription id </param>
         /// <returns> operation result </returns>
-        void UnsubscribeBlockNumber(int id);
+        void UnsubscribeBlockNumber(string id);
 
         /// <summary>
         /// Subscribe to most recent runtime version.This subscription is necessary for applications that keep connection
@@ -316,7 +324,7 @@
         /// </summary>
         /// <param name="callback"> callback - delegate that will receive updates </param>
         /// <returns> operation result </returns>
-        int SubscribeRuntimeVersion(Action<RuntimeVersion> callback);
+        string SubscribeRuntimeVersion(Action<RuntimeVersion> callback);
 
         /// <summary>
         /// Submit and subscribe a fully formatted extrinsic for block inclusion
@@ -328,7 +336,7 @@
         /// <param name="privateKey">  sender private key </param>
         /// <param name="callback"> expression that will receive operation updates </param>
         /// <returns></returns>
-        int SubmitAndSubcribeExtrinsic(byte[] encodedMethodBytes,
+        string SubmitAndSubcribeExtrinsic(byte[] encodedMethodBytes,
                                         string module, string method, Address sender, string privateKey,
                                        Action<string> callback);
 
@@ -336,30 +344,30 @@
         /// Unsubscribe from WebSocket endpoint and stop receiving updates with most recent Runtime Version.
         /// </summary>
         /// <param name="id"> Subscription id </param>
-        void UnsubscribeRuntimeVersion(int id);
+        void UnsubscribeRuntimeVersion(string id);
 
         /// <summary>
         /// Unsubscribe from WebSocket endpoint and stop receiving updates for address nonce.
         /// </summary>
         /// <param name="id"> Subscription id </param>
-        void UnsubscribeAccountNonce(int id);
+        void UnsubscribeAccountNonce(string id);
 
         /// <summary>
         /// Unsubscribe from WebSocket endpoint and stop receiving updates with era and session.
         /// </summary>
         /// <param name="id"> Subscription id </param>
-        void UnsubscribeEraAndSession(int id);
+        void UnsubscribeEraAndSession(string id);
 
         /// <summary>
         /// Unsubscribe from WebSocket endpoint and stop receiving updates for address balance.
         /// </summary>
         /// <param name="id"> Subscription id </param>
-        void UnsubscribeStorage(int id);
+        void UnsubscribeStorage(string id);
 
         /// <summary>
         /// Unsubscribe from WebSocket endpoint and stop receiving updates for address balance.
         /// </summary>
         /// <param name="id"> Subscription id </param>
-        void UnsubscribeBalance(int id);
+        void UnsubscribeBalance(string id);
     }
 }

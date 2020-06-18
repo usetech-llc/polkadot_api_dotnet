@@ -4,7 +4,7 @@
 
     public struct JsonRpcQuery
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public JObject Json { get; set; }
     };
 }

@@ -2,7 +2,7 @@
 {
     public static class Consts
     {
-        public const string WssConnectionString = "wss://alex.unfrastructure.io/public/ws";
+        public const string WssConnectionString = "wss://kusama-rpc.polkadot.io/";
         public const string WsConnectionString = "ws://192.168.100.135:9944";
         public const string CertFileName = "ca-chain.cert.pem";
 
@@ -30,7 +30,7 @@
         public const int MAX_METHOD_BYTES_SZ = 2048;
 
         public static int DEFAULT_FIXED_EXSTRINSIC_SIZE = 103;
-
+        public static int HEALTH_REQUEST_TIME_SEC = 10;
 
         // lastLengthChange storage subscription hash
         public const string LAST_LENGTH_CHANGE_SUBSCRIPTION = "0xe781aa1e06ea53e01a4e129e0496764e";

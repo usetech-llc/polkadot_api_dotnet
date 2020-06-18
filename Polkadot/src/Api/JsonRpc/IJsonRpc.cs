@@ -31,7 +31,7 @@
         /// <param name="jsonMap"> jsonMap JSON object with command parameters </param>
         /// <param name="observer"> observer The observer that will be notified of updates </param>
         /// <returns> subscription ID </returns>
-        int SubscribeWs(JObject jsonMap, IWebSocketMessageObserver observer);
+        string SubscribeWs(JObject jsonMap, IWebSocketMessageObserver observer);
 
         /// <summary>
         /// Send a command to unsubscribe from websocket updates, e.g.state_unsubscribeStorage
@@ -39,6 +39,6 @@
         /// <param name="subscriptionId"> subscriptionId Id of subscription to unsubscribe from </param>
         /// <param name="method"></param>
         /// <returns> command execution result </returns>
-        int UnsubscribeWs(int subscriptionId, string method);
+        string UnsubscribeWs(string subscriptionId, string method);
     }
 }

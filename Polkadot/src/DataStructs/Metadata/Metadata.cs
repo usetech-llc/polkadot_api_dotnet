@@ -74,9 +74,7 @@
             int moduleIndex = -1;
             int emptyCount = 0;
 
-            var kusamaBase = _metadata.Version == 8 || _metadata.Version == 7;
-
-            if (kusamaBase)
+            if (IsKusamaBased())
             {
                 var md = _metadata as dynamic;
 
@@ -119,9 +117,7 @@
         {
             bool result = true;
 
-            var kusamaBase = _metadata.Version == 8 || _metadata.Version == 7;
-
-            if (kusamaBase)
+            if (IsKusamaBased())
             {
                 var md = _metadata as dynamic;
                 result = md.Module[moduleIndex].Call != null;
@@ -140,9 +136,7 @@
         {
             int methodIndex = -1;
 
-            var kusamaBase = _metadata.Version == 8 || _metadata.Version == 7;
-
-            if (kusamaBase)
+            if (IsKusamaBased())
             {
                 var md = _metadata as dynamic;
                 var module = md.Module[moduleIndex];
@@ -179,9 +173,7 @@
         {
             int methodIndex = -1;
 
-            var kusamaBase = _metadata.Version == 8 || _metadata.Version == 7;
-
-            if (kusamaBase)
+            if (IsKusamaBased())
             {
                 var md = _metadata as dynamic;
                 var module = md.Module[moduleIndex];
@@ -216,9 +208,7 @@
 
         public bool IsStateVariablePlain(int moduleIndex, int varIndex)
         {
-            var kusamaBase = _metadata.Version == 8 || _metadata.Version == 7;
-
-            if (kusamaBase)
+            if (IsKusamaBased())
             {
                 var md = _metadata as dynamic;
                 return md.Module[moduleIndex].Storage.Items[varIndex].Type.Type == 0;
@@ -238,9 +228,7 @@
             BigInteger value = -1;
             var babeModuleIndex = GetModuleIndex(module, false);
 
-            var kusamaBase = _metadata.Version == 8 || _metadata.Version == 7;
-
-            if (kusamaBase)
+            if (IsKusamaBased())
             {
                 var md = _metadata as dynamic;
                 foreach (var item in md.Module[babeModuleIndex].Cons)
@@ -370,7 +358,8 @@
             }
             else if (hasher == Hasher.BLAKE2)
             {
-                var hash = Blake2Core.Blake2B.ComputeHash(data, 0, lenght);
+                var config = new Blake2Core.Blake2BConfig { OutputSizeInBytes = 16 };
+                var hash = Blake2Core.Blake2B.ComputeHash(data, 0, lenght, config);
 
                 foreach(var bt in hash)
                 {
@@ -378,7 +367,7 @@
                 }
             }
 
-            return $"0x{key}";
+            return key;
         }
 
         public string GetMappedStorageKey(Hasher hasher, KeyValuePair<string, string> param, string prefix)
@@ -432,6 +421,11 @@
             }
 
             return hasher;
+        }
+    
+        private bool IsKusamaBased()
+        {
+            return _metadata.Version >= 7;
         }
     }
 }

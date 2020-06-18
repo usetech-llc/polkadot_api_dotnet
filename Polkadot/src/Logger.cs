@@ -29,9 +29,9 @@
 
         public void Info(string message)
         {
-            if (message.Length > 200)
+            if (message.Length > 300)
             {
-                _logger.Info($"{message.Substring(0, 150)}.....{message.Substring(message.Length - 50)}");
+                _logger.Info($"{message.Substring(0, 250)}.....{message.Substring(message.Length - 50)}");
             }
             else
             {

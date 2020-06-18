@@ -7,6 +7,6 @@
         /// <summary>
         /// Do not call API in message handler thread
         /// </summary>
-        void HandleWsMessage(int subscriptionId, JObject message);
+        void HandleWsMessage(string subscriptionId, JObject message);
     }
 }
