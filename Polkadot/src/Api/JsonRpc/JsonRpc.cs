@@ -167,7 +167,10 @@
                 _logger.Info($"Pending message processed for {subscriptionId}");
 
                 // Register observer for this subscription ID
-                _subscriptions.TryAdd(subscriptionId, observer);
+                if (!_subscriptions.ContainsKey(subscriptionId))
+                {
+                    _subscriptions.Add(subscriptionId, observer);
+                }
 
                 if (pendingResponse != null)
                     observer.HandleWsMessage(subscriptionId, pendingResponse);
@@ -231,7 +234,10 @@
                         // We may get here if subscription update arrives before we know subscription ID
                         // In this case, observer is not found here, pend this response for this subscription ID
 
-                        _pendingSubscriptionUpdates.TryAdd(subscriptionId, result);
+                        if (!_pendingSubscriptionUpdates.ContainsKey(subscriptionId))
+                        {
+                            _pendingSubscriptionUpdates.Add(subscriptionId, result);
+                        }
                         _logger.Info($"Message collected for {subscriptionId}");
                         handled = true;
                     }
