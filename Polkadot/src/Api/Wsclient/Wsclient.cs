@@ -45,6 +45,8 @@
             };
 
             _wss.Connect();
+            _wss.WaitTime = new TimeSpan(0, 2, 0);
+
             _logger.Info($"Connected to {connectionString}");
 
             return 0;

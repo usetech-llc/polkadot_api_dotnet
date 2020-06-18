@@ -26,9 +26,9 @@
         private MetadataBase _metadataCache;
 
         private Object _subscriptionLock = new Object();
-        private ConcurrentDictionary<int, JObject> _pendingSubscriptionUpdates = new ConcurrentDictionary<int, JObject>();
+        private ConcurrentDictionary<string, JObject> _pendingSubscriptionUpdates = new ConcurrentDictionary<string, JObject>();
         private delegate void UpdateDelegate(JObject update);
-        private ConcurrentDictionary<int, UpdateDelegate> _subscriptionHandlers = new ConcurrentDictionary<int, UpdateDelegate>();
+        private ConcurrentDictionary<string, UpdateDelegate> _subscriptionHandlers = new ConcurrentDictionary<string, UpdateDelegate>();
         public ProtocolParameters _protocolParams;
 
         // Era/epoch/session subscription storage hashes and data
@@ -86,6 +86,7 @@
 
             // Connect to WS
             result = _jsonRpc.Connect(node_url);
+
             _protocolParams.GenesisBlockHash = new byte[Consts.BLOCK_HASH_SIZE];
 
             GetBlockHashParams par = new GetBlockHashParams();
@@ -125,9 +126,9 @@
 
             try
             {
-                _storageKeyBabeGenesisSlot = GetKeys("", "Babe", "GenesisSlot");
-                _storageKeyBabeCurrentSlot = GetKeys("", "Babe", "CurrentSlot");
-                _storageKeyBabeEpochIndex = GetKeys("", "Babe", "EpochIndex");
+                _storageKeyBabeGenesisSlot = GetKeys("Babe", "GenesisSlot");
+                //_storageKeyBabeCurrentSlot = GetKeys("Babe", "CurrentSlot");
+                //_storageKeyBabeEpochIndex = GetKeys("Babe", "EpochIndex");
                 _sessionsPerEra = _protocolParams.Metadata.GetConst("Staking", "SessionsPerEra");
                 _babeEpochDuration = _protocolParams.Metadata.GetConst("Babe", "EpochDuration");
             }
@@ -142,7 +143,6 @@
                 _logger.Info("Using epochs");
             else
                 _logger.Info("Using sessions");
-
 
             return result;
         }
@@ -238,16 +238,10 @@
 
             JObject response = _jsonRpc.Request(query);
 
-            if (TryDeserialize<MetadataV4, ParseMetadataV4>(response, out MetadataV4 md4))
+            if (TryDeserialize<MetadataV11, ParseMetadataV11>(response, out MetadataV11 md11))
             {
-                _metadataCache = md4;
-                return md4;
-            }
-
-            if (TryDeserialize<MetadataV7, ParseMetadataV7>(response, out MetadataV7 md7))
-            {
-                _metadataCache = md7;
-                return md7;
+                _metadataCache = md11;
+                return md11;
             }
 
             if (TryDeserialize<MetadataV8, ParseMetadataV8>(response, out MetadataV8 md8))
@@ -256,12 +250,18 @@
                 return md8;
             }
 
-            if (TryDeserialize<MetadataV11, ParseMetadataV11>(response, out MetadataV11 md11))
+            if (TryDeserialize<MetadataV7, ParseMetadataV7>(response, out MetadataV7 md7))
             {
-                _metadataCache = md11;
-                return md11;
+                _metadataCache = md7;
+                return md7;
             }
 
+            if (TryDeserialize<MetadataV4, ParseMetadataV4>(response, out MetadataV4 md4))
+            {
+                _metadataCache = md4;
+                return md4;
+            }
+            
             return null;
         }
 
@@ -298,7 +298,13 @@
             return Deserialize<FinalHead, ParseFinalizedHead>(response);
         }
 
-        public string GetKeys(string jsonPrm, string module, string variable)
+        public string GetKeys(string module, string variable)
+        {
+            var e = default(ITypeCreate);
+            return GetKeys(e, module, variable);
+        }
+
+        public string GetKeys<T>(T prm, string module, string variable) where T:ITypeCreate
         {
             // Determine if parameters are required for given module + variable
             // Find the module and variable indexes in metadata
@@ -312,46 +318,78 @@
             string key;
             if (_protocolParams.Metadata.IsStateVariablePlain(moduleIndex, variableIndex))
             {
-                key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, $"{module} {variable}");
+                key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, module);
+                key += _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, variable);
+            }
+            else if (prm != null)
+            {
+                key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, module);
+                key += _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, variable);
+                key += prm.GetTypeEncoded();
             }
             else
             {
-                var param = JsonParse.ParseJsonKeyValuePair(jsonPrm);
-                key = _protocolParams.Metadata.GetMappedStorageKey(_protocolParams.FreeBalanceHasher, param, $"{module} {variable}");
+                throw new ApplicationException("Parameter requered");
             }
-            return key;
+
+            return $"0x{key}";
         }
 
-        public string GetStorage(string jsonPrm, string module, string variable)
+        public string GetStorage(string module, string variable)
         {
             // Get most recent block hash
             var headHash = GetBlockHash(null);
 
-            string key = GetKeys(jsonPrm, module, variable);
+            var e = default(ITypeCreate);
+            string key = GetKeys(e, module, variable);
             JObject query = new JObject { { "method", "state_getStorage" }, { "params", new JArray { key, headHash.Hash } } };
             JObject response = _jsonRpc.Request(query);
 
             return response.ToString();
         }
 
-        public string GetStorageHash(string jsonPrm, string module, string variable)
+        public string GetStorage<T>(T prm, string module, string variable) where T : ITypeCreate
         {
             // Get most recent block hash
             var headHash = GetBlockHash(null);
 
-            string key = GetKeys(jsonPrm, module, variable);
+            string key = GetKeys(prm, module, variable);
+            JObject query = new JObject { { "method", "state_getStorage" }, { "params", new JArray { key, headHash.Hash } } };
+            JObject response = _jsonRpc.Request(query);
+
+            return response.ToString();
+        }
+
+        public string GetStorageHash(string module, string variable)
+        {
+            var e = default(ITypeCreate);
+            return GetStorageHash(e, module, variable);
+        }
+
+        public string GetStorageHash<T>(T prm, string module, string variable) where T : ITypeCreate
+        {
+            // Get most recent block hash
+            var headHash = GetBlockHash(null);
+
+            string key = GetKeys(prm, module, variable);
             JObject query = new JObject { { "method", "state_getStorageHash" }, { "params", new JArray { key, headHash.Hash } } };
             JObject response = _jsonRpc.Request(query);
 
             return response["result"].ToString();
         }
 
-        public int GetStorageSize(string jsonPrm, string module, string variable)
+        public int GetStorageSize(string module, string variable)
+        {
+            var e = default(ITypeCreate);
+            return GetStorageSize(e, module, variable);
+        }
+
+        public int GetStorageSize<T>(T prm, string module, string variable) where T : ITypeCreate
         {
             // Get most recent block hash
             var headHash = GetBlockHash(null);
 
-            string key = GetKeys(jsonPrm, module, variable);
+            string key = GetKeys(prm, module, variable);
             JObject query = new JObject { { "method", "state_getStorageSize" }, { "params", new JArray { key, headHash.Hash } } };
             JObject response = _jsonRpc.Request(query);
 
@@ -459,7 +497,7 @@
             return Deserialize<SystemHealth, ParseSystemHealth>(response);
         }
 
-        public int SubscribeBlockNumber(Action<long> callback)
+        public string SubscribeBlockNumber(Action<long> callback)
         {
             JObject subscribeQuery = new JObject { { "method", "chain_subscribeNewHead" }, { "params", new JArray { } } };
 
@@ -471,7 +509,7 @@
             });
         }
 
-        public int SubscribeRuntimeVersion(Action<RuntimeVersion> callback)
+        public string SubscribeRuntimeVersion(Action<RuntimeVersion> callback)
         {
             JObject subscribeQuery = new JObject { { "method", "state_subscribeRuntimeVersion" }, { "params", new JArray { } } };
 
@@ -482,7 +520,7 @@
             });
         }
 
-        private int Subscribe(JObject subscriptionQuery, UpdateDelegate parseFunc)
+        private string Subscribe(JObject subscriptionQuery, UpdateDelegate parseFunc)
         {
             var subscriptionId = _jsonRpc.SubscribeWs(subscriptionQuery, this);
 
@@ -499,37 +537,37 @@
             return subscriptionId;
         }
 
-        public void UnsubscribeBlockNumber(int id)
+        public void UnsubscribeBlockNumber(string id)
         {
             RemoveSubscription(id, "chain_unsubscribeNewHead");
         }
 
-        public void UnsubscribeRuntimeVersion(int id)
+        public void UnsubscribeRuntimeVersion(string id)
         {
             RemoveSubscription(id, "state_unsubscribeRuntimeVersion");
         }
 
-        public void UnsubscribeAccountNonce(int id)
+        public void UnsubscribeAccountNonce(string id)
         {
             RemoveSubscription(id, "state_unsubscribeStorage");
         }
 
-        public void UnsubscribeEraAndSession(int id)
+        public void UnsubscribeEraAndSession(string id)
         {
             RemoveSubscription(id, "state_unsubscribeStorage");
         }
 
-        public void UnsubscribeBalance(int id)
+        public void UnsubscribeBalance(string id)
         {
             RemoveSubscription(id, "state_unsubscribeStorage");
         }
 
-        public void UnsubscribeStorage(int id)
+        public void UnsubscribeStorage(string id)
         {
             RemoveSubscription(id, "state_unsubscribeStorage");
         }
 
-        public void HandleWsMessage(int subscriptionId, JObject message)
+        public void HandleWsMessage(string subscriptionId, JObject message)
         {
             // subscription already init otherwise subscription does not exist
             UpdateDelegate handler = null;
@@ -545,7 +583,7 @@
             handler?.Invoke(message);
         }
 
-        private void RemoveSubscription(int subscriptionId, string method)
+        private void RemoveSubscription(string subscriptionId, string method)
         {
             if (_subscriptionHandlers.ContainsKey(subscriptionId))
             {
@@ -561,7 +599,7 @@
             }
         }
 
-        public int SignAndSendTransfer(string sender, string privateKey, string recipient, BigInteger amount, Action<string> callback)
+        public string SignAndSendTransfer(string sender, string privateKey, string recipient, BigInteger amount, Action<string> callback)
         {
             _logger.Info("=== Starting a Transfer Extrinsic ===");
 
@@ -789,7 +827,7 @@
             return response.ToString();
         }
 
-        public int SubmitAndSubcribeExtrinsic(byte[] encodedMethodBytes, string module, string method, Address sender, string privateKey, Action<string> callback)
+        public string SubmitAndSubcribeExtrinsic(byte[] encodedMethodBytes, string module, string method, Address sender, string privateKey, Action<string> callback)
         {
             string teStr = ExtrinsicQueryString(encodedMethodBytes, module, method, sender, privateKey);
 
@@ -813,10 +851,12 @@
             return false;
         }
 
-        public int SubscribeAccountNonce(Address address, Action<BigInteger> callback)
+        public string SubscribeAccountNonce(Address address, Action<BigInteger> callback)
         {
             var storageKey = _protocolParams.Metadata.GetAddressStorageKey(_protocolParams.FreeBalanceHasher,
                 address, "System AccountNonce");
+
+            // var storageKey = address.GetTypeEncoded();
 
             _logger.Info($"Nonce subscription storageKey: {storageKey}");
 
@@ -829,7 +869,7 @@
             });
         }
 
-        public int SubscribeStorage(string key, Action<string> callback)
+        public string SubscribeStorage(string key, Action<string> callback)
         {
             // Subscribe to websocket
             var subscribeQuery =
@@ -841,7 +881,7 @@
             });
         }
 
-        public int SubscribeEraAndSession(Action<Era, SessionOrEpoch> callback)
+        public string SubscribeEraAndSession(Action<Era, SessionOrEpoch> callback)
         {
             long _bestBlockNum = 0;
             bool done = false;
@@ -855,13 +895,18 @@
             {
                 Thread.SpinWait(1500);
             }
+            //UnsubscribeBlockNumber(sbnId);
 
             // era and session subscription
             JArray _params;
             if (_isEpoch)
             {
+                var babeEpochIndex = GetKeys("Babe","EpochIndex");
+                var babeGenesisSlot = GetKeys("Babe", "GenesisSlot");
+                var babeCurrentSlot = GetKeys("Babe", "CurrentSlot");
+
                 _params =
-                    new JArray { new JArray { _storageKeyBabeEpochIndex, _storageKeyBabeGenesisSlot, _storageKeyBabeCurrentSlot } };
+                    new JArray { new JArray { babeEpochIndex, babeGenesisSlot, babeCurrentSlot } };
             }
             else
             {
@@ -949,14 +994,17 @@
             });
         }
 
-        public int SubscribeBalance(string address, Action<BigInteger> callback)
+        public string SubscribeBalance(string address, Action<BigInteger> callback)
         {
-            string storageKey =
-                       _protocolParams.Metadata.GetAddressStorageKey(_protocolParams.FreeBalanceHasher,
-                       new Address(address), "Balances FreeBalance");
+            //string storageKey =
+            //           _protocolParams.Metadata.GetAddressStorageKey(_protocolParams.FreeBalanceHasher,
+            //           new Address(address), "System Account");
+
+            string storageKey = GetStorage(new Address(address), "System", "Account");
 
             var subscribeQuery =
                 new JObject { { "method", "state_subscribeStorage"}, { "params", new JArray { new JArray { storageKey} } } };
+
 
             return Subscribe(subscribeQuery, (json) =>
             {
