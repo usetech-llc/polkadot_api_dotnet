@@ -20,7 +20,7 @@ namespace PolkaTest
         {
             using (IApplication app = PolkaApi.GetAppication())
             {
-                app.Connect();
+                app.Connect("wss://kusama-rpc.polkadot.io/");
                 var result = app.GetNetworkState();
 
                 Assert.True(result != null);

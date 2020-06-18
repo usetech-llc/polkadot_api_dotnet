@@ -55,7 +55,7 @@ namespace PolkaTest
                 // Get timestamp history for last 50 blocks
                 string module = "Timestamp";
                 string variable = "Now";
-                string key = app.GetKeys("", module, variable);
+                string key = app.GetKeys(module, variable);
                 StorageItem[] items = app.QueryStorage(key, tenBackHash.Hash, lastHash.Hash, 20);
 
                 // Assert that item count is at least 10

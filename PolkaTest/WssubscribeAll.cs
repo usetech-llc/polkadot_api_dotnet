@@ -25,16 +25,16 @@ namespace PolkaTest
                 int messagesCount = 0;
                 RuntimeVersion rv = null;
 
-                app.Connect();
+                app.Connect("wss://kusama-rpc.polkadot.io/");
 
-                int subId = app.SubscribeBlockNumber((blockNumber) =>
+                var subId = app.SubscribeBlockNumber((blockNumber) =>
                 {
                     blockNum = blockNumber;
                     messagesCount++;
                     output.WriteLine($"Last block number        : {blockNumber}");
                 });
 
-                int subId2 = app.SubscribeRuntimeVersion((runtimeVersion) =>
+                var subId2 = app.SubscribeRuntimeVersion((runtimeVersion) =>
                 {
                     rv = runtimeVersion;
                     output.WriteLine($"Runtime version spec name: {runtimeVersion.SpecName}");

@@ -24,7 +24,7 @@ namespace PolkaTest
                 int messagesCount = 0;
                 app.Connect();
 
-                int subId = app.SubscribeBlockNumber((blockNumber) =>
+                var subId = app.SubscribeBlockNumber((blockNumber) =>
                 {
                     blockNum = blockNumber;
                     messagesCount++;

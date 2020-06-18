@@ -6,6 +6,7 @@ namespace PolkaTest
     using Xunit.Abstractions;
     using Polkadot.Data;
     using Newtonsoft.Json.Linq;
+    using Polkadot.DataStructs;
 
     [Collection("Sequential")]
     public class GetKeys
@@ -23,13 +24,12 @@ namespace PolkaTest
             using (IApplication app = PolkaApi.GetAppication())
             {
                 string address = "5HQdHxuPgQ1BpJasmm5ZzfSk5RDvYiH6YHfDJVE8jXmp4eig";
-                string module = "Balances";
-                string variable = "FreeBalance";
+                string module = "System";
+                string variable = "Account";
 
                 app.Connect();
 
-                JObject prm = new JObject{{ "type", "AccountId"}, { "value", address}};
-                var actualKey = app.GetKeys(prm.ToString(), module, variable);
+                var actualKey = app.GetKeys(new Address(address), module, variable);
 
                 output.WriteLine($"Storage key for prefix {module} {variable} for address {address} : {actualKey}");
                 Console.WriteLine($"\nStorage key for prefix {module} {variable} for address {address} : {actualKey}\n");

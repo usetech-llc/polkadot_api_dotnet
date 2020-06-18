@@ -4,6 +4,7 @@ namespace PolkaTest
     using Xunit;
     using Xunit.Abstractions;
     using Newtonsoft.Json.Linq;
+    using Polkadot.DataStructs;
 
     [Collection("Sequential")]
     public class GetStorageSize
@@ -19,16 +20,15 @@ namespace PolkaTest
         public void Ok()
         {
             string address = "5ECcjykmdAQK71qHBCkEWpWkoMJY6NXvpdKy8UeMx16q5gFr";
-            string module1 = "Balances";
-            string variable1 = "FreeBalance";
+            string module1 = "System";
+            string variable1 = "Account";
             int expectedBalanceSize = 16; // 128 bits
 
             using (IApplication app = PolkaApi.GetAppication())
             {
                 app.Connect();
                 output.WriteLine("================== Get Storage Size: Address Balance ==================");
-                JObject prm1 = new JObject{ { "type", "AccountId"}, { "value", address} };
-                var storageSize = app.GetStorageSize(prm1.ToString(), module1, variable1);
+                var storageSize = app.GetStorageSize(new Address(address), module1, variable1);
                 output.WriteLine($"Storage size: {storageSize}");
                 Assert.True(storageSize == expectedBalanceSize);
              
