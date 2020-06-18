@@ -23,7 +23,7 @@ namespace PolkaTest
                 app.Connect();
                 var result = app.GetBlockHash(new GetBlockHashParams { BlockNumber = 2 });
 
-                Assert.Equal("0x37096ff58d1831c2ee64b026f8b70afab1942119c022d1dcfdbdc1558ebf63fa", result.Hash);
+                Assert.Equal("0x2df84d4c6bb8441f7a1702b4589dc33f8dc43a0794a4df446c74110636456989", result.Hash);
 
                 output.WriteLine($"Result hash : {result.Hash}");
 

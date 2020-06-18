@@ -4,6 +4,7 @@ namespace PolkaTest
     using Xunit;
     using Xunit.Abstractions;
     using Newtonsoft.Json.Linq;
+    using Polkadot.DataStructs;
 
     [Collection("Sequential")]
     public class GetStorageHash
@@ -19,15 +20,14 @@ namespace PolkaTest
         public void Ok()
         {
             string address = "5ECcjykmdAQK71qHBCkEWpWkoMJY6NXvpdKy8UeMx16q5gFr";
-            string module1 = "Balances";
-            string variable1 = "FreeBalance";
+            string module1 = "System";
+            string variable1 = "Account";
 
             using (IApplication app = PolkaApi.GetAppication())
             {
                 app.Connect();
                 output.WriteLine("================== Get Storage Hash: Address Balance ==================");
-                JObject prm1 = new JObject{ { "type", "AccountId"}, { "value", address} };
-                string storageHash = app.GetStorageHash(prm1.ToString(), module1, variable1);
+                string storageHash = app.GetStorageHash(new Address(address), module1, variable1);
                 output.WriteLine($"Storage hash: {storageHash}");
                 Assert.True(storageHash.Length == 66);
              

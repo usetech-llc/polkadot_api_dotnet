@@ -18,7 +18,7 @@ namespace PolkaTest
         [Fact]
         public void Ok()
         {
-            var testBlock = new GetBlockParams { BlockHash = "0x37096ff58d1831c2ee64b026f8b70afab1942119c022d1dcfdbdc1558ebf63fa" };
+            var testBlock = new GetBlockParams { BlockHash = "0xbd6c40490d8272f2c03bb19627add2ac6fddc1fd7e0eefd690ca47e4f9729d8f" };
 
             using (IApplication app = PolkaApi.GetAppication())
             {
