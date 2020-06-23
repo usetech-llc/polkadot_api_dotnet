@@ -102,7 +102,7 @@
                 BitConverter.ToUInt64(dataSpan[..8].ToArray(), 0),
                 BitConverter.ToUInt64(dataSpan[8..16].ToArray(), 0),
                 BitConverter.ToUInt64(dataSpan[16..24].ToArray(), 0),
-                BitConverter.ToUInt64(dataSpan[..^8].ToArray(), 0),
+                BitConverter.ToUInt64(dataSpan[^8..].ToArray(), 0),
                 0
             };
 
