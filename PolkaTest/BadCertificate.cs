@@ -20,19 +20,25 @@ namespace PolkaTest
         public void Ok()
         {
             var cert = File.ReadAllBytes(Consts.CertFileName);
-            File.Delete(Consts.CertFileName);
-
-            Assert.Throws<FileNotFoundException>(() =>
+            try
             {
-                using (IApplication app = PolkaApi.GetAppication())
+                File.Delete(Consts.CertFileName);
+
+                Assert.Throws<FileNotFoundException>(() =>
                 {
-                    app.Connect();
+                    using (IApplication app = PolkaApi.GetAppication())
+                    {
+                        app.Connect();
 
-                    app.Disconnect();
-                }
-            });
+                        app.Disconnect();
+                    }
+                });
 
-            File.WriteAllBytes(Consts.CertFileName, cert);
+            }
+            finally
+            {
+                File.WriteAllBytes(Consts.CertFileName, cert);
+            }
         }
     }
 }

@@ -259,17 +259,11 @@
                 {
                     _cancelletionTokenSource.Cancel();
                     _healthTask.Wait();               
+                    _healthTask.Dispose();
                 }
             }
 
-            if (_cancelletionTokenSource != null)
-                _cancelletionTokenSource.Dispose();
-
-            _healthTask.Dispose();
-
-
-
-
+            _cancelletionTokenSource?.Dispose();
             _wsc.Dispose();
         }
     }

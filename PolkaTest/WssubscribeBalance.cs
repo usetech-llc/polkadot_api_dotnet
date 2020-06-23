@@ -23,10 +23,10 @@ namespace PolkaTest
         {
             using (IApplication app = PolkaApi.GetAppication())
             {
-                app.Connect("ws://127.0.0.1:9944");
+                app.Connect();
                 BigInteger maxValue = (new BigInteger(1) << 128) - 1;
 
-                string addr = "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY";
+                string addr = Constants.KusamaAddress1;
                 bool doneS = false;
                 BigInteger balanceResult = maxValue;
                 var sid = app.SubscribeBalance(addr, (balance) => {

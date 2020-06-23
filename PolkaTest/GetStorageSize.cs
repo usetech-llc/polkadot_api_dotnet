@@ -19,18 +19,17 @@ namespace PolkaTest
         [Fact]
         public void Ok()
         {
-            string address = "5ECcjykmdAQK71qHBCkEWpWkoMJY6NXvpdKy8UeMx16q5gFr";
             string module1 = "System";
             string variable1 = "Account";
-            int expectedBalanceSize = 16; // 128 bits
+            int expectedBalanceSize = 69;
 
             using (IApplication app = PolkaApi.GetAppication())
             {
                 app.Connect();
                 output.WriteLine("================== Get Storage Size: Address Balance ==================");
-                var storageSize = app.GetStorageSize(new Address(address), module1, variable1);
+                var storageSize = app.GetStorageSize(new Address(Constants.KusamaAddress1), module1, variable1);
                 output.WriteLine($"Storage size: {storageSize}");
-                Assert.True(storageSize == expectedBalanceSize);
+                Assert.Equal(expectedBalanceSize, storageSize);
              
                 app.Disconnect();
             }

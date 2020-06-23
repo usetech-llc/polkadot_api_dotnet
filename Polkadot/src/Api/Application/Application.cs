@@ -718,7 +718,7 @@
                 count++;
             }
 
-            return genericExtrinsic;
+            return genericExtrinsic.AsSpan()[..count].ToArray();
         }
 
         private string ExtrinsicQueryString(byte[] encodedMethodBytes, string module, string method, Address sender, string privateKey)
