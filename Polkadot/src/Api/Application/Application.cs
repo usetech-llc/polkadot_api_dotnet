@@ -1,4 +1,6 @@
-﻿namespace Polkadot.Api
+﻿using Polkadot.Exceptions;
+
+namespace Polkadot.Api
 {
     using System;
     using System.Collections.Concurrent;
@@ -354,10 +356,10 @@
             var headHash = GetBlockHash(null);
 
             string key = GetKeys(prm, module, variable);
-            JObject query = new JObject { { "method", "state_getStorage" }, { "params", new JArray { key, headHash.Hash } } };
+            JObject query = new JObject { { "method", "state_getStorage" }, { "params", new JArray { key } } };
             JObject response = _jsonRpc.Request(query);
 
-            return response.ToString();
+            return response["result"].ToString();
         }
 
         public string GetStorageHash(string module, string variable)
@@ -476,6 +478,11 @@
                                           { "params", new JArray { } } };
             JObject response = _jsonRpc.Request(query);
 
+            if (response == null)
+            {
+                throw new UnsafeNotAllowedException("system_networkState");
+            }
+
             return Deserialize<NetworkState, ParseNetworkState>(response);
         }
 
@@ -484,6 +491,11 @@
             JObject query = new JObject { { "method", "system_peers" },
                                           { "params", new JArray { } } };
             JObject response = _jsonRpc.Request(query);
+
+            if (response == null)
+            {
+                throw new UnsafeNotAllowedException("system_peers");
+            }
 
             return Deserialize<PeersInfo, ParsePeersInfo>(response);
         }
@@ -994,21 +1006,25 @@
             });
         }
 
-        public string SubscribeBalance(string address, Action<BigInteger> callback)
+        public string SubscribeBalance(string address, Action<AccountInfo> callback)
         {
             //string storageKey =
             //           _protocolParams.Metadata.GetAddressStorageKey(_protocolParams.FreeBalanceHasher,
             //           new Address(address), "System Account");
 
-            string storageKey = GetStorage(new Address(address), "System", "Account");
+            string key = GetKeys(new Address(address), "System", "Account");
 
             var subscribeQuery =
-                new JObject { { "method", "state_subscribeStorage"}, { "params", new JArray { new JArray { storageKey} } } };
+                new JObject { { "method", "state_subscribeStorage"}, { "params", new JArray { new JArray { key} } } };
 
 
             return Subscribe(subscribeQuery, (json) =>
             {
-                callback(BigInteger.Parse(json["result"]["changes"][0][1].ToString().Substring(2), NumberStyles.HexNumber));
+                var changes = json["result"]["changes"];
+                var balanceStr = changes[0][1].ToString();
+                
+                var accountInfo = Converters.StringToByteArray(balanceStr).ToStruct<AccountInfo>();
+                callback(accountInfo);
             });
         }
     }

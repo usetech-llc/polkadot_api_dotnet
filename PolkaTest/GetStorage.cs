@@ -23,7 +23,7 @@ namespace PolkaTest
         [Fact]
         public void Ok()
         {
-            string address = Constants.KusamaAddress1;
+            string address = Constants.KusamaAccountAddress1;
             string module1 = "Balances";
             string variable1 = "TotalIssuance";
             string module2 = "System";
