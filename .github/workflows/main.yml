@@ -12,4 +12,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build image
-      run: docker build -t nft_parachain .
+      run: docker build -t polkadot_api_dotnet .
