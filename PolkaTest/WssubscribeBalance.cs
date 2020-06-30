@@ -23,16 +23,17 @@ namespace PolkaTest
         {
             using (IApplication app = PolkaApi.GetAppication())
             {
-                app.Connect("ws://127.0.0.1:9944");
+                app.Connect(Constants.LocalNodeUri);
                 BigInteger maxValue = (new BigInteger(1) << 128) - 1;
 
-                string addr = "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY";
+                string addr = Constants.LocalAccountAddress1;
                 bool doneS = false;
                 BigInteger balanceResult = maxValue;
-                var sid = app.SubscribeBalance(addr, (balance) => {
-                    output.WriteLine($"Balance: {balance}");
-                    Console.WriteLine($"\nBalance: {balance}\n");
-                    balanceResult = balance;
+                var sid = app.SubscribeBalance(addr, (accountInfo) => {
+                    var free = accountInfo.AccountData.Free;
+                    output.WriteLine($"Balance: {free}");
+                    Console.WriteLine($"\nBalance: {free}\n");
+                    balanceResult = free;
                     doneS = true;
                 });
 

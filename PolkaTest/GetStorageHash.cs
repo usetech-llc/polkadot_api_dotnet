@@ -19,7 +19,6 @@ namespace PolkaTest
         [Fact]
         public void Ok()
         {
-            string address = "5ECcjykmdAQK71qHBCkEWpWkoMJY6NXvpdKy8UeMx16q5gFr";
             string module1 = "System";
             string variable1 = "Account";
 
@@ -27,9 +26,9 @@ namespace PolkaTest
             {
                 app.Connect();
                 output.WriteLine("================== Get Storage Hash: Address Balance ==================");
-                string storageHash = app.GetStorageHash(new Address(address), module1, variable1);
+                string storageHash = app.GetStorageHash(new Address(Constants.KusamaAccountAddress1), module1, variable1);
                 output.WriteLine($"Storage hash: {storageHash}");
-                Assert.True(storageHash.Length == 66);
+                Assert.Equal(66, storageHash.Length);
              
                 app.Disconnect();
             }

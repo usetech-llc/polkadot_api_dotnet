@@ -28,7 +28,8 @@ namespace PolkaTest
             {
                 app.Connect();
 
-                foreach(var item in app.PendingExtrinsics(10))
+                var pendingExtrinsics = app.PendingExtrinsics(10);
+                foreach(var item in pendingExtrinsics)
                 {
                     output.WriteLine($"SignerAddress: {item.SignerAddress}");
                     output.WriteLine($"Signature: {item.Signature}");

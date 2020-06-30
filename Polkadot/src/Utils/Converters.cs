@@ -1,4 +1,6 @@
-﻿namespace Polkadot.Utils
+﻿using System.Runtime.InteropServices;
+
+namespace Polkadot.Utils
 {
     using System;
     using System.Linq;
@@ -72,7 +74,7 @@
             return bt;
         }
 
-    public static byte[] StringToByteArray(string hex)
+        public static byte[] StringToByteArray(string hex)
         {
             if ((hex[0] == '0') && (hex[1] == 'x'))
             {
@@ -95,6 +97,14 @@
             var rd = data.AsMemory().Slice(0, length).ToArray();
 
             return BitConverter.ToString(rd).Replace("-", "");
+        }
+
+        public static unsafe TResult ToStruct<TResult>(this byte[] array) where TResult : struct
+        {
+            fixed (byte* ptr = array)
+            {
+                 return Marshal.PtrToStructure<TResult>(new IntPtr(ptr));
+            }
         }
     }
 }

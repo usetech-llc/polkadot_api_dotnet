@@ -1,3 +1,5 @@
+using Polkadot.Exceptions;
+
 namespace PolkaTest
 {
     using Polkadot.Api;
@@ -20,13 +22,26 @@ namespace PolkaTest
         {
             using (IApplication app = PolkaApi.GetAppication())
             {
-                app.Connect();
+                app.Connect(Constants.LocalNodeUri);
                 var result = app.GetSystemPeers();
 
-                Assert.True(result != null);
+                Assert.NotNull(result);
 
                 output.WriteLine($"Count : {result.Count}");
                 output.WriteLine($"Peers : {result.Peers}");
+
+                app.Disconnect();
+            }
+        }
+
+        [Fact]
+        public void UnsafeCallThrowsCorrectException()
+        {
+            using (IApplication app = PolkaApi.GetAppication())
+            {
+                app.Connect();
+                var exception = Assert.Throws<UnsafeNotAllowedException>(() => app.GetSystemPeers());
+                Assert.Contains("system_peers", exception.Message);
 
                 app.Disconnect();
             }

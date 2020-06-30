@@ -243,7 +243,7 @@
         /// <param name="address"> address to receive balance updates for </param>
         /// <param name="callback">  expression that will receive balance updates </param>
         /// <returns> Subscription id </returns>
-        string SubscribeBalance(string address, Action<BigInteger> callback);
+        string SubscribeBalance(string address, Action<AccountInfo> callback);
 
         /// <summary>
         /// Returns all pending extrinsics
