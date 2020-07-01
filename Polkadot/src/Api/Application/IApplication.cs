@@ -234,16 +234,16 @@
         string SubscribeStorage(string key, Action<string> callback);
 
         /// <summary>
-        /// Subscribe to most recent balance for a given address. Only one subscription at a time per address is allowed. If
+        /// Subscribe to most recent account info for a given address. Only one subscription at a time per address is allowed. If
         ///     a subscription already exists for the same address, old subscription will be discarded and replaced with the new
-        ///     one. Until unsubscribeBalance method is called with the same address, the API will be receiving updates and
+        ///     one. Until <see cref="UnsubscribeAccountInfo"/> method is called with the same address, the API will be receiving updates and
         ///     forwarding them to subscribed object/function.Only unsubscribeBalance will physically unsubscribe from WebSocket
         ///     endpoint updates.
         /// </summary>
-        /// <param name="address"> address to receive balance updates for </param>
-        /// <param name="callback">  expression that will receive balance updates </param>
+        /// <param name="address"> address to receive updates for </param>
+        /// <param name="callback">  expression that will receive account info updates </param>
         /// <returns> Subscription id </returns>
-        string SubscribeBalance(string address, Action<AccountInfo> callback);
+        string SubscribeAccountInfo(string address, Action<AccountInfo> callback);
 
         /// <summary>
         /// Returns all pending extrinsics
@@ -254,18 +254,6 @@
         ///     indexes greater than bufferSize are not returned) 
         /// </returns>
         GenericExtrinsic[] PendingExtrinsics(int bufferSize);
-
-        /// <summary>
-        /// Subscribe to nonce updates for a given address. Only one subscription at a time per address is allowed. If
-        /// a subscription already exists for the same address, old subscription will be discarded and replaced with the new
-        /// one.Until unsubscribeNonce method is called with the same address, the API will be receiving updates and
-        /// forwarding them to subscribed object/function.Only unsubscribeNonce will physically unsubscribe from WebSocket
-        /// endpoint updates.
-        /// </summary>
-        /// <param name="address"> address to receive nonce updates for </param>
-        /// <param name="callback"> delegate expression that will receive nonce updates </param>
-        /// <returns> operation result </returns>
-        string SubscribeAccountNonce(Address address, Action<BigInteger> callback);
 
         /// <summary>
         /// Submit a fully formatted extrinsic for block inclusion
@@ -347,12 +335,6 @@
         void UnsubscribeRuntimeVersion(string id);
 
         /// <summary>
-        /// Unsubscribe from WebSocket endpoint and stop receiving updates for address nonce.
-        /// </summary>
-        /// <param name="id"> Subscription id </param>
-        void UnsubscribeAccountNonce(string id);
-
-        /// <summary>
         /// Unsubscribe from WebSocket endpoint and stop receiving updates with era and session.
         /// </summary>
         /// <param name="id"> Subscription id </param>
@@ -365,9 +347,9 @@
         void UnsubscribeStorage(string id);
 
         /// <summary>
-        /// Unsubscribe from WebSocket endpoint and stop receiving updates for address balance.
+        /// Unsubscribe from WebSocket endpoint and stop receiving updates for address account info.
         /// </summary>
         /// <param name="id"> Subscription id </param>
-        void UnsubscribeBalance(string id);
+        void UnsubscribeAccountInfo(string id);
     }
 }

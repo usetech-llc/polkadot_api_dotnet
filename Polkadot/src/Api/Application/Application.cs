@@ -191,14 +191,14 @@ namespace Polkadot.Api
             bool done = false;
             BigInteger result = 0;
 
-            var subId = SubscribeAccountNonce(address, (nonce) =>
+            var subId = SubscribeAccountInfo(address.Symbols, (accountInfo) =>
             {
-                result = nonce;
+                result = accountInfo.Nonce;
                 done = true;
             });
 
             SpinWait.SpinUntil(() => !done);
-            UnsubscribeAccountNonce(subId);
+            UnsubscribeAccountInfo(subId);
 
             return result;
         }
@@ -559,17 +559,12 @@ namespace Polkadot.Api
             RemoveSubscription(id, "state_unsubscribeRuntimeVersion");
         }
 
-        public void UnsubscribeAccountNonce(string id)
-        {
-            RemoveSubscription(id, "state_unsubscribeStorage");
-        }
-
         public void UnsubscribeEraAndSession(string id)
         {
             RemoveSubscription(id, "state_unsubscribeStorage");
         }
 
-        public void UnsubscribeBalance(string id)
+        public void UnsubscribeAccountInfo(string id)
         {
             RemoveSubscription(id, "state_unsubscribeStorage");
         }
@@ -863,24 +858,6 @@ namespace Polkadot.Api
             return false;
         }
 
-        public string SubscribeAccountNonce(Address address, Action<BigInteger> callback)
-        {
-            var storageKey = _protocolParams.Metadata.GetAddressStorageKey(_protocolParams.FreeBalanceHasher,
-                address, "System AccountNonce");
-
-            // var storageKey = address.GetTypeEncoded();
-
-            _logger.Info($"Nonce subscription storageKey: {storageKey}");
-
-            JObject subscribeQuery = new JObject { { "method", "state_subscribeStorage" }, { "params", new JArray { new JArray { storageKey } } } };
-
-            return Subscribe(subscribeQuery, (json) =>
-            {
-                var result = Converters.FromHex(json["result"]["changes"][0][1].ToString().Substring(2));
-                callback(result);
-            });
-        }
-
         public string SubscribeStorage(string key, Action<string> callback)
         {
             // Subscribe to websocket
@@ -1006,7 +983,7 @@ namespace Polkadot.Api
             });
         }
 
-        public string SubscribeBalance(string address, Action<AccountInfo> callback)
+        public string SubscribeAccountInfo(string address, Action<AccountInfo> callback)
         {
             //string storageKey =
             //           _protocolParams.Metadata.GetAddressStorageKey(_protocolParams.FreeBalanceHasher,
@@ -1021,9 +998,9 @@ namespace Polkadot.Api
             return Subscribe(subscribeQuery, (json) =>
             {
                 var changes = json["result"]["changes"];
-                var balanceStr = changes[0][1].ToString();
+                var accountInfoHex = changes[0][1].ToString();
                 
-                var accountInfo = Converters.StringToByteArray(balanceStr).ToStruct<AccountInfo>();
+                var accountInfo = Converters.StringToByteArray(accountInfoHex).ToStruct<AccountInfo>();
                 callback(accountInfo);
             });
         }
