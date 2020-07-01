@@ -29,7 +29,7 @@ namespace PolkaTest
                 string addr = Constants.LocalAccountAddress1;
                 bool doneS = false;
                 BigInteger balanceResult = maxValue;
-                var sid = app.SubscribeBalance(addr, (accountInfo) => {
+                var sid = app.SubscribeAccountInfo(addr, (accountInfo) => {
                     var free = accountInfo.AccountData.Free;
                     output.WriteLine($"Balance: {free}");
                     Console.WriteLine($"\nBalance: {free}\n");
@@ -42,7 +42,7 @@ namespace PolkaTest
                     Thread.Sleep(1000);
                 }
 
-                app.UnsubscribeBalance(sid);
+                app.UnsubscribeAccountInfo(sid);
 
                 app.Disconnect();
 
