@@ -1,25 +1,29 @@
-﻿using Polkadot.Exceptions;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Polkadot.BinaryContracts;
+using Polkadot.BinarySerializer;
+using Polkadot.DataStructs.Metadata.Interfaces;
+using Polkadot.Exceptions;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Numerics;
+using System.Threading;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Polkadot.Data;
+using Polkadot.DataFactory;
+using Polkadot.DataFactory.Metadata;
+using Polkadot.DataStructs;
+using Polkadot.DataStructs.Metadata;
+using Polkadot.src.DataStructs;
+using Polkadot.Utils;
+using Schnorrkel;
+using SignaturePayload = Polkadot.BinaryContracts.SignaturePayload;
 
 namespace Polkadot.Api
 {
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Numerics;
-    using System.Threading;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using Polkadot.Data;
-    using Polkadot.DataFactory;
-    using Polkadot.DataFactory.Metadata;
-    using Polkadot.DataStructs;
-    using Polkadot.DataStructs.Metadata;
-    using Polkadot.Source.Utils;
-    using Polkadot.src.DataStructs;
-    using Polkadot.Utils;
-    using Schnorrkel;
-
     public class Application : IApplication, IWebSocketMessageObserver
     {
         private ILogger _logger;
@@ -43,6 +47,8 @@ namespace Polkadot.Api
         private BigInteger _sessionsPerEra;
         private string _storageKeyBabeEpochIndex;
         private bool _isEpoch; // True, if epochs should be used instead of sessions
+
+        public TimeSpan RequestsTimeout { get; set; } = TimeSpan.FromSeconds(Consts.RESPONSE_TIMEOUT_S);
 
         private T Deserialize<T, C>(JObject json)
             where C : IParseFactory<T>, new()
@@ -80,7 +86,11 @@ namespace Polkadot.Api
             _logger = logger;
             _jsonRpc = jsonRpc;
             _protocolParams = new ProtocolParameters();
+            
+            Signer = new Signer(this);
         }
+
+        public ISigner Signer { get; }
 
         public int Connect(string node_url = "", string metadataBlockHash = null)
         {
@@ -154,6 +164,11 @@ namespace Polkadot.Api
             _jsonRpc.Disconnect();
         }
 
+        public ProtocolParameters GetProtocolParameters()
+        {
+            return _protocolParams;
+        }
+
         public void Dispose()
         {
             _jsonRpc.Dispose();
@@ -184,23 +199,19 @@ namespace Polkadot.Api
             return Deserialize<SystemInfo, ParseSystemInfo>(completeJson);
         }
 
-        public BigInteger GetAccountNonce(Address address)
+        public virtual BigInteger GetAccountNonce(Address address)
         {
             // Subscribe to account nonce updates and immediately unsubscribe after response is received
             // This pattern is borrowed from POC-3 UI
-            bool done = false;
-            BigInteger result = 0;
-
+            var completionSource = new TaskCompletionSource<BigInteger>();
             var subId = SubscribeAccountInfo(address.Symbols, (accountInfo) =>
             {
-                result = accountInfo.Nonce;
-                done = true;
+                completionSource.SetResult(accountInfo.Nonce);
             });
 
-            SpinWait.SpinUntil(() => !done);
             UnsubscribeAccountInfo(subId);
 
-            return result;
+            return completionSource.Task.WithTimeout(RequestsTimeout).Sync();
         }
 
         public BlockHash GetBlockHash(GetBlockHashParams param)
@@ -267,7 +278,7 @@ namespace Polkadot.Api
             return null;
         }
 
-        public SignedBlock GetBlock(GetBlockParams param)
+        public virtual SignedBlock GetBlock(GetBlockParams param)
         {
             JArray prm = new JArray { };
             if (param != null)
@@ -606,54 +617,18 @@ namespace Polkadot.Api
             }
         }
 
-        public string SignAndSendTransfer(string sender, string privateKey, string recipient, BigInteger amount, Action<string> callback)
+        public string SignAndSendTransfer(string sender, string privateKey, string recipient, BigInteger amount, Action<string> callback, EraDto era = null, BigInteger? chargeTransactionPayment = null)
         {
             _logger.Info("=== Starting a Transfer Extrinsic ===");
+            var from = new Address(sender);
+            var privateKeyBytes = privateKey.HexToByteArray();
+            var to = new Address(recipient);
+            var extrinsic = CreateSignedTransferExtrinsic(from, privateKeyBytes, to, amount, era, chargeTransactionPayment);
+            var encodedExtrinsic = CreateSerializer()
+                .Serialize(extrinsic)
+                .ToPrefixedHexString();
 
-            // Get account Nonce
-            var address = new Address { Symbols = sender };
-            var nonce = GetAccountNonce(address);
-            _logger.Info($"sender nonce: {nonce} ");
-
-            // Format transaction
-            TransferExtrinsic te = new TransferExtrinsic();
-            te.Method.ModuleIndex = _protocolParams.BalanceModuleIndex;
-            te.Method.MethodIndex = _protocolParams.TransferMethodIndex;
-
-            var recipientPK = _protocolParams.Metadata.GetPublicKeyFromAddr(new Address(recipient));
-            te.Method.ReceiverPublicKey = recipientPK.Bytes;
-            te.Method.Amount = amount;
-            te.Signature.Version = Consts.SIGNATURE_VERSION;
-            var senderPK = _protocolParams.Metadata.GetPublicKeyFromAddr(new Address(sender));
-            te.Signature.SignerPublicKey = senderPK.Bytes;
-            te.Signature.Nonce = nonce;
-            te.Signature.Era = ExtrinsicEra.IMMORTAL_ERA;
-
-            // Format signature payload
-            SignaturePayload sp = new SignaturePayload();
-            sp.Nonce = nonce;
-            var methodBytes = new byte[Consts.MAX_METHOD_BYTES_SZ];
-            sp.MethodBytesLength = (int)te.SerializeMethodBinary(ref methodBytes);
-            sp.MethodBytes = methodBytes;
-            sp.Era = ExtrinsicEra.IMMORTAL_ERA;
-            sp.AuthoringBlockHash = _protocolParams.GenesisBlockHash;
-
-            // Serialize and Sign payload
-            var signaturePayloadBytes = new byte[Consts.MAX_METHOD_BYTES_SZ];
-            long payloadLength = sp.SerializeBinary(ref signaturePayloadBytes);
-
-            byte[] secretKeyVec = Converters.StringToByteArray(privateKey);
-
-            var message = signaturePayloadBytes.AsMemory().Slice(0, (int)payloadLength).ToArray();
-            var sig = Sr25519v011.SignSimple(te.Signature.SignerPublicKey, secretKeyVec, message);
-            te.Signature.Sr25519Signature = sig;
-
-            // Serialize and send transaction
-            var teBytes = new byte[Consts.MAX_METHOD_BYTES_SZ];
-            long teByteLength = te.SerializeBinary(ref teBytes);
-            string teStr = $"0x{Converters.ByteArrayToString(teBytes, (int)teByteLength)}";
-
-            var query = new JObject { { "method", "author_submitAndWatchExtrinsic" }, { "params", new JArray { teStr } } };
+            var query = new JObject { { "method", "author_submitAndWatchExtrinsic" }, { "params", new JArray { encodedExtrinsic } } };
 
             // Send == Subscribe callback to completion
             return Subscribe(query, (json) =>
@@ -728,100 +703,27 @@ namespace Polkadot.Api
             return genericExtrinsic.AsSpan()[..count].ToArray();
         }
 
-        private string ExtrinsicQueryString(byte[] encodedMethodBytes, string module, string method, Address sender, string privateKey)
+        internal string ExtrinsicQueryString(byte[] encodedMethodBytes, string module, string method, Address sender, string privateKey)
         {
             _logger.Info("=== Started Invoking Extrinsic ===");
-
-            // Get account Nonce
+            var publicKey = _protocolParams.Metadata.GetPublicKeyFromAddr(sender).Bytes;
+            var address = new ExtrinsicAddress(publicKey);
+            
             var nonce = GetAccountNonce(sender);
-            var compactNonce = Scale.EncodeCompactInteger(nonce);
             _logger.Info($"sender nonce: {nonce}");
-
-            byte[] mmBuf = new byte[3];
-            // Module + Method
+            var extra = new SignedExtra(DefaultEra(), nonce, BigInteger.Zero);
+            
             var absoluteIndex = _protocolParams.Metadata.GetModuleIndex(module, false);
-            mmBuf[0] = (byte)_protocolParams.Metadata.GetModuleIndex(module, true);
-            mmBuf[1] = (byte)_protocolParams.Metadata.GetCallMethodIndex(absoluteIndex, method);
+            var moduleIndex = (byte)_protocolParams.Metadata.GetModuleIndex(module, true);
+            var methodIndex = (byte)_protocolParams.Metadata.GetCallMethodIndex(absoluteIndex, method);
+            var call = new ExtrinsicCall<byte[]>(moduleIndex, methodIndex, encodedMethodBytes);
+            var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, ExtrinsicCall<byte[]>>(true, address, null, extra, call);
 
-            // Address separator
-            mmBuf[2] = Consts.ADDRESS_SEPARATOR;
+            Signer.SignUncheckedExtrinsic(extrinsic, publicKey, privateKey.HexToByteArray());
 
-            Extrinsic ce = new Extrinsic();
-
-            var completeMessage = new byte[encodedMethodBytes.Length + 3];
-            mmBuf.CopyTo(completeMessage.AsMemory());
-            encodedMethodBytes.CopyTo(completeMessage.AsMemory(3));
-
-            // memcpy(completeMessage + 3, encodedMethodBytes, encodedMethodBytesSize);
-
-            ce.Signature.Version = Consts.SIGNATURE_VERSION;
-            var senderPK = _protocolParams.Metadata.GetPublicKeyFromAddr(sender);
-            ce.Signature.SignerPublicKey = senderPK.Bytes;
-            ce.Signature.Nonce = nonce;
-            ce.Signature.Era = ExtrinsicEra.IMMORTAL_ERA;
-
-            // Format signature payload
-            SignaturePayload sp = new SignaturePayload();
-            sp.Nonce = nonce;
-
-            sp.MethodBytesLength = encodedMethodBytes.Length + 3;
-            sp.MethodBytes = completeMessage;
-            sp.Era = ExtrinsicEra.IMMORTAL_ERA;
-            sp.AuthoringBlockHash = _protocolParams.GenesisBlockHash;
-
-            // Serialize and Sign payload
-            var signaturePayloadBytes = new byte[Consts.MAX_METHOD_BYTES_SZ];
-            long payloadLength = sp.SerializeBinary(ref signaturePayloadBytes);
-
-            var secretKeyVec = Converters.StringToByteArray(privateKey);
-
-            var message = signaturePayloadBytes.AsMemory().Slice(0, (int)payloadLength).ToArray();
-            var sig = Sr25519v011.SignSimple(ce.Signature.SignerPublicKey, secretKeyVec, message);
-            ce.Signature.Sr25519Signature = sig;
-
-            // Copy signature bytes to transaction
-            ce.Signature.Sr25519Signature = sig;
-            var length = Consts.DEFAULT_FIXED_EXSTRINSIC_SIZE + encodedMethodBytes.Length + compactNonce.Length - 1;
-            var compactLength = Scale.EncodeCompactInteger(length);
-
-            /////////////////////////////////////////
-            // Serialize message signature and write to buffer
-
-            long writtenLength = 0;
-            var buf = new byte[2048];
-            var buf2 = new List<byte>();
-
-            // Length
-            writtenLength += Scale.WriteCompactToBuf(compactLength, ref buf, writtenLength);
-
-            // Signature version
-            buf[writtenLength++] = ce.Signature.Version;
-
-            // Address separator
-            buf[writtenLength++] = Consts.ADDRESS_SEPARATOR;
-
-            // Signer public key
-            ce.Signature.SignerPublicKey.CopyTo(buf.AsMemory((int)writtenLength));
-
-            writtenLength += Consts.SR25519_PUBLIC_SIZE;
-
-            // SR25519 Signature
-            ce.Signature.Sr25519Signature.CopyTo(buf.AsMemory((int)writtenLength));
-            writtenLength += Consts.SR25519_SIGNATURE_SIZE;
-
-            // Nonce
-            writtenLength += Scale.WriteCompactToBuf(compactNonce, ref buf, writtenLength);
-
-            // Extrinsic Era
-            buf[writtenLength++] = (byte)ce.Signature.Era;
-
-            // Serialize and send transaction
-            var teBytes = new byte[Consts.MAX_METHOD_BYTES_SZ];
-            teBytes = buf;
-            completeMessage.AsMemory().CopyTo(teBytes.AsMemory((int)writtenLength));
-
-            long teByteLength = writtenLength + encodedMethodBytes.Length + 3;
-            return $"0x{Converters.ByteArrayToString(teBytes, (int)teByteLength)}";
+            return CreateSerializer()
+                .Serialize(extrinsic)
+                .ToPrefixedHexString();
         }
 
         public string SubmitExtrinsic(byte[] encodedMethodBytes, string module, string method, Address sender, string privateKey)
@@ -874,11 +776,11 @@ namespace Polkadot.Api
         {
             long _bestBlockNum = 0;
             bool done = false;
-            var sbnId = SubscribeBlockNumber(new Action<long>((blockNum) =>
+            var sbnId = SubscribeBlockNumber((blockNum) =>
             {
                 _bestBlockNum = blockNum;
                 done = true;
-            }));
+            });
 
             while (!done)
             {
@@ -1000,9 +902,87 @@ namespace Polkadot.Api
                 var changes = json["result"]["changes"];
                 var accountInfoHex = changes[0][1].ToString();
                 
-                var accountInfo = Converters.StringToByteArray(accountInfoHex).ToStruct<AccountInfo>();
+                var accountInfo = accountInfoHex.HexToByteArray().ToStruct<AccountInfo>();
                 callback(accountInfo);
             });
+        }
+
+        internal EraDto DefaultEra()
+        {
+            return new EraDto(new ImmortalEra());
+            var metadata = GetMetadata(null);
+            return FromBlockHashCount(metadata) ?? FromMinimumPeriod(metadata) ?? new EraDto(new ImmortalEra());
+        }
+
+        private EraDto FromMinimumPeriod(MetadataBase metadata)
+        {
+            var timestampModule = metadata
+                .ModuleLookup()
+                .TryGetOrDefault(KnownModules.Timestamp);
+            var minimumPeriodStr = timestampModule
+                ?.ConstantLookup()
+                ?.TryGetOrDefault(KnownConstants.MinimumPeriod)
+                ?.GetValue();
+            if (minimumPeriodStr == null)
+            {
+                return null;
+            }
+
+            using var enumerator = minimumPeriodStr.HexToByteArray().AsEnumerable().GetEnumerator();
+            var period = (ulong)CreateSerializer().ReadLong(enumerator);
+            var block = GetBlock(null);
+            return new EraDto(new MortalEra(period, block.Block.Header.Number));
+        }
+
+        private EraDto FromBlockHashCount(MetadataBase metadata)
+        {
+            var systemModule = metadata
+                .ModuleLookup()
+                .TryGetOrDefault(KnownModules.System);
+            var blockHashCountStr = systemModule
+                ?.ConstantLookup()
+                ?.TryGetOrDefault(KnownConstants.BlockHashCount)
+                ?.GetValue();
+
+            if (blockHashCountStr == null)
+            {
+                return null;
+            }
+
+            using var enumerator = blockHashCountStr.HexToByteArray().AsEnumerable().GetEnumerator();
+            var blockHashCount = (ulong) CreateSerializer().ReadLong(enumerator);
+
+            var period = blockHashCount & (ulong) -(long) blockHashCount;
+
+            var block = GetBlock(null);
+            return new EraDto(new MortalEra(period, block.Block.Header.Number));
+        }
+
+        internal AsByteVec<UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, ExtrinsicCall<TransferParams>>> CreateSignedTransferExtrinsic(Address from, byte[] privateKeyFrom, Address to, BigInteger amount, EraDto era = null, BigInteger? chargeTransactionPayment = null)
+        {
+            era ??= DefaultEra();
+            chargeTransactionPayment ??= 0;
+
+            var publicKeyFrom = _protocolParams.Metadata.GetPublicKeyFromAddr(from).Bytes;
+            
+            var extrinsicAddressFrom = new ExtrinsicAddress(publicKeyFrom);
+
+            var nonce = GetAccountNonce(@from);
+            var extra = new SignedExtra(era, nonce, chargeTransactionPayment.Value);
+
+            var publicKeyTo = _protocolParams.Metadata.GetPublicKeyFromAddr(to).Bytes;
+            var param = new TransferParams(publicKeyTo, amount);
+            var call = new ExtrinsicCall<TransferParams>(_protocolParams.BalanceModuleIndex, _protocolParams.TransferMethodIndex, param);
+            var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, ExtrinsicCall<TransferParams>>(true, extrinsicAddressFrom, null, extra, call);
+
+            Signer.SignUncheckedExtrinsic(extrinsic, publicKeyFrom, privateKeyFrom);
+
+            return AsByteVec.FromValue(extrinsic);
+        }
+
+        public IBinarySerializer CreateSerializer()
+        {
+            return new BinarySerializer.BinarySerializer();
         }
     }
 }

@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
     <ApplicationIcon />
     <StartupObject />
     <LangVersion>8</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,13 +22,21 @@
     <PackageReference Include="Extensions.Data.xxHash.core20" Version="1.0.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="NLog" Version="4.6.7" />
+    <PackageReference Include="OneOf" Version="2.1.155" />
     <PackageReference Include="SimpleBase" Version="1.8.0" />
     <PackageReference Include="websocketsharp.core" Version="1.0.0" />
     <PackageReference Include="IndexRange" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Polkadot.BinarySerializer\Polkadot.BinarySerializer.csproj" />
     <ProjectReference Include="..\Schnorrkel\Schnorrkel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ca-chain.cert.pem">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

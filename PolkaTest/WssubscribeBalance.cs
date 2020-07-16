@@ -26,10 +26,10 @@ namespace PolkaTest
                 app.Connect(Constants.LocalNodeUri);
                 BigInteger maxValue = (new BigInteger(1) << 128) - 1;
 
-                string addr = Constants.LocalAccountAddress1;
+                var addr = Constants.LocalAliceAddress;
                 bool doneS = false;
                 BigInteger balanceResult = maxValue;
-                var sid = app.SubscribeAccountInfo(addr, (accountInfo) => {
+                var sid = app.SubscribeAccountInfo(addr.Symbols, (accountInfo) => {
                     var free = accountInfo.AccountData.Free;
                     output.WriteLine($"Balance: {free}");
                     Console.WriteLine($"\nBalance: {free}\n");

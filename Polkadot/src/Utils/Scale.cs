@@ -1,60 +1,8 @@
-﻿namespace Polkadot.Source.Utils
+﻿using System;
+using System.Numerics;
+
+namespace Polkadot.Utils
 {
-    using System;
-    using System.Numerics;
-
-    public struct CompactInteger
-    {
-        public static CompactInteger operator +(CompactInteger self, int value)
-        {
-            self.Value += value;
-            return self;
-        }
-
-        public static CompactInteger operator *(CompactInteger self, int value)
-        {
-            self.Value *= value;
-            return self;
-        }
-
-        public static CompactInteger operator +(CompactInteger self, uint value)
-        {
-            self.Value += value;
-            return self;
-        }
-
-        public static CompactInteger operator *(CompactInteger self, uint value)
-        {
-            self.Value *= value;
-            return self;
-        }
-
-        public static CompactInteger operator +(CompactInteger self, byte value)
-        {
-            self.Value += value;
-            return self;
-        }
-
-        public static CompactInteger operator *(CompactInteger self, byte value)
-        {
-            self.Value *= value;
-            return self;
-        }
-
-        public static CompactInteger operator +(CompactInteger self, CompactInteger value)
-        {
-            self.Value += value.Value;
-            return self;
-        }
-
-        public static CompactInteger operator *(CompactInteger self, CompactInteger value)
-        {
-            self.Value *= value.Value;
-            return self;
-        }
-
-        public long Value { get; set; }
-    }
 
     public static class Scale
     {
@@ -80,7 +28,7 @@
             return ushort.Parse(major + minor, System.Globalization.NumberStyles.HexNumber);
         }
 
-        public static string ExtractString(ref string stringStream, long length)
+        public static string ExtractString(ref string stringStream, BigInteger length)
         {
             return ExtractString(ref stringStream, (int)length);
         }
@@ -209,8 +157,7 @@
 
         public static long WriteCompactToBuf(CompactIntegerLEBytes ci, ref byte[] buf, long offset)
         {
-            for (int i = 0; i < ci.Length; ++i)
-                buf[offset + i] = ci.Bytes[i];
+            Array.Copy(ci.Bytes, 0, buf, offset, ci.Bytes.Length);
             return ci.Length;
         }
     }

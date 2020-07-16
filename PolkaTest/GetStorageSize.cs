@@ -27,7 +27,7 @@ namespace PolkaTest
             {
                 app.Connect();
                 output.WriteLine("================== Get Storage Size: Address Balance ==================");
-                var storageSize = app.GetStorageSize(new Address(Constants.KusamaAccountAddress1), module1, variable1);
+                var storageSize = app.GetStorageSize(new Address(Constants.KusamaAccount1Address), module1, variable1);
                 output.WriteLine($"Storage size: {storageSize}");
                 Assert.Equal(expectedBalanceSize, storageSize);
              

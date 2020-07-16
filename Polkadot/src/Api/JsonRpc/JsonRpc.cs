@@ -188,7 +188,7 @@
             dynamic json = JsonConvert.DeserializeObject(payload);
             _logger.Info($"Message received: {payload}");
             string requestId = "0";
-            string subscriptionId = "0";
+            string subscriptionId = null;
             if (json["id"] != null)
                 requestId = json["id"].Value.ToString();
             if (json["params"] != null)
@@ -215,7 +215,7 @@
             else
 
             // message is subscription request
-            if (subscriptionId != "0")
+            if (subscriptionId != null)
             {
                 // Subscription response arrived.
                 var result = json["params"] as JObject;

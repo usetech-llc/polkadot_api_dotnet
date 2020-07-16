@@ -1,4 +1,6 @@
-﻿namespace Polkadot.DataStructs
+﻿using Polkadot.Utils;
+
+namespace Polkadot.DataStructs
 {
     using Polkadot.Api;
     using Polkadot.Source.Utils;

@@ -1,4 +1,7 @@
-﻿namespace Polkadot.Api
+﻿using Polkadot.BinaryContracts;
+using Polkadot.BinarySerializer;
+
+namespace Polkadot.Api
 {
     using System;
     using System.Numerics;
@@ -9,9 +12,13 @@
 
     public interface IApplication : IDisposable
     {
+        ISigner Signer { get; }
+        
         int Connect(string node_url = "", string metadataBlockHash = null);
 
         void Disconnect();
+
+        ProtocolParameters GetProtocolParameters();
 
         /// <summary>
         /// Retreives the current nonce for specific address
@@ -209,7 +216,9 @@
         /// <param name="recipient"> address that will receive the transfer </param>
         /// <param name="amount"> amount (in femto DOTs) to transfer </param>
         /// <param name="callback"> delegate that will receive operation updates </param>
-        string SignAndSendTransfer(string sender, string privateKey, string recipient, BigInteger amount, Action<string> callback);
+        /// <param name="era">Valid era for transaction to be included into blockchain. Node settings will be used by default.</param>
+        /// <param name="chargeTransactionPayment">Tips. Default is 0.</param>
+        string SignAndSendTransfer(string sender, string privateKey, string recipient, BigInteger amount, Action<string> callback, EraDto era = null, BigInteger? chargeTransactionPayment = null);
 
         /// <summary>
         /// Subscribe to era and session. Only one subscription at a time is allowed. If a subscription already
@@ -351,5 +360,7 @@
         /// </summary>
         /// <param name="id"> Subscription id </param>
         void UnsubscribeAccountInfo(string id);
+
+        IBinarySerializer CreateSerializer();
     }
 }

@@ -41,7 +41,7 @@ namespace PolkaTest
                 app.Connect();
                 // Get the most recent block number and hash
                 var lastblock = app.GetBlock(null);
-                var lastNumber = (int)lastblock.Block.Header.Number;
+                var lastNumber = lastblock.Block.Header.Number;
                 var lastHash = app.GetBlockHash(new GetBlockHashParams { BlockNumber = lastNumber });
 
                 // Get the 10 blocks back number and hash

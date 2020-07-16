@@ -37,17 +37,19 @@ namespace PolkaTest
             var message = Encoding.UTF8.GetBytes("aaa");
 
 
-            byte[] pk = Converters.StringToByteArray("0x586cc32614d6a3f219667db501ade545753058d43b14e6e971e9c9cc908ad843");
+            byte[] pk = "0x586cc32614d6a3f219667db501ade545753058d43b14e6e971e9c9cc908ad843".HexToByteArray();
             byte[] newSk = new byte[] { 25, 213, 29, 81, 62, 79, 15, 251, 133, 76, 195, 26, 105, 73, 195, 72, 250, 71, 29, 191, 218, 137, 226, 179, 177, 231, 181, 184, 231, 131, 87, 8, 34, 136, 220, 254, 5, 36, 13, 150, 131, 44, 182, 66, 174, 140, 83, 204, 30, 106, 8, 246, 45, 73, 25, 47, 15, 182, 26, 197, 26, 125, 25, 119 };
-            var sig3 = Converters.StringToByteArray("0x30b9a6ee4c3f0ff13984cfe58c9673b832f14c70eedcc98f321825d99ad7191478bbbe692f2b4c2f5ddb3e43a05500ac523e73736c5577b6306b67257dfb5f80");
+            var sig3 =
+                "0x30b9a6ee4c3f0ff13984cfe58c9673b832f14c70eedcc98f321825d99ad7191478bbbe692f2b4c2f5ddb3e43a05500ac523e73736c5577b6306b67257dfb5f80"
+                    .HexToByteArray();
 
             // var sig2 = Sr25519v091.SignSimple(pk, newSk, message);
 
 
 
-            var result = Sr25519v091.Verify(sig3, pk, message);
+            var verified = Sr25519v091.Verify(sig3, pk, message);
 
-            Assert.True(Sr25519v091.Verify(sig3, pk, message));
+            Assert.True(verified);
         }
     }
 }

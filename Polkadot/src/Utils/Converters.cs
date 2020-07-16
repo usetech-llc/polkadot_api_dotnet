@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Globalization;
+using System.Runtime.InteropServices;
 
 namespace Polkadot.Utils
 {
@@ -74,29 +75,37 @@ namespace Polkadot.Utils
             return bt;
         }
 
-        public static byte[] StringToByteArray(string hex)
+        public static byte[] HexToByteArray(this string hex)
         {
+            var span = hex.AsSpan();
             if ((hex[0] == '0') && (hex[1] == 'x'))
             {
-                hex = hex.Substring(2);
+                span = span[2..];
             }
 
-            return Enumerable.Range(0, hex.Length)
-                             .Where(x => x % 2 == 0)
-                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
-                             .ToArray();
+            var value = new byte[span.Length / 2];
+            for (int i = 0; i < value.Length; i++)
+            {
+                var substring = span[(i * 2)..(i * 2 + 2)];
+                value[i] = byte.Parse(substring, NumberStyles.HexNumber);
+            }
+
+            return value;
         }
 
-        public static string ByteArrayToString(byte[] data, int length = 0)
+        public static string ToHexString(this byte[] data, int? length = null)
         {
-            if (length == 0)
+            if (length != null)
             {
-                length = data.Length;
+                data = data.AsMemory().Slice(0, length.Value).ToArray();
             }
 
-            var rd = data.AsMemory().Slice(0, length).ToArray();
+            return BitConverter.ToString(data).Replace("-", "");
+        }
 
-            return BitConverter.ToString(rd).Replace("-", "");
+        public static string ToPrefixedHexString(this byte[] data, int? length = null)
+        {
+            return $"0x{data.ToHexString(length)}";
         }
 
         public static unsafe TResult ToStruct<TResult>(this byte[] array) where TResult : struct
