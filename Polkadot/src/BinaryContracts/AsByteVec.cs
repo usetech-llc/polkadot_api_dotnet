@@ -34,9 +34,9 @@ namespace Polkadot.BinaryContracts
             var valueBytes = serializer.Serialize(Value);
             
             var lengthBytes = Scale.EncodeCompactInteger(valueBytes.Length).Bytes;
-            stream.Write(lengthBytes);
+            stream.Write(lengthBytes, 0, lengthBytes.Length);
             
-            stream.Write(valueBytes);
+            stream.Write(valueBytes, 0, valueBytes.Length);
         }
     }
 }

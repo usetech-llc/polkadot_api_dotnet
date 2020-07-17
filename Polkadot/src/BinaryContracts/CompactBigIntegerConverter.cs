@@ -10,7 +10,7 @@ namespace Polkadot.BinaryContracts
         public void Serialize(Stream stream, object value, IBinarySerializer serializer)
         {
             var encoded = Scale.EncodeCompactInteger((BigInteger)value);
-            stream.Write(encoded.Bytes);
+            stream.Write(encoded.Bytes, 0, encoded.Bytes.Length);
         }
     }
 }

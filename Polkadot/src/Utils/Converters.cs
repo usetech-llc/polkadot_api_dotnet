@@ -87,7 +87,7 @@ namespace Polkadot.Utils
             for (int i = 0; i < value.Length; i++)
             {
                 var substring = span[(i * 2)..(i * 2 + 2)];
-                value[i] = byte.Parse(substring, NumberStyles.HexNumber);
+                value[i] = byte.Parse(substring.ToString(), NumberStyles.HexNumber);
             }
 
             return value;
