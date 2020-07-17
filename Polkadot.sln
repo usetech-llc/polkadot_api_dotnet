@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoveExtrinsicTest", "Remo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schnorrkel", "Schnorrkel\Schnorrkel.csproj", "{71C8A71C-0CC9-44F6-985A-C7DA3CACC35B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polkadot.BinarySerializer", "Polkadot.BinarySerializer\Polkadot.BinarySerializer.csproj", "{22BAF944-5BC7-4DF9-9683-53B1F607A527}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,14 @@ Global
 		{71C8A71C-0CC9-44F6-985A-C7DA3CACC35B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{71C8A71C-0CC9-44F6-985A-C7DA3CACC35B}.Release|x64.ActiveCfg = Release|Any CPU
 		{71C8A71C-0CC9-44F6-985A-C7DA3CACC35B}.Release|x64.Build.0 = Release|Any CPU
+		{22BAF944-5BC7-4DF9-9683-53B1F607A527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22BAF944-5BC7-4DF9-9683-53B1F607A527}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22BAF944-5BC7-4DF9-9683-53B1F607A527}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{22BAF944-5BC7-4DF9-9683-53B1F607A527}.Debug|x64.Build.0 = Debug|Any CPU
+		{22BAF944-5BC7-4DF9-9683-53B1F607A527}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22BAF944-5BC7-4DF9-9683-53B1F607A527}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22BAF944-5BC7-4DF9-9683-53B1F607A527}.Release|x64.ActiveCfg = Release|Any CPU
+		{22BAF944-5BC7-4DF9-9683-53B1F607A527}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

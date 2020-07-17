@@ -12,7 +12,7 @@ COPY . .
 COPY ["./PolkaTest/", "PolkaTest/"]
 RUN dotnet restore PolkaTest/PolkaTest.csproj
 COPY . .
-
+RUN ls
 COPY ["./Polkadot/ca-chain.cert.pem", "PolkaTest/bin/Debug/netcoreapp2.2/ca-chain.cert.pem"]
 
 WORKDIR "/src/Polkadot"

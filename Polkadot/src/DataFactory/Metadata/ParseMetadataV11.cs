@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using Polkadot.DataStructs.Metadata;
 using Polkadot.Source.Utils;
+using Polkadot.Utils;
 
 namespace Polkadot.DataFactory.Metadata
 {

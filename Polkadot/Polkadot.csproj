@@ -23,6 +23,7 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="NLog" Version="4.6.7" />
+    <PackageReference Include="OneOf" Version="2.1.155" />
     <PackageReference Include="SimpleBase" Version="1.8.0" />
     <PackageReference Include="System.Threading.Tasks.Dataflow" Version="4.11.1" />
     <PackageReference Include="websocketsharp.core" Version="1.0.0" />
@@ -30,7 +31,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Polkadot.BinarySerializer\Polkadot.BinarySerializer.csproj" />
     <ProjectReference Include="..\Schnorrkel\Schnorrkel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ca-chain.cert.pem">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

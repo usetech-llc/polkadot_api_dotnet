@@ -1,4 +1,6 @@
-﻿namespace Polkadot.DataStructs.Metadata
+﻿using Polkadot.DataStructs.Metadata.Interfaces;
+
+namespace Polkadot.DataStructs.Metadata
 {
     using Extensions.Data;
     using Polkadot.Api;
@@ -14,6 +16,8 @@
         public int MetadataVersion { get; private set; }
         private readonly MetadataBase _metadata;
 
+        public IMetadata RawMetadata => _metadata;
+        
         public Metadata(MetadataBase metadata)
         {
             _metadata = metadata;

@@ -25,7 +25,7 @@
         public const string STORAGE_TYPE_HASH = "Hash";
         public const string STORAGE_TYPE_PARACHAIN_ID = "ParaId";
 
-        public const byte SIGNATURE_VERSION = 0x81;
+        public const byte SIGNATURE_VERSION = 0x84;
         public const long BLOCK_HASH_SIZE = 32;
         public const int MAX_METHOD_BYTES_SZ = 2048;
 

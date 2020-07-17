@@ -2,6 +2,6 @@
 {
     public class GetBlockHashParams
     {
-        public int BlockNumber { get; set; }
+        public ulong BlockNumber { get; set; }
     }
 }

@@ -1,4 +1,8 @@
-﻿namespace Polkadot.DataStructs.Metadata
+﻿using System.Collections.Generic;
+using System.Linq;
+using Polkadot.DataStructs.Metadata.Interfaces;
+
+namespace Polkadot.DataStructs.Metadata
 {
     public class MetadataV8 : MetadataBase
     {
@@ -8,9 +12,19 @@
         {
             Version = 8;
         }
+
+        public override IEnumerable<IModule> GetModules()
+        {
+            return Module;
+        }
+
+        public override string[] GetExtrinsicExtension()
+        {
+            return null;
+        }
     }
 
-    public class ModuleV8
+    public class ModuleV8 : ModuleBase, IModule
     {
         public string Name { get; set; }
         public StorageCollectionV8 Storage { get; set; }
@@ -25,6 +39,16 @@
             Storage = null;
             Call = null;
             Ev = null;
+        }
+
+        public override IEnumerable<IConstant> GetConstants()
+        {
+            return Cons ?? Enumerable.Empty<IConstant>();
+        }
+
+        public override string GetName()
+        {
+            return Name;
         }
     }
 
@@ -83,11 +107,20 @@
         public string[] Documentation { get; set; }
     }
 
-    public class ConstV8
+    public class ConstV8 : IConstant
     {
         public string Name { get; set; }
         public string Type { get; set; }
         public string Value { get; set; }
         public string[] Documentation { get; set; }
+        public string GetName()
+        {
+            return Name;
+        }
+
+        public string GetValue()
+        {
+            return Value;
+        }
     }
 }

@@ -3,6 +3,9 @@
     using Schnorrkel.Merlin;
     using System;
 
+    /// <summary>
+    /// Hardcoded bytes for debug purposes
+    /// </summary>
     public class Hardcoded : RandomGenerator
     {
         private byte[] res;
