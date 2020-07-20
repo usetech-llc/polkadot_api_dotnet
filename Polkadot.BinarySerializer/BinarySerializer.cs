@@ -21,7 +21,7 @@ namespace Polkadot.BinarySerializer
 
         public void Serialize<T>(T value, Stream stream)
         {
-            Serialize(typeof(T), value, stream);
+            Serialize(value.GetType(), value, stream);
         }
 
         public long ReadLong(IEnumerator<byte> input)
