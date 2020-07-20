@@ -722,7 +722,7 @@ namespace Polkadot.Api
             Signer.SignUncheckedExtrinsic(extrinsic, publicKey, privateKey.HexToByteArray());
 
             return CreateSerializer()
-                .Serialize(extrinsic)
+                .Serialize(AsByteVec.FromValue(extrinsic))
                 .ToPrefixedHexString();
         }
 
