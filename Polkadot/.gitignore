@@ -6,8 +6,5 @@
 /**/packages/
 /**/bin/
 /**/obj/
-<<<<<<< HEAD
 log.txt
-=======
-api/
->>>>>>> 0c0bf3701a0009e84f4cf6fba78247e981b4f2d8
+/_site/api/
