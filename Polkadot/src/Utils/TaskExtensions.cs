@@ -21,5 +21,15 @@ namespace Polkadot.Utils
             }
             return await task;
         } 
+
+        public static Task<T> WithTimeout<T>(this Task<T> task, TimeSpan? interval)
+        {
+            if (interval == null)
+            {
+                return task;
+            }
+
+            return task.WithTimeout(interval.Value);
+        } 
     }
 }
