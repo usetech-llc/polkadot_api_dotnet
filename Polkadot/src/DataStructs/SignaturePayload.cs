@@ -1,4 +1,5 @@
-﻿using Polkadot.Utils;
+﻿using Polkadot.BinarySerializer;
+using Polkadot.Utils;
 
 namespace Polkadot.DataStructs
 {

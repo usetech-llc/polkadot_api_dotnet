@@ -26,7 +26,7 @@ namespace PolkaTest
 
             //var meta = new ParseMetadataV11().Parse(json);
 
-            using (IApplication app = PolkaApi.GetAppication())
+            using (IApplication app = PolkaApi.GetApplication())
             {
                 app.Connect();
                 var result = app.GetMetadata(null);

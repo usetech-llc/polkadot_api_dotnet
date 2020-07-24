@@ -28,7 +28,7 @@ namespace PolkaTest
             var logger = new Logger();
             var jsonrpc = new MockJsonRpc(new Wsclient(logger), logger, param);
 
-            using (var _instance = new Application(logger, jsonrpc))
+            using (var _instance = new Application(logger, jsonrpc, Application.DefaultSubstrateSettings()))
             {
                // _instance.Connect();
                 var result = _instance.GetRuntimeVersion(

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Polkadot.DataStructs.Metadata.Interfaces;
 
@@ -14,7 +15,7 @@ namespace Polkadot.DataStructs.Metadata
             Version = 11;
         }
 
-        public override IEnumerable<IModule> GetModules()
+        public override IEnumerable<IModuleMeta> GetModules()
         {
             return Module;
         }
@@ -25,7 +26,7 @@ namespace Polkadot.DataStructs.Metadata
         }
     }
 
-    public class ModuleV11 : ModuleBase, IModule
+    public class ModuleV11 : ModuleBase, IModuleMeta
     {
         public string Name { get; set; }
         public StorageCollectionV11 Storage { get; set; }
@@ -42,14 +43,24 @@ namespace Polkadot.DataStructs.Metadata
             Ev = null;
         }
 
-        public override IEnumerable<IConstant> GetConstants()
+        public override IReadOnlyList<IConstantMeta> GetConstants()
         {
-            return Cons ?? Enumerable.Empty<IConstant>();
+            return Cons ?? Array.Empty<IConstantMeta>();
         }
 
         public override string GetName()
         {
             return Name;
+        }
+
+        public override IReadOnlyList<ICallMeta> GetCalls()
+        {
+            return Call;
+        }
+
+        public override IReadOnlyList<IEventMeta> GetEvents()
+        {
+            return Ev;
         }
     }
 
@@ -65,18 +76,26 @@ namespace Polkadot.DataStructs.Metadata
         public string Type { get; set; }
     }
 
-    public class EventArgV11
+    public class EventArgV11 : IEventMeta
     {
         public string Name { get; set; }
         public string[] Args { get; set; }
         public string[] Documentation { get; set; }
+        public string GetName()
+        {
+            return Name;
+        }
     }
 
-    public class CallV11
+    public class CallV11 : ICallMeta
     {
         public string Name { get; set; }
         public FunctionCallArgV11[] Args { get; set; }
         public string[] Documentation { get; set; }
+        public string GetName()
+        {
+            return Name;
+        }
     }
 
     public class FuncTypeV11
@@ -108,7 +127,7 @@ namespace Polkadot.DataStructs.Metadata
         public string[] Documentation { get; set; }
     }
 
-    public class ConstV11 : IConstant
+    public class ConstV11 : IConstantMeta
     {
         public string Name { get; set; }
         public string Type { get; set; }

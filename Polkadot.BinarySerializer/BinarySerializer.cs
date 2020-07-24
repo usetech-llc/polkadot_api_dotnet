@@ -5,13 +5,38 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using OneOf;
+using Polkadot.BinarySerializer.Extensions;
 
 namespace Polkadot.BinarySerializer
 {
-    public class BinarySerializer: IBinarySerializer
+    public class BinarySerializer : IBinarySerializer
     {
         private readonly Dictionary<Type, IBinaryConverter> _convertersCache = new Dictionary<Type, IBinaryConverter>();
-        
+        private readonly Dictionary<Type, ICollection<OneOf<FieldInfo, PropertyInfo>>> _serializableMembersCache = new Dictionary<Type, ICollection<OneOf<FieldInfo, PropertyInfo>>>();
+        private readonly Dictionary<Type, ICollection<OneOf<FieldInfo, PropertyInfo>>> _deserializableMembersCache = new Dictionary<Type, ICollection<OneOf<FieldInfo, PropertyInfo>>>();
+
+        private readonly Dictionary<(byte module, byte method), Type> _callTypeCache = new Dictionary<(byte module, byte method), Type>();
+        private readonly Dictionary<Type, (byte module, byte method)> _callIndexCache = new Dictionary<Type, (byte module, byte method)>();
+        private readonly Dictionary<(byte module, byte @event), Type> _eventTypeCache = new Dictionary<(byte module, byte @event), Type>();
+        private readonly Dictionary<Type, (byte module, byte @event)> _eventIndexCache = new Dictionary<Type, (byte module, byte @event)>();
+
+        public BinarySerializer(IndexResolver resolver, SerializerSettings settings)
+        {
+            foreach (var (module, method, type) in settings.KnownCalls)
+            {
+                var callIndex = resolver.CallIndex((module, method));
+                _callIndexCache[type] = callIndex;
+                _callTypeCache[callIndex] = type;
+            }
+
+            foreach (var (module, @event, type) in settings.KnownEvents)
+            {
+                var eventIndex = resolver.EventIndex((module, @event));
+                _eventIndexCache[type] = eventIndex;
+                _eventTypeCache[eventIndex] = type;
+            }
+        }
+
         public byte[] Serialize<T>(T value)
         {
             using var ms = new MemoryStream();
@@ -21,37 +46,186 @@ namespace Polkadot.BinarySerializer
 
         public void Serialize<T>(T value, Stream stream)
         {
-            Serialize(value.GetType(), value, stream);
+            SerializeInternal(value, stream);
         }
 
-        public long ReadLong(IEnumerator<byte> input)
+        public T Deserialize<T>(Stream stream)
         {
-            long value = 0;
-            var offset = 0;
-            for (int i = 0; i < 8 && input.MoveNext(); i++)
+            return (T) DeserializeInternal(typeof(T), stream);
+        }
+
+        public object Deserialize(Type type, Stream stream)
+        {
+            return DeserializeInternal(type, stream);
+        }
+
+        private object DeserializeInternal(Type type, Stream stream)
+        {
+            if (typeof(IBinaryDeserializable).IsAssignableFrom(type))
             {
-                value |= input.Current << offset;
-                offset += 8;
+                var deserializable = (IBinaryDeserializable)CreateObject(type);
+                return deserializable.Deserialize(stream, this);
+            }
+            
+            return type switch
+            {
+                {} when type == typeof(byte) => stream.ReadByteThrowIfStreamEnd(),
+                {} when type == typeof(sbyte) => (sbyte)stream.ReadByteThrowIfStreamEnd(),
+                {} when type == typeof(short) => ReadShort(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
+                {} when type == typeof(ushort) => (ushort)ReadShort(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
+                {} when type == typeof(int) => ReadInt(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
+                {} when type == typeof(uint) => (uint)ReadInt(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
+                {} when type == typeof(long) => ReadLong(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
+                {} when type == typeof(ulong) => (ulong)ReadLong(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
+                {} when typeof(Enum).IsAssignableFrom(type) => ReadEnum(type, stream), 
+                
+                _ => ReadObject(type, stream),
+            };
+
+        }
+
+        private object ReadEnum(Type type, Stream stream)
+        {
+            var enumType = Enum.GetUnderlyingType(type);
+            return DeserializeInternal(enumType, stream);
+        }
+
+        private object ReadObject(Type type, Stream stream)
+        {
+            var deserialized = CreateObject(type);
+
+            var members = GetDeserializableMembers(type);
+            foreach (var member in members)
+            {
+                try
+                {
+                    object value = null;
+                    var (converter, param) = GetConverter(member);
+                    var memberType = member.Match(f => f.FieldType, p => p.PropertyType);
+                    if (converter != null)
+                    {
+                        value = converter.Deserialize(memberType, stream, this, param);
+                    }
+                    else
+                    {
+                        value = DeserializeInternal(memberType, stream);
+                    }
+
+                    member.Switch(f => f.SetValue(deserialized, value), p => p.SetValue(deserialized, value));
+                }
+                catch (Exception ex)
+                {
+                    var memberName = member.Match(f => f.Name, p => p.Name);
+                    throw new DeserializationException($"Failed to deserialize {memberName} of {type.FullName}", ex);
+                }
             }
 
-            return value;
+            return deserialized;
         }
 
-        private void Serialize(Type t, object value, Stream ms)
+        private ICollection<OneOf<FieldInfo, PropertyInfo>> GetDeserializableMembers(Type type)
         {
-            if (typeof(IBinarySerializable).IsAssignableFrom(t))
+            if (_deserializableMembersCache.TryGetValue(type, out var cachedMembers))
+            {
+                return cachedMembers;
+            }
+
+            var serializableMembers = GetAttributedMembers<SerializeAttribute>(type);
+            var members = serializableMembers
+                .OrderBy(m => m.attribute.DeserializeOrder ?? m.attribute.Order)
+                .Select(m => m.memberInfo)
+                .ToList();
+            _deserializableMembersCache[type] = members;
+            return members;
+        }
+
+        public object CreateObject(Type type)
+        {
+            var constructorInfo = type.GetConstructor(Array.Empty<Type>());
+            if (constructorInfo == null)
+            {
+                throw new NotSupportedException(
+                    $"Type {type.FullName} doesn't have parameterless constructor, cannot deserialize.");
+            }
+
+            return constructorInfo.Invoke(Array.Empty<object>());
+        }
+
+        public Type GetCallType(byte moduleIndex, byte methodIndex)
+        {
+            return _callTypeCache[(moduleIndex, methodIndex)];
+        }
+
+        public (byte moduleIndex, byte methodIndex) GetCallIndex(Type typeOfCall)
+        {
+            return _callIndexCache[typeOfCall];
+        }
+
+        public Type GetEventType(byte moduleIndex, byte eventIndex)
+        {
+            return _eventTypeCache[(moduleIndex, eventIndex)];
+        }
+
+        public (byte moduleIndex, byte eventIndex) GetEventIndex(Type typeOfEvent)
+        {
+            return _eventIndexCache[typeOfEvent];
+        }
+
+        private long ReadLong(byte b0, byte b1, byte b2, byte b3, byte b4, byte b5, byte b6, byte b7)
+        {
+            var ul0 = (ulong) b0;
+            var ul1 = ((ulong) b1) << 8;
+            var ul2 = ((ulong) b2) << 16;
+            var ul3 = ((ulong) b3) << 24;
+            var ul4 = ((ulong) b4) << 32;
+            var ul5 = ((ulong) b5) << 40;
+            var ul6 = ((ulong) b6) << 48;
+            var ul7 = ((ulong) b7) << 56;
+
+            return (long) (ul0 | ul1 | ul2 | ul3 | ul4 | ul5 | ul6 | ul7);
+        }
+
+        private int ReadInt(byte b0, byte b1, byte b2, byte b3)
+        {
+            var ul0 = (ulong) b0;
+            var ul1 = ((ulong) b1) << 8;
+            var ul2 = ((ulong) b2) << 16;
+            var ul3 = ((ulong) b3) << 24;
+
+            return (int) (ul0 | ul1 | ul2 | ul3);
+        }
+
+        private short ReadShort(byte b0, byte b1)
+        {
+            var ul0 = (ulong) b0;
+            var ul1 = ((ulong) b1) << 8;
+            return (short)(ul0 | ul1);
+        }
+
+        public T Deserialize<T>(byte[] data)
+        {
+            using var stream = new MemoryStream(data);
+            return Deserialize<T>(stream);
+        }
+
+        private void SerializeInternal(object value, Stream ms)
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            var type = value.GetType();
+            
+            if (typeof(IBinarySerializable).IsAssignableFrom(type))
             {
                 ((IBinarySerializable)value).Serialize(ms, this);
                 return;
             }
 
-            if (typeof(IEnumerable).IsAssignableFrom(t))
+            if (typeof(IEnumerable).IsAssignableFrom(type))
             {
-                var enumerable = (IEnumerable) value;
-                foreach (var item in enumerable)
-                {
-                    Serialize(item.GetType(), item, ms);
-                }
+                WriteEnumerable((IEnumerable)value, ms);
                 return;
             }
             
@@ -86,39 +260,124 @@ namespace Polkadot.BinarySerializer
                     break;
                 
                 default:
-                    WriteObject(ms, t, value);
+                    WriteObject(ms, type, value);
                     break;
+            }
+        }
+
+        private void WriteEnumerable(IEnumerable enumerable, Stream ms)
+        {
+            if (enumerable is byte[] byteArray)
+            {
+                ms.Write(byteArray, 0, byteArray.Length);
+                return;
+            }
+            
+            foreach (var item in enumerable)
+            {
+                SerializeInternal(item, ms);
             }
         }
 
         private void WriteEnum(Stream ms, Enum value)
         {
             var enumType = Enum.GetUnderlyingType(value.GetType());
-            if (enumType == typeof(byte))
+            switch (enumType)
             {
-                ms.WriteByte(Convert.ToByte(value));
-                return;
-            }
-
-            if (enumType == typeof(short))
-            {
-                WriteShort(ms, Convert.ToInt16(value));
-                return;
-            }
-
-            if (enumType == typeof(int))
-            {
-                WriteInt(ms, Convert.ToInt32(value));
-                return;
-            }
-            
-            if (enumType == typeof(long))
-            {
-                WriteLong(ms, Convert.ToInt64(value));
-            }
+                case {} when enumType == typeof(byte): ms.WriteByte(Convert.ToByte(value)); break;
+                case {} when enumType == typeof(sbyte): ms.WriteByte((byte)Convert.ToSByte(value)); break;
+                case {} when enumType == typeof(short): WriteShort(ms, Convert.ToInt16(value)); break;
+                case {} when enumType == typeof(ushort): WriteShort(ms, (short)Convert.ToUInt16(value)); break;
+                case {} when enumType == typeof(int): WriteInt(ms, Convert.ToInt32(value)); break;
+                case {} when enumType == typeof(uint): WriteInt(ms, (int)Convert.ToUInt32(value)); break;
+                case {} when enumType == typeof(long): WriteLong(ms, Convert.ToInt64(value)); break;
+                case {} when enumType == typeof(ulong): WriteLong(ms, (long)Convert.ToUInt64(value)); break;
+                
+                default: throw new ArgumentNullException($"Unexpected underlying enum type {enumType}");
+            };
         }
 
         private void WriteObject(Stream ms, Type t, object value)
+        {
+            var members = GetSerializableMembers(t);
+
+            foreach (var member in members)
+            {
+                try
+                {
+                    var memberValue = member.Match(f => f.GetValue(value), p => p.GetValue(value));
+
+                    var (converter, param) = GetConverter(member);
+                    if (converter != null)
+                    {
+                        converter.Serialize(ms, memberValue, this, param);
+                        continue;
+                    }
+
+                    SerializeInternal(memberValue, ms);
+                }
+                catch (Exception ex)
+                {
+                    var memberName = member.Match(f => f.Name, p => p.Name);
+                    throw new SerializationException($"Failed to serialize {memberName} of {t.FullName}", ex);
+                }
+
+            }
+        }
+
+        private (IBinaryConverter Converter, object[] Param) GetConverter(OneOf<FieldInfo, PropertyInfo> member)
+        {
+            var attributes = member.Match(f => f.GetCustomAttributes(),
+                p => p.GetCustomAttributes());
+            if (attributes.FirstOrDefault(a => a is ConverterAttribute) is ConverterAttribute converterType)
+            {
+                if (!_convertersCache.TryGetValue(converterType.SerializeConverterType, out var converter))
+                {
+                    converter = (IBinaryConverter) CreateObject(converterType.SerializeConverterType);
+                    _convertersCache[converterType.SerializeConverterType] = converter;
+                }
+
+                return (converter, converterType.SerializeParameters);
+            }
+
+            return (null, null);
+        }
+
+        private (IBinaryConverter Converter, object Param) GetBackConverter(OneOf<FieldInfo, PropertyInfo> member)
+        {
+            var converterType = member.Match(f => f.GetCustomAttribute<ConverterAttribute>(),
+                p => p.GetCustomAttribute<ConverterAttribute>());
+            if (converterType != null)
+            {
+                if (!_convertersCache.TryGetValue(converterType.DeserializeConverterType, out var converter))
+                {
+                    converter = (IBinaryConverter) CreateObject(converterType.DeserializeConverterType);
+                    _convertersCache[converterType.DeserializeConverterType] = converter;
+                }
+
+                return (converter, converterType.DeserializeParameters);
+            }
+
+            return (null, null);
+        }
+
+        private ICollection<OneOf<FieldInfo, PropertyInfo>> GetSerializableMembers(Type t)
+        {
+            if (_serializableMembersCache.TryGetValue(t, out var cachedMembers))
+            {
+                return cachedMembers;
+            }
+            
+            var serializableMembers = GetAttributedMembers<SerializeAttribute>(t);
+            var members = serializableMembers
+                .OrderBy(m => m.attribute.Order)
+                .Select(m => m.memberInfo)
+                .ToList();
+            _serializableMembersCache[t] = members;
+            return members;
+        }
+
+        private static IEnumerable<(OneOf<FieldInfo, PropertyInfo> memberInfo, TAttribute attribute)> GetAttributedMembers<TAttribute>(Type t) where TAttribute : Attribute
         {
             var properties = t
                 .GetProperties()
@@ -126,34 +385,13 @@ namespace Polkadot.BinarySerializer
                 .Select(p => (OneOf<FieldInfo, PropertyInfo>) p);
             var fields = t.GetFields()
                 .Select(f => (OneOf<FieldInfo, PropertyInfo>) f);
-            var members = fields
+            var serializableMembers = fields
                 .Concat(properties)
                 .Select(memberInfo => (memberInfo,
-                    attribute: memberInfo.Match(f => f.GetCustomAttribute<SerializeAttribute>(),
-                        p => p.GetCustomAttribute<SerializeAttribute>())))
-                .Where(m => m.attribute != null)
-                .OrderBy(m => m.attribute.Order)
-                .Select(m => m.memberInfo);
-
-            foreach (var member in members)
-            {
-                var memberValue = member.Match(f => f.GetValue(value), p => p.GetValue(value));
-                var converterType = member.Match(f => f.GetCustomAttribute<ConverterAttribute>(), p => p.GetCustomAttribute<ConverterAttribute>());
-                if (converterType != null)
-                {
-                    if (!_convertersCache.TryGetValue(converterType.ConverterType, out var converter))
-                    {
-                        converter = (IBinaryConverter)Activator.CreateInstance(converterType.ConverterType);
-                        _convertersCache[converterType.ConverterType] = converter;
-                    }
-                    
-                    converter.Serialize(ms, memberValue, this);
-                    continue;
-                }
-                
-                var type = member.Match(f => f.FieldType, p => p.PropertyType);
-                Serialize(type, memberValue, ms);
-            }
+                    attribute: memberInfo.Match(f => f.GetCustomAttribute<TAttribute>(),
+                        p => p.GetCustomAttribute<TAttribute>())))
+                .Where(m => m.attribute != null);
+            return serializableMembers;
         }
 
         private void WriteShort(Stream ms, short s)

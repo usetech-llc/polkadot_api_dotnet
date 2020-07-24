@@ -23,7 +23,7 @@ namespace PolkaTest
         {
            // Thread.Sleep(10000);
 
-            //using (IApplication app = PolkaApi.GetAppication())
+            //using (IApplication app = PolkaApi.GetApplication())
             //{
             //    // Subscribe to block number updates
             //    bool done = false;
@@ -100,7 +100,7 @@ namespace PolkaTest
             //Thread.Sleep(10000);
 
             // Kusama test
-            using (IApplication app = PolkaApi.GetAppication())
+            using (IApplication app = PolkaApi.GetApplication())
             {
                 // Subscribe to block number updates
                 bool done = false;

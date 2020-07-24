@@ -21,7 +21,7 @@ namespace PolkaTest
         [Fact]
         public void Ok()
         {
-            using (IApplication app = PolkaApi.GetAppication())
+            using (IApplication app = PolkaApi.GetApplication())
             {
                 string address = "5HQdHxuPgQ1BpJasmm5ZzfSk5RDvYiH6YHfDJVE8jXmp4eig";
                 string module = "System";

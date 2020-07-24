@@ -2,11 +2,12 @@
 using System.IO;
 using OneOf;
 using Polkadot.BinarySerializer;
+using Polkadot.BinarySerializer.Extensions;
 using Polkadot.Utils;
 
 namespace Polkadot.BinaryContracts
 {
-    public class EraDto: IBinarySerializable
+    public class EraDto: IBinarySerializable, IBinaryDeserializable
     {
         public OneOf<ImmortalEra, MortalEra> Value { get; set; }
 
@@ -36,6 +37,34 @@ namespace Polkadot.BinaryContracts
         private void SerializeImmortal(Stream stream, IBinarySerializer serializer, ImmortalEra immortal)
         {
             stream.WriteByte(0);
+        }
+
+        public object Deserialize(Stream stream, IBinarySerializer serializer)
+        {
+            var b0 = stream.ReadByteThrowIfStreamEnd();
+            if (b0 == 0)
+            {
+                return new EraDto(new ImmortalEra());
+            }
+
+            var b1 = stream.ReadByteThrowIfStreamEnd();
+            return ParseMortalEra(b0, b1);
+        }
+
+        private EraDto ParseMortalEra(byte b0, byte b1)
+        {
+            var ul0 = (ulong) b0;
+            var ul1 = (ulong) b1;
+            var encoded = ul0  + (ul1 << 8);
+            var period = 2UL << (int)(encoded % (1 << 4));
+            var quantizeFactor = Math.Max(1, period >> 12);
+            var phase = (encoded >> 4) * quantizeFactor;
+            if (period < 4 || phase >= period)
+            {
+                throw new ArgumentException($"{new[] {b0, b1}.ToHexString()} is not a valid representation of Era.");
+            }
+
+            return new EraDto(new MortalEra(period, phase));
         }
     }
 }

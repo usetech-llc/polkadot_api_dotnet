@@ -1,8 +1,7 @@
 ﻿namespace Polkadot.DataStructs.Metadata.Interfaces
 {
-    public interface IConstant
+    public interface ICallMeta
     {
         string GetName();
-        string GetValue();
     }
 }

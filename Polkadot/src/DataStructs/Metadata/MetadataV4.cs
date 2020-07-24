@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Polkadot.DataStructs.Metadata.Interfaces;
 
@@ -13,7 +14,7 @@ namespace Polkadot.DataStructs.Metadata
             Version = 4;
         }
 
-        public override IEnumerable<IModule> GetModules()
+        public override IEnumerable<IModuleMeta> GetModules()
         {
             return Module;
         }
@@ -24,7 +25,7 @@ namespace Polkadot.DataStructs.Metadata
         }
     }
 
-    public class ModuleV4 : ModuleBase, IModule
+    public class ModuleV4 : ModuleBase, IModuleMeta
     {
         public string Name { get; set; }
         public string Prefix { get; set; }
@@ -41,14 +42,24 @@ namespace Polkadot.DataStructs.Metadata
             Ev = null;
         }
 
-        public override IEnumerable<IConstant> GetConstants()
+        public override IReadOnlyList<IConstantMeta> GetConstants()
         {
-            return Enumerable.Empty<IConstant>();
+            return Array.Empty<IConstantMeta>();
         }
 
         public override string GetName()
         {
             return Name;
+        }
+
+        public override IReadOnlyList<ICallMeta> GetCalls()
+        {
+            return Call;
+        }
+
+        public override IReadOnlyList<IEventMeta> GetEvents()
+        {
+            return Ev;
         }
     }
 
@@ -58,18 +69,26 @@ namespace Polkadot.DataStructs.Metadata
         public string Type { get; set; }
     }
 
-    public class EventArgV4
+    public class EventArgV4 : IEventMeta
     {
         public string Name { get; set; }
         public string[] Args { get; set; }
         public string[] Documentation { get; set; }
+        public string GetName()
+        {
+            return Name;
+        }
     }
 
-    public class CallV4
+    public class CallV4 : ICallMeta
     {
         public string Name { get; set; }
         public FunctionCallArgV4[] Args { get; set; }
         public string[] Documentation { get; set; }
+        public string GetName()
+        {
+            return Name;
+        }
     }
 
     public class FuncTypeV4

@@ -6,6 +6,7 @@ namespace Polkadot.BinarySerializer
     public class SerializeAttribute : Attribute
     {
         public int Order { get; set; }
+        public int? DeserializeOrder { get; set; }
 
         public SerializeAttribute(int order)
         {

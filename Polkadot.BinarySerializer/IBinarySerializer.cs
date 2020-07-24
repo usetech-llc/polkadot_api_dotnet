@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Polkadot.BinarySerializer
@@ -7,6 +8,14 @@ namespace Polkadot.BinarySerializer
     {
         byte[] Serialize<T>(T value);
         void Serialize<T>(T value, Stream stream);
-        long ReadLong(IEnumerator<byte> input);
+        T Deserialize<T>(Stream stream);
+        object Deserialize(Type type, Stream stream);
+        T Deserialize<T>(byte[] data);
+        object CreateObject(Type type);
+
+        Type GetCallType(byte moduleIndex, byte methodIndex);
+        (byte moduleIndex, byte methodIndex) GetCallIndex(Type typeOfCall);
+        Type GetEventType(byte moduleIndex, byte eventIndex);
+        (byte moduleIndex, byte eventIndex) GetEventIndex(Type typeOfEvent);
     }
 }

@@ -1,21 +1,23 @@
 ﻿using System.Numerics;
 using Polkadot.BinarySerializer;
+using Polkadot.BinarySerializer.Converters;
 
 namespace Polkadot.BinaryContracts
 {
-    public class TransferParams
+    public class TransferCall : IExtrinsicCall
     {
         [Serialize(0)]
+        [FixedSizeArrayConverter(Size = 32)]
         public byte[] DestinationPublicKey { get; set; }
         [Serialize(1)]
-        [Converter(typeof(CompactBigIntegerConverter))]
+        [Converter(ConverterType = typeof(CompactBigIntegerConverter))]
         public BigInteger Amount { get; set; }
 
-        public TransferParams()
+        public TransferCall()
         {
         }
 
-        public TransferParams(byte[] destinationPublicKey, BigInteger amount)
+        public TransferCall(byte[] destinationPublicKey, BigInteger amount)
         {
             DestinationPublicKey = destinationPublicKey;
             Amount = amount;

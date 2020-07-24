@@ -16,7 +16,7 @@ namespace Polkadot.BinaryContracts
     /// Objects like Extrinsics are also byte arrays with compact length prefixed.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class AsByteVec<T> : AsByteVec, IBinarySerializable
+    public class AsByteVec<T> : AsByteVec, IBinarySerializable, IBinaryDeserializable
     {
         public T Value;
 
@@ -37,6 +37,12 @@ namespace Polkadot.BinaryContracts
             stream.Write(lengthBytes);
             
             stream.Write(valueBytes);
+        }
+
+        public object Deserialize(Stream stream, IBinarySerializer serializer)
+        {
+            Scale.DecodeCompactInteger(stream);
+            return FromValue(serializer.Deserialize<T>(stream));
         }
     }
 }

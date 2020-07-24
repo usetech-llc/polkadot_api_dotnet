@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using Polkadot.BinarySerializer;
 using Polkadot.DataStructs.Metadata;
 using Polkadot.Source.Utils;
 using Polkadot.Utils;

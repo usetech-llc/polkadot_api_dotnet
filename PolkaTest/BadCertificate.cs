@@ -26,7 +26,7 @@ namespace PolkaTest
 
                 Assert.Throws<FileNotFoundException>(() =>
                 {
-                    using (IApplication app = PolkaApi.GetAppication())
+                    using (IApplication app = PolkaApi.GetApplication())
                     {
                         app.Connect();
 

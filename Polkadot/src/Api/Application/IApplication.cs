@@ -13,6 +13,7 @@ namespace Polkadot.Api
     public interface IApplication : IDisposable
     {
         ISigner Signer { get; }
+        IBinarySerializer Serializer { get; }
         
         int Connect(string node_url = "", string metadataBlockHash = null);
 
@@ -360,7 +361,5 @@ namespace Polkadot.Api
         /// </summary>
         /// <param name="id"> Subscription id </param>
         void UnsubscribeAccountInfo(string id);
-
-        IBinarySerializer CreateSerializer();
     }
 }

@@ -20,7 +20,7 @@ namespace PolkaTest
         [Fact]
         public void Ok()
         {
-            using (IApplication app = PolkaApi.GetAppication())
+            using (IApplication app = PolkaApi.GetApplication())
             {
                 app.Connect(Constants.LocalNodeUri);
                 var result = app.GetNetworkState();
@@ -39,7 +39,7 @@ namespace PolkaTest
         [Fact]
         public void UnsafeCallThrowsCorrectException()
         {
-            using (IApplication app = PolkaApi.GetAppication())
+            using (IApplication app = PolkaApi.GetApplication())
             {
                 app.Connect();
                 var exception = Assert.Throws<UnsafeNotAllowedException>(() => app.GetNetworkState());

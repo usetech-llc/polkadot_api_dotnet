@@ -22,7 +22,7 @@ namespace PolkaTest
             string module1 = "System";
             string variable1 = "Account";
 
-            using (IApplication app = PolkaApi.GetAppication())
+            using (IApplication app = PolkaApi.GetApplication())
             {
                 app.Connect();
                 output.WriteLine("================== Get Storage Hash: Address Balance ==================");

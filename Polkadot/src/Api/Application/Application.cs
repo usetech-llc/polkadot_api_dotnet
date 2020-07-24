@@ -12,6 +12,7 @@ using System.Numerics;
 using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Polkadot.BinaryContracts.Events;
 using Polkadot.Data;
 using Polkadot.DataFactory;
 using Polkadot.DataFactory.Metadata;
@@ -28,6 +29,7 @@ namespace Polkadot.Api
     {
         private ILogger _logger;
         private IJsonRpc _jsonRpc;
+        private readonly SerializerSettings _serializerSettings;
 
         private MetadataBase _metadataCache;
 
@@ -47,6 +49,7 @@ namespace Polkadot.Api
         private BigInteger _sessionsPerEra;
         private string _storageKeyBabeEpochIndex;
         private bool _isEpoch; // True, if epochs should be used instead of sessions
+        private Lazy<IBinarySerializer> _serializer;
 
         public TimeSpan RequestsTimeout { get; set; } = TimeSpan.FromSeconds(Consts.RESPONSE_TIMEOUT_S);
 
@@ -81,16 +84,19 @@ namespace Polkadot.Api
             }
         }
 
-        public Application(ILogger logger, IJsonRpc jsonRpc)
+        public Application(ILogger logger, IJsonRpc jsonRpc, SerializerSettings serializerSettings)
         {
             _logger = logger;
             _jsonRpc = jsonRpc;
+            _serializerSettings = serializerSettings;
             _protocolParams = new ProtocolParameters();
+            _serializer = new Lazy<IBinarySerializer>(CreateSerializer);
             
             Signer = new Signer(this);
         }
 
         public ISigner Signer { get; }
+        public IBinarySerializer Serializer => _serializer.Value;
 
         public int Connect(string node_url = "", string metadataBlockHash = null)
         {
@@ -716,8 +722,8 @@ namespace Polkadot.Api
             var absoluteIndex = _protocolParams.Metadata.GetModuleIndex(module, false);
             var moduleIndex = (byte)_protocolParams.Metadata.GetModuleIndex(module, true);
             var methodIndex = (byte)_protocolParams.Metadata.GetCallMethodIndex(absoluteIndex, method);
-            var call = new ExtrinsicCall<byte[]>(moduleIndex, methodIndex, encodedMethodBytes);
-            var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, ExtrinsicCall<byte[]>>(true, address, null, extra, call);
+            var call = new ExtrinsicCallRaw<byte[]>(moduleIndex, methodIndex, encodedMethodBytes);
+            var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, ExtrinsicCallRaw<byte[]>>(true, address, null, extra, call);
 
             Signer.SignUncheckedExtrinsic(extrinsic, publicKey, privateKey.HexToByteArray());
 
@@ -909,6 +915,7 @@ namespace Polkadot.Api
 
         internal EraDto DefaultEra()
         {
+            //Todo: figure out how to make good mortal era.
             return new EraDto(new ImmortalEra());
             var metadata = GetMetadata(null);
             return FromBlockHashCount(metadata) ?? FromMinimumPeriod(metadata) ?? new EraDto(new ImmortalEra());
@@ -928,8 +935,7 @@ namespace Polkadot.Api
                 return null;
             }
 
-            using var enumerator = minimumPeriodStr.HexToByteArray().AsEnumerable().GetEnumerator();
-            var period = (ulong)CreateSerializer().ReadLong(enumerator);
+            var period = CreateSerializer().Deserialize<ulong>(minimumPeriodStr.HexToByteArray());
             var block = GetBlock(null);
             return new EraDto(new MortalEra(period, block.Block.Header.Number));
         }
@@ -949,8 +955,7 @@ namespace Polkadot.Api
                 return null;
             }
 
-            using var enumerator = blockHashCountStr.HexToByteArray().AsEnumerable().GetEnumerator();
-            var blockHashCount = (ulong) CreateSerializer().ReadLong(enumerator);
+            var blockHashCount = CreateSerializer().Deserialize<ulong>(blockHashCountStr.HexToByteArray());
 
             var period = blockHashCount & (ulong) -(long) blockHashCount;
 
@@ -958,7 +963,7 @@ namespace Polkadot.Api
             return new EraDto(new MortalEra(period, block.Block.Header.Number));
         }
 
-        internal AsByteVec<UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, ExtrinsicCall<TransferParams>>> CreateSignedTransferExtrinsic(Address from, byte[] privateKeyFrom, Address to, BigInteger amount, EraDto era = null, BigInteger? chargeTransactionPayment = null)
+        internal AsByteVec<UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, InheritanceCall<TransferCall>>> CreateSignedTransferExtrinsic(Address from, byte[] privateKeyFrom, Address to, BigInteger amount, EraDto era = null, BigInteger? chargeTransactionPayment = null)
         {
             era ??= DefaultEra();
             chargeTransactionPayment ??= 0;
@@ -971,9 +976,9 @@ namespace Polkadot.Api
             var extra = new SignedExtra(era, nonce, chargeTransactionPayment.Value);
 
             var publicKeyTo = _protocolParams.Metadata.GetPublicKeyFromAddr(to).Bytes;
-            var param = new TransferParams(publicKeyTo, amount);
-            var call = new ExtrinsicCall<TransferParams>(_protocolParams.BalanceModuleIndex, _protocolParams.TransferMethodIndex, param);
-            var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, ExtrinsicCall<TransferParams>>(true, extrinsicAddressFrom, null, extra, call);
+            var call = new TransferCall(publicKeyTo, amount);
+            var inheritanceCall = new InheritanceCall<TransferCall>(call);
+            var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, InheritanceCall<TransferCall>>(true, extrinsicAddressFrom, null, extra, inheritanceCall);
 
             Signer.SignUncheckedExtrinsic(extrinsic, publicKeyFrom, privateKeyFrom);
 
@@ -982,7 +987,49 @@ namespace Polkadot.Api
 
         public IBinarySerializer CreateSerializer()
         {
-            return new BinarySerializer.BinarySerializer();
+            var metadata = GetMetadata(null);
+            var callModuleIndex = -1;
+            var eventModuleIndex = -1;
+            var callsLookup = new Dictionary<(string module, string method), (byte module, byte method)>();
+            var eventsLookup = new Dictionary<(string module, string @event), (byte module, byte @event)>();
+            foreach (var module in metadata.GetModules())
+            {
+                var calls = module.GetCalls();
+                if (calls != null && calls.Any())
+                {
+                    callModuleIndex++;
+                    var methodIndex = 0;
+                    foreach (var call in calls)
+                    {
+                        callsLookup[(module.GetName(), call.GetName())] = ((byte) callModuleIndex, (byte) methodIndex++);
+                    }
+                }
+
+                var events = module.GetEvents();
+                if (events != null && events.Any())
+                {
+                    eventModuleIndex++;
+                    var eventIndex = 0;
+                    foreach (var @event in events)
+                    {
+                        eventsLookup[(module.GetName(), @event.GetName())] = ((byte) eventModuleIndex, (byte) eventIndex++);
+                    }
+                }
+            }
+            var resolver = new IndexResolver()
+            {
+                CallIndex = strValue => callsLookup[strValue],
+                EventIndex = str => eventsLookup[str],
+            };
+            return new BinarySerializer.BinarySerializer(resolver, _serializerSettings);
+        }
+
+        public static SerializerSettings DefaultSubstrateSettings()
+        {
+            return new SerializerSettings()
+                .AddCall<TransferCall>("Balances", "transfer")
+                
+                .AddEvent<ExtrinsicSuccess>("System", "ExtrinsicSuccess");
         }
     }
 }

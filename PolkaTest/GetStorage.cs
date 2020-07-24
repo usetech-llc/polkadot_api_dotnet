@@ -31,7 +31,7 @@ namespace PolkaTest
             string module3 = "Timestamp";
             string variable3 = "Now";
 
-            using (IApplication app = PolkaApi.GetAppication())
+            using (IApplication app = PolkaApi.GetApplication())
             {
                 app.Connect();
                 output.WriteLine("================== Get Storage 1: Address Balance ==================");
