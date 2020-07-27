@@ -43,7 +43,7 @@
         
         public static string GetAddrFromPublicKey(PublicKey pubKey)
         {
-            var plainAddr = new byte[1024];
+            var plainAddr = new byte[35];
             Array.Fill<byte>(plainAddr, 0x2A);
             pubKey.Bytes.CopyTo(plainAddr.AsMemory(1));
 
