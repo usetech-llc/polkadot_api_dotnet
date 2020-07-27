@@ -43,8 +43,9 @@
         
         public static string GetAddrFromPublicKey(PublicKey pubKey)
         {
-            var plainAddr = new byte[1024];
-            Array.Fill<byte>(plainAddr, 0x2A);
+            var plainAddr = Enumerable
+                .Repeat((byte) 0x2A, 1024)
+                .ToArray();
             pubKey.Bytes.CopyTo(plainAddr.AsMemory(1));
 
             // Add control sum
