@@ -1,6 +1,6 @@
 ﻿using Polkadot.BinarySerializer;
 
-namespace Polkadot.BinaryContracts.Events.Phase
+namespace Polkadot.BinaryContracts.Events.PhaseEnum
 {
     public class ApplyExtrinsic
     {

@@ -1,7 +1,7 @@
 ﻿using OneOf;
 using OneOf.Types;
-using Polkadot.BinaryContracts.Events.DispatchClass;
-using Polkadot.BinaryContracts.Events.Pays;
+using Polkadot.BinaryContracts.Events.DispatchClassEnum;
+using Polkadot.BinaryContracts.Events.PaysEnum;
 using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 
@@ -13,12 +13,10 @@ namespace Polkadot.BinaryContracts.Events
         public ulong Weight;
         
         [Serialize(1)]
-        [Converter(ConverterType = typeof(OneOfEnumConverter))]
-        public OneOf<Normal, Operational, Mandatory> DispatchClass;
+        public DispatchClass DispatchClass;
 
         [Serialize(2)]
-        [Converter(ConverterType = typeof(OneOfEnumConverter))]
-        public OneOf<YesPay, NoPay> Pays;
+        public Pays Pays;
 
         public DispatchInfo()
         {

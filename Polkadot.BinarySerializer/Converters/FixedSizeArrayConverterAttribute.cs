@@ -8,10 +8,11 @@
             set => Parameters[2] = value;
         }
         
-        public FixedSizeArrayConverterAttribute()
+        public FixedSizeArrayConverterAttribute(int size)
         {
             Parameters = new object[3];
             ConverterType = typeof(FixedSizeArrayConverter);
+            Size = size;
         }
     }
 }

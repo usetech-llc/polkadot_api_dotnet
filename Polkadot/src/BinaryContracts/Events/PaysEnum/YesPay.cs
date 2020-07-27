@@ -1,4 +1,4 @@
-﻿namespace Polkadot.BinaryContracts.Events.Pays
+﻿namespace Polkadot.BinaryContracts.Events.PaysEnum
 {
     public class YesPay
     {

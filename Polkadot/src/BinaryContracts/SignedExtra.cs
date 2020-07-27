@@ -11,11 +11,11 @@ namespace Polkadot.BinaryContracts
         public EraDto Era { get; set; }
         
         [Serialize(1)]
-        [Converter(ConverterType = typeof(CompactBigIntegerConverter))]
+        [CompactBigIntegerConverter]
         public BigInteger Nonce { get; set; }
         
         [Serialize(2)]
-        [Converter(ConverterType = typeof(CompactBigIntegerConverter))]
+        [CompactBigIntegerConverter]
         public BigInteger ChargeTransactionPayment { get; set; }
 
         public SignedExtra()

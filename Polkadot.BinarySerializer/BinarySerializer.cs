@@ -77,11 +77,27 @@ namespace Polkadot.BinarySerializer
                 {} when type == typeof(uint) => (uint)ReadInt(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
                 {} when type == typeof(long) => ReadLong(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
                 {} when type == typeof(ulong) => (ulong)ReadLong(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
+                {} when type == typeof(bool) => ReadBool(stream.ReadByteThrowIfStreamEnd()),
                 {} when typeof(Enum).IsAssignableFrom(type) => ReadEnum(type, stream), 
                 
                 _ => ReadObject(type, stream),
             };
 
+        }
+
+        private bool ReadBool(byte b)
+        {
+            if (b == 0)
+            {
+                return false;
+            }
+
+            if (b == 1)
+            {
+                return true;
+            }
+            
+            throw new ArgumentException($"Invalid encoded boolean value: {b}");
         }
 
         private object ReadEnum(Type type, Stream stream)
@@ -258,10 +274,25 @@ namespace Polkadot.BinarySerializer
                 case Enum e:
                     WriteEnum(ms, e);
                     break;
+                case bool b:
+                    WriteBool(ms, b);
+                    break;
                 
                 default:
                     WriteObject(ms, type, value);
                     break;
+            }
+        }
+
+        private void WriteBool(Stream ms, bool b)
+        {
+            if (b)
+            {
+                ms.WriteByte(1);
+            }
+            else
+            {
+                ms.WriteByte(0);
             }
         }
 

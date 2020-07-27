@@ -6,7 +6,7 @@ using Polkadot.BinarySerializer.Extensions;
 
 namespace Polkadot.BinarySerializer.Converters
 {
-    public class OneOfEnumConverter : IBinaryConverter
+    public class OneOfConverter : IBinaryConverter
     {
         public void Serialize(Stream stream, object value, IBinarySerializer serializer, object[] parameters)
         {

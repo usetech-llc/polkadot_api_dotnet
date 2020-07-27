@@ -1,4 +1,4 @@
-﻿namespace Polkadot.BinaryContracts.Events.DispatchClass
+﻿namespace Polkadot.BinaryContracts.Events.DispatchClassEnum
 {
     public class Normal
     {

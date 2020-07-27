@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Polkadot.Api;
 using Polkadot.BinaryContracts.Events;
@@ -15,7 +16,7 @@ namespace PolkaTest
         {
             using var app = PolkaApi.GetApplication();
             app.Connect(Constants.LocalNodeUri);
-            
+
             var storageKey = app.GetKeys("System", "Events");
             var deserializedCount = 0;
             var tcs = new TaskCompletionSource<EventList>();

@@ -1,25 +1,26 @@
 ﻿using System.Numerics;
 using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
+using Polkadot.DataStructs;
 
 namespace Polkadot.BinaryContracts
 {
     public class TransferCall : IExtrinsicCall
     {
         [Serialize(0)]
-        [FixedSizeArrayConverter(Size = 32)]
-        public byte[] DestinationPublicKey { get; set; }
+        public PublicKey Destination { get; set; }
+        
         [Serialize(1)]
-        [Converter(ConverterType = typeof(CompactBigIntegerConverter))]
+        [CompactBigIntegerConverter]
         public BigInteger Amount { get; set; }
 
         public TransferCall()
         {
         }
 
-        public TransferCall(byte[] destinationPublicKey, BigInteger amount)
+        public TransferCall(PublicKey destination, BigInteger amount)
         {
-            DestinationPublicKey = destinationPublicKey;
+            Destination = destination;
             Amount = amount;
         }
     }

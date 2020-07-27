@@ -13,6 +13,10 @@ using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Polkadot.BinaryContracts.Events;
+using Polkadot.BinaryContracts.Events.Balances;
+using Polkadot.BinaryContracts.Events.Contracts;
+using Polkadot.BinaryContracts.Events.Grandpa;
+using Polkadot.BinaryContracts.Events.Sudo;
 using Polkadot.Data;
 using Polkadot.DataFactory;
 using Polkadot.DataFactory.Metadata;
@@ -22,6 +26,7 @@ using Polkadot.src.DataStructs;
 using Polkadot.Utils;
 using Schnorrkel;
 using SignaturePayload = Polkadot.BinaryContracts.SignaturePayload;
+using Transfer = Polkadot.BinaryContracts.Events.Balances.Transfer;
 
 namespace Polkadot.Api
 {
@@ -712,7 +717,7 @@ namespace Polkadot.Api
         internal string ExtrinsicQueryString(byte[] encodedMethodBytes, string module, string method, Address sender, string privateKey)
         {
             _logger.Info("=== Started Invoking Extrinsic ===");
-            var publicKey = _protocolParams.Metadata.GetPublicKeyFromAddr(sender).Bytes;
+            var publicKey = _protocolParams.Metadata.GetPublicKeyFromAddr(sender);
             var address = new ExtrinsicAddress(publicKey);
             
             var nonce = GetAccountNonce(sender);
@@ -725,7 +730,7 @@ namespace Polkadot.Api
             var call = new ExtrinsicCallRaw<byte[]>(moduleIndex, methodIndex, encodedMethodBytes);
             var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, ExtrinsicCallRaw<byte[]>>(true, address, null, extra, call);
 
-            Signer.SignUncheckedExtrinsic(extrinsic, publicKey, privateKey.HexToByteArray());
+            Signer.SignUncheckedExtrinsic(extrinsic, publicKey.Bytes, privateKey.HexToByteArray());
 
             return CreateSerializer()
                 .Serialize(AsByteVec.FromValue(extrinsic))
@@ -968,19 +973,19 @@ namespace Polkadot.Api
             era ??= DefaultEra();
             chargeTransactionPayment ??= 0;
 
-            var publicKeyFrom = _protocolParams.Metadata.GetPublicKeyFromAddr(from).Bytes;
+            var publicKeyFrom = _protocolParams.Metadata.GetPublicKeyFromAddr(from);
             
             var extrinsicAddressFrom = new ExtrinsicAddress(publicKeyFrom);
 
             var nonce = GetAccountNonce(@from);
             var extra = new SignedExtra(era, nonce, chargeTransactionPayment.Value);
 
-            var publicKeyTo = _protocolParams.Metadata.GetPublicKeyFromAddr(to).Bytes;
+            var publicKeyTo = _protocolParams.Metadata.GetPublicKeyFromAddr(to);
             var call = new TransferCall(publicKeyTo, amount);
             var inheritanceCall = new InheritanceCall<TransferCall>(call);
             var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, InheritanceCall<TransferCall>>(true, extrinsicAddressFrom, null, extra, inheritanceCall);
 
-            Signer.SignUncheckedExtrinsic(extrinsic, publicKeyFrom, privateKeyFrom);
+            Signer.SignUncheckedExtrinsic(extrinsic, publicKeyFrom.Bytes, privateKeyFrom);
 
             return AsByteVec.FromValue(extrinsic);
         }
@@ -1029,7 +1034,30 @@ namespace Polkadot.Api
             return new SerializerSettings()
                 .AddCall<TransferCall>("Balances", "transfer")
                 
-                .AddEvent<ExtrinsicSuccess>("System", "ExtrinsicSuccess");
+                .AddEvent<ExtrinsicSuccess>("System", "ExtrinsicSuccess")
+                .AddEvent<ExtrinsicFailed>("System", "ExtrinsicFailed")
+                .AddEvent<CodeUpdated>("System", "CodeUpdated")
+                .AddEvent<NewAccount>("System", "NewAccount")
+                .AddEvent<KilledAccount>("System", "KilledAccount")
+                .AddEvent<Transfer>("Contracts", "Transfer")
+                .AddEvent<Instantiated>("Contracts", "Instantiated")
+                .AddEvent<Evicted>("Contracts", "Evicted")
+                .AddEvent<Restored>("Contracts", "Restored")
+                .AddEvent<CodeStored>("Contracts", "CodeStored")
+                .AddEvent<ScheduleUpdated>("Contracts", "ScheduleUpdated")
+                .AddEvent<Dispatched>("Contracts", "Dispatched")
+                .AddEvent<ContractExecution>("Contracts", "ContractExecution")
+                .AddEvent<NewAuthorities>("Grandpa", "NewAuthorities")
+                .AddEvent<Paused>("Grandpa", "Paused")
+                .AddEvent<Resumed>("Grandpa", "Resumed")
+                .AddEvent<Endowed>("Balances", "Endowed")
+                .AddEvent<DustLost>("Balances", "DustLost")
+                .AddEvent<Transfer>("Balances", "Transfer")
+                .AddEvent<BalanceSet>("Balances", "BalanceSet")
+                .AddEvent<Deposit>("Balances", "Deposit")
+                .AddEvent<Sudid>("Sudo", "Sudid")
+                .AddEvent<KeyChanged>("Sudo", "KeyChanged")
+                .AddEvent<SudoAsDone>("Sudo", "SudoAsDone");
         }
     }
 }

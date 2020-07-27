@@ -1,5 +1,5 @@
-﻿using Polkadot.BinaryContracts.Events.Phase;
-using OneOf;
+﻿using OneOf;
+using Polkadot.BinaryContracts.Events.PhaseEnum;
 using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 
@@ -8,8 +8,7 @@ namespace Polkadot.BinaryContracts.Events
     public class EventRecord
     {
         [Serialize(0)]
-        [Converter(ConverterType = typeof(OneOfEnumConverter))]
-        public OneOf<ApplyExtrinsic, Finalization, Initialization> Phase;
+        public Phase Phase;
 
         [Serialize(1)]
         [Converter(ConverterType = typeof(EventConverter))]
@@ -23,7 +22,7 @@ namespace Polkadot.BinaryContracts.Events
         {
         }
 
-        public EventRecord(OneOf<ApplyExtrinsic, Finalization, Initialization> phase, IEvent @event, ITopics[] topics)
+        public EventRecord(Phase phase, IEvent @event, ITopics[] topics)
         {
             Phase = phase;
             Event = @event;
