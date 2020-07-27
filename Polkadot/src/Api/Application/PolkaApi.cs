@@ -2,24 +2,19 @@
 {
     public class PolkaApi
     {
-        private static IApplication _instance;
-
-        private static void CreateInstance()
+        private static Application CreateInstance()
         {
             JsonRpcParams param = new JsonRpcParams();
             param.JsonrpcVersion = "2.0";
 
             var logger = new Logger();
             var jsonrpc = new JsonRpc(new Wsclient(logger), logger, param);
-            _instance = new Application(logger, jsonrpc);
+            return new Application(logger, jsonrpc, Application.DefaultSubstrateSettings());
         }
 
-        public static IApplication GetAppication()
+        public static IApplication GetApplication()
         {
-            if (_instance == null)
-                CreateInstance();
-               
-            return _instance;
+            return CreateInstance();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Blake2Core;
+using OneOf;
 using Polkadot.BinaryContracts;
 using Polkadot.Data;
 using Polkadot.Utils;
@@ -55,8 +56,7 @@ namespace Polkadot.Api
             });
 
             var signaturePayload = SignaturePayload.Create(extrinsic.Call, extrinsic.Extra, extraSigned);
-            var serializer = Application.CreateSerializer();
-            var serialized = serializer.Serialize(signaturePayload);
+            var serialized = Application.Serializer.Serialize(signaturePayload);
             //Payloads longer than 256 bytes are going to be `blake2_256`-hashed.
             if (serialized.Length > 256)
             {

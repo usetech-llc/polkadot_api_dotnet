@@ -1,5 +1,6 @@
 ﻿
 using Polkadot.BinarySerializer;
+using Polkadot.BinarySerializer.Converters;
 
 namespace Polkadot.BinaryContracts
 {
@@ -7,7 +8,9 @@ namespace Polkadot.BinaryContracts
     {
         [Serialize(0)]
         public SignatureType SignatureType { get; set; }
+        
         [Serialize(1)]
+        [FixedSizeArrayConverter(64)]
         public byte[] Signature { get; set; }
 
         public ExtrinsicMultiSignature()

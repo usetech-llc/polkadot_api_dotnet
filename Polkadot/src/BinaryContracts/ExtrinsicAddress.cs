@@ -1,18 +1,19 @@
-﻿
-using Polkadot.BinarySerializer;
+﻿using Polkadot.BinarySerializer;
+using Polkadot.BinarySerializer.Converters;
+using Polkadot.DataStructs;
 
 namespace Polkadot.BinaryContracts
 {
     public class ExtrinsicAddress : IExtrinsicAddress
     {
         [Serialize(0)]
-        public byte[] PublicKey { get; set; }
+        public PublicKey PublicKey { get; set; }
 
         public ExtrinsicAddress()
         {
         }
 
-        public ExtrinsicAddress(byte[] publicKey)
+        public ExtrinsicAddress(PublicKey publicKey)
         {
             PublicKey = publicKey;
         }

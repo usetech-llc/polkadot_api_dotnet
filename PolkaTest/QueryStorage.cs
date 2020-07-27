@@ -36,7 +36,7 @@ namespace PolkaTest
         [Fact]
         public void Ok()
         {
-            using (IApplication app = PolkaApi.GetAppication())
+            using (IApplication app = PolkaApi.GetApplication())
             {
                 app.Connect();
                 // Get the most recent block number and hash

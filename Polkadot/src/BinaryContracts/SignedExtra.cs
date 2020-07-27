@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using Polkadot.BinarySerializer;
+using Polkadot.BinarySerializer.Converters;
 using Polkadot.Utils;
 
 namespace Polkadot.BinaryContracts
@@ -10,11 +11,11 @@ namespace Polkadot.BinaryContracts
         public EraDto Era { get; set; }
         
         [Serialize(1)]
-        [Converter(typeof(CompactBigIntegerConverter))]
+        [CompactBigIntegerConverter]
         public BigInteger Nonce { get; set; }
         
         [Serialize(2)]
-        [Converter(typeof(CompactBigIntegerConverter))]
+        [CompactBigIntegerConverter]
         public BigInteger ChargeTransactionPayment { get; set; }
 
         public SignedExtra()

@@ -24,7 +24,7 @@ namespace ExtrinsicTest
                 var amountStr = args[2];
                 var senderPrivateKeyStr = args[3];
 
-                using (IApplication app = PolkaApi.GetAppication())
+                using (IApplication app = PolkaApi.GetApplication())
                 {
                     bool done = false;
 

@@ -23,7 +23,7 @@ namespace PolkaTest
             string variable1 = "Account";
             int expectedBalanceSize = 69;
 
-            using (IApplication app = PolkaApi.GetAppication())
+            using (IApplication app = PolkaApi.GetApplication())
             {
                 app.Connect();
                 output.WriteLine("================== Get Storage Size: Address Balance ==================");

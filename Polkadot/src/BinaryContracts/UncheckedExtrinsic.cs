@@ -1,5 +1,6 @@
 ﻿
 using Polkadot.BinarySerializer;
+using Polkadot.BinarySerializer.Converters;
 
 namespace Polkadot.BinaryContracts
 {

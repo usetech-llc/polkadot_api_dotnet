@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Numerics;
+using Polkadot.BinarySerializer.Extensions;
 
-namespace Polkadot.Utils
+namespace Polkadot.BinarySerializer
 {
 
     public static class Scale
@@ -46,7 +48,28 @@ namespace Polkadot.Utils
 
         public static CompactInteger DecodeCompactInteger(ref string stringStream)
         {
-            uint first_byte = NextByte(ref stringStream);
+            var str = stringStream;
+            Func<byte> nextByte = () =>
+            {
+                var s = str;
+                var b = NextByte(ref s);
+                str = s;
+                return b;
+            };
+
+            var compactInteger = DecodeCompactInteger(nextByte);
+            stringStream = str;
+            return compactInteger;
+        }
+
+        public static CompactInteger DecodeCompactInteger(Stream stream)
+        {
+            return DecodeCompactInteger(stream.ReadByteThrowIfStreamEnd);
+        }
+        
+        public static CompactInteger DecodeCompactInteger(Func<byte> nextByte)
+        {
+            uint first_byte = nextByte();
             uint flag = (first_byte) & 0b00000011u;
             uint number = 0u;
 
@@ -60,7 +83,7 @@ namespace Polkadot.Utils
 
                 case 0b01u:
                     {
-                        uint second_byte = NextByte(ref stringStream);
+                        uint second_byte = nextByte();
 
                         number = ((uint)((first_byte) & 0b11111100u) + (uint)(second_byte) * 256u) >> 2;
                         break;
@@ -73,7 +96,7 @@ namespace Polkadot.Utils
 
                         for (var i = 0u; i < 3u; ++i)
                         {
-                            number += NextByte(ref stringStream) * multiplier;
+                            number += nextByte() * multiplier;
                             multiplier = multiplier << 8;
                         }
                         number = number >> 2;
@@ -90,7 +113,7 @@ namespace Polkadot.Utils
                         // no need to make checks in a loop
                         for (var i = 0u; i < bytes_count; ++i)
                         {
-                            value += multiplier * NextByte(ref stringStream);
+                            value += multiplier * nextByte();
                             multiplier *= 256u;
                         }
 

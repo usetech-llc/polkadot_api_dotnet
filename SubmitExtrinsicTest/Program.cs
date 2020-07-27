@@ -5,6 +5,7 @@ using Polkadot.Utils;
 using System;
 using System.Numerics;
 using System.Threading;
+using Polkadot.BinarySerializer;
 
 namespace ExtrinsicTest
 {
@@ -29,7 +30,7 @@ namespace ExtrinsicTest
                 var amountStr = "1000000000000";
                 var senderPrivateKeyStr = "0xa81056d713af1ff17b599e60d287952e89301b5208324a0529b62dc7369c745defc9c8dd67b7c59b201bc164163a8978d40010c22743db142a47f2e064480d4b";
 
-                using (IApplication app = PolkaApi.GetAppication())
+                using (IApplication app = PolkaApi.GetApplication())
                 {
                     // Receiving address public key
                     var pk = AddressUtils.GetPublicKeyFromAddr(recipientAddr);

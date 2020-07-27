@@ -3,7 +3,7 @@ using Polkadot.BinarySerializer;
 
 namespace Polkadot.BinaryContracts
 {
-    public class ExtrinsicCall<TParams> : IExtrinsicCall
+    public class ExtrinsicCallRaw<TParams> : IExtrinsicCall
     {
         [Serialize(0)]
         public byte ModuleIndex { get; set; }
@@ -14,11 +14,11 @@ namespace Polkadot.BinaryContracts
         [Serialize(2)]
         public TParams Params { get; set; }
 
-        public ExtrinsicCall()
+        public ExtrinsicCallRaw()
         {
         }
 
-        public ExtrinsicCall(byte moduleIndex, byte methodIndex, TParams @params)
+        public ExtrinsicCallRaw(byte moduleIndex, byte methodIndex, TParams @params)
         {
             ModuleIndex = moduleIndex;
             MethodIndex = methodIndex;

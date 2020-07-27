@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Polkadot.Utils
+namespace Polkadot.BinarySerializer
 {
     public struct CompactInteger
     {

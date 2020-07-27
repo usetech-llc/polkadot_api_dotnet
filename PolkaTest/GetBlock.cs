@@ -18,7 +18,7 @@ namespace PolkaTest
         [Fact]
         public void Ok()
         {
-            using (IApplication app = PolkaApi.GetAppication())
+            using (IApplication app = PolkaApi.GetApplication())
             {
                 app.Connect();
                 var result = app.GetBlockHash(new GetBlockHashParams { BlockNumber = 2 });

@@ -21,7 +21,7 @@ namespace PolkaTest
         [Fact]
         public void Ok()
         {
-            using (IApplication app = PolkaApi.GetAppication())
+            using (IApplication app = PolkaApi.GetApplication())
             {
                 app.Connect(Constants.LocalNodeUri);
                 BigInteger maxValue = (new BigInteger(1) << 128) - 1;

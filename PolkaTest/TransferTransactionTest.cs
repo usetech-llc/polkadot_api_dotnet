@@ -27,7 +27,7 @@ namespace PolkaTest
             var privateKey = Constants.LocalAlicePrivateKey;
             var to = Constants.LocalBobAddress;
             
-            using var application = PolkaApi.GetAppication();
+            using var application = PolkaApi.GetApplication();
 
             application.Connect(Constants.LocalNodeUri);
 

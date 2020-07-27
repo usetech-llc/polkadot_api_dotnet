@@ -20,7 +20,7 @@ namespace PolkaTest
             var message2 = new byte[1000];
             random.NextBytes(message2);
 
-            using var application = (Application)PolkaApi.GetAppication();
+            using var application = (Application)PolkaApi.GetApplication();
             application.Connect(Constants.LocalNodeUri);
             var publicKey = application._protocolParams.Metadata.GetPublicKeyFromAddr(Constants.LocalAliceAddress).Bytes;
             var privateKey = Constants.LocalAlicePrivateKey;
@@ -37,7 +37,7 @@ namespace PolkaTest
         [Fact]
         public void VerificationOfWebSignSuccessful()
         {
-            using var application = (Application)PolkaApi.GetAppication();
+            using var application = (Application)PolkaApi.GetApplication();
             application.Connect(Constants.LocalNodeUri);
 
             var message = new byte[]{0};
