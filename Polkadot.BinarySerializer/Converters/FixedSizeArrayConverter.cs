@@ -6,9 +6,14 @@ namespace Polkadot.BinarySerializer.Converters
 {
     public class FixedSizeArrayConverter : BaseArrayConverter
     {
-        protected override int GetSize(Type type, Stream stream, IBinarySerializer deserializer, object[] param)
+        public override void Serialize(Stream stream, object value, IBinarySerializer serializer, object[] param)
         {
-            return (int) param[2];
+            serializer.Serialize(value, stream);
+        }
+
+        public override object Deserialize(Type type, Stream stream, IBinarySerializer deserializer, object[] param)
+        {
+            return DeserializeArray(type, stream, deserializer, param, (int) param[2]);
         }
     }
 }
