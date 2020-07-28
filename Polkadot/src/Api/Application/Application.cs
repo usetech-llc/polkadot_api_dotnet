@@ -324,11 +324,10 @@ namespace Polkadot.Api
 
         public string GetKeys(string module, string variable)
         {
-            var e = default(ITypeCreate);
-            return GetKeys(e, module, variable);
+            return GetKeys<object>(null, module, variable);
         }
 
-        public string GetKeys<T>(T prm, string module, string variable) where T:ITypeCreate
+        public string GetKeys<T>(T prm, string module, string variable)
         {
             // Determine if parameters are required for given module + variable
             // Find the module and variable indexes in metadata
@@ -345,11 +344,16 @@ namespace Polkadot.Api
                 key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, module);
                 key += _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, variable);
             }
-            else if (prm != null)
+            else if (prm is ITypeCreate t)
             {
                 key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, module);
                 key += _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, variable);
-                key += prm.GetTypeEncoded();
+                key += t.GetTypeEncoded();
+            } else if (prm != null)
+            {
+                key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, module);
+                key += _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, variable);
+                key += Serializer.Serialize(prm).ToHexString();
             }
             else
             {
@@ -372,11 +376,8 @@ namespace Polkadot.Api
             return response.ToString();
         }
 
-        public string GetStorage<T>(T prm, string module, string variable) where T : ITypeCreate
+        public string GetStorage<T>(T prm, string module, string variable)
         {
-            // Get most recent block hash
-            var headHash = GetBlockHash(null);
-
             string key = GetKeys(prm, module, variable);
             JObject query = new JObject { { "method", "state_getStorage" }, { "params", new JArray { key } } };
             JObject response = _jsonRpc.Request(query);
