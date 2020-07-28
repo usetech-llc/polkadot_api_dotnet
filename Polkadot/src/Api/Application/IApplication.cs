@@ -101,7 +101,7 @@ namespace Polkadot.Api
         /// <param name="module"> module (as in metadata)</param>
         /// <param name="variable"> state variable (as in metadata for given module)</param>
         /// <returns> Storage key </returns>
-        string GetKeys<T>(T prm, string module, string variable) where T : ITypeCreate;
+        string GetKeys<T>(T prm, string module, string variable);
 
         string GetKeys(string module, string variable);
 
@@ -121,7 +121,7 @@ namespace Polkadot.Api
         /// <returns> Storage content </returns>
         string GetStorage(string module, string variable);
 
-        string GetStorage<T>(T prm, string module, string variable) where T : ITypeCreate;
+        string GetStorage<T>(T prm, string module, string variable);
 
         /// <summary>
         /// Returns storage hash of given State Variable for a given Module defined by parameter.
