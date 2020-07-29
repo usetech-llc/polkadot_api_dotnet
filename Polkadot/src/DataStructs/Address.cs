@@ -1,6 +1,8 @@
 ﻿using Polkadot.Utils;
 using System;
+using System.Linq;
 using System.Text;
+using Polkadot.BinarySerializer;
 
 namespace Polkadot.DataStructs
 {
@@ -15,11 +17,10 @@ namespace Polkadot.DataStructs
             Symbols = symbols;
         }
 
-        public string GetTypeEncoded()
+        public byte[] GetTypeEncoded(IBinarySerializer serializer)
         {
             var aupk = AddressUtils.GetPublicKeyFromAddr(Symbols);
-            var str = BitConverter.ToString(aupk.Bytes).Replace("-", "");
-            return $"{Hash.GetStorageKey(Hasher.BLAKE2, aupk.Bytes)}{str}";
+            return Hash.GetStorageKey(Hasher.BLAKE2, aupk.Bytes, aupk.Bytes.Length, serializer).Concat(aupk.Bytes).ToArray();
         }
     }
 }

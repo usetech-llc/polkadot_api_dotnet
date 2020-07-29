@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Polkadot.BinarySerializer;
 
 namespace Polkadot.DataStructs
 {
     public interface ITypeCreate
     {
-        string GetTypeEncoded();
+        byte[] GetTypeEncoded(IBinarySerializer serializer);
     }
 }

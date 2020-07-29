@@ -139,13 +139,13 @@ namespace Polkadot.Api
             _logger.Info($"Transfer call index: {_protocolParams.TransferMethodIndex}");
 
             // Calculate storage hashes
-            _storageKeyCurrentEra = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, "Staking CurrentEra");
+            _storageKeyCurrentEra = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, "Staking CurrentEra", Serializer);
 
             _storageKeySessionsPerEra =
-                _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, "Staking SessionsPerEra");
+                _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, "Staking SessionsPerEra", Serializer);
 
             _storageKeyCurrentSessionIndex =
-                _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, "Session CurrentIndex");
+                _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, "Session CurrentIndex", Serializer);
 
             try
             {
@@ -341,18 +341,18 @@ namespace Polkadot.Api
             string key;
             if (_protocolParams.Metadata.IsStateVariablePlain(moduleIndex, variableIndex))
             {
-                key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, module);
-                key += _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, variable);
+                key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, module, Serializer);
+                key += _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, variable, Serializer);
             }
             else if (prm is ITypeCreate t)
             {
-                key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, module);
-                key += _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, variable);
-                key += t.GetTypeEncoded();
+                key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, module, Serializer);
+                key += _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, variable, Serializer);
+                key += t.GetTypeEncoded(Serializer).ToHexString();
             } else if (prm != null)
             {
-                key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, module);
-                key += _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, variable);
+                key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, module, Serializer);
+                key += _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, variable, Serializer);
                 key += Serializer.Serialize(prm).ToHexString();
             }
             else

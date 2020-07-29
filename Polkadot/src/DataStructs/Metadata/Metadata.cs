@@ -1,4 +1,5 @@
-﻿using Polkadot.DataStructs.Metadata.Interfaces;
+﻿using Polkadot.BinarySerializer;
+using Polkadot.DataStructs.Metadata.Interfaces;
 
 namespace Polkadot.DataStructs.Metadata
 {
@@ -248,9 +249,9 @@ namespace Polkadot.DataStructs.Metadata
             return value;
         }
 
-        public string GetPlainStorageKey(Hasher hasher, string prefix)
+        public string GetPlainStorageKey(Hasher hasher, string prefix, IBinarySerializer serializer)
         {
-            return GetStorageKey(hasher, Encoding.ASCII.GetBytes(prefix), prefix.Length);
+            return GetStorageKey(hasher, Encoding.ASCII.GetBytes(prefix), prefix.Length, serializer);
         }
 
         public string GetAddrFromPublicKey(PublicKey pubKey)
@@ -258,7 +259,7 @@ namespace Polkadot.DataStructs.Metadata
             return AddressUtils.GetAddrFromPublicKey(pubKey);
         }
 
-        public string GetAddressStorageKey(Hasher hasher, Address address, string prefix)
+        public string GetAddressStorageKey(Hasher hasher, Address address, string prefix, IBinarySerializer serializer)
         {
             PublicKey pubk = GetPublicKeyFromAddr(address);
             var data = new List<byte>();
@@ -266,7 +267,7 @@ namespace Polkadot.DataStructs.Metadata
             data.AddRange(Encoding.ASCII.GetBytes(prefix));
             data.AddRange(pubk.Bytes);
 
-            return GetStorageKey(hasher, data.ToArray(), Consts.PUBLIC_KEY_LENGTH + prefix.Length);
+            return GetStorageKey(hasher, data.ToArray(), Consts.PUBLIC_KEY_LENGTH + prefix.Length, serializer);
         }
 
         public PublicKey GetPublicKeyFromAddr(Address address)
@@ -274,78 +275,28 @@ namespace Polkadot.DataStructs.Metadata
             return AddressUtils.GetPublicKeyFromAddr(address);
         }
 
-        public string GetStorageKey(Hasher hasher, byte[] data, int lenght)
+        public static string GetStorageKey(Hasher hasher, byte[] data, int length, IBinarySerializer serializer)
         {
-            // byte[] key = new byte[2 * Consts.STORAGE_KEY_BYTELENGTH + 3];
-            string key = string.Empty;
-
-            if (hasher == Hasher.XXHASH)
-            {
-                var xxhash1 = XXHash.XXH64(data, 0, lenght, 0);
-                byte[] bytes1 = new byte[] {
-                    (byte)(xxhash1 & 0xFF),
-                    (byte)((xxhash1 & 0xFF00) >> 8),
-                    (byte)((xxhash1 & 0xFF0000) >> 16),
-                    (byte)((xxhash1 & 0xFF000000) >> 24),
-                    (byte)((xxhash1 & 0xFF00000000) >> 32),
-                    (byte)((xxhash1 & 0xFF0000000000) >> 40),
-                    (byte)((xxhash1 & 0xFF000000000000) >> 48),
-                    (byte)((xxhash1 & 0xFF00000000000000) >> 56)
-                };
-
-                var xxhash2 = XXHash.XXH64(data, 0, lenght, 1);
-                byte[] bytes2 = new byte[] {
-                    (byte)(xxhash2 & 0xFF),
-                    (byte)((xxhash2 & 0xFF00) >> 8),
-                    (byte)((xxhash2 & 0xFF0000) >> 16),
-                    (byte)((xxhash2 & 0xFF000000) >> 24),
-                    (byte)((xxhash2 & 0xFF00000000) >> 32),
-                    (byte)((xxhash2 & 0xFF0000000000) >> 40),
-                    (byte)((xxhash2 & 0xFF000000000000) >> 48),
-                    (byte)((xxhash2 & 0xFF00000000000000) >> 56)
-                };
-
-                foreach (var bt in bytes1)
-                {
-                    key += bt.ToString("X2");
-                }
-
-                foreach (var bt in bytes2)
-                {
-                    key += bt.ToString("X2");
-                }
-            }
-            else if (hasher == Hasher.BLAKE2)
-            {
-                var config = new Blake2Core.Blake2BConfig { OutputSizeInBytes = 16 };
-                var hash = Blake2Core.Blake2B.ComputeHash(data, 0, lenght, config);
-
-                foreach(var bt in hash)
-                {
-                    key += bt.ToString("X2");
-                }
-            }
-
-            return key;
+            return Hash.GetStorageKey(hasher, data, length, serializer).ToHexString();
         }
 
-        public string GetMappedStorageKey(Hasher hasher, KeyValuePair<string, string> param, string prefix)
+        public string GetMappedStorageKey(Hasher hasher, KeyValuePair<string, string> param, string prefix, IBinarySerializer serializer)
         {
             if (param.Key == Consts.STORAGE_TYPE_ADDRESS)
             {
-                return GetAddressStorageKey(hasher, new Address { Symbols = param.Value }, prefix);
+                return GetAddressStorageKey(hasher, new Address { Symbols = param.Value }, prefix, serializer);
             }
             else if (param.Key == Consts.STORAGE_TYPE_BLOCK_NUMBER || param.Key == Consts.STORAGE_TYPE_U32 ||
                 param.Key == Consts.STORAGE_TYPE_ACCOUNT_INDEX || param.Key == Consts.STORAGE_TYPE_PROPOSAL_INDEX ||
                 param.Key == Consts.STORAGE_TYPE_REFERENDUM_INDEX || param.Key == Consts.STORAGE_TYPE_PARACHAIN_ID)
             {
                 var key = $"{prefix} {param.Value}";
-                return GetStorageKey(hasher, Encoding.ASCII.GetBytes(key), key.Length);
+                return GetStorageKey(hasher, Encoding.ASCII.GetBytes(key), key.Length, serializer);
             }
             else if (param.Key == Consts.STORAGE_TYPE_HASH)
             {
                 var key = $"{prefix} {param.Value}";
-                return GetStorageKey(hasher, Encoding.ASCII.GetBytes(key), key.Length);
+                return GetStorageKey(hasher, Encoding.ASCII.GetBytes(key), key.Length, serializer);
             }
 
             throw new ApplicationException($"Storage key with type {param.Key} is not defined");
