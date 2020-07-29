@@ -4,7 +4,7 @@ using Polkadot.DataStructs;
 
 namespace Polkadot.BinaryContracts.Events
 {
-    public class NewAccount
+    public class NewAccount : IEvent
     {
         [Serialize(0)]
         public PublicKey Account;

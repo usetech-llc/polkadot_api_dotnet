@@ -1,4 +1,5 @@
 ﻿using Polkadot.BinaryContracts;
+using Polkadot.BinarySerializer;
 
 namespace Polkadot.Api
 {

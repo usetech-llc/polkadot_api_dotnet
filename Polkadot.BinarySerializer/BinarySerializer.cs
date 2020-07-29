@@ -25,15 +25,21 @@ namespace Polkadot.BinarySerializer
             foreach (var (module, method, type) in settings.KnownCalls)
             {
                 var callIndex = resolver.CallIndex((module, method));
-                _callIndexCache[type] = callIndex;
-                _callTypeCache[callIndex] = type;
+                if (callIndex.HasValue)
+                {
+                    _callIndexCache[type] = callIndex.Value;
+                    _callTypeCache[callIndex.Value] = type;
+                }
             }
 
             foreach (var (module, @event, type) in settings.KnownEvents)
             {
                 var eventIndex = resolver.EventIndex((module, @event));
-                _eventIndexCache[type] = eventIndex;
-                _eventTypeCache[eventIndex] = type;
+                if (eventIndex.HasValue)
+                {
+                    _eventIndexCache[type] = eventIndex.Value;
+                    _eventTypeCache[eventIndex.Value] = type;
+                }
             }
         }
 

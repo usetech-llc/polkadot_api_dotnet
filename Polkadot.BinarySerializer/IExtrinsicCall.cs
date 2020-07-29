@@ -1,4 +1,4 @@
-﻿namespace Polkadot.BinaryContracts
+﻿namespace Polkadot.BinarySerializer
 {
     public interface IExtrinsicCall
     {
