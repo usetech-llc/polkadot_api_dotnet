@@ -1,4 +1,4 @@
-﻿namespace Polkadot.BinaryContracts.Events
+﻿namespace Polkadot.BinarySerializer
 {
     public interface IEvent
     {

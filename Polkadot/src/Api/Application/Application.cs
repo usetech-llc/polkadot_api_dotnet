@@ -996,8 +996,8 @@ namespace Polkadot.Api
             var metadata = GetMetadata(null);
             var callModuleIndex = -1;
             var eventModuleIndex = -1;
-            var callsLookup = new Dictionary<(string module, string method), (byte module, byte method)>();
-            var eventsLookup = new Dictionary<(string module, string @event), (byte module, byte @event)>();
+            var callsLookup = new Dictionary<(string module, string method), (byte module, byte method)?>();
+            var eventsLookup = new Dictionary<(string module, string @event), (byte module, byte @event)?>();
             foreach (var module in metadata.GetModules())
             {
                 var calls = module.GetCalls();
@@ -1024,8 +1024,8 @@ namespace Polkadot.Api
             }
             var resolver = new IndexResolver()
             {
-                CallIndex = strValue => callsLookup[strValue],
-                EventIndex = str => eventsLookup[str],
+                CallIndex = strValue => callsLookup.TryGetOrDefault(strValue, null),
+                EventIndex = str => eventsLookup.TryGetOrDefault(str, null),
             };
             return new BinarySerializer.BinarySerializer(resolver, _serializerSettings);
         }
@@ -1056,6 +1056,9 @@ namespace Polkadot.Api
                 .AddEvent<Transfer>("Balances", "Transfer")
                 .AddEvent<BalanceSet>("Balances", "BalanceSet")
                 .AddEvent<Deposit>("Balances", "Deposit")
+                .AddEvent<Reserved>("Balances", "Reserved")
+                .AddEvent<Unreserved>("Balances", "Unreserved")
+                .AddEvent<ReserveRepatriated>("Balances", "ReserveRepatriated")
                 .AddEvent<Sudid>("Sudo", "Sudid")
                 .AddEvent<KeyChanged>("Sudo", "KeyChanged")
                 .AddEvent<SudoAsDone>("Sudo", "SudoAsDone");
