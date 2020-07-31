@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using OneOf;
 using Polkadot.BinarySerializer.Extensions;
 
@@ -11,7 +12,7 @@ namespace Polkadot.BinarySerializer.Converters
         public void Serialize(Stream stream, object value, IBinarySerializer serializer, object[] parameters)
         {
             var innerValue = ((IOneOf) value).Value;
-            var index = (int) value.GetType().GetField("_index").GetValue(value);
+            var index = (int) value.GetType().GetField("_index", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)!.GetValue(value);
             stream.WriteByte((byte)index);
             serializer.Serialize(innerValue);
         }
