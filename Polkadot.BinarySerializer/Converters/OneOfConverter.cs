@@ -14,7 +14,7 @@ namespace Polkadot.BinarySerializer.Converters
             var innerValue = ((IOneOf) value).Value;
             var index = (int) value.GetType().GetField("_index", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)!.GetValue(value);
             stream.WriteByte((byte)index);
-            serializer.Serialize(innerValue);
+            serializer.Serialize(innerValue, stream);
         }
 
         public object Deserialize(Type type, Stream stream, IBinarySerializer deserializer, object[] parameters)
