@@ -15,15 +15,16 @@
     {
         public SystemInfo Parse(JObject jsonObject)
         {
-            dynamic djson = JsonConvert.DeserializeObject(jsonObject["item3"].ToString());
+            var tokenDecimals = jsonObject["item3"].HasValues ? jsonObject["item3"].Value<string>("tokenDecimals") : "";
+            var tokenSymbol = jsonObject["item3"].HasValues ? jsonObject["item3"].Value<string>("tokenSymbol") : "";
 
             return new SystemInfo
             {
                 ChainName = jsonObject["item0"].ToString(),
                 ChainId = jsonObject["item1"].ToString(),
                 Version = jsonObject["item2"].ToString(),
-                TokenDecimals = djson["tokenDecimals"].ToObject<int>(),
-                TokenSymbol = djson["tokenSymbol"].ToString()
+                TokenDecimals = string.IsNullOrEmpty(tokenDecimals) ? 0 : int.Parse(tokenDecimals), 
+                TokenSymbol = tokenSymbol
             };
         }
     }
