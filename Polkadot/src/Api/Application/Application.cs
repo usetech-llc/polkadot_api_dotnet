@@ -103,12 +103,15 @@ namespace Polkadot.Api
         public ISigner Signer { get; }
         public IBinarySerializer Serializer => _serializer.Value;
 
-        public int Connect(string node_url = "", string metadataBlockHash = null)
+        public int Connect(ConnectionParameters connectionParams, string metadataBlockHash = null)
         {
+            if (connectionParams is null)
+                throw new ArgumentNullException(nameof(connectionParams));
+
             int result = Consts.PAPI_OK;
 
             // Connect to WS
-            result = _jsonRpc.Connect(node_url);
+            result = _jsonRpc.Connect(connectionParams);
 
             _protocolParams.GenesisBlockHash = new byte[Consts.BLOCK_HASH_SIZE];
 

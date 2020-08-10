@@ -47,9 +47,12 @@
             _wsc.RegisterMessageObserver(this);
         }
 
-        public int Connect(string node_url)
+        public int Connect(ConnectionParameters connectionParams)
         {
-            _wsc.Connect(node_url);
+            if (connectionParams is null)
+                throw new ArgumentNullException(nameof(connectionParams));
+
+            _wsc.Connect(connectionParams);
 
             _cancelletionTokenSource = new CancellationTokenSource();
             _cancelletionToken = _cancelletionTokenSource.Token;

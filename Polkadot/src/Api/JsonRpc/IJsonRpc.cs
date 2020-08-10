@@ -8,9 +8,9 @@
         /// <summary>
         /// Connects to WebSocket
         /// </summary>
-        /// <param name="node_url"> Node URL to connect to </param>
+        /// <param name="connectionParams">Connection parameters</param>
         /// <returns> operation result </returns>
-        int Connect(string node_url);
+        int Connect(ConnectionParameters connectionParams);
 
         /// <summary>
         /// Disconnects from WebSocket
