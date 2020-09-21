@@ -147,7 +147,7 @@ namespace Polkadot.BinarySerializer
             {
                 b.Length = 2;
                 b.Bytes[0] = (byte)(((n & 0x3F) << 2) | 0x01);
-                b.Bytes[1] = (byte)((n & 0xFC0) >> 6);
+                b.Bytes[1] = (byte)((n & 0xFFC0) >> 6);
             }
             else if (n <= 0x3FFFFFFF)
             {
