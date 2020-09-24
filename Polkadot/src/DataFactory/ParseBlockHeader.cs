@@ -15,7 +15,7 @@
             var result = new BlockHeader
             {
                 ParentHash = djson["parentHash"].ToString(),
-                Number = Convert.ToUInt64(djson["number"].ToString().Substring(2)),
+                Number = Convert.ToUInt64(djson["number"].ToString(), 16),
                 StateRoot = djson["stateRoot"].ToString(),
                 ExtrinsicsRoot = djson["extrinsicsRoot"].ToString()
             };

@@ -25,16 +25,16 @@ namespace PolkaTest
                 Assert.True(result.ChainId.Length > 0);
 
                 // Check chainName
-                Assert.Equal("parity-polkadot", result.ChainName);
+                Assert.Equal("Parity Polkadot", result.ChainName);
 
                 // Check version
                 Assert.NotEqual(string.Empty, result.Version);
 
                 // Check tokenSymbol
-                Assert.Equal("DOT", result.TokenSymbol);
+                Assert.Equal("KSM", result.TokenSymbol);
 
                 // Check tokenDecimals
-                Assert.Equal(15, result.TokenDecimals);
+                Assert.Equal(12, result.TokenDecimals);
 
                 output.WriteLine($"Chain id        : {result.ChainId}");
                 output.WriteLine($"Chain name      : {result.ChainName}");

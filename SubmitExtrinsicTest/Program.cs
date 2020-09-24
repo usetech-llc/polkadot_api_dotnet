@@ -13,19 +13,21 @@ namespace ExtrinsicTest
         static void Main(string[] args)
         {
             // This is a manual test due to lack of test DOTs
-            if (args.Length < 4)
-            {
-                Console.WriteLine("This is intended to be a manual test");
-                Console.WriteLine("Usage: ");
-                Console.WriteLine("<sender address> <recipient address> <amount in fDOTs> <sender private key (hex)>");
-                Console.WriteLine("success");
-            }
-            else
-            {
-                var senderAddr = args[0];
-                var recipientAddr = args[1];
-                var amountStr = args[2];
-                var senderPrivateKeyStr = args[3];
+            //if (args.Length < 4)
+            //{
+            //    Console.WriteLine("This is intended to be a manual test");
+            //    Console.WriteLine("Usage: ");
+            //    Console.WriteLine("<sender address> <recipient address> <amount in fDOTs> <sender private key (hex)>");
+            //    Console.WriteLine("success");
+            //}
+            //else
+            //{
+
+
+                var senderAddr = "5GuuxfuxbvaiwteUrV9U7Mj2Fz7TWK84WhLaZdMMJRvSuzr4";
+                var recipientAddr = "5HQdHxuPgQ1BpJasmm5ZzfSk5RDvYiH6YHfDJVE8jXmp4eig";
+                var amountStr = "1000000000000";
+                var senderPrivateKeyStr = "0xa81056d713af1ff17b599e60d287952e89301b5208324a0529b62dc7369c745defc9c8dd67b7c59b201bc164163a8978d40010c22743db142a47f2e064480d4b";
 
                 using (IApplication app = PolkaApi.GetAppication())
                 {
@@ -44,7 +46,7 @@ namespace ExtrinsicTest
                     Console.WriteLine(result);
                     app.Disconnect();
                 }
-            }
+       //     }
         }
     }
 }

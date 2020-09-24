@@ -24,7 +24,7 @@ namespace PolkaTest
                 RuntimeVersion rv = null;
                 app.Connect();
 
-                int subId = app.SubscribeRuntimeVersion((runtimeVersion) =>
+                var subId = app.SubscribeRuntimeVersion((runtimeVersion) =>
                 {
                     rv = runtimeVersion;
                     output.WriteLine($"Runtime version spec name: {runtimeVersion.SpecName}");

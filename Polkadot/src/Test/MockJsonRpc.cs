@@ -56,7 +56,7 @@
         {
             var query = new JsonRpcQuery
             {
-                Id = GetNextId()
+                Id = GetNextId().ToString()
             };
 
             // build request
@@ -88,12 +88,12 @@
             return ret;
         }
 
-        public int SubscribeWs(JObject jsonMap, IWebSocketMessageObserver observer)
+        public string SubscribeWs(JObject jsonMap, IWebSocketMessageObserver observer)
         {
             throw new NotImplementedException();
         }
 
-        public int UnsubscribeWs(int subscriptionId, string method)
+        public string UnsubscribeWs(string subscriptionId, string method)
         {
             throw new NotImplementedException();
         }

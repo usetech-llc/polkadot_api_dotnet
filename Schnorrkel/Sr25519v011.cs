@@ -39,7 +39,7 @@
         public static bool Verify(byte[] signature, byte[] publicKey, byte[] message)
         {
             var s = new Signature();
-            s.FromBytes(signature);
+            s.FromBytes011(signature);
             var pk = new PublicKey(publicKey);
             var signingContext = new SigningContext011(Encoding.UTF8.GetBytes("substrate"));
             var st = new SigningTranscript(signingContext);

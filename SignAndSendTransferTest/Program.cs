@@ -36,7 +36,7 @@ namespace ExtrinsicTest
 
                     var amount = BigInteger.Parse(amountStr);
 
-                    app.Connect();
+                    app.Connect("ws://127.0.0.1:9944");
                     app.SignAndSendTransfer(senderAddr, senderPrivateKeyStr, recipientAddr, amount, cb);
 
                     // Wait until transaction is mined

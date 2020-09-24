@@ -19,7 +19,7 @@ namespace PolkaTest
         {
             using (IApplication app = PolkaApi.GetAppication())
             {
-                app.Connect();
+                app.Connect("wss://kusama-rpc.polkadot.io/");
 
                 //var childKeysResponse = app.GetChildKeys(string.Empty, string.Empty);
                 //output.WriteLine($"Child Keys Response: {childKeysResponse}");

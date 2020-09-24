@@ -28,5 +28,16 @@
             sb.Append("}");
             return sb.ToString();
         }
+
+        public static string PrintHexByteArray(this byte[] bytes)
+        {
+            var sb = new StringBuilder("new byte[] { ");
+            foreach (var b in bytes)
+            {
+                sb.Append($"0x{b:X2}, ");
+            }
+            sb.Append("}");
+            return sb.ToString();
+        }
     }
 }
