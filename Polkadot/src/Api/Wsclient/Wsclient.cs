@@ -19,15 +19,20 @@
             _logger = logger;
         }
 
-        public int Connect(string node_url = "")
+        public int Connect(ConnectionParameters connectionParams)
         {
-            var connectionString = node_url.Equals(string.Empty) ? Consts.WssConnectionString : node_url;
-            var certList = GetCertificatesFromPem(Consts.CertFileName);
+            if (connectionParams is null)
+                throw new ArgumentNullException(nameof(connectionParams));
+
+            var connectionString = connectionParams.NodeUrl;
+            var clientCertList = !string.IsNullOrEmpty(connectionParams.ClientCertPath)
+                ? GetCertificatesFromPem(connectionParams.ClientCertPath) : null;
 
             _wss = new WebSocketSharp.WebSocket(connectionString);
 
             _wss.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
-            _wss.SslConfiguration.ClientCertificates = new X509CertificateCollection(certList);
+            if (clientCertList != null)
+                _wss.SslConfiguration.ClientCertificates = new X509CertificateCollection(clientCertList);
             _wss.SslConfiguration.ServerCertificateValidationCallback =
                 (sender, certificate, chain, sslPolicyErrors) => {
                     // If the server certificate is valid.

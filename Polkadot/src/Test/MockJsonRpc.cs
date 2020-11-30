@@ -40,9 +40,9 @@
             return ++_lastId;
         }
 
-        public int Connect(string node_url)
+        public int Connect(ConnectionParameters connectionParams)
         {
-            _wsc.Connect(node_url);
+            _wsc.Connect(connectionParams);
 
             return Consts.PAPI_OK;
         }

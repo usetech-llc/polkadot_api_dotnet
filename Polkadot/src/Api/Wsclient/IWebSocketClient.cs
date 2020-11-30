@@ -4,7 +4,7 @@
 
     public interface IWebSocketClient : IDisposable
     {
-        int Connect(string node_url);
+        int Connect(ConnectionParameters connectionParams);
         bool IsConnected();
         void Disconnect();
         void Send(string msg);

@@ -6,7 +6,7 @@
     <StartupObject />
     <LangVersion>8</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -15,15 +15,17 @@
 
   <ItemGroup>
     <PackageReference Include="Blake2Core" Version="1.0.0" />
-    <PackageReference Include="docfx.console" Version="2.45.1">
+    <PackageReference Include="docfx.console" Version="2.56.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Extensions.Data.xxHash.core20" Version="1.0.2.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="NLog" Version="4.6.7" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="NLog" Version="4.7.3" />
     <PackageReference Include="OneOf" Version="2.1.155" />
-    <PackageReference Include="SimpleBase" Version="1.8.0" />
+    <PackageReference Include="SimpleBase" Version="3.0.1" />
+    <PackageReference Include="System.Threading.Tasks.Dataflow" Version="4.11.1" />
     <PackageReference Include="websocketsharp.core" Version="1.0.0" />
     <PackageReference Include="IndexRange" Version="1.0.0" />
   </ItemGroup>

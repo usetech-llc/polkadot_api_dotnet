@@ -14,8 +14,8 @@ namespace Polkadot.Api
     {
         ISigner Signer { get; }
         IBinarySerializer Serializer { get; }
-        
-        int Connect(string node_url = "", string metadataBlockHash = null);
+
+        int Connect(ConnectionParameters connectionParams, string metadataBlockHash = null);
 
         void Disconnect();
 
