@@ -42,7 +42,7 @@
 
         public Transcript Clone()
         {
-            return new Transcript(_obj);
+            return new Transcript((Strobe)_obj.Clone());
         }
 
         private byte[] EncodeU64(byte[] data)
@@ -234,11 +234,10 @@
             bytes.Initialize();
             rng.FillBytes(ref bytes);
 
-            var newStrobe = _strobe.Clone();
-            newStrobe.MetaAd(Encoding.UTF8.GetBytes("rng"), false);
-            newStrobe.Key(bytes, false);
+            _strobe.MetaAd(Encoding.UTF8.GetBytes("rng"), false);
+            _strobe.Key(bytes, false);
 
-            return new TranscriptRng(newStrobe);
+            return new TranscriptRng(_strobe);
         }
     }
 
