@@ -265,6 +265,13 @@ namespace Polkadot.Api
 
             JObject response = _jsonRpc.Request(query);
 
+            // TODO: Version check refactoring
+            if (TryDeserialize<MetadataV12, ParseMetadataV12>(response, out MetadataV12 md12))
+            {
+                _metadataCache = md12;
+                return md12;
+            }
+
             if (TryDeserialize<MetadataV11, ParseMetadataV11>(response, out MetadataV11 md11))
             {
                 _metadataCache = md11;
