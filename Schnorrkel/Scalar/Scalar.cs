@@ -124,6 +124,16 @@
             return naf;
         }
 
+        public static Scalar FromBits(byte[] data)
+        {
+            data[31] &= 127;
+            var sc = new Scalar
+            {
+                ScalarBytes = data
+            };
+            return sc;
+        }
+
         public static Scalar FromBytesModOrder(byte[] data)
         {
             var sc = UnpackedScalar.FromBytes(data);

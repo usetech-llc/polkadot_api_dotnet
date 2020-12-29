@@ -1,5 +1,6 @@
 ﻿namespace Schnorrkel
 {
+    using Schnorrkel.Keys;
     using Schnorrkel.Merlin;
     using Schnorrkel.Ristretto;
     using Schnorrkel.Scalars;
@@ -11,6 +12,17 @@
     {
         public Sr25519v091(SchnorrkelSettings settings) : base(settings) 
         {
+        }
+
+        public static byte[] SignSimple(KeyPair pair, byte[] message)
+        {
+            var signingContext = new SigningContext085(Encoding.UTF8.GetBytes("substrate"));
+            var st = new SigningTranscript(signingContext);
+            signingContext.ts = signingContext.Bytes(message);
+            var rng = new Simple();
+            var sig = Sign(st, pair.Secret, pair.Public, rng);
+
+            return sig.ToBytes();
         }
 
         public static byte[] SignSimple(byte[] publicKey, byte[] secretKey, byte[] message)
@@ -25,6 +37,18 @@
 
             return sig.ToBytes();
         }
+
+        public static bool Verify(byte[] signature, PublicKey publicKey, byte[] message)
+        {
+            var s = new Signature();
+            s.FromBytes(signature);
+            var signingContext = new SigningContext085(Encoding.UTF8.GetBytes("substrate"));
+            var st = new SigningTranscript(signingContext);
+            signingContext.ts = signingContext.Bytes(message);
+
+            return Verify(st, s, publicKey);
+        }
+
         public static bool Verify(byte[] signature, byte[] publicKey, byte[] message)
         {
             var s = new Signature();

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.779
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polkadot", "Polkadot\Polkadot.csproj", "{E1FFFF05-CD38-4912-9218-B5D61EE9445E}"
 EndProject
@@ -17,7 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemoveExtrinsicTest", "Remo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schnorrkel", "Schnorrkel\Schnorrkel.csproj", "{71C8A71C-0CC9-44F6-985A-C7DA3CACC35B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polkadot.BinarySerializer", "Polkadot.BinarySerializer\Polkadot.BinarySerializer.csproj", "{22BAF944-5BC7-4DF9-9683-53B1F607A527}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Polkadot.BinarySerializer", "Polkadot.BinarySerializer\Polkadot.BinarySerializer.csproj", "{22BAF944-5BC7-4DF9-9683-53B1F607A527}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MnemonicSubstrate", "MnemonicSubstrate\MnemonicSubstrate.csproj", "{536C1908-D506-4E0C-B32F-DE9D58B2703A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{71C8A71C-0CC9-44F6-985A-C7DA3CACC35B} = {71C8A71C-0CC9-44F6-985A-C7DA3CACC35B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +96,14 @@ Global
 		{22BAF944-5BC7-4DF9-9683-53B1F607A527}.Release|Any CPU.Build.0 = Release|Any CPU
 		{22BAF944-5BC7-4DF9-9683-53B1F607A527}.Release|x64.ActiveCfg = Release|Any CPU
 		{22BAF944-5BC7-4DF9-9683-53B1F607A527}.Release|x64.Build.0 = Release|Any CPU
+		{536C1908-D506-4E0C-B32F-DE9D58B2703A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{536C1908-D506-4E0C-B32F-DE9D58B2703A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{536C1908-D506-4E0C-B32F-DE9D58B2703A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{536C1908-D506-4E0C-B32F-DE9D58B2703A}.Debug|x64.Build.0 = Debug|Any CPU
+		{536C1908-D506-4E0C-B32F-DE9D58B2703A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{536C1908-D506-4E0C-B32F-DE9D58B2703A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{536C1908-D506-4E0C-B32F-DE9D58B2703A}.Release|x64.ActiveCfg = Release|Any CPU
+		{536C1908-D506-4E0C-B32F-DE9D58B2703A}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

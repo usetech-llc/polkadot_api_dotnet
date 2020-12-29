@@ -8,6 +8,8 @@ namespace PolkaTest
     using System;
     using Schnorrkel;
     using Polkadot.Utils;
+    using Schnorrkel.Keys;
+    using StrobeNet.Extensions;
 
     public class Sr25519_091Test
     {
@@ -24,30 +26,44 @@ namespace PolkaTest
         }
 
         [Fact]
-        public void Ok()
+        public void SignWithMiniSecret()
+        {
+            //    Secret Key URI `//Alice` is account:
+            //    Network ID/ version: substrate
+            //    Secret seed:        0xe5be9a5092b81bca64be81d212e7f2f9eba183bb7a90954f7b76361f6edb5c0a
+            //    Public key(hex):    0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d
+            //    Account ID:         0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d
+            //    SS58 Address:       5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
+
+            // Version 0.9.1
+            var message = Encoding.UTF8.GetBytes("aaa");
+
+            var msk = new MiniSecret("e5be9a5092b81bca64be81d212e7f2f9eba183bb7a90954f7b76361f6edb5c0a".ToByteArray(), 
+                ExpandMode.Ed25519);
+
+            // Check public key generation
+            var pair = msk.GetPair();
+            Assert.Equal("d43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d",
+                pair.Public.Key.ToHexString().ToLower());
+
+            var sig = Sr25519v091.SignSimple(pair, message);
+            var verified = Sr25519v091.Verify(sig, pair.Public, message);
+
+            Assert.True(verified);
+        }
+
+        [Fact]
+        public void SignWithRawKeys()
         {
 
             // Version 0.9.1
-            // var message = new byte[] { 0 }; 
-            // var message = Encoding.UTF8.GetBytes("aaa");
-
-            // byte[] signerPublicKey = Converters.StringToByteArray("0xd678b3e00c4238888bbf08dbbe1d7de77c3f1ca1fc71a5a283770f06f7cd1205");
-            // byte[] secretKeyVec = Converters.StringToByteArray("0xa81056d713af1ff17b599e60d287952e89301b5208324a0529b62dc7369c745defc9c8dd67b7c59b201bc164163a8978d40010c22743db142a47f2e064480d4b");
-
             var message = Encoding.UTF8.GetBytes("aaa");
 
+            byte[] rawPublic = "d43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d".HexToByteArray();
+            byte[] rawSecret = "33A6F3093F158A7109F679410BEF1A0C54168145E0CECB4DF006C1C2FFFB1F09925A225D97AA00682D6A59B95B18780C10D7032336E88F3442B42361F4A66011".HexToByteArray();
 
-            byte[] pk = "0x586cc32614d6a3f219667db501ade545753058d43b14e6e971e9c9cc908ad843".HexToByteArray();
-            byte[] newSk = new byte[] { 25, 213, 29, 81, 62, 79, 15, 251, 133, 76, 195, 26, 105, 73, 195, 72, 250, 71, 29, 191, 218, 137, 226, 179, 177, 231, 181, 184, 231, 131, 87, 8, 34, 136, 220, 254, 5, 36, 13, 150, 131, 44, 182, 66, 174, 140, 83, 204, 30, 106, 8, 246, 45, 73, 25, 47, 15, 182, 26, 197, 26, 125, 25, 119 };
-            var sig3 =
-                "0x30b9a6ee4c3f0ff13984cfe58c9673b832f14c70eedcc98f321825d99ad7191478bbbe692f2b4c2f5ddb3e43a05500ac523e73736c5577b6306b67257dfb5f80"
-                    .HexToByteArray();
-
-            // var sig2 = Sr25519v091.SignSimple(pk, newSk, message);
-
-
-
-            var verified = Sr25519v091.Verify(sig3, pk, message);
+            var sig = Sr25519v091.SignSimple(rawPublic, rawSecret, message);
+            var verified = Sr25519v091.Verify(sig, rawPublic, message);
 
             Assert.True(verified);
         }

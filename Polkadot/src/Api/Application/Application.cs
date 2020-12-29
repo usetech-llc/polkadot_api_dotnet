@@ -715,7 +715,7 @@ namespace Polkadot.Api
                     genericExtrinsic[count].Method.MethodBytes = estr;
 
                     // Encode signer address to base58
-                    PublicKey pubk = new PublicKey();
+                    DataStructs.PublicKey pubk = new DataStructs.PublicKey();
                     pubk.Bytes = genericExtrinsic[count].Signature.SignerPublicKey;
                     genericExtrinsic[count].SignerAddress = _protocolParams.Metadata.GetAddrFromPublicKey(pubk);
                 }

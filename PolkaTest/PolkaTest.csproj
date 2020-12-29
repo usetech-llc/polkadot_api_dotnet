@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MnemonicSubstrate\MnemonicSubstrate.csproj" />
     <ProjectReference Include="..\Polkadot\Polkadot.csproj" />
     <ProjectReference Include="..\Schnorrkel\Schnorrkel.csproj" />
   </ItemGroup>
