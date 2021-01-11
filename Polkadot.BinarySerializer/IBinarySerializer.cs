@@ -12,6 +12,7 @@ namespace Polkadot.BinarySerializer
         object Deserialize(Type type, Stream stream);
         T Deserialize<T>(byte[] data);
         object CreateObject(Type type);
+        IBinaryConverter GetConverter(Type type);
 
         Type GetCallType(byte moduleIndex, byte methodIndex);
         (byte moduleIndex, byte methodIndex) GetCallIndex(Type typeOfCall);

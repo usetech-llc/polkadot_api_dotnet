@@ -22,6 +22,7 @@ using Polkadot.DataFactory;
 using Polkadot.DataFactory.Metadata;
 using Polkadot.DataStructs;
 using Polkadot.DataStructs.Metadata;
+using Polkadot.DataStructs.Metadata.BinaryContracts;
 using Polkadot.src.DataStructs;
 using Polkadot.Utils;
 using Schnorrkel;
@@ -265,38 +266,18 @@ namespace Polkadot.Api
 
             JObject response = _jsonRpc.Request(query);
 
-            // TODO: Version check refactoring
-            if (TryDeserialize<MetadataV12, ParseMetadataV12>(response, out MetadataV12 md12))
+            try
             {
-                _metadataCache = md12;
-                return md12;
+                var bytes = response["result"].ToString().HexToByteArray();
+                var binarySerializer = new BinarySerializer.BinarySerializer(new IndexResolver(), new SerializerSettings());
+                var meta = binarySerializer.Deserialize<RuntimeMetadataPrefixed>(bytes);
+                _metadataCache = meta.RuntimeMetadata.IsT12 ? meta.RuntimeMetadata.AsT12 : null;
+                return _metadataCache;
             }
-
-            if (TryDeserialize<MetadataV11, ParseMetadataV11>(response, out MetadataV11 md11))
+            catch (Exception ex)
             {
-                _metadataCache = md11;
-                return md11;
+                return null;
             }
-
-            if (TryDeserialize<MetadataV8, ParseMetadataV8>(response, out MetadataV8 md8))
-            {
-                _metadataCache = md8;
-                return md8;
-            }
-
-            if (TryDeserialize<MetadataV7, ParseMetadataV7>(response, out MetadataV7 md7))
-            {
-                _metadataCache = md7;
-                return md7;
-            }
-
-            if (TryDeserialize<MetadataV4, ParseMetadataV4>(response, out MetadataV4 md4))
-            {
-                _metadataCache = md4;
-                return md4;
-            }
-            
-            return null;
         }
 
         public virtual SignedBlock GetBlock(GetBlockParams param)

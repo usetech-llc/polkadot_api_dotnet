@@ -50,12 +50,24 @@ namespace PolkaTest
 
             var webSign = strSign.HexToByteArray();
             var alicePublicKey = application._protocolParams.Metadata.GetPublicKeyFromAddr(Constants.LocalAliceAddress).Bytes;
-            var verify = application.Signer.VerifySignature(
-                webSign,
-                alicePublicKey,
-                message);
-            
-            Assert.Equal(isValid, verify);
+            try
+            {
+                var verify = application.Signer.VerifySignature(
+                    webSign,
+                    alicePublicKey,
+                    message);
+                Assert.Equal(isValid, verify);
+            }
+            catch (Exception)
+            {
+                if (!isValid)
+                {
+                    return;
+                }
+
+                throw;
+            }
+
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Polkadot.BinarySerializer.Converters
             var length = ((Array) value).Length;
             var compactLength = Scale.EncodeCompactInteger(length).Bytes;
             stream.Write(compactLength, 0, compactLength.Length);
-            serializer.Serialize(value, stream);
+            SerializeArray(stream, value, serializer, param);
         }
 
         public override object Deserialize(Type type, Stream stream, IBinarySerializer deserializer, object[] param)

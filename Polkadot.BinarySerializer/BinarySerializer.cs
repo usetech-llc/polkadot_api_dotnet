@@ -163,6 +163,11 @@ namespace Polkadot.BinarySerializer
 
         public object CreateObject(Type type)
         {
+            if (type.IsValueType)
+            {
+                return Activator.CreateInstance(type);
+            }
+            
             var constructorInfo = type.GetConstructor(Array.Empty<Type>());
             if (constructorInfo == null)
             {
@@ -368,16 +373,23 @@ namespace Polkadot.BinarySerializer
                 p => p.GetCustomAttributes());
             if (attributes.FirstOrDefault(a => a is ConverterAttribute) is ConverterAttribute converterType)
             {
-                if (!_convertersCache.TryGetValue(converterType.SerializeConverterType, out var converter))
-                {
-                    converter = (IBinaryConverter) CreateObject(converterType.SerializeConverterType);
-                    _convertersCache[converterType.SerializeConverterType] = converter;
-                }
+                var converter = GetConverter(converterType.SerializeConverterType);
 
                 return (converter, converterType.SerializeParameters);
             }
 
             return (null, null);
+        }
+
+        public IBinaryConverter GetConverter(Type converterType)
+        {
+            if (!_convertersCache.TryGetValue(converterType, out var converter))
+            {
+                converter = (IBinaryConverter) CreateObject(converterType);
+                _convertersCache[converterType] = converter;
+            }
+
+            return converter;
         }
 
         private (IBinaryConverter Converter, object Param) GetBackConverter(OneOf<FieldInfo, PropertyInfo> member)
@@ -386,12 +398,7 @@ namespace Polkadot.BinarySerializer
                 p => p.GetCustomAttribute<ConverterAttribute>());
             if (converterType != null)
             {
-                if (!_convertersCache.TryGetValue(converterType.DeserializeConverterType, out var converter))
-                {
-                    converter = (IBinaryConverter) CreateObject(converterType.DeserializeConverterType);
-                    _convertersCache[converterType.DeserializeConverterType] = converter;
-                }
-
+                var converter = GetConverter(converterType.DeserializeConverterType);
                 return (converter, converterType.DeserializeParameters);
             }
 
