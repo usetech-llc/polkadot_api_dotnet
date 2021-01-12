@@ -4,9 +4,13 @@ namespace Polkadot.DataStructs.Metadata.Interfaces
 {
     public interface IMetadata
     {
-        IEnumerable<IModuleMeta> GetModules();
+        IReadOnlyList<IModuleMeta> GetModules();
 
-        IDictionary<string, IModuleMeta> ModuleLookup();
+        IModuleMeta GetModule(string name);
+
+        int ModuleIndex(string moduleName);
+        
+        int ModuleIndexSkipZeroCalls(string moduleName);
 
         string[] GetExtrinsicExtension();
     }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using OneOf;
+using Polkadot.DataStructs.Metadata.BinaryContracts.StorageEntryType;
 using Polkadot.DataStructs.Metadata.Interfaces;
 
 namespace Polkadot.DataStructs.Metadata
@@ -14,7 +16,7 @@ namespace Polkadot.DataStructs.Metadata
             Version = 7;
         }
 
-        public override IEnumerable<IModuleMeta> GetModules()
+        public override IReadOnlyList<IModuleMeta> GetModules()
         {
             return Module;
         }
@@ -59,6 +61,11 @@ namespace Polkadot.DataStructs.Metadata
         public override IReadOnlyList<IEventMeta> GetEvents()
         {
             return Ev;
+        }
+
+        public override IReadOnlyList<IStorage> GetStorages()
+        {
+            return Storage?.Items;
         }
     }
 
@@ -108,7 +115,7 @@ namespace Polkadot.DataStructs.Metadata
         public StorageV7[] Items { get; set; }
     };
 
-    public class StorageV7
+    public class StorageV7: IStorage
     {
         public string Name { get; set; }
         public string Prefix { get; set; }
@@ -117,6 +124,15 @@ namespace Polkadot.DataStructs.Metadata
         public FuncTypeV7 Type { get; set; }
         public string Fallback { get; set; }
         public string[] Documentation { get; set; }
+        public string GetName()
+        {
+            return Name;
+        }
+
+        public OneOf<Plain, Map, DoubleMap> GetStorageType()
+        {
+            return OneOf<Plain, Map, DoubleMap>.FromT0(new Plain());
+        }
     }
 
     public class ConstV7 : IConstantMeta

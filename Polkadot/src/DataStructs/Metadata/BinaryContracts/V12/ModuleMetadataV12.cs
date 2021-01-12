@@ -56,5 +56,10 @@ namespace Polkadot.DataStructs.Metadata.BinaryContracts.V12
         {
             return Events.Match(_ => Array.Empty<IEventMeta>(), e => e);
         }
+
+        public override IReadOnlyList<IStorage> GetStorages()
+        {
+            return Storage.Value.Match(_ => Array.Empty<IStorage>(), s => s.Entries);
+        }
     }
 }

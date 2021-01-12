@@ -81,21 +81,9 @@ namespace Polkadot.DataStructs.Metadata
 
             if (IsKusamaBased())
             {
-                var md = _metadata as dynamic;
-
-                var modules = md.Module;
-                for (var ind = 0; ind < modules.Length; ind++)
-                {
-                    if (modules[ind].Name.Equals(moduleName, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        moduleIndex = ind;
-                        break;
-                    }
-                    else if (!HasMethods(ind) && skipZeroCalls)
-                    {
-                        emptyCount++;
-                    }
-                }
+                return skipZeroCalls
+                    ? _metadata.ModuleIndexSkipZeroCalls(moduleName)
+                    : _metadata.ModuleIndex(moduleName);
             }
 
             if (_metadata.Version == 4)
@@ -137,29 +125,20 @@ namespace Polkadot.DataStructs.Metadata
             return result;
         }
 
-        public int GetStorageMethodIndex(int moduleIndex, string funcName)
+        public int GetStorageMethodIndex(string moduleName, string funcName)
         {
             int methodIndex = -1;
 
             if (IsKusamaBased())
             {
-                var md = _metadata as dynamic;
-                var module = md.Module[moduleIndex];
-
-                for(var ind = 0; ind < module.Storage.Items.Length; ind++)
-                {
-                    var storage = module.Storage.Items[ind];
-                    if (storage.Name.Equals(funcName, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        methodIndex = ind;
-                        break;
-                    }
-                }
+                var module = _metadata.GetModule(moduleName);
+                return module.GetStorageIndex(funcName);
             }
 
             if (_metadata.Version == 4)
             {
-                var md = _metadata as MetadataV4;
+                var md = (MetadataV4)_metadata;
+                var moduleIndex = _metadata.ModuleIndex(moduleName);
                 var module = md.Module.ElementAtOrDefault(moduleIndex);
 
                 foreach (var storage in module.Storage.Select((item, ind) => new { item, ind }))
@@ -313,7 +292,7 @@ namespace Polkadot.DataStructs.Metadata
             uint hasherEnum = 0;
             if (moduleIndex >= 0)
             {
-                int methodIndex = GetStorageMethodIndex(moduleIndex, funcName);
+                int methodIndex = GetStorageMethodIndex(moduleName, funcName);
                 if (methodIndex > 0)
                 {
                     if (_metadata.Version == 4)

@@ -8,7 +8,9 @@ namespace Polkadot.DataStructs.Metadata.Interfaces
         string GetName();
         IReadOnlyList<ICallMeta> GetCalls();
         IReadOnlyList<IEventMeta> GetEvents();
+        IReadOnlyList<IStorage> GetStorages();
 
-        IDictionary<string, IConstantMeta> ConstantLookup();
+        IConstantMeta GetConstant(string constantName);
+        int GetStorageIndex(string storageName);
     }
 }

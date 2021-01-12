@@ -23,4 +23,10 @@
     <ProjectReference Include="..\Schnorrkel\Schnorrkel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="invalid-certificate.pem">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

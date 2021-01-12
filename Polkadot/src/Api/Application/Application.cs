@@ -325,7 +325,7 @@ namespace Polkadot.Api
             int moduleIndex = _protocolParams.Metadata.GetModuleIndex(module, false);
             if (moduleIndex == -1)
                 throw new ApplicationException("Module not found");
-            int variableIndex = _protocolParams.Metadata.GetStorageMethodIndex(moduleIndex, variable);
+            int variableIndex = _protocolParams.Metadata.GetStorageMethodIndex(module, variable);
             if (variableIndex == -1)
                 throw new ApplicationException("Variable not found");
 
@@ -920,12 +920,9 @@ namespace Polkadot.Api
 
         private EraDto FromMinimumPeriod(MetadataBase metadata)
         {
-            var timestampModule = metadata
-                .ModuleLookup()
-                .TryGetOrDefault(KnownModules.Timestamp);
+            var timestampModule = metadata.GetModule(KnownModules.Timestamp);
             var minimumPeriodStr = timestampModule
-                ?.ConstantLookup()
-                ?.TryGetOrDefault(KnownConstants.MinimumPeriod)
+                ?.GetConstant(KnownConstants.MinimumPeriod)
                 ?.GetValue();
             if (minimumPeriodStr == null)
             {
@@ -939,12 +936,9 @@ namespace Polkadot.Api
 
         private EraDto FromBlockHashCount(MetadataBase metadata)
         {
-            var systemModule = metadata
-                .ModuleLookup()
-                .TryGetOrDefault(KnownModules.System);
+            var systemModule = metadata.GetModule(KnownModules.System);
             var blockHashCountStr = systemModule
-                ?.ConstantLookup()
-                ?.TryGetOrDefault(KnownConstants.BlockHashCount)
+                ?.GetConstant(KnownConstants.BlockHashCount)
                 ?.GetValue();
 
             if (blockHashCountStr == null)

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Polkadot.DataStructs.Metadata.Interfaces;
+using Polkadot.Utils;
 
 namespace Polkadot.DataStructs.Metadata
 {
     public abstract class ModuleBase : IModuleMeta
     {
-        private Lazy<IDictionary<string, IConstantMeta>> _constantLookup;
+        private readonly Lazy<IDictionary<string, IConstantMeta>> _constantLookup;
         
         public ModuleBase()
         {
@@ -22,10 +23,19 @@ namespace Polkadot.DataStructs.Metadata
         public abstract string GetName();
         public abstract IReadOnlyList<ICallMeta> GetCalls();
         public abstract IReadOnlyList<IEventMeta> GetEvents();
+        public abstract IReadOnlyList<IStorage> GetStorages();
 
-        public IDictionary<string, IConstantMeta> ConstantLookup()
+        public IConstantMeta GetConstant(string constantName)
         {
-            return _constantLookup.Value;
+            return _constantLookup.Value.TryGetOrDefault(constantName);
+        }
+
+        public int GetStorageIndex(string storageName)
+        {
+            return GetStorages()
+                .Select((storage, index) => (storage, index))
+                .First(s => string.Equals(s.storage.GetName(), storageName, StringComparison.OrdinalIgnoreCase))
+                .index;
         }
     }
 }

@@ -16,7 +16,12 @@ namespace Polkadot.DataStructs.Metadata.BinaryContracts.V12
         [Serialize(1)]
         public ExtrinsicMetadataV12 Extrinsic { get; set; }
 
-        public override IEnumerable<IModuleMeta> GetModules()
+        public RuntimeMetadataV12()
+        {
+            Version = 12;
+        }
+
+        public override IReadOnlyList<IModuleMeta> GetModules()
         {
             return Modules;
         }

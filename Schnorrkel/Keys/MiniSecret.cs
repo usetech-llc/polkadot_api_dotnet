@@ -3,6 +3,7 @@ using Schnorrkel.Ristretto;
 using Schnorrkel.Scalars;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -28,9 +29,9 @@ namespace Schnorrkel.Keys
                         break;
                     }
                 default:
-                    {
-                        throw new ApplicationException("Unknown ExpandMode");
-                    }
+                {
+                    throw new InvalidEnumArgumentException(nameof(expandMode), (int) expandMode, typeof(ExpandMode));
+                }
             }
         }
 
