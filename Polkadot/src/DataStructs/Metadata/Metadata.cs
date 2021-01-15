@@ -153,30 +153,20 @@ namespace Polkadot.DataStructs.Metadata
             return methodIndex;
         }
 
-        public int GetCallMethodIndex(int moduleIndex, string funcName)
+        public int GetCallMethodIndex(string moduleName, string funcName)
         {
             int methodIndex = -1;
 
             if (IsKusamaBased())
             {
-                var md = _metadata as dynamic;
-                var module = md.Module[moduleIndex];
-
-                for (var ind = 0; ind < module.Call.Length; ind++)
-                {
-                    var call = module.Call[ind];
-                    if (call.Name.Equals(funcName, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        methodIndex = ind;
-                        break;
-                    }
-                }
+                var module = _metadata.GetModule(moduleName);
+                return module.GetCallIndex(funcName);
             }
 
             if (_metadata.Version == 4)
             {
                 var md = _metadata as MetadataV4;
-                var module = md.Module[moduleIndex];
+                var module = md.Module[_metadata.ModuleIndex(moduleName)];
 
                 foreach (var call in module.Call.Select((item, ind) => new { item, ind }))
                 {
@@ -210,27 +200,18 @@ namespace Polkadot.DataStructs.Metadata
         public BigInteger GetConst(string module, string constName)
         {
             BigInteger value = -1;
-            var babeModuleIndex = GetModuleIndex(module, false);
 
             if (IsKusamaBased())
             {
-                var md = _metadata as dynamic;
-                foreach (var item in md.Module[babeModuleIndex].Cons)
-                {
-                    if (item.Name.Equals(constName))
-                    {
-                        value = Converters.FromHex(item.Value, false);
-                        break;
-                    }
-                }
+                var valueStr = _metadata
+                    .GetModule(module)
+                    .GetConstant(constName)
+                    .GetValue();
+
+                value = Converters.FromHex(valueStr, false);
             }
 
             return value;
-        }
-
-        public string GetPlainStorageKey(Hasher hasher, string prefix, IBinarySerializer serializer)
-        {
-            return GetStorageKey(hasher, Encoding.ASCII.GetBytes(prefix), prefix.Length, serializer);
         }
 
         public string GetAddrFromPublicKey(PublicKey pubKey)
@@ -238,78 +219,9 @@ namespace Polkadot.DataStructs.Metadata
             return AddressUtils.GetAddrFromPublicKey(pubKey);
         }
 
-        public string GetAddressStorageKey(Hasher hasher, Address address, string prefix, IBinarySerializer serializer)
-        {
-            PublicKey pubk = GetPublicKeyFromAddr(address);
-            var data = new List<byte>();
-
-            data.AddRange(Encoding.ASCII.GetBytes(prefix));
-            data.AddRange(pubk.Bytes);
-
-            return GetStorageKey(hasher, data.ToArray(), Consts.PUBLIC_KEY_LENGTH + prefix.Length, serializer);
-        }
-
         public PublicKey GetPublicKeyFromAddr(Address address)
         {
             return AddressUtils.GetPublicKeyFromAddr(address);
-        }
-
-        public static string GetStorageKey(Hasher hasher, byte[] data, int length, IBinarySerializer serializer)
-        {
-            return Hash.GetStorageKey(hasher, data, length, serializer).ToHexString();
-        }
-
-        public string GetMappedStorageKey(Hasher hasher, KeyValuePair<string, string> param, string prefix, IBinarySerializer serializer)
-        {
-            if (param.Key == Consts.STORAGE_TYPE_ADDRESS)
-            {
-                return GetAddressStorageKey(hasher, new Address { Symbols = param.Value }, prefix, serializer);
-            }
-            else if (param.Key == Consts.STORAGE_TYPE_BLOCK_NUMBER || param.Key == Consts.STORAGE_TYPE_U32 ||
-                param.Key == Consts.STORAGE_TYPE_ACCOUNT_INDEX || param.Key == Consts.STORAGE_TYPE_PROPOSAL_INDEX ||
-                param.Key == Consts.STORAGE_TYPE_REFERENDUM_INDEX || param.Key == Consts.STORAGE_TYPE_PARACHAIN_ID)
-            {
-                var key = $"{prefix} {param.Value}";
-                return GetStorageKey(hasher, Encoding.ASCII.GetBytes(key), key.Length, serializer);
-            }
-            else if (param.Key == Consts.STORAGE_TYPE_HASH)
-            {
-                var key = $"{prefix} {param.Value}";
-                return GetStorageKey(hasher, Encoding.ASCII.GetBytes(key), key.Length, serializer);
-            }
-
-            throw new ApplicationException($"Storage key with type {param.Key} is not defined");
-        }
-
-        public Hasher GetFuncHasher(string moduleName, string funcName)
-        {
-            Hasher hasher = Hasher.XXHASH;
-
-            // Find the module index in metadata
-            int moduleIndex = GetModuleIndex(moduleName, false);
-
-            // Find function by name in module and get its hasher
-            uint hasherEnum = 0;
-            if (moduleIndex >= 0)
-            {
-                int methodIndex = GetStorageMethodIndex(moduleName, funcName);
-                if (methodIndex > 0)
-                {
-                    if (_metadata.Version == 4)
-                    {
-                        var md = _metadata as MetadataV4;
-                        hasherEnum = md.Module[moduleIndex].Storage[methodIndex].Type.Hasher;
-                    }
-                }
-            }
-
-            // Parse hasher name
-            if (hasherEnum == 1)
-            {
-                hasher = Hasher.BLAKE2;
-            }
-
-            return hasher;
         }
     
         private bool IsKusamaBased()

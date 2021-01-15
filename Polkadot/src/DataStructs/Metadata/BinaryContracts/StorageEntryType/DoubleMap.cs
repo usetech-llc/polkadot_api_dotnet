@@ -16,7 +16,7 @@ namespace Polkadot.DataStructs.Metadata.BinaryContracts.StorageEntryType
         [Serialize(3)]
         [Utf8StringConverter]
         public string Value { get; set; }
-        [Serialize(3)]
+        [Serialize(4)]
         public StorageHasher.StorageHasher Key2Hasher { get; set; }
     }
 }

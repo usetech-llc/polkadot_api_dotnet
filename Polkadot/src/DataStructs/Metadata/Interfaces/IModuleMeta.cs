@@ -12,5 +12,7 @@ namespace Polkadot.DataStructs.Metadata.Interfaces
 
         IConstantMeta GetConstant(string constantName);
         int GetStorageIndex(string storageName);
+        IStorage GetStorage(string storageName);
+        int GetCallIndex(string callName);
     }
 }

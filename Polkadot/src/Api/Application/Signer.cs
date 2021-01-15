@@ -82,8 +82,17 @@ namespace Polkadot.Api
                 { "CheckEra", CheckEra },
                 { "CheckNonce", CheckNonce },
                 { "CheckWeight", CheckWeight },
-                { "ChargeTransactionPayment", ChargeTransactionPayment}
+                { "ChargeTransactionPayment", ChargeTransactionPayment},
+                { "CheckMortality", CheckMortality}
             };
+        }
+
+        private object CheckMortality<TAddress, TSignature, TSignedExtra, TCall>(UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall> arg) where TAddress : IExtrinsicAddress where TSignature : IExtrinsicSignature where TSignedExtra : IExtrinsicExtra where TCall : IExtrinsicCall
+        {
+            var current = Application.GetBlockHeader(null).Number;
+            var n = arg.Extra.GetEraIfAny().Birth(current);
+            var hash = Application.GetBlockHash(new GetBlockHashParams() {BlockNumber = n}).Hash;
+            return hash.HexToByteArray();
         }
 
         private object ChargeTransactionPayment<TAddress, TSignature, TSignedExtra, TCall>(UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall> arg) where TAddress : IExtrinsicAddress where TSignature : IExtrinsicSignature where TSignedExtra : IExtrinsicExtra where TCall : IExtrinsicCall

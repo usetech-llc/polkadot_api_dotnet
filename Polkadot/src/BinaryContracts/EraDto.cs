@@ -20,6 +20,14 @@ namespace Polkadot.BinaryContracts
             Value = value;
         }
 
+        public ulong Birth(ulong current)
+        {
+            return Value.Match(
+                _ => 0UL,
+                mortal => (Math.Max(current, mortal.Phase) - mortal.Phase) / mortal.Period * mortal.Period +
+                          mortal.Phase);
+        }
+
         public void Serialize(Stream stream, IBinarySerializer serializer)
         {
             Value.Switch(immortal => SerializeImmortal(stream, serializer, immortal), mortal => SerializeMortal(stream, serializer, mortal));

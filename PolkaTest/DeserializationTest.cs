@@ -17,10 +17,10 @@ namespace PolkaTest
             using var app = PolkaApi.GetApplication();
             app.Connect(Constants.LocalNodeUri);
 
-            var storageKey = app.GetKeys("System", "Events");
+            var storageKey = app.StorageApi.GetKeys("System", "Events");
             var deserializedCount = 0;
             var tcs = new TaskCompletionSource<EventList>();
-            app.SubscribeStorage(storageKey, s =>
+            app.StorageApi.SubscribeStorage(storageKey, s =>
             {
                 try
                 {

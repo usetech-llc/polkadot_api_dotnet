@@ -23,7 +23,7 @@ namespace PolkaTest
         [Fact]
         public void Ok()
         {
-            string address = Constants.KusamaAccount1Address;
+            string address = Constants.LocalAliceAddress.Symbols;
             string module1 = "Balances";
             string variable1 = "TotalIssuance";
             string module2 = "System";
@@ -33,21 +33,21 @@ namespace PolkaTest
 
             using (IApplication app = PolkaApi.GetApplication())
             {
-                app.Connect();
+                app.Connect(Constants.LocalNodeUri);
                 output.WriteLine("================== Get Storage 1: Address Balance ==================");
-                string balance = app.GetStorage(new Address(address), module1, variable1);
+                string balance = app.StorageApi.GetStorage(module1, variable1, new Address(address));
                 output.WriteLine($"Encoded balance: {balance}");
                 Assert.True(balance != "null");
                 Assert.True(balance.Length > 0);
 
                 output.WriteLine("================== Get Storage 2: System Account ==================");
-                string accountBalance = app.GetStorage(new Address(address), module2, variable2);
+                string accountBalance = app.StorageApi.GetStorage(module2, variable2, new Address(address));
                 output.WriteLine($"Encoded account balance: {accountBalance}");
                 Assert.True(accountBalance != "null");
                 Assert.True(accountBalance.Length > 0);
 
                 output.WriteLine("================== Get Storage 3: Timestamp ==================");
-                string timeNow = app.GetStorage(module3, variable3);
+                string timeNow = app.StorageApi.GetStorage(module3, variable3);
                 output.WriteLine($"Encoded timestamp: {timeNow}");
                 Assert.True(timeNow != "null");
                 Assert.True(timeNow.Length > 0);
@@ -55,7 +55,7 @@ namespace PolkaTest
                 output.WriteLine("================== Get Storage 4: Non-existing storage key ==================");
                 try
                 {
-                    string abra = app.GetStorage("Abra", "Cadabra");
+                    string abra = app.StorageApi.GetStorage("Abra", "Cadabra");
                 }
                 catch (Exception)
                 {

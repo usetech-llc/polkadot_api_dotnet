@@ -77,6 +77,7 @@ namespace Polkadot.Utils
 
         public static byte[] HexToByteArray(this string hex)
         {
+            
             var span = hex.AsSpan();
             if ((hex[0] == '0') && (hex[1] == 'x'))
             {

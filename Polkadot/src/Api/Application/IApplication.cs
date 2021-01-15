@@ -1,4 +1,6 @@
-﻿using Polkadot.BinaryContracts;
+﻿using Newtonsoft.Json.Linq;
+using Polkadot.Api.Hashers;
+using Polkadot.BinaryContracts;
 using Polkadot.BinarySerializer;
 
 namespace Polkadot.Api
@@ -14,6 +16,8 @@ namespace Polkadot.Api
     {
         ISigner Signer { get; }
         IBinarySerializer Serializer { get; }
+        IHasher PlainHasher { get; }
+        IStorageApi StorageApi { get; }
 
         int Connect(ConnectionParameters connectionParams, string metadataBlockHash = null);
 
@@ -88,110 +92,6 @@ namespace Polkadot.Api
         MetadataBase GetMetadata(GetMetadataParams param, bool force = false);
 
         /// <summary>
-        ///  Generates storage key for a certain Module and State variable defined by parameter and prefix. Parameter is a JSON
-        ///   string representing a value of certain type, which has two fields: type and value.Type should be one of type
-        ///   strings defined above.Value should correspond to the type.Example:
-        ///
-        ///      { "type" : "AccountId", "value" : "5ECcjykmdAQK71qHBCkEWpWkoMJY6NXvpdKy8UeMx16q5gFr"}
-        ///
-        ///   Information about Modules and State variables(with parameters and their types) is returned by getMetadata
-        ///   method.
-        /// </summary>
-        /// <param name="jsonPrm"> JSON string that contains parameter and its type</param>
-        /// <param name="module"> module (as in metadata)</param>
-        /// <param name="variable"> state variable (as in metadata for given module)</param>
-        /// <returns> Storage key </returns>
-        string GetKeys<T>(T prm, string module, string variable);
-
-        string GetKeys(string module, string variable);
-
-        /// <summary>
-        ///  Reads storage for a certain Module and State variable defined by parameter and prefix.Parameter is a JSON
-        ///   string representing a value of certain type, which has two fields: type and value.Type should be one of type
-        ///   strings defined above.Value should correspond to the type.Example:
-        ///
-        ///      { "type" : "AccountId", "value" : "5ECcjykmdAQK71qHBCkEWpWkoMJY6NXvpdKy8UeMx16q5gFr"}
-        ///
-        ///   Information about Modules and State variables(with parameters and their types) is returned by getMetadata
-        ///   method.
-        /// </summary>
-        /// <param name="jsonPrm"> JSON string that contains parameter and its type</param>
-        /// <param name="module"> module (as in metadata)</param>
-        /// <param name="variable"> state variable (as in metadata for given module)</param>
-        /// <returns> Storage content </returns>
-        string GetStorage(string module, string variable);
-
-        string GetStorage<T>(T prm, string module, string variable);
-
-        /// <summary>
-        /// Returns storage hash of given State Variable for a given Module defined by parameter.
-        ///  Parameter is a JSON string representing a value of certain type, which has two fields: type and value.Type
-        ///  should be one of type strings defined above.Value should correspond to the type. Example:
-        ///
-        ///      { "type" : "AccountId", "value" : "5ECcjykmdAQK71qHBCkEWpWkoMJY6NXvpdKy8UeMx16q5gFr"}
-        ///
-        ///   Information about Modules and State variables(with parameters and their types) is returned by getMetadata
-        ///   method.
-        /// </summary>
-        /// <param name="jsonPrm"> JSON string that contains parameter and its type</param>
-        /// <param name="module"> module (as in metadata)</param>
-        /// <param name="variable"> state variable (as in metadata for given module)</param>
-        /// <returns> Storage hash </returns>
-        string GetStorageHash<T>(T prm, string module, string variable) where T : ITypeCreate;
-
-        string GetStorageHash(string module, string variable);
-
-        /// <summary>
-        /// Returns storage size for a given State Variable for a given Module defined by parameter.
-        ///  Parameter is a JSON string representing a value of certain type, which has two fields: type and value.Type
-        ///  should be one of type strings defined above.Value should correspond to the type. Example:
-        ///
-        ///      { "type" : "AccountId", "value" : "5ECcjykmdAQK71qHBCkEWpWkoMJY6NXvpdKy8UeMx16q5gFr"}
-        ///
-        ///   Information about Modules and State variables(with parameters and their types) is returned by getMetadata
-        ///   method.
-        /// </summary>
-        /// <param name="jsonPrm"> JSON string that contains parameter and its type</param>
-        /// <param name="module"> module (as in metadata)</param>
-        /// <param name="variable"> state variable (as in metadata for given module)</param>
-        /// <returns> Storage size </returns>
-        int GetStorageSize<T>(T prm, string module, string variable) where T : ITypeCreate;
-
-        int GetStorageSize(string module, string variable);
-
-        /// <summary>
-        /// Calls storage_getChildKeys RPC method with given child storage key and storage key
-        /// </summary>
-        /// <param name="childStorageKey">string with 0x prefixed child storage key hex value</param>
-        /// <param name="storageKey">string with 0x prefixed storage key hex value</param>
-        /// <returns>string response from RPC method</returns>
-        string GetChildKeys(string childStorageKey, string storageKey);
-
-        /// <summary>
-        /// Calls storage_getChildStorage RPC method with given child storage key and storage key
-        /// </summary>
-        /// <param name="childStorageKey"> string with 0x prefixed child storage key hex value </param>
-        /// <param name="storageKey"> string with 0x prefixed storage key hex value </param>
-        /// <returns> string response from RPC method </returns>
-        string GetChildStorage(string childStorageKey, string storageKey);
-
-        /// <summary>
-        /// Calls storage_getChildStorageHash RPC method with given child storage key and storage key
-        /// </summary>
-        /// <param name="childStorageKey"> string with 0x prefixed child storage key hex value </param>
-        /// <param name="storageKey"> string with 0x prefixed storage key hex value </param>
-        /// <returns> string response from RPC method </returns>
-        string GetChildStorageHash(string childStorageKey, string storageKey);
-
-        /// <summary>
-        /// Calls storage_getChildStorageSize RPC method with given child storage key and storage key
-        /// </summary>
-        /// <param name="childStorageKey">  string with 0x prefixed child storage key hex value </param>
-        /// <param name="storageKey"> string with 0x prefixed storage key hex value </param>
-        /// <returns> int response from RPC method </returns>
-        int GetChildStorageSize(string childStorageKey, string storageKey);
-
-        /// <summary>
         /// Returns the currently connected peers
         /// </summary>
         /// <returns>
@@ -232,18 +132,6 @@ namespace Polkadot.Api
         string SubscribeEraAndSession(Action<Era, SessionOrEpoch> callback);
 
         /// <summary>
-        /// Subscribe to most recent value updates for a given storage key. Only one subscription at a time per address is
-        ///     allowed. If a subscription already exists for the same storage key, old subscription will be discarded and
-        ///     replaced with the new one. Until unsubscribeStorage method is called with the same storage key, the API will be
-        ///     receiving updates and forwarding them to subscribed object/function. Only unsubscribeStorage will physically
-        ///     unsubscribe from WebSocket endpoint updates.
-        /// </summary>
-        /// <param name="key"> storage key to receive updates for (e.g. "0x66F795B8D457430EDDA717C3CBA459B9") </param>
-        /// <param name="callback"> expression that will received </param>
-        /// <returns> Subscription id </returns>
-        string SubscribeStorage(string key, Action<string> callback);
-
-        /// <summary>
         /// Subscribe to most recent account info for a given address. Only one subscription at a time per address is allowed. If
         ///     a subscription already exists for the same address, old subscription will be discarded and replaced with the new
         ///     one. Until <see cref="UnsubscribeAccountInfo"/> method is called with the same address, the API will be receiving updates and
@@ -282,16 +170,6 @@ namespace Polkadot.Api
         /// <param name="extrinsicHash"> hash of extrinsic as returned by submitExtrisic </param>
         /// <returns> Operation result </returns>
         bool RemoveExtrinsic(string extrinsicHash);
-
-        /// <summary>
-        /// Calls state_queryStorage RPC method to get historical information about storage at a key
-        /// </summary>
-        /// <param name="key"> storage key to query </param>
-        /// <param name="startHash"> hash of block to start with </param>
-        /// <param name="stopHash"> hash of block to stop at </param>
-        /// <param name="itemCount"> size of StorageItem elements for retrieve </param>
-        /// <returns> array of StorageItem elements </returns>
-        StorageItem[] QueryStorage(string key, string startHash, string stopHash, int itemCount);
 
         /// <summary>
         /// Subscribe to most recent block number.Only one subscription at a time is allowed.If a subscription already 
@@ -349,12 +227,6 @@ namespace Polkadot.Api
         /// </summary>
         /// <param name="id"> Subscription id </param>
         void UnsubscribeEraAndSession(string id);
-
-        /// <summary>
-        /// Unsubscribe from WebSocket endpoint and stop receiving updates for address balance.
-        /// </summary>
-        /// <param name="id"> Subscription id </param>
-        void UnsubscribeStorage(string id);
 
         /// <summary>
         /// Unsubscribe from WebSocket endpoint and stop receiving updates for address account info.

@@ -1,6 +1,7 @@
 ﻿using Extensions.Data;
 using Polkadot.DataStructs;
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,14 +12,48 @@ namespace Polkadot.Utils
 {
     public class Hash
     {
-        public static byte[] GetStorageKey(Hasher hasher, byte[] bytes, int length, IBinarySerializer serializer)
+        public static byte[] ConcatThenHash(IEnumerable<byte[]> input, Func<byte[], byte[]> hashFunction)
         {
-            return hasher switch
+            var collection = input.AsCollection();
+            if (collection.Count == 1)
             {
-                Hasher.XXHASH => XxHash(bytes, length, serializer),
-                Hasher.BLAKE2 => Blake2(bytes, length),
-                _ => Array.Empty<byte>()
-            };
+                return hashFunction(collection.First());
+            }
+            
+            var size = 0;
+            foreach (var array in collection)
+            {
+                size += array.Length;
+            }
+
+            var concat = ArrayPool<byte>.Shared.Rent(size);
+            var offset = 0;
+            foreach (var array in collection)
+            {
+                Array.Copy(array, 0, concat, offset, array.Length);
+                offset += array.Length;
+            }
+
+            var hash = hashFunction(concat);
+            ArrayPool<byte>.Shared.Return(concat);
+            return hash;
+        }
+
+        public static byte[] HashThenConcat(IEnumerable<byte[]> input, Func<byte[], byte[]> hashFunction)
+        {
+            var collection = input.AsCollection();
+            if (collection.Count == 1)
+            {
+                return hashFunction(collection.First());
+            }
+
+            var hash = new List<byte>();
+            foreach (var array in collection)
+            {
+                hash.AddRange(hashFunction(array));
+            }
+
+            return hash.ToArray();
         }
 
         private static byte[] Blake2(byte[] bytes, int length)

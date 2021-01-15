@@ -26,10 +26,10 @@ namespace PolkaTest
                 // Subscribe to storage updates (timestamp)
                 var module = "Timestamp";
                 var variable = "Now";
-                var key = app.GetKeys(module, variable);
+                var key = app.StorageApi.GetKeys(module, variable);
                 bool doneS = false;
                 string tsUpdate = string.Empty;
-                var sid = app.SubscribeStorage(key, (update) => {
+                var sid = app.StorageApi.SubscribeStorage(key, (update) => {
                     output.WriteLine($"Timestamp update: {update}");
                     tsUpdate = update;
                     doneS = true;
@@ -40,7 +40,7 @@ namespace PolkaTest
                     Thread.SpinWait(1000);
                 }
 
-                app.UnsubscribeStorage(sid);
+                app.StorageApi.UnsubscribeStorage(sid);
 
                 app.Disconnect();
 

@@ -37,5 +37,18 @@ namespace Polkadot.DataStructs.Metadata
                 .First(s => string.Equals(s.storage.GetName(), storageName, StringComparison.OrdinalIgnoreCase))
                 .index;
         }
+
+        public IStorage GetStorage(string storageName)
+        {
+            return GetStorages()?.FirstOrDefault(s => string.Equals(s.GetName(), storageName, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public int GetCallIndex(string callName)
+        {
+            return GetCalls()
+                .Select((call, index) => (call, index))
+                .First(s => string.Equals(s.call.GetName(), callName, StringComparison.OrdinalIgnoreCase))
+                .index;
+        }
     }
 }

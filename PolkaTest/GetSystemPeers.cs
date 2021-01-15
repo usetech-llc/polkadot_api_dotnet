@@ -17,7 +17,7 @@ namespace PolkaTest
             this.output = output;
         }
 
-        [Fact]
+        [Fact(Skip = "Unsafe methods are not allowed.")]
         public void Ok()
         {
             using (IApplication app = PolkaApi.GetApplication())

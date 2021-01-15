@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using OneOf;
 using Polkadot.BinarySerializer.Extensions;
 
@@ -20,6 +21,10 @@ namespace Polkadot.BinarySerializer
         private readonly Dictionary<(byte module, byte @event), Type> _eventTypeCache = new Dictionary<(byte module, byte @event), Type>();
         private readonly Dictionary<Type, (byte module, byte @event)> _eventIndexCache = new Dictionary<Type, (byte module, byte @event)>();
 
+        public BinarySerializer()
+        {
+        }
+        
         public BinarySerializer(IndexResolver resolver, SerializerSettings settings)
         {
             foreach (var (module, method, type) in settings.KnownCalls)
@@ -250,6 +255,12 @@ namespace Polkadot.BinarySerializer
                 return;
             }
 
+            if (value is string s)
+            {
+                WriteString(ms, s);
+                return;
+            }
+
             if (typeof(IEnumerable).IsAssignableFrom(type))
             {
                 WriteEnumerable((IEnumerable)value, ms);
@@ -293,6 +304,12 @@ namespace Polkadot.BinarySerializer
                     WriteObject(ms, type, value);
                     break;
             }
+        }
+
+        private void WriteString(Stream ms, string s)
+        {
+            var bytes = Encoding.UTF8.GetBytes(s);
+            ms.Write(bytes, 0, bytes.Length);
         }
 
         private void WriteBool(Stream ms, bool b)

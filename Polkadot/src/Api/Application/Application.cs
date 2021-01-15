@@ -5,18 +5,22 @@ using Polkadot.BinarySerializer;
 using Polkadot.DataStructs.Metadata.Interfaces;
 using Polkadot.Exceptions;
 using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Numerics;
 using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Polkadot.Api.Hashers;
 using Polkadot.BinaryContracts.Events;
 using Polkadot.BinaryContracts.Events.Balances;
 using Polkadot.BinaryContracts.Events.Contracts;
 using Polkadot.BinaryContracts.Events.Grandpa;
 using Polkadot.BinaryContracts.Events.Sudo;
+using Polkadot.BinarySerializer.Extensions;
 using Polkadot.Data;
 using Polkadot.DataFactory;
 using Polkadot.DataFactory.Metadata;
@@ -38,15 +42,14 @@ namespace Polkadot.Api
         private readonly SerializerSettings _serializerSettings;
 
         private MetadataBase _metadataCache;
+        private GetMetadataParams _metadataDefaultBlockHash;
 
         private Object _subscriptionLock = new Object();
         private ConcurrentDictionary<string, JObject> _pendingSubscriptionUpdates = new ConcurrentDictionary<string, JObject>();
-        private delegate void UpdateDelegate(JObject update);
-        private ConcurrentDictionary<string, UpdateDelegate> _subscriptionHandlers = new ConcurrentDictionary<string, UpdateDelegate>();
+        private ConcurrentDictionary<string, Action<JObject>> _subscriptionHandlers = new ConcurrentDictionary<string, Action<JObject>>();
         public ProtocolParameters _protocolParams;
 
         // Era/epoch/session subscription storage hashes and data
-        private string _storageKeyCurrentEra;
         private string _storageKeySessionsPerEra;
         private string _storageKeyCurrentSessionIndex;
         private string _storageKeyBabeGenesisSlot;
@@ -99,16 +102,22 @@ namespace Polkadot.Api
             _serializer = new Lazy<IBinarySerializer>(CreateSerializer);
             
             Signer = new Signer(this);
+            StorageApi = new StorageApi(this);
         }
 
         public ISigner Signer { get; }
         public IBinarySerializer Serializer => _serializer.Value;
+        public IHasher PlainHasher { get; } = new Twox128();
+        public IStorageApi StorageApi { get; }
 
         public int Connect(ConnectionParameters connectionParams, string metadataBlockHash = null)
         {
             if (connectionParams is null)
                 throw new ArgumentNullException(nameof(connectionParams));
 
+            _metadataDefaultBlockHash = metadataBlockHash == null
+                ? null
+                : new GetMetadataParams() {BlockHash = metadataBlockHash};
             int result = Consts.PAPI_OK;
 
             // Connect to WS
@@ -125,41 +134,23 @@ namespace Polkadot.Api
             }
 
             // Read metadata for head block and initialize protocol parameters
-            var meta = metadataBlockHash != null ? new GetMetadataParams { BlockHash = metadataBlockHash } : null;
-
-            _protocolParams.Metadata = new Metadata(GetMetadata(meta));
-            _protocolParams.FreeBalanceHasher = _protocolParams.Metadata.GetFuncHasher("Balances", "FreeBalance");
-            _protocolParams.FreeBalancePrefix = "Balances FreeBalance";
+            _protocolParams.Metadata = new Metadata(GetMetadata(null));
             _protocolParams.BalanceModuleIndex = (byte)_protocolParams.Metadata.GetModuleIndex("Balances", true);
-            _protocolParams.TransferMethodIndex = (byte)_protocolParams.Metadata.GetCallMethodIndex(
-            _protocolParams.Metadata.GetModuleIndex("Balances", false), "transfer");
-
-            if (_protocolParams.FreeBalanceHasher == Hasher.XXHASH)
-                _logger.Info("FreeBalance hash function is xxHash");
-            else
-                _logger.Info("FreeBalance hash function is Blake2-256");
+            _protocolParams.TransferMethodIndex = (byte)_protocolParams.Metadata.GetCallMethodIndex("Balances", "transfer");
 
             _logger.Info($"Balances module index: {_protocolParams.BalanceModuleIndex}");
             _logger.Info($"Transfer call index: {_protocolParams.TransferMethodIndex}");
 
-            // Calculate storage hashes
-            _storageKeyCurrentEra = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, "Staking CurrentEra", Serializer);
-
-            _storageKeySessionsPerEra =
-                _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, "Staking SessionsPerEra", Serializer);
-
-            _storageKeyCurrentSessionIndex =
-                _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, "Session CurrentIndex", Serializer);
 
             try
             {
-                _storageKeyBabeGenesisSlot = GetKeys("Babe", "GenesisSlot");
+                _storageKeyBabeGenesisSlot = StorageApi.GetKeys("Babe", "GenesisSlot");
                 //_storageKeyBabeCurrentSlot = GetKeys("Babe", "CurrentSlot");
                 //_storageKeyBabeEpochIndex = GetKeys("Babe", "EpochIndex");
                 _sessionsPerEra = _protocolParams.Metadata.GetConst("Staking", "SessionsPerEra");
                 _babeEpochDuration = _protocolParams.Metadata.GetConst("Babe", "EpochDuration");
             }
-            catch (ApplicationException)
+            catch (ModuleNotFoundException)
             {
                 // Expected exception if Babe module is not present (e.g. Alexander network)
             }
@@ -177,6 +168,15 @@ namespace Polkadot.Api
         public void Disconnect()
         {
             _jsonRpc.Disconnect();
+        }
+
+        internal JObject Request(JObject query, int? timeout = null)
+        {
+            if (timeout != null)
+            {
+                return _jsonRpc.Request(query, timeout.Value);
+            }
+            return _jsonRpc.Request(query);
         }
 
         public ProtocolParameters GetProtocolParameters()
@@ -256,6 +256,7 @@ namespace Polkadot.Api
 
         public MetadataBase GetMetadata(GetMetadataParams param, bool force = false)
         {
+            param ??= _metadataDefaultBlockHash;
             if (_metadataCache != null && !force)
                 return _metadataCache;
 
@@ -270,7 +271,7 @@ namespace Polkadot.Api
             {
                 var bytes = response["result"].ToString().HexToByteArray();
                 var binarySerializer = new BinarySerializer.BinarySerializer(new IndexResolver(), new SerializerSettings());
-                var meta = binarySerializer.Deserialize<RuntimeMetadataPrefixed>(bytes);
+                var meta = binarySerializer.DeserializeAssertReadAll<RuntimeMetadataPrefixed>(bytes);
                 _metadataCache = meta.RuntimeMetadata.IsT12 ? meta.RuntimeMetadata.AsT12 : null;
                 return _metadataCache;
             }
@@ -311,179 +312,6 @@ namespace Polkadot.Api
             JObject response = _jsonRpc.Request(query);
 
             return Deserialize<FinalHead, ParseFinalizedHead>(response);
-        }
-
-        public string GetKeys(string module, string variable)
-        {
-            return GetKeys<object>(null, module, variable);
-        }
-
-        public string GetKeys<T>(T prm, string module, string variable)
-        {
-            // Determine if parameters are required for given module + variable
-            // Find the module and variable indexes in metadata
-            int moduleIndex = _protocolParams.Metadata.GetModuleIndex(module, false);
-            if (moduleIndex == -1)
-                throw new ApplicationException("Module not found");
-            int variableIndex = _protocolParams.Metadata.GetStorageMethodIndex(module, variable);
-            if (variableIndex == -1)
-                throw new ApplicationException("Variable not found");
-
-            string key;
-            if (_protocolParams.Metadata.IsStateVariablePlain(moduleIndex, variableIndex))
-            {
-                key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, module, Serializer);
-                key += _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, variable, Serializer);
-            }
-            else if (prm is ITypeCreate t)
-            {
-                key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, module, Serializer);
-                key += _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, variable, Serializer);
-                key += t.GetTypeEncoded(Serializer).ToHexString();
-            } else if (prm != null)
-            {
-                key = _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, module, Serializer);
-                key += _protocolParams.Metadata.GetPlainStorageKey(_protocolParams.FreeBalanceHasher, variable, Serializer);
-                key += Serializer.Serialize(prm).ToHexString();
-            }
-            else
-            {
-                throw new ApplicationException("Parameter requered");
-            }
-
-            return $"0x{key}";
-        }
-
-        public string GetStorage(string module, string variable)
-        {
-            // Get most recent block hash
-            var headHash = GetBlockHash(null);
-
-            var e = default(ITypeCreate);
-            string key = GetKeys(e, module, variable);
-            JObject query = new JObject { { "method", "state_getStorage" }, { "params", new JArray { key, headHash.Hash } } };
-            JObject response = _jsonRpc.Request(query);
-
-            return response.ToString();
-        }
-
-        public string GetStorage<T>(T prm, string module, string variable)
-        {
-            string key = GetKeys(prm, module, variable);
-            JObject query = new JObject { { "method", "state_getStorage" }, { "params", new JArray { key } } };
-            JObject response = _jsonRpc.Request(query);
-
-            return response["result"].ToString();
-        }
-
-        public string GetStorageHash(string module, string variable)
-        {
-            var e = default(ITypeCreate);
-            return GetStorageHash(e, module, variable);
-        }
-
-        public string GetStorageHash<T>(T prm, string module, string variable) where T : ITypeCreate
-        {
-            // Get most recent block hash
-            var headHash = GetBlockHash(null);
-
-            string key = GetKeys(prm, module, variable);
-            JObject query = new JObject { { "method", "state_getStorageHash" }, { "params", new JArray { key, headHash.Hash } } };
-            JObject response = _jsonRpc.Request(query);
-
-            return response["result"].ToString();
-        }
-
-        public int GetStorageSize(string module, string variable)
-        {
-            var e = default(ITypeCreate);
-            return GetStorageSize(e, module, variable);
-        }
-
-        public int GetStorageSize<T>(T prm, string module, string variable) where T : ITypeCreate
-        {
-            // Get most recent block hash
-            var headHash = GetBlockHash(null);
-
-            string key = GetKeys(prm, module, variable);
-            JObject query = new JObject { { "method", "state_getStorageSize" }, { "params", new JArray { key, headHash.Hash } } };
-            JObject response = _jsonRpc.Request(query);
-
-            return response["result"].ToObject<int>();
-        }
-
-        public string GetChildKeys(string childStorageKey, string storageKey)
-        {
-            // Get most recent block hash
-            var headHash = GetBlockHash(null);
-
-            JObject query = new JObject { { "method", "state_getChildKeys" },
-                                          { "params", new JArray { childStorageKey, storageKey, headHash.Hash } } };
-            JObject response = _jsonRpc.Request(query);
-
-            return response.ToString();
-        }
-
-        public string GetChildStorage(string childStorageKey, string storageKey)
-        {
-            // Get most recent block hash
-            var headHash = GetBlockHash(null);
-
-            JObject query = new JObject { { "method", "state_getChildStorage" },
-                { "params", new JArray { childStorageKey, storageKey, headHash.Hash } } };
-            JObject response = _jsonRpc.Request(query);
-
-            return response.ToString();
-        }
-
-        public string GetChildStorageHash(string childStorageKey, string storageKey)
-        {
-            // Get most recent block hash
-            var headHash = GetBlockHash(null);
-
-            JObject query = new JObject { { "method", "state_getChildStorageHash" },
-                { "params", new JArray { childStorageKey, storageKey, headHash.Hash } } };
-            JObject response = _jsonRpc.Request(query);
-
-            return response.ToString();
-        }
-
-        public int GetChildStorageSize(string childStorageKey, string storageKey)
-        {
-            // Get most recent block hash
-            var headHash = GetBlockHash(null);
-
-            JObject query = new JObject { { "method", "state_getChildStorageSize" },
-                { "params", new JArray { childStorageKey, storageKey, headHash.Hash } } };
-            JObject response = _jsonRpc.Request(query);
-
-            return response.ToObject<int>();
-        }
-
-        public StorageItem[] QueryStorage(string key, string startHash, string stopHash, int itemCount)
-        {
-            JObject query = new JObject { { "method", "state_queryStorage" },
-                 { "params", new JArray { new JArray(key), startHash, stopHash } } };
-            JObject response = _jsonRpc.Request(query, 30);
-
-            var si = new List<StorageItem>();
-
-            int i = 0;
-            dynamic values = JsonConvert.DeserializeObject(response["result"].ToString());
-
-            while (i < itemCount && (values.Count > i))
-            {
-                var item = new StorageItem
-                {
-                    BlockHash = values[i]["block"].ToString(),
-                    Key = values[i]["changes"][0][0].ToString(),
-                    Value = values[i]["changes"][0][1].ToString()
-                };
-                si.Add(item);
-                i++;
-            }
-
-            return si.ToArray();
         }
 
         public NetworkState GetNetworkState()
@@ -546,7 +374,7 @@ namespace Polkadot.Api
             });
         }
 
-        private string Subscribe(JObject subscriptionQuery, UpdateDelegate parseFunc)
+        internal string Subscribe(JObject subscriptionQuery, Action<JObject> parseFunc)
         {
             var subscriptionId = _jsonRpc.SubscribeWs(subscriptionQuery, this);
 
@@ -583,15 +411,10 @@ namespace Polkadot.Api
             RemoveSubscription(id, "state_unsubscribeStorage");
         }
 
-        public void UnsubscribeStorage(string id)
-        {
-            RemoveSubscription(id, "state_unsubscribeStorage");
-        }
-
         public void HandleWsMessage(string subscriptionId, JObject message)
         {
             // subscription already init otherwise subscription does not exist
-            UpdateDelegate handler = null;
+            Action<JObject> handler = null;
 
             lock (_subscriptionLock)
             {
@@ -604,7 +427,7 @@ namespace Polkadot.Api
             handler?.Invoke(message);
         }
 
-        private void RemoveSubscription(string subscriptionId, string method)
+        internal void RemoveSubscription(string subscriptionId, string method)
         {
             if (_subscriptionHandlers.ContainsKey(subscriptionId))
             {
@@ -716,9 +539,8 @@ namespace Polkadot.Api
             _logger.Info($"sender nonce: {nonce}");
             var extra = new SignedExtra(DefaultEra(), nonce, BigInteger.Zero);
             
-            var absoluteIndex = _protocolParams.Metadata.GetModuleIndex(module, false);
             var moduleIndex = (byte)_protocolParams.Metadata.GetModuleIndex(module, true);
-            var methodIndex = (byte)_protocolParams.Metadata.GetCallMethodIndex(absoluteIndex, method);
+            var methodIndex = (byte)_protocolParams.Metadata.GetCallMethodIndex(module, method);
             var call = new ExtrinsicCallRaw<byte[]>(moduleIndex, methodIndex, encodedMethodBytes);
             var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, ExtrinsicCallRaw<byte[]>>(true, address, null, extra, call);
 
@@ -763,16 +585,12 @@ namespace Polkadot.Api
             return false;
         }
 
-        public string SubscribeStorage(string key, Action<string> callback)
+        private byte[] PlainHash<T>(T value)
         {
-            // Subscribe to websocket
-            var subscribeQuery =
-                    new JObject { { "method", "state_subscribeStorage" }, { "params", new JArray { new JArray { key } } } };
-
-            return Subscribe(subscribeQuery, (json) =>
-            {
-                callback(json["result"]["changes"][0][1].ToString());
-            });
+            using var ms = new MemoryStream();
+            Serializer.Serialize(value, ms);
+            var bytes = ms.ToArray();
+            return PlainHasher.Hash(bytes);
         }
 
         public string SubscribeEraAndSession(Action<Era, SessionOrEpoch> callback)
@@ -795,9 +613,9 @@ namespace Polkadot.Api
             JArray _params;
             if (_isEpoch)
             {
-                var babeEpochIndex = GetKeys("Babe","EpochIndex");
-                var babeGenesisSlot = GetKeys("Babe", "GenesisSlot");
-                var babeCurrentSlot = GetKeys("Babe", "CurrentSlot");
+                var babeEpochIndex = StorageApi.GetKeys("Babe","EpochIndex");
+                var babeGenesisSlot = StorageApi.GetKeys("Babe", "GenesisSlot");
+                var babeCurrentSlot = StorageApi.GetKeys("Babe", "CurrentSlot");
 
                 _params =
                     new JArray { new JArray { babeEpochIndex, babeGenesisSlot, babeCurrentSlot } };
@@ -807,8 +625,8 @@ namespace Polkadot.Api
                 _params =
                     new JArray {
                             new JArray {
-                                Consts.LAST_LENGTH_CHANGE_SUBSCRIPTION, Consts.SESSION_LENGTH_SUBSCRIPTION, _storageKeyCurrentEra,
-                                            _storageKeySessionsPerEra, _storageKeyCurrentSessionIndex}
+                                Consts.LAST_LENGTH_CHANGE_SUBSCRIPTION, Consts.SESSION_LENGTH_SUBSCRIPTION, PlainHash("Staking CurrentEra"),
+                                            PlainHash("Staking SessionsPerEra"), PlainHash("Session CurrentIndex")}
                         };
             }
 
@@ -894,7 +712,7 @@ namespace Polkadot.Api
             //           _protocolParams.Metadata.GetAddressStorageKey(_protocolParams.FreeBalanceHasher,
             //           new Address(address), "System Account");
 
-            string key = GetKeys(new Address(address), "System", "Account");
+            string key = StorageApi.GetKeys( "System", "Account", new Address(address));
 
             var subscribeQuery =
                 new JObject { { "method", "state_subscribeStorage"}, { "params", new JArray { new JArray { key} } } };

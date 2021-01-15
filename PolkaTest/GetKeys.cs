@@ -29,7 +29,7 @@ namespace PolkaTest
 
                 app.Connect();
 
-                var actualKey = app.GetKeys(new Address(address), module, variable);
+                var actualKey = app.StorageApi.GetKeys(module, variable, new Address(address));
 
                 output.WriteLine($"Storage key for prefix {module} {variable} for address {address} : {actualKey}");
                 Console.WriteLine($"\nStorage key for prefix {module} {variable} for address {address} : {actualKey}\n");
