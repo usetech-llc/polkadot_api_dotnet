@@ -23,5 +23,18 @@ namespace Polkadot.Utils
             var clearAllButFirstOneBit = value & (ulong)-(long)value;
             return TrailingZeroesCache[clearAllButFirstOneBit];
         }
+
+        public static ulong NextPowerOfTwo(this ulong value)
+        {
+            value--;
+            value |= value >> 1;
+            value |= value >> 2;
+            value |= value >> 4;
+            value |= value >> 8;
+            value |= value >> 16;
+            value |= value >> 32;
+            value++;
+            return value;
+        }
     }
 }

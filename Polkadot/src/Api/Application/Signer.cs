@@ -4,6 +4,7 @@ using System.Linq;
 using Blake2Core;
 using OneOf;
 using Polkadot.BinaryContracts;
+using Polkadot.BinaryContracts.Signatures;
 using Polkadot.BinarySerializer;
 using Polkadot.Data;
 using Polkadot.Utils;
@@ -22,7 +23,7 @@ namespace Polkadot.Api
 
         public IExtrinsicSignature Sign(byte[] publicKey, byte[] privateKey, byte[] message)
         {
-            return new ExtrinsicMultiSignature(SignatureType.Sr25519, Sr25519v091.SignSimple(publicKey, privateKey, message));
+            return new ExtrinsicMultiSignature(new Sr25519(Sr25519v091.SignSimple(publicKey, privateKey, message)));
         }
 
         public bool VerifySignature(byte[] sign, byte[] publicKey, byte[] message)
@@ -36,35 +37,42 @@ namespace Polkadot.Api
             where TSignedExtra : IExtrinsicExtra 
             where TCall : IExtrinsicCall
         {
-            var metadata = Application.GetProtocolParameters().Metadata;
-            var extrinsicExtension = metadata.RawMetadata.GetExtrinsicExtension();
-            if (extrinsicExtension == null)
-            {
-                throw new NotSupportedException($"Metadata with version {metadata.MetadataVersion} doesn't have information about signature payload construction. Try use {nameof(SignaturePayload)} instead or override {nameof(ISigner)}.{nameof(GetSignaturePayload)} method.");
-            }
-
-            var additionalSignedTable = AdditionalSignersUncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall>();
-
-            var extraSigned = extrinsicExtension.Select(x =>
-            {
-                if (!additionalSignedTable.TryGetValue(x, out var additionalSigned))
+            return extrinsic.Prefix.Value.Match(
+                _ => Array.Empty<byte>(),
+                prefix =>
                 {
-                    throw new NotSupportedException(
-                        $"Unknown extrinsic extension {x}, unable to make signature payload for it.");
-                }
+                    var metadata = Application.GetProtocolParameters().Metadata;
+                    var extrinsicExtension = metadata.RawMetadata.GetExtrinsicExtension();
+                    if (extrinsicExtension == null)
+                    {
+                        throw new NotSupportedException(
+                            $"Metadata with version {metadata.MetadataVersion} doesn't have information about signature payload construction. Try use {nameof(SignaturePayload)} instead or override {nameof(ISigner)}.{nameof(GetSignaturePayload)} method.");
+                    }
 
-                return additionalSigned(extrinsic);
-            });
+                    var additionalSignedTable =
+                        AdditionalSignersUncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall>();
 
-            var signaturePayload = SignaturePayload.Create(extrinsic.Call, extrinsic.Extra, extraSigned);
-            var serialized = Application.Serializer.Serialize(signaturePayload);
-            //Payloads longer than 256 bytes are going to be `blake2_256`-hashed.
-            if (serialized.Length > 256)
-            {
-                serialized = Blake2B.ComputeHash(serialized);
-            }
+                    var extraSigned = extrinsicExtension.Select(x =>
+                    {
+                        if (!additionalSignedTable.TryGetValue(x, out var additionalSigned))
+                        {
+                            throw new NotSupportedException(
+                                $"Unknown extrinsic extension {x}, unable to make signature payload for it.");
+                        }
 
-            return serialized;
+                        return additionalSigned(extrinsic);
+                    });
+
+                    var signaturePayload = SignaturePayload.Create(extrinsic.Call, prefix.Extra, extraSigned);
+                    var serialized = Application.Serializer.Serialize(signaturePayload);
+                    //Payloads longer than 256 bytes are going to be `blake2_256`-hashed.
+                    if (serialized.Length > 256)
+                    {
+                        serialized = Blake2B.ComputeHash(serialized);
+                    }
+
+                    return serialized;
+                });
         }
 
         public Dictionary<string, Func<UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall>, object>>
@@ -89,8 +97,9 @@ namespace Polkadot.Api
 
         private object CheckMortality<TAddress, TSignature, TSignedExtra, TCall>(UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall> arg) where TAddress : IExtrinsicAddress where TSignature : IExtrinsicSignature where TSignedExtra : IExtrinsicExtra where TCall : IExtrinsicCall
         {
-            var current = Application.GetBlockHeader(null).Number;
-            var n = arg.Extra.GetEraIfAny().Birth(current);
+            var era = arg.Prefix.Value.AsT1.Extra.GetEraIfAny();
+            var current = era.Header.Number;
+            var n = era.Birth(current);
             var hash = Application.GetBlockHash(new GetBlockHashParams() {BlockNumber = n}).Hash;
             return hash.HexToByteArray();
         }
@@ -112,7 +121,7 @@ namespace Polkadot.Api
 
         private object CheckEra<TAddress, TSignature, TSignedExtra, TCall>(UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall> arg) where TAddress : IExtrinsicAddress where TSignature : IExtrinsicSignature where TSignedExtra : IExtrinsicExtra where TCall : IExtrinsicCall
         {
-            return arg.Extra.GetEraIfAny().Value.Match(immortal => Application.GetProtocolParameters().GenesisBlockHash, MortalBlockHash);
+            return arg.Prefix.Value.AsT1.Extra.GetEraIfAny().Value.Match(immortal => Application.GetProtocolParameters().GenesisBlockHash, MortalBlockHash);
         }
 
         private byte[] MortalBlockHash(MortalEra mortal)

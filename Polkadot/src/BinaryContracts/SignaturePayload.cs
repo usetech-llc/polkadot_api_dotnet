@@ -28,7 +28,7 @@ namespace Polkadot.BinaryContracts
         [Serialize(0)]
         public TCall Call { get; set; }
         
-        [Serialize(1)]
+        //[Serialize(1)]
         public TExtra Extra { get; set; }
         
         [Serialize(2)]

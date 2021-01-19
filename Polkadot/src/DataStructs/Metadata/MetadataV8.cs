@@ -157,5 +157,10 @@ namespace Polkadot.DataStructs.Metadata
         {
             return Value;
         }
+
+        public byte[] GetValueBytes()
+        {
+            return null;
+        }
     }
 }

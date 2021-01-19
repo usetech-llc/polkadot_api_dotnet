@@ -9,5 +9,15 @@ namespace Polkadot.BinarySerializer.Types
         [Serialize(0)]
         [OneOfConverter]
         public OneOf<None, T> Value { get; set; }
+
+        public Option()
+        {
+            Value = new None();
+        }
+
+        public Option(T value)
+        {
+            Value = value;
+        }
     }
 }

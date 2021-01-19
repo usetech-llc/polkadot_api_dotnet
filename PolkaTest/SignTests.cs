@@ -26,11 +26,11 @@ namespace PolkaTest
             var privateKey = Constants.LocalAlicePrivateKey;
             
             var sign = (ExtrinsicMultiSignature)application.Signer.Sign(publicKey, privateKey, message);
-            var verify = application.Signer.VerifySignature(sign.Signature, publicKey, message);
+            var verify = application.Signer.VerifySignature(sign.MultiSignature.AsT1.Signature, publicKey, message);
             Assert.True(verify);
 
             var sign2 = (ExtrinsicMultiSignature)application.Signer.Sign(publicKey, privateKey, message2);
-            var verify2 = application.Signer.VerifySignature(sign2.Signature, publicKey, message2);
+            var verify2 = application.Signer.VerifySignature(sign2.MultiSignature.AsT1.Signature, publicKey, message2);
             Assert.True(verify2);
         }
         

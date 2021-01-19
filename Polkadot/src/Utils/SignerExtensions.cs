@@ -16,9 +16,14 @@ namespace Polkadot.Utils
                 where TSignedExtra : IExtrinsicExtra
                 where TCall : IExtrinsicCall
         {
-            var payload = signer.GetSignaturePayload(extrinsic);
-            var sign = signer.Sign(publicKey, privateKey, payload);
-            extrinsic.Signature = (TSignature)sign;
+            extrinsic.Prefix.Value.Switch(
+                _ => { },
+                prefix =>
+                {
+                    var payload = signer.GetSignaturePayload(extrinsic);
+                    var sign = signer.Sign(publicKey, privateKey, payload);
+                    prefix.Signature = (TSignature) sign;
+                });
         }
     }
 }

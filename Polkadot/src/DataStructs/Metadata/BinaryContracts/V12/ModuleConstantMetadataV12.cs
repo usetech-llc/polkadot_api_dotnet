@@ -7,6 +7,7 @@ namespace Polkadot.DataStructs.Metadata.BinaryContracts.V12
 {
     public class ModuleConstantMetadataV12 : IConstantMeta
     {
+
         [Serialize(0)]
         [Utf8StringConverter]
         public string Name { get; set; }
@@ -31,6 +32,11 @@ namespace Polkadot.DataStructs.Metadata.BinaryContracts.V12
         public string GetValue()
         {
             return Encoding.UTF8.GetString(Value);
+        }
+
+        public byte[] GetValueBytes()
+        {
+            return Value;
         }
     }
 }

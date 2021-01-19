@@ -1,4 +1,6 @@
 ﻿
+using OneOf;
+using Polkadot.BinaryContracts.Signatures;
 using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 
@@ -7,20 +9,24 @@ namespace Polkadot.BinaryContracts
     public class ExtrinsicMultiSignature : IExtrinsicSignature
     {
         [Serialize(0)]
-        public SignatureType SignatureType { get; set; }
-        
-        [Serialize(1)]
-        [FixedSizeArrayConverter(64)]
-        public byte[] Signature { get; set; }
+        [OneOfConverter]
+        public OneOf<Ed25519, Sr25519, Ecdsa> MultiSignature { get; set; }
 
         public ExtrinsicMultiSignature()
         {
         }
 
-        public ExtrinsicMultiSignature(SignatureType signatureType, byte[] signature)
+        public ExtrinsicMultiSignature(Ed25519 multiSignature)
         {
-            SignatureType = signatureType;
-            Signature = signature;
+            MultiSignature = multiSignature;
+        }
+        public ExtrinsicMultiSignature(Sr25519 multiSignature)
+        {
+            MultiSignature = multiSignature;
+        }
+        public ExtrinsicMultiSignature(Ecdsa multiSignature)
+        {
+            MultiSignature = multiSignature;
         }
     }
 }

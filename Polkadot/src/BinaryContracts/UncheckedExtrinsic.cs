@@ -1,38 +1,47 @@
 ﻿
+using System.IO;
 using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
+using Polkadot.BinarySerializer.Types;
 
 namespace Polkadot.BinaryContracts
 {
-    public sealed class UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall>
+    public sealed class UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall> : IBinarySerializable
         where TAddress : IExtrinsicAddress
         where TSignature : IExtrinsicSignature
         where TSignedExtra : IExtrinsicExtra
         where TCall : IExtrinsicCall
     {
+        private const byte TransactionVersion = 4;
+        
         [Serialize(0)]
-        public byte SignatureVersion { get; set; }
+        public Option<UncheckedExtrinsicPrefix<TAddress, TSignature, TSignedExtra>> Prefix { get; set; }
+        
         [Serialize(1)]
-        public TAddress Address { get; set; }
-        [Serialize(2)]
-        public TSignature Signature { get; set; }
-        [Serialize(3)]
-        public TSignedExtra Extra { get; set; }
-        [Serialize(4)]
         public TCall Call { get; set; }
 
         public UncheckedExtrinsic()
         {
         }
 
-        public UncheckedExtrinsic(bool signed, TAddress address, TSignature signature, TSignedExtra extra, TCall call)
+        public UncheckedExtrinsic(TAddress address, TSignature signature, TSignedExtra extra, TCall call)
         {
-            //4 is the TRANSACTION_VERSION constant and it is 7 bits long, the highest bit 1 for signed transaction, 0 for unsigned. 
-            SignatureVersion = (byte) (4 | (signed ? 0x80 : 0));
-            Address = address;
-            Signature = signature;
-            Extra = extra;
+            Prefix = new Option<UncheckedExtrinsicPrefix<TAddress, TSignature, TSignedExtra>>(
+                new UncheckedExtrinsicPrefix<TAddress, TSignature, TSignedExtra>(address, signature, extra));
             Call = call;
+        }
+
+        public void Serialize(Stream stream, IBinarySerializer serializer)
+        {
+            Prefix.Value.Switch(
+                _ => serializer.Serialize((byte)(TransactionVersion & 0b0111_1111), stream),
+                prefix =>
+                {
+                    serializer.Serialize((byte)(TransactionVersion | 0b1000_0000), stream);
+                    serializer.Serialize(prefix, stream);
+                });
+
+            serializer.Serialize(Call, stream);
         }
     }
 }

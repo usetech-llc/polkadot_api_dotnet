@@ -3,6 +3,7 @@ using System.IO;
 using OneOf;
 using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Extensions;
+using Polkadot.Data;
 using Polkadot.Utils;
 
 namespace Polkadot.BinaryContracts
@@ -10,22 +11,24 @@ namespace Polkadot.BinaryContracts
     public class EraDto: IBinarySerializable, IBinaryDeserializable
     {
         public OneOf<ImmortalEra, MortalEra> Value { get; set; }
+        public BlockHeader Header;
 
         public EraDto()
         {
         }
 
-        public EraDto(OneOf<ImmortalEra, MortalEra> value)
+        public EraDto(OneOf<ImmortalEra, MortalEra> value, BlockHeader header)
         {
             Value = value;
+            Header = header;
         }
 
         public ulong Birth(ulong current)
         {
             return Value.Match(
                 _ => 0UL,
-                mortal => (Math.Max(current, mortal.Phase) - mortal.Phase) / mortal.Period * mortal.Period +
-                          mortal.Phase);
+                mortal => (Math.Max(current, mortal.Phase) - mortal.Phase) / mortal.Period * mortal.Period + mortal.Phase
+            );
         }
 
         public void Serialize(Stream stream, IBinarySerializer serializer)
@@ -52,7 +55,7 @@ namespace Polkadot.BinaryContracts
             var b0 = stream.ReadByteThrowIfStreamEnd();
             if (b0 == 0)
             {
-                return new EraDto(new ImmortalEra());
+                return new EraDto(new ImmortalEra(), null);
             }
 
             var b1 = stream.ReadByteThrowIfStreamEnd();
@@ -72,7 +75,7 @@ namespace Polkadot.BinaryContracts
                 throw new ArgumentException($"{new[] {b0, b1}.ToHexString()} is not a valid representation of Era.");
             }
 
-            return new EraDto(new MortalEra(period, phase));
+            return new EraDto(new MortalEra(period, phase), null);
         }
     }
 }

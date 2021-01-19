@@ -542,7 +542,7 @@ namespace Polkadot.Api
             var moduleIndex = (byte)_protocolParams.Metadata.GetModuleIndex(module, true);
             var methodIndex = (byte)_protocolParams.Metadata.GetCallMethodIndex(module, method);
             var call = new ExtrinsicCallRaw<byte[]>(moduleIndex, methodIndex, encodedMethodBytes);
-            var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, ExtrinsicCallRaw<byte[]>>(true, address, null, extra, call);
+            var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, ExtrinsicCallRaw<byte[]>>(address, null, extra, call);
 
             Signer.SignUncheckedExtrinsic(extrinsic, publicKey.Bytes, privateKey.HexToByteArray());
 
@@ -730,10 +730,10 @@ namespace Polkadot.Api
 
         internal EraDto DefaultEra()
         {
-            //Todo: figure out how to make good mortal era.
-            return new EraDto(new ImmortalEra());
+            // //Todo: figure out how to make good mortal era.
+            // return new EraDto(new ImmortalEra());
             var metadata = GetMetadata(null);
-            return FromBlockHashCount(metadata) ?? FromMinimumPeriod(metadata) ?? new EraDto(new ImmortalEra());
+            return FromBlockHashCount(metadata) ?? FromMinimumPeriod(metadata) ?? new EraDto(new ImmortalEra(), null);
         }
 
         private EraDto FromMinimumPeriod(MetadataBase metadata)
@@ -749,27 +749,29 @@ namespace Polkadot.Api
 
             var period = CreateSerializer().Deserialize<ulong>(minimumPeriodStr.HexToByteArray());
             var block = GetBlock(null);
-            return new EraDto(new MortalEra(period, block.Block.Header.Number));
+            return new EraDto(new MortalEra(period, block.Block.Header.Number), null);
         }
 
         private EraDto FromBlockHashCount(MetadataBase metadata)
         {
             var systemModule = metadata.GetModule(KnownModules.System);
-            var blockHashCountStr = systemModule
+            var blockHashCountBytes = systemModule
                 ?.GetConstant(KnownConstants.BlockHashCount)
-                ?.GetValue();
+                ?.GetValueBytes();
 
-            if (blockHashCountStr == null)
+            var blockHashCount = blockHashCountBytes switch
             {
-                return null;
-            }
+                {Length: 1} => blockHashCountBytes[0],
+                {Length: 2} => BitConverter.ToUInt16(blockHashCountBytes),
+                {Length: 4} => BitConverter.ToUInt32(blockHashCountBytes),
+                {Length: 8} => BitConverter.ToUInt64(blockHashCountBytes),
+                _ => throw new OverflowException("Unable to deserialize block hash count")
+            };
 
-            var blockHashCount = CreateSerializer().Deserialize<ulong>(blockHashCountStr.HexToByteArray());
+            var period = blockHashCount.NextPowerOfTwo() / 2 ;
 
-            var period = blockHashCount & (ulong) -(long) blockHashCount;
-
-            var block = GetBlock(null);
-            return new EraDto(new MortalEra(period, block.Block.Header.Number));
+            var block = GetBlockHeader(null);
+            return new EraDto(MortalEra.FromCurrentBlock(period, block.Number - 1), block);
         }
 
         internal AsByteVec<UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, InheritanceCall<TransferCall>>> CreateSignedTransferExtrinsic(Address from, byte[] privateKeyFrom, Address to, BigInteger amount, EraDto era = null, BigInteger? chargeTransactionPayment = null)
@@ -787,7 +789,7 @@ namespace Polkadot.Api
             var publicKeyTo = _protocolParams.Metadata.GetPublicKeyFromAddr(to);
             var call = new TransferCall(publicKeyTo, amount);
             var inheritanceCall = new InheritanceCall<TransferCall>(call);
-            var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, InheritanceCall<TransferCall>>(true, extrinsicAddressFrom, null, extra, inheritanceCall);
+            var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, InheritanceCall<TransferCall>>(extrinsicAddressFrom, null, extra, inheritanceCall);
 
             Signer.SignUncheckedExtrinsic(extrinsic, publicKeyFrom.Bytes, privateKeyFrom);
 
@@ -804,14 +806,11 @@ namespace Polkadot.Api
             foreach (var module in metadata.GetModules())
             {
                 var calls = module.GetCalls();
-                if (calls != null && calls.Any())
+                callModuleIndex++;
+                var methodIndex = 0;
+                foreach (var call in calls)
                 {
-                    callModuleIndex++;
-                    var methodIndex = 0;
-                    foreach (var call in calls)
-                    {
-                        callsLookup[(module.GetName(), call.GetName())] = ((byte) callModuleIndex, (byte) methodIndex++);
-                    }
+                    callsLookup[(module.GetName(), call.GetName())] = ((byte) callModuleIndex, (byte) methodIndex++);
                 }
 
                 var events = module.GetEvents();
@@ -836,7 +835,7 @@ namespace Polkadot.Api
         public static SerializerSettings DefaultSubstrateSettings()
         {
             return new SerializerSettings()
-                .AddCall<TransferCall>("Balances", "transfer")
+                .AddCall<TransferCall>("Balances", "transfer_keep_alive")
                 
                 .AddEvent<ExtrinsicSuccess>("System", "ExtrinsicSuccess")
                 .AddEvent<ExtrinsicFailed>("System", "ExtrinsicFailed")

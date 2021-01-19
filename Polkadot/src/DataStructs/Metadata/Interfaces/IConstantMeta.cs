@@ -4,5 +4,7 @@
     {
         string GetName();
         string GetValue();
+
+        byte[] GetValueBytes();
     }
 }
