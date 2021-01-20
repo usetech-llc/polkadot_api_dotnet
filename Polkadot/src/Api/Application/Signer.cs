@@ -50,7 +50,7 @@ namespace Polkadot.Api
                     }
 
                     var additionalSignedTable =
-                        AdditionalSignersUncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall>();
+                        AdditionalSignersUncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall>(extrinsic.BlockHeader);
 
                     var extraSigned = extrinsicExtension.Select(x =>
                     {
@@ -76,16 +76,19 @@ namespace Polkadot.Api
         }
 
         public Dictionary<string, Func<UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall>, object>>
-            AdditionalSignersUncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall>()
+            AdditionalSignersUncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall>(BlockHeader blockHeader)
             where TAddress : IExtrinsicAddress
             where TSignature : IExtrinsicSignature
             where TSignedExtra : IExtrinsicExtra
             where TCall : IExtrinsicCall
         {
+            var blockHash = Application.GetBlockHash(new GetBlockHashParams(){ BlockNumber = blockHeader.Number}).Hash;
+            var runtimeVersion = Application.GetRuntimeVersion(new GetRuntimeVersionParams()
+                {BlockHash = blockHash});
             return new Dictionary<string, Func<UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall>, object>>()
             {
-                { "CheckSpecVersion", CheckSpecVersion },
-                { "CheckTxVersion", CheckTxVersion },
+                { "CheckSpecVersion", p => CheckSpecVersion(p, runtimeVersion) },
+                { "CheckTxVersion", p => CheckTxVersion(p, runtimeVersion) },
                 { "CheckGenesis", CheckGenesis },
                 { "CheckEra", CheckEra },
                 { "CheckNonce", CheckNonce },
@@ -98,7 +101,7 @@ namespace Polkadot.Api
         private object CheckMortality<TAddress, TSignature, TSignedExtra, TCall>(UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall> arg) where TAddress : IExtrinsicAddress where TSignature : IExtrinsicSignature where TSignedExtra : IExtrinsicExtra where TCall : IExtrinsicCall
         {
             var era = arg.Prefix.Value.AsT1.Extra.GetEraIfAny();
-            var current = era.Header.Number;
+            var current = arg.BlockHeader.Number;
             var n = era.Birth(current);
             var hash = Application.GetBlockHash(new GetBlockHashParams() {BlockNumber = n}).Hash;
             return hash.HexToByteArray();
@@ -137,14 +140,14 @@ namespace Polkadot.Api
             return Application.GetProtocolParameters().GenesisBlockHash;
         }
 
-        private object CheckTxVersion<TAddress, TSignature, TSignedExtra, TCall>(UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall> arg) where TAddress : IExtrinsicAddress where TSignature : IExtrinsicSignature where TSignedExtra : IExtrinsicExtra where TCall : IExtrinsicCall
+        private object CheckTxVersion<TAddress, TSignature, TSignedExtra, TCall>(UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall> arg, RuntimeVersion runtimeVersion) where TAddress : IExtrinsicAddress where TSignature : IExtrinsicSignature where TSignedExtra : IExtrinsicExtra where TCall : IExtrinsicCall
         {
-            return 1;
+            return runtimeVersion.TransactionVersion;
         }
 
-        private object CheckSpecVersion<TAddress, TSignature, TSignedExtra, TCall>(UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall> arg) where TAddress : IExtrinsicAddress where TSignature : IExtrinsicSignature where TSignedExtra : IExtrinsicExtra where TCall : IExtrinsicCall
+        private object CheckSpecVersion<TAddress, TSignature, TSignedExtra, TCall>(UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall> arg, RuntimeVersion runtimeVersion) where TAddress : IExtrinsicAddress where TSignature : IExtrinsicSignature where TSignedExtra : IExtrinsicExtra where TCall : IExtrinsicCall
         {
-            return 1;
+            return runtimeVersion.SpecVersion;
         }
     }
 }

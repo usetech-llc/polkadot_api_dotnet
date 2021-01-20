@@ -11,16 +11,14 @@ namespace Polkadot.BinaryContracts
     public class EraDto: IBinarySerializable, IBinaryDeserializable
     {
         public OneOf<ImmortalEra, MortalEra> Value { get; set; }
-        public BlockHeader Header;
 
         public EraDto()
         {
         }
 
-        public EraDto(OneOf<ImmortalEra, MortalEra> value, BlockHeader header)
+        public EraDto(OneOf<ImmortalEra, MortalEra> value)
         {
             Value = value;
-            Header = header;
         }
 
         public ulong Birth(ulong current)
@@ -55,7 +53,7 @@ namespace Polkadot.BinaryContracts
             var b0 = stream.ReadByteThrowIfStreamEnd();
             if (b0 == 0)
             {
-                return new EraDto(new ImmortalEra(), null);
+                return new EraDto(new ImmortalEra());
             }
 
             var b1 = stream.ReadByteThrowIfStreamEnd();
@@ -75,7 +73,7 @@ namespace Polkadot.BinaryContracts
                 throw new ArgumentException($"{new[] {b0, b1}.ToHexString()} is not a valid representation of Era.");
             }
 
-            return new EraDto(new MortalEra(period, phase), null);
+            return new EraDto(new MortalEra(period, phase));
         }
     }
 }

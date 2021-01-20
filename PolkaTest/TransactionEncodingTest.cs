@@ -45,10 +45,15 @@ namespace PolkaTest
                     {
                         Header = new BlockHeader()
                         {
-                            Number = 123456
+                            Number = 1
                         }
                     }
                 };
+            }
+
+            public override BlockHeader GetBlockHeader(GetBlockParams param)
+            {
+                return GetBlock(null).Block.Header;
             }
         }
         
@@ -56,7 +61,7 @@ namespace PolkaTest
         public void TransactionEncodedCorrectly()
         {
             var expectedTransaction =
-                "250284586CC32614D6A3F219667DB501ADE545753058D43B14E6E971E9C9CC908AD84301.{128}001D010005008EAF04151687736326C9FEA17E25FC5287613693C912909CB226AA4794F26A4804";
+                "290284586CC32614D6A3F219667DB501ADE545753058D43B14E6E971E9C9CC908AD84301.{128}0A001D010006038EAF04151687736326C9FEA17E25FC5287613693C912909CB226AA4794F26A4804";
             using var application = MockedApplication.Create();
             application.Connect(Constants.LocalNodeUri);
 
@@ -74,14 +79,13 @@ namespace PolkaTest
         [Fact]
         public void SerializingDeserializedTransactionMakesSameValue()
         {
-            var transactionSample =
-                "250284586CC32614D6A3F219667DB501ADE545753058D43B14E6E971E9C9CC908AD84301AA3981480D00A15C231769CEB1F98C456C0759D7B5C1B5050DE8872F05D76C5C9F8D44E8A5E632179436D324BCFB8E38D1D9048A6EEBD93467E7B9878D546489001D010005008EAF04151687736326C9FEA17E25FC5287613693C912909CB226AA4794F26A4804";
+            var transactionSample = "290284586CC32614D6A3F219667DB501ADE545753058D43B14E6E971E9C9CC908AD84301B6E14B633A7AE50BFE488E6E0AC4E35D870593264F1AF92FE4BC650879313B709132209719EB41CCFCE75D819E64B7DE6AB51A4C2FA1720C0C939541FAA1958D0A001D010006038EAF04151687736326C9FEA17E25FC5287613693C912909CB226AA4794F26A4804";
             
             using var application = MockedApplication.Create();
             application.Connect(Constants.LocalNodeUri);
             var serializer = application.CreateSerializer();
             var deserializedTransaction = serializer
-                .Deserialize<
+                .DeserializeAssertReadAll<
                     AsByteVec<UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra,
                         ExtrinsicCallRaw<TransferCall>>>>(transactionSample.HexToByteArray());
             var serializedTransaction = serializer.Serialize(deserializedTransaction)

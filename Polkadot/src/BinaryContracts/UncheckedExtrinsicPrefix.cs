@@ -14,6 +14,10 @@ namespace Polkadot.BinaryContracts
         [Serialize(2)]
         public TSignedExtra Extra { get; set; }
 
+        public UncheckedExtrinsicPrefix()
+        {
+        }
+
         public UncheckedExtrinsicPrefix(TAddress address, TSignature signature, TSignedExtra extra)
         {
             Address = address;

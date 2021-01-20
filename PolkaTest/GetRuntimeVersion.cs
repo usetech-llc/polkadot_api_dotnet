@@ -39,9 +39,9 @@ namespace PolkaTest
 
                 // Ensure all items are present in api
                 int apiItemCount = 0;
-                foreach (var item in result.Api)
+                foreach (var item in result.Apis)
                 {
-                    if (item.Num.Length == 18)
+                    if (item.Item1.Length == 18)
                     {
                         apiItemCount++;
                     }

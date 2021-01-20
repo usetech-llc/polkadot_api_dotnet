@@ -1,18 +1,17 @@
-﻿namespace Polkadot.Data
+﻿using Newtonsoft.Json;
+using Polkadot.JsonConverters;
+
+namespace Polkadot.Data
 {
     public class RuntimeVersion
     {
-        public ApiItem[] Api { get; set; }
+        [JsonProperty(ItemConverterType = typeof(TupleConverter))]
+        public (string, int)[] Apis { get; set; }
         public uint AuthoringVersion { get; set; }
         public string ImplName { get; set; }
         public int ImplVersion { get; set; }
         public string SpecName { get; set; }
         public int SpecVersion { get; set; }
+        public int TransactionVersion { get; set; }
     }
-
-    public struct ApiItem
-    {
-        public string Num { get; set; }
-        public int Id { get; set; }
-    };
 }
