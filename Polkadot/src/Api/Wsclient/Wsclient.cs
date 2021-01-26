@@ -29,7 +29,7 @@
                 ? GetCertificatesFromPem(connectionParams.ClientCertPath) : null;
 
             _wss = new WebSocketSharp.WebSocket(connectionString);
-
+            
             _wss.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
             if (clientCertList != null)
                 _wss.SslConfiguration.ClientCertificates = new X509CertificateCollection(clientCertList);
@@ -46,6 +46,15 @@
                 foreach(var item in _observers)
                 {
                     item.HandleMessage(payload);
+                }
+            };
+
+            _wss.OnError += (sender, args) =>
+            {
+                _logger.Info($"WS Received Error: {args.Message}");
+                foreach (var item in _observers)
+                {
+                    item.OnError(args.Exception);
                 }
             };
 

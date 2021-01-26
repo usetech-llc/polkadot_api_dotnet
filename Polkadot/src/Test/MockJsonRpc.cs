@@ -103,6 +103,11 @@
             throw new NotImplementedException();
         }
 
+        public void OnError(Exception exception)
+        {
+            
+        }
+
         public void Dispose()
         {
             _wsc.Dispose();
