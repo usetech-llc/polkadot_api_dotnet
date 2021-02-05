@@ -1,8 +1,7 @@
 ﻿using Polkadot.BinarySerializer;
-using Polkadot.BinarySerializer.Converters;
 using Polkadot.DataStructs;
 
-namespace Polkadot.BinaryContracts.Events
+namespace Polkadot.BinaryContracts.Events.System
 {
     public class KilledAccount : IEvent
     {

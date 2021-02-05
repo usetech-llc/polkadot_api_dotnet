@@ -1,7 +1,7 @@
 ﻿using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 
-namespace Polkadot.BinaryContracts
+namespace Polkadot.BinaryContracts.Calls
 {
     public class InheritanceCall<TCall> : IExtrinsicCall where TCall : IExtrinsicCall
     {

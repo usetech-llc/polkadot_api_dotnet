@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MnemonicSubstrate", "Mnemon
 		{71C8A71C-0CC9-44F6-985A-C7DA3CACC35B} = {71C8A71C-0CC9-44F6-985A-C7DA3CACC35B}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polkadot.NodeTypesGenerator", "Polkadot.NodeTypesGenerator\Polkadot.NodeTypesGenerator.csproj", "{08B66A81-626A-441F-A637-2203222D8E32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,14 @@ Global
 		{536C1908-D506-4E0C-B32F-DE9D58B2703A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{536C1908-D506-4E0C-B32F-DE9D58B2703A}.Release|x64.ActiveCfg = Release|Any CPU
 		{536C1908-D506-4E0C-B32F-DE9D58B2703A}.Release|x64.Build.0 = Release|Any CPU
+		{08B66A81-626A-441F-A637-2203222D8E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08B66A81-626A-441F-A637-2203222D8E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08B66A81-626A-441F-A637-2203222D8E32}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{08B66A81-626A-441F-A637-2203222D8E32}.Debug|x64.Build.0 = Debug|Any CPU
+		{08B66A81-626A-441F-A637-2203222D8E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08B66A81-626A-441F-A637-2203222D8E32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08B66A81-626A-441F-A637-2203222D8E32}.Release|x64.ActiveCfg = Release|Any CPU
+		{08B66A81-626A-441F-A637-2203222D8E32}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

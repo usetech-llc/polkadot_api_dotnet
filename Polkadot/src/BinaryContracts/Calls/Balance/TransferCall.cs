@@ -3,9 +3,9 @@ using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 using Polkadot.DataStructs;
 
-namespace Polkadot.BinaryContracts
+namespace Polkadot.BinaryContracts.Calls.Balance
 {
-    public class TransferCall : IExtrinsicCall
+    public class TransferCall: IExtrinsicCall
     {
         [Serialize(0)]
         public PublicKey Destination { get; set; }

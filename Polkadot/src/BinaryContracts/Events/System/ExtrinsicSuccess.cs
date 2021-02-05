@@ -1,6 +1,6 @@
 ﻿using Polkadot.BinarySerializer;
 
-namespace Polkadot.BinaryContracts.Events
+namespace Polkadot.BinaryContracts.Events.System
 {
     public class ExtrinsicSuccess : IEvent
     {

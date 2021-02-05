@@ -1,4 +1,4 @@
-﻿namespace Polkadot.BinaryContracts
+﻿namespace Polkadot.BinaryContracts.Extrinsic
 {
     public interface IExtrinsicSignature
     {

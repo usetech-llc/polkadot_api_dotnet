@@ -1,7 +1,7 @@
 ﻿
 using Polkadot.BinarySerializer;
 
-namespace Polkadot.BinaryContracts
+namespace Polkadot.BinaryContracts.Calls
 {
     public class ExtrinsicCallRaw<TParams> : IExtrinsicCall
     {

@@ -1,10 +1,9 @@
-﻿
-using OneOf;
+﻿using OneOf;
 using Polkadot.BinaryContracts.Signatures;
 using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 
-namespace Polkadot.BinaryContracts
+namespace Polkadot.BinaryContracts.Extrinsic
 {
     public class ExtrinsicMultiSignature : IExtrinsicSignature
     {

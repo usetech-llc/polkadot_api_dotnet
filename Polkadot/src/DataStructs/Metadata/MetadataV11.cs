@@ -77,7 +77,7 @@ namespace Polkadot.DataStructs.Metadata
         public string[] Documentation { get; set; }
     }
 
-    public class FunctionCallArgV11
+    public class FunctionCallArgV11 : ICallArgument
     {
         public string Name { get; set; }
         public string Type { get; set; }
@@ -99,10 +99,8 @@ namespace Polkadot.DataStructs.Metadata
         public string Name { get; set; }
         public FunctionCallArgV11[] Args { get; set; }
         public string[] Documentation { get; set; }
-        public string GetName()
-        {
-            return Name;
-        }
+        public string GetName() => Name;
+        public IReadOnlyList<ICallArgument> GetArguments() => Args;
     }
 
     public class FuncTypeV11

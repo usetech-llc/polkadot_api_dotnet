@@ -1,4 +1,5 @@
-﻿using Polkadot.BinarySerializer;
+﻿using System.Collections.Generic;
+using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 using Polkadot.DataStructs.Metadata.Interfaces;
 
@@ -18,9 +19,8 @@ namespace Polkadot.DataStructs.Metadata.BinaryContracts.V12
         [PrefixedArrayConverter(ItemConverter = typeof(Utf8StringConverter))]
         public string[] Documentation { get; set; }
 
-        public string GetName()
-        {
-            return Name;
-        }
+        public string GetName() => Name;
+
+        public IReadOnlyList<ICallArgument> GetArguments() => Arguments;
     }
 }

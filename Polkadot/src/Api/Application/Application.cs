@@ -15,11 +15,16 @@ using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Polkadot.Api.Hashers;
+using Polkadot.BinaryContracts.Calls;
+using Polkadot.BinaryContracts.Calls.Balance;
+using Polkadot.BinaryContracts.Calls.System;
 using Polkadot.BinaryContracts.Events;
 using Polkadot.BinaryContracts.Events.Balances;
 using Polkadot.BinaryContracts.Events.Contracts;
 using Polkadot.BinaryContracts.Events.Grandpa;
 using Polkadot.BinaryContracts.Events.Sudo;
+using Polkadot.BinaryContracts.Events.System;
+using Polkadot.BinaryContracts.Extrinsic;
 using Polkadot.BinarySerializer.Extensions;
 using Polkadot.Data;
 using Polkadot.DataFactory;
@@ -35,7 +40,7 @@ using Transfer = Polkadot.BinaryContracts.Events.Balances.Transfer;
 
 namespace Polkadot.Api
 {
-    public class Application : IApplication, IWebSocketMessageObserver
+    public partial class Application : IApplication, IWebSocketMessageObserver
     {
         private ILogger _logger;
         private IJsonRpc _jsonRpc;
@@ -836,6 +841,16 @@ namespace Polkadot.Api
         public static SerializerSettings DefaultSubstrateSettings()
         {
             return new SerializerSettings()
+                .AddCall<FillBlock>("System", "fill_block")
+                .AddCall<Remark>("System", "remark")
+                .AddCall<SetHeapPages>("System", "set_heap_pages")
+                .AddCall<SetCode>("System", "set_code")
+                .AddCall<SetCodeWithoutChecks>("System", "set_code_without_checks")
+                .AddCall<ChangesTrieConfiguration>("System", "set_changes_trie_config")
+                .AddCall<SetStorage>("System", "set_storage")
+                .AddCall<KillStorage>("System", "kill_storage")
+                .AddCall<KillPrefix>("System", "kill_prefix")
+                .AddCall<TransferCall>("Balances", "transfer")
                 .AddCall<TransferCall>("Balances", "transfer_keep_alive")
                 
                 .AddEvent<ExtrinsicSuccess>("System", "ExtrinsicSuccess")

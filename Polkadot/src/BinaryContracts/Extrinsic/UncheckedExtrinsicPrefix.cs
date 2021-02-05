@@ -1,6 +1,6 @@
 ﻿using Polkadot.BinarySerializer;
 
-namespace Polkadot.BinaryContracts
+namespace Polkadot.BinaryContracts.Extrinsic
 {
     public class UncheckedExtrinsicPrefix<TAddress, TSignature, TSignedExtra>
         where TAddress : IExtrinsicAddress

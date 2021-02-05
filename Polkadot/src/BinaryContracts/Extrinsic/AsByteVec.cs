@@ -1,8 +1,7 @@
 ﻿using System.IO;
 using Polkadot.BinarySerializer;
-using Polkadot.Utils;
 
-namespace Polkadot.BinaryContracts
+namespace Polkadot.BinaryContracts.Extrinsic
 {
     public class AsByteVec
     {

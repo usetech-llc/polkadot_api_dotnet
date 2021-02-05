@@ -4,6 +4,7 @@ using System.Linq;
 using Blake2Core;
 using OneOf;
 using Polkadot.BinaryContracts;
+using Polkadot.BinaryContracts.Extrinsic;
 using Polkadot.BinaryContracts.Signatures;
 using Polkadot.BinarySerializer;
 using Polkadot.Data;

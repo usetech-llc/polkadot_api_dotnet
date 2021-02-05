@@ -70,7 +70,7 @@ namespace Polkadot.DataStructs.Metadata
         }
     }
 
-    public class FunctionCallArgV4
+    public class FunctionCallArgV4 : ICallArgument
     {
         public string Name { get; set; }
         public string Type { get; set; }
@@ -92,10 +92,9 @@ namespace Polkadot.DataStructs.Metadata
         public string Name { get; set; }
         public FunctionCallArgV4[] Args { get; set; }
         public string[] Documentation { get; set; }
-        public string GetName()
-        {
-            return Name;
-        }
+        public string GetName() => Name;
+
+        public IReadOnlyList<ICallArgument> GetArguments() => Args;
     }
 
     public class FuncTypeV4

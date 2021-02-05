@@ -1,8 +1,6 @@
-﻿
-using Polkadot.BinarySerializer;
-using Polkadot.BinarySerializer.Converters;
+﻿using Polkadot.BinarySerializer;
 
-namespace Polkadot.BinaryContracts
+namespace Polkadot.BinaryContracts.Extrinsic
 {
     public sealed class UncheckedExtrinsicRaw<TAddress, TSignature, TSignedExtra, TCall>
         where TAddress : IExtrinsicAddress

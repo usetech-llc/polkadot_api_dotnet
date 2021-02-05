@@ -1,12 +1,11 @@
-﻿
-using System.IO;
+﻿using System.IO;
 using Polkadot.BinarySerializer;
-using Polkadot.BinarySerializer.Converters;
 using Polkadot.BinarySerializer.Extensions;
 using Polkadot.BinarySerializer.Types;
 using Polkadot.Data;
+using Polkadot.Exceptions;
 
-namespace Polkadot.BinaryContracts
+namespace Polkadot.BinaryContracts.Extrinsic
 {
     public sealed class UncheckedExtrinsic<TAddress, TSignature, TSignedExtra, TCall> : IBinarySerializable, IBinaryDeserializable
         where TAddress : IExtrinsicAddress
@@ -52,7 +51,14 @@ namespace Polkadot.BinaryContracts
         public object Deserialize(Stream stream, IBinarySerializer serializer)
         {
             var pref = stream.ReadByteThrowIfStreamEnd();
-            if(pref != (byte)(TransactionVersion & 0b0111_1111))
+
+            var extrinsicTransactionVersion = (byte)(pref & 0b0111_1111);
+            if (extrinsicTransactionVersion != TransactionVersion)
+            {
+                throw new UnsupportedTransactionVersionException(extrinsicTransactionVersion);
+            }
+            
+            if((pref & 0b1000_0000) != 0)
             {
                 Prefix = new Option<UncheckedExtrinsicPrefix<TAddress, TSignature, TSignedExtra>>(serializer.Deserialize<UncheckedExtrinsicPrefix<TAddress, TSignature, TSignedExtra>>(stream));
             }

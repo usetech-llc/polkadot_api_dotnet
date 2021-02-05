@@ -1,8 +1,7 @@
 ﻿using Polkadot.BinarySerializer;
-using Polkadot.BinarySerializer.Converters;
 using Polkadot.DataStructs;
 
-namespace Polkadot.BinaryContracts
+namespace Polkadot.BinaryContracts.Extrinsic
 {
     public class ExtrinsicAddress : IExtrinsicAddress
     {
