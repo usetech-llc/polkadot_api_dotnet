@@ -528,8 +528,8 @@ namespace Polkadot.Api
                     DataStructs.PublicKey pubk = new DataStructs.PublicKey();
                     pubk.Bytes = genericExtrinsic[count].Signature.SignerPublicKey;
                     genericExtrinsic[count].SignerAddress = _protocolParams.Metadata.GetAddrFromPublicKey(pubk);
+                    count++;
                 }
-                count++;
             }
 
             return genericExtrinsic.AsSpan()[..count].ToArray();
