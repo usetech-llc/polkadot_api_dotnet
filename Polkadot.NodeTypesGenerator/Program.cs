@@ -72,8 +72,8 @@ namespace Polkadot.NodeTypesGenerator
             var usingCalls = new StringBuilder();
             foreach (var module in metadata.GetModules())
             {
-                usingCalls.AppendLine($"using Polkadot.BinaryContracts.Calls.{CamelCase(module.GetName())};");
-                Directory.CreateDirectory($"{configuration.Output}/Calls/{CamelCase(module.GetName())}");
+                usingCalls.AppendLine($"using Polkadot.BinaryContracts.Calls.{PascalCase(module.GetName())};");
+                Directory.CreateDirectory($"{configuration.Output}/Calls/{PascalCase(module.GetName())}");
                 foreach (var callRegistration in CreateCalls(module, configuration))
                 {
                     serializerRegistrations.AppendLine(callRegistration);
@@ -95,64 +95,85 @@ namespace Polkadot.Api
 }}";
             
             File.WriteAllText($"{configuration.Output}/Calls/Application.calls.cs", registerCalls);
-            
-            Console.WriteLine("Unknown types:");
-            Console.WriteLine(string.Join(Environment.NewLine, UnknownTypes));
+
+            if (UnknownTypes.Any())
+            {
+                Console.WriteLine("Unknown types:");
+                Console.WriteLine(string.Join(Environment.NewLine, UnknownTypes));
+            }
         }
 
         private static IEnumerable<string> CreateCalls(IModuleMeta module, Configuration configuration)
         {
             foreach (var call in module.GetCalls())
             {
-                var args = call.GetArguments()
-                    .Select(a => (Property: ParseProperty(a.Name, a.Type), OriginalType: a.Type))
-                    .Select((p, i) => 
-                        @$"{PropertyTab}// Rust type {p.OriginalType}
-{PropertyTab}[Serialize({i})]
-{p.Property}");
+                var properties = call.GetArguments()
+                    .Select(a =>
+                    {
+                        var parsed = ParseProperty(a.Type);
+                        return new Property()
+                        {
+                            Type = parsed.Name,
+                            ConverterAttribute = parsed.ConvertAttributeName,
+                            PropertyName = a.Name,
+                            OriginalType = a.Type
+                        };
+                    }).ToList();
+
+                string FormatAttribute(string attribute) => string.IsNullOrEmpty(attribute)
+                    ? ""
+                    : $"{Environment.NewLine}{PropertyTab}[{attribute}]";
+
+                var propertiesStr = string.Join($"{Environment.NewLine}{Environment.NewLine}",
+                    properties.Select((p, i) => $@"{PropertyTab}// Rust type {p.OriginalType}
+{PropertyTab}[Serialize({i})]{FormatAttribute(p.ConverterAttribute)}
+{PropertyTab}public {p.Type} {PascalCase(p.PropertyName)} {{ get; set; }}
+"));
+
+                var className = $"{PascalCase(call.GetName())}Call";
+                var constructorParams = string.Join(", ", properties.Select(p => $"{p.Type} {CamelCase(p.PropertyName)}"));
+                var constructorSetters = string.Join($"{Environment.NewLine}",
+                    properties.Select(p => $"{PropertyTab}{PropertyTab}this.{PascalCase(p.PropertyName)} = {CamelCase(p.PropertyName)}"));
+                var constructors = $@"
+{PropertyTab}public {className}() {{ }}
+
+{PropertyTab}public {className}({constructorParams})
+{PropertyTab}{{
+{constructorSetters}
+{PropertyTab}}}
+";
 
                 var callClass = $@"using Polkadot.BinarySerializer;
 using Polkadot.DataStructs;
 using Polkadot.BinarySerializer.Converters;
 
 
-namespace Polkadot.BinaryContracts.Calls.{CamelCase(module.GetName())}
+namespace Polkadot.BinaryContracts.Calls.{PascalCase(module.GetName())}
 {{
-{Tab}public class {CamelCase(call.GetName())} : IExtrinsicCall
+{Tab}public class {className} : IExtrinsicCall
 {Tab}{{
-{string.Join(Environment.NewLine + Environment.NewLine, args)}
+{propertiesStr}
+
+{constructors}
 {Tab}}}
 }}";
                 
-                File.WriteAllText($"{configuration.Output}/Calls/{CamelCase(module.GetName())}/{CamelCase(call.GetName())}.cs", callClass);
-                yield return @$"{Tab}{Tab}{Tab}{Tab}.AddCall<{CamelCase(call.GetName())}>(""{module.GetName()}"", ""{call.GetName()}"")";
+                File.WriteAllText($"{configuration.Output}/Calls/{PascalCase(module.GetName())}/{className}.cs", callClass);
+                yield return @$"{Tab}{Tab}{Tab}{Tab}.AddCall<{className}>(""{module.GetName()}"", ""{call.GetName()}"")";
             }
         }
 
-        private static string ParseProperty(string name, string type)
+        private static RustSimpleType ParseProperty(string type)
         {
             var parser = RustTypeParser.CreateParser();
             var parseResult = parser.TryParse(type);
-            RustSimpleType flatType;
             if (!parseResult.WasSuccessful)
             {
                 AddUnknownType(type);
-                flatType = new(){Name = type};
-            }
-            else
-            {
-                flatType = FlattenPropertyType(parseResult.Value);
+                return FlattenPropertyType(new(){ Type = new RustSimpleType() {Name = type}});
             }
 
-            var property = new StringBuilder();
-            if (!string.IsNullOrEmpty(flatType.ConvertAttributeName))
-            {
-                property.AppendLine($"[{flatType.ConvertAttributeName}]");
-            }
-
-            property.AppendLine($"{PropertyTab}public {flatType.Name} {CamelCase(name)} {{ get; set; }}");
-
-            return property.ToString();
+            return FlattenPropertyType(parseResult.Value);
         }
 
         private static RustSimpleType FlattenPropertyType(RustType parseResult)
@@ -162,11 +183,7 @@ namespace Polkadot.BinaryContracts.Calls.{CamelCase(module.GetName())}
                 FlattenTuple,
                 simple =>
                 {
-                    if (!KnownTypes.Contains(simple.Name))
-                    {
-                        AddUnknownType(simple.Name);
-                    }
-                    
+                    AddUnknownType(simple.Name);
                     return simple;
                 });
         }
@@ -186,7 +203,7 @@ namespace Polkadot.BinaryContracts.Calls.{CamelCase(module.GetName())}
 
         private static RustSimpleType FlattenCompact()
         {
-            return new RustSimpleType()
+            return new()
             {
                 Name = "System.Numerics.BigInteger",
                 ConvertAttributeName = "CompactBigIntegerConverter"
@@ -240,7 +257,7 @@ namespace Polkadot.BinaryContracts.Calls.{CamelCase(module.GetName())}
             };
         }
 
-        private static string CamelCase(string str)
+        private static string PascalCase(string str)
         {
             var sb = new StringBuilder(str);
             for (int i = 0; i < sb.Length; i++)
@@ -258,6 +275,28 @@ namespace Polkadot.BinaryContracts.Calls.{CamelCase(module.GetName())}
             if (char.IsLetter(sb[0]))
             {
                 sb[0] = char.ToUpper(sb[0]);
+            }
+            return sb.ToString();
+        }
+
+        private static string CamelCase(string str)
+        {
+            var sb = new StringBuilder(str);
+            for (int i = 0; i < sb.Length; i++)
+            {
+                if (sb[i] == '_')
+                {
+                    sb.Remove(i, 1);
+                    if (char.IsLetter(sb[i]))
+                    {
+                        sb[i] = char.ToUpper(sb[i]);
+                    }
+                }
+            }
+
+            if (char.IsLetter(sb[0]))
+            {
+                sb[0] = char.ToLower(sb[0]);
             }
             return sb.ToString();
         }
@@ -282,7 +321,11 @@ namespace Polkadot.BinaryContracts.Calls.{CamelCase(module.GetName())}
             {
                 
             }
-            UnknownTypes.Add(type);
+
+            if (!KnownTypes.Contains(type))
+            {
+                UnknownTypes.Add(type);
+            }
         }
     }
 }
