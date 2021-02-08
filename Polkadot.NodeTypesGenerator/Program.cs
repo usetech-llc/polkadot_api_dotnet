@@ -67,20 +67,20 @@ namespace Polkadot.NodeTypesGenerator
             using var app = PolkaApi.GetApplication();
             app.Connect(configuration.NodeWsEndpoint);
             var metadata = app.GetMetadata(null);
-            Directory.CreateDirectory($"{configuration.Output}/Calls");
+            Directory.CreateDirectory($"{configuration.Output}/Generated");
+            Directory.CreateDirectory($"{configuration.Output}/Generated/Calls");
             var serializerRegistrations = new StringBuilder();
             var usingCalls = new StringBuilder();
             foreach (var module in metadata.GetModules())
             {
-                usingCalls.AppendLine($"using Polkadot.BinaryContracts.Calls.{PascalCase(module.GetName())};");
-                Directory.CreateDirectory($"{configuration.Output}/Calls/{PascalCase(module.GetName())}");
+                Directory.CreateDirectory($"{configuration.Output}/Generated/Calls/{PascalCase(module.GetName())}");
                 foreach (var callRegistration in CreateCalls(module, configuration))
                 {
                     serializerRegistrations.AppendLine(callRegistration);
                 }
             }
 
-            var registerCalls = $@"{usingCalls}
+            var registerCalls = $@"using Polkadot.BinarySerializer;
 
 namespace Polkadot.Api
 {{
@@ -89,12 +89,12 @@ namespace Polkadot.Api
         public void RegisterGeneratedCalls(SerializerSettings settings) 
         {{  
             settings
-            {serializerRegistrations};
+{serializerRegistrations};
         }}
     }}
 }}";
             
-            File.WriteAllText($"{configuration.Output}/Calls/Application.calls.cs", registerCalls);
+            File.WriteAllText($"{configuration.Output}/Generated/Calls/Application.calls.cs", registerCalls);
 
             if (UnknownTypes.Any())
             {
@@ -131,24 +131,29 @@ namespace Polkadot.Api
 "));
 
                 var className = $"{PascalCase(call.GetName())}Call";
-                var constructorParams = string.Join(", ", properties.Select(p => $"{p.Type} {CamelCase(p.PropertyName)}"));
+                var constructorParams = string.Join(", ", properties.Select(p => $"{p.Type} @{CamelCase(p.PropertyName)}"));
                 var constructorSetters = string.Join($"{Environment.NewLine}",
-                    properties.Select(p => $"{PropertyTab}{PropertyTab}this.{PascalCase(p.PropertyName)} = {CamelCase(p.PropertyName)}"));
-                var constructors = $@"
-{PropertyTab}public {className}() {{ }}
-
-{PropertyTab}public {className}({constructorParams})
+                    properties.Select(p => $"{PropertyTab}{Tab}this.{PascalCase(p.PropertyName)} = @{CamelCase(p.PropertyName)};"));
+                var parameterfullConstructor = properties.Any() ? $@"{PropertyTab}public {className}({constructorParams})
 {PropertyTab}{{
 {constructorSetters}
-{PropertyTab}}}
+{PropertyTab}}}" : "";
+                
+                
+                var constructors = $@"
+{PropertyTab}public {className}() {{ }}
+{parameterfullConstructor}
 ";
+
+                var @namespace = $"Polkadot.BinaryContracts.Calls.{PascalCase(module.GetName())}";
 
                 var callClass = $@"using Polkadot.BinarySerializer;
 using Polkadot.DataStructs;
 using Polkadot.BinarySerializer.Converters;
+using Polkadot.BinaryContracts.Nft;
+using System.Numerics;
 
-
-namespace Polkadot.BinaryContracts.Calls.{PascalCase(module.GetName())}
+namespace {@namespace}
 {{
 {Tab}public class {className} : IExtrinsicCall
 {Tab}{{
@@ -158,8 +163,8 @@ namespace Polkadot.BinaryContracts.Calls.{PascalCase(module.GetName())}
 {Tab}}}
 }}";
                 
-                File.WriteAllText($"{configuration.Output}/Calls/{PascalCase(module.GetName())}/{className}.cs", callClass);
-                yield return @$"{Tab}{Tab}{Tab}{Tab}.AddCall<{className}>(""{module.GetName()}"", ""{call.GetName()}"")";
+                File.WriteAllText($"{configuration.Output}/Generated/Calls/{PascalCase(module.GetName())}/{className}.cs", callClass);
+                yield return @$"{PropertyTab}{Tab}{Tab}.AddCall<{@namespace}.{className}>(""{module.GetName()}"", ""{call.GetName()}"")";
             }
         }
 
@@ -205,7 +210,7 @@ namespace Polkadot.BinaryContracts.Calls.{PascalCase(module.GetName())}
         {
             return new()
             {
-                Name = "System.Numerics.BigInteger",
+                Name = "BigInteger",
                 ConvertAttributeName = "CompactBigIntegerConverter"
             };
         }
@@ -215,7 +220,7 @@ namespace Polkadot.BinaryContracts.Calls.{PascalCase(module.GetName())}
             AddUnknownType(generic.GenericName);
             return new RustSimpleType()
             {
-                Name = $"{generic.GenericName}<{string.Join(", ", generic.GenericParams.Select(FlattenPropertyType))}>"
+                Name = $"{generic.GenericName}<{string.Join(", ", generic.GenericParams.Select(FlattenPropertyType).Select(t => t.Name))}>"
             };
         }
 

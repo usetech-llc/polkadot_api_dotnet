@@ -75,13 +75,14 @@ namespace Polkadot.NodeTypesGenerator.TypesParser
             var @uint = Parse.String("u32").Text().Select(s => new RustSimpleType(){ Name = "uint"});
             var collectionId = Parse.String("CollectionId").Text().Select(s => new RustSimpleType(){ Name = "uint"});
             var tokenId = Parse.String("TokenId").Text().Select(s => new RustSimpleType(){ Name = "uint"});
-            var u128 = Parse.String("u128").Text().Select(s => new RustSimpleType(){ Name = "System.Numerics.BigInteger", ConvertAttributeName = "U128Converter"});
+            var u128 = Parse.String("u128").Text().Select(s => new RustSimpleType(){ Name = "BigInteger", ConvertAttributeName = "U128Converter"});
             var address = Parse.String("<T::Lookup as StaticLookup>::Source").Text().Select(s => new RustSimpleType(){ Name = "PublicKey"});
             var balanceOf = Parse.String("BalanceOf<T>").Text().Select(s => new RustSimpleType(){ Name = "Balance"});
             var blockNumber = Parse.String("T::BlockNumber").Text().Select(s => new RustSimpleType(){ Name = "BlockNumber"});
             var vestingInfo = Parse.String("VestingInfo<BalanceOf<T>, T::BlockNumber>").Text().Select(s => new RustSimpleType(){ Name = "VestingInfo"});
             var accountId = Parse.String("T::AccountId").Text().Select(s => new RustSimpleType(){ Name = "PublicKey"});
             var call = Parse.String("Call").Text().Select(s => new RustSimpleType(){ Name = "InheritanceCall<IExtrinsicCall>"});
+            var createItemData = Parse.String("CreateItemData").Text().Select(s => new RustSimpleType(){ Name = "Polkadot.BinaryContracts.Nft.CreateItem.CreateItemData"});
 
             return @byte
                 .Or(@ushort)
@@ -96,6 +97,7 @@ namespace Polkadot.NodeTypesGenerator.TypesParser
                 .Or(accountId)
                 .Or(address)
                 .Or(call)
+                .Or(createItemData)
                 .Select(r => new RustType(){Type = r});
         }
     }
