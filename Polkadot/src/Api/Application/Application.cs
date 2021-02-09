@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Polkadot.Api.Hashers;
 using Polkadot.BinaryContracts.Calls;
-using Polkadot.BinaryContracts.Calls.Balance;
+using Polkadot.BinaryContracts.Calls.Balances;
 using Polkadot.BinaryContracts.Calls.System;
 using Polkadot.BinaryContracts.Events;
 using Polkadot.BinaryContracts.Events.Balances;
@@ -840,18 +840,7 @@ namespace Polkadot.Api
 
         public static SerializerSettings DefaultSubstrateSettings()
         {
-            return new SerializerSettings()
-                .AddCall<FillBlock>("System", "fill_block")
-                .AddCall<Remark>("System", "remark")
-                .AddCall<SetHeapPages>("System", "set_heap_pages")
-                .AddCall<SetCode>("System", "set_code")
-                .AddCall<SetCodeWithoutChecks>("System", "set_code_without_checks")
-                .AddCall<ChangesTrieConfiguration>("System", "set_changes_trie_config")
-                .AddCall<SetStorage>("System", "set_storage")
-                .AddCall<KillStorage>("System", "kill_storage")
-                .AddCall<KillPrefix>("System", "kill_prefix")
-                .AddCall<TransferCall>("Balances", "transfer")
-                .AddCall<TransferCall>("Balances", "transfer_keep_alive")
+            var settings = new SerializerSettings()
                 
                 .AddEvent<ExtrinsicSuccess>("System", "ExtrinsicSuccess")
                 .AddEvent<ExtrinsicFailed>("System", "ExtrinsicFailed")
@@ -880,6 +869,10 @@ namespace Polkadot.Api
                 .AddEvent<Sudid>("Sudo", "Sudid")
                 .AddEvent<KeyChanged>("Sudo", "KeyChanged")
                 .AddEvent<SudoAsDone>("Sudo", "SudoAsDone");
+
+            RegisterGeneratedCalls(settings);
+
+            return settings;
         }
     }
 }

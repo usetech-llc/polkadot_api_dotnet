@@ -86,7 +86,7 @@ namespace Polkadot.Api
 {{
     public partial class Application : IApplication, IWebSocketMessageObserver
     {{
-        public void RegisterGeneratedCalls(SerializerSettings settings) 
+        public static void RegisterGeneratedCalls(SerializerSettings settings) 
         {{  
             settings
 {serializerRegistrations};

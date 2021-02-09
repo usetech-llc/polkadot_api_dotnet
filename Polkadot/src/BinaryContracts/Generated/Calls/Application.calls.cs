@@ -4,7 +4,7 @@ namespace Polkadot.Api
 {
     public partial class Application : IApplication, IWebSocketMessageObserver
     {
-        public void RegisterGeneratedCalls(SerializerSettings settings) 
+        public static void RegisterGeneratedCalls(SerializerSettings settings) 
         {  
             settings
                 .AddCall<Polkadot.BinaryContracts.Calls.System.FillBlockCall>("System", "fill_block")
