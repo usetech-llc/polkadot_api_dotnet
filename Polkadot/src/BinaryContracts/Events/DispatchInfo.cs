@@ -2,7 +2,7 @@
 using Polkadot.BinaryContracts.Events.PaysEnum;
 using Polkadot.BinarySerializer;
 
-namespace Polkadot.BinaryContracts.Events.System
+namespace Polkadot.BinaryContracts.Events
 {
     public class DispatchInfo
     {

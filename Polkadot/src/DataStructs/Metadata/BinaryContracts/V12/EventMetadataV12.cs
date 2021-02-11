@@ -1,4 +1,5 @@
-﻿using Polkadot.BinarySerializer;
+﻿using System.Collections.Generic;
+using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 using Polkadot.DataStructs.Metadata.Interfaces;
 
@@ -22,5 +23,7 @@ namespace Polkadot.DataStructs.Metadata.BinaryContracts.V12
         {
             return Name;
         }
+
+        public IReadOnlyList<string> GetArguments() => Arguments;
     }
 }

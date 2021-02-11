@@ -85,6 +85,8 @@ namespace Polkadot.DataStructs.Metadata
         {
             return Name;
         }
+
+        public IReadOnlyList<string> GetArguments() => Args;
     }
 
     public class CallV4 : ICallMeta
