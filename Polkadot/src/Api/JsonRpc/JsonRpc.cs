@@ -227,7 +227,7 @@
                         _errorsHandler?.Invoke(ex);
                     }
 
-                    resp?.SendAsync(result);
+                    resp?.SendAsync(result).GetAwaiter().GetResult();
                 }
                 else
 
