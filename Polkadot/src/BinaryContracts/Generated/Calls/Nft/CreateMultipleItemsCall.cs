@@ -2,6 +2,7 @@ using Polkadot.BinarySerializer;
 using Polkadot.DataStructs;
 using Polkadot.BinarySerializer.Converters;
 using Polkadot.BinaryContracts.Nft;
+using Polkadot.BinaryContracts.Common;
 using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Nft
@@ -21,12 +22,12 @@ namespace Polkadot.BinaryContracts.Calls.Nft
         // Rust type Vec<CreateItemData>
         [Serialize(2)]
         [PrefixedArrayConverter]
-        public Polkadot.BinaryContracts.Nft.CreateItem.CreateItemData[] ItemsData { get; set; }
+        public CreateItemData[] ItemsData { get; set; }
 
 
 
         public CreateMultipleItemsCall() { }
-        public CreateMultipleItemsCall(uint @collectionId, PublicKey @owner, Polkadot.BinaryContracts.Nft.CreateItem.CreateItemData[] @itemsData)
+        public CreateMultipleItemsCall(uint @collectionId, PublicKey @owner, CreateItemData[] @itemsData)
         {
             this.CollectionId = @collectionId;
             this.Owner = @owner;

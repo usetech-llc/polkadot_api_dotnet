@@ -39,7 +39,7 @@ namespace Polkadot.NodeTypesGenerator
             "ChainLimits",
             "CollectionLimits",
             "AccessMode",
-            "Polkadot.BinaryContracts.Nft.CreateItem.CreateItemData",
+            "CreateItemData",
             "SchemaVersion",
             "Weight",
             "Gas",
@@ -53,6 +53,7 @@ namespace Polkadot.NodeTypesGenerator
             "EquivocationProof",
             "DispatchInfo",
             "DispatchError",
+            "Polkadot.BinaryContracts.Events.BalanceStatusEnum.BalanceStatus",
         };
         private const string Tab = "    ";
         private static readonly string PropertyTab = $"{Tab}{Tab}";
@@ -149,7 +150,7 @@ namespace Polkadot.NodeTypesGenerator
                 {
                     var type = jsonProperty.Value switch
                     {
-                        {ValueKind: JsonValueKind.String} v => ParseType(v.GetString()),
+                        {ValueKind: JsonValueKind.String} v => ParseType(null, v.GetString()),
                         {ValueKind: JsonValueKind.Object} v => ObjectType(v, jsonProperty.Name) 
                     };
 
@@ -206,7 +207,7 @@ namespace Polkadot.NodeTypesGenerator
 
             yield return new Property()
             {
-                Type = $"OneOf<{enumCases}>",
+                Type = $"OneOf.OneOf<{enumCases}>",
                 ConverterAttribute = nameof(OneOfConverter),
                 OriginalType = ReplaceNewLines(value.GetRawText()),
                 PropertyName = "Value"
@@ -216,13 +217,20 @@ namespace Polkadot.NodeTypesGenerator
         private static string PluralizeLastPascalCaseWord(string pascalCase)
         {
             var words = Regex.Split(pascalCase, "(?=[A-Z])");
-            words[^1] = words[^1].Pluralize(false);
+            var lastWord = words[^1];
+            var plural = lastWord.Pluralize();
+            if (string.Equals(lastWord, plural, StringComparison.Ordinal))
+            {
+                plural = $"{plural}Entries";
+            }
+
+            words[^1] = plural;
             return string.Join("", words);
         }
 
         private static IEnumerable<Property> CustomTypeStringProperties(string value)
         {
-            var parsed = ParseType(value);
+            var parsed = ParseType(null, value);
             yield return new Property()
             {
                 Type = parsed.Name,
@@ -246,7 +254,7 @@ namespace Polkadot.NodeTypesGenerator
                     var properties = eventMeta.GetArguments()
                         .Select((type, index) =>
                         {
-                            var parsed = ParseType(type);
+                            var parsed = ParseType(module.GetName(), type);
                             return new Property()
                             {
                                 Type = parsed.Name,
@@ -313,7 +321,7 @@ namespace Polkadot.Api
                 var properties = call.GetArguments()
                     .Select(a =>
                     {
-                        var parsed = ParseType(a.Type);
+                        var parsed = ParseType(module.GetName(), a.Type);
                         return new Property()
                         {
                             Type = parsed.Name,
@@ -385,9 +393,9 @@ namespace {@namespace}
             return @class;
         }
 
-        private static RustSimpleType ParseType(string type)
+        private static RustSimpleType ParseType(string module, string type)
         {
-            var parser = RustTypeParser.CreateParser();
+            var parser = RustTypeParser.CreateParser(module);
             var parseResult = parser.TryParse(type);
             if (!parseResult.WasSuccessful)
             {

@@ -2,6 +2,7 @@ using Polkadot.BinarySerializer;
 using Polkadot.DataStructs;
 using Polkadot.BinarySerializer.Converters;
 using Polkadot.BinaryContracts.Nft;
+using Polkadot.BinaryContracts.Common;
 using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.System
@@ -10,14 +11,14 @@ namespace Polkadot.BinaryContracts.Calls.System
     {
         // Rust type Perbill
         [Serialize(0)]
-        public Perbill Ratio { get; set; }
+        public Perbill _ratio { get; set; }
 
 
 
         public FillBlockCall() { }
-        public FillBlockCall(Perbill @ratio)
+        public FillBlockCall(Perbill @_ratio)
         {
-            this.Ratio = @ratio;
+            this._ratio = @_ratio;
         }
 
     }

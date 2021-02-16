@@ -2,6 +2,7 @@ using Polkadot.BinarySerializer;
 using Polkadot.DataStructs;
 using Polkadot.BinarySerializer.Converters;
 using Polkadot.BinaryContracts.Nft;
+using Polkadot.BinaryContracts.Common;
 using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Sudo
@@ -15,15 +16,15 @@ namespace Polkadot.BinaryContracts.Calls.Sudo
 
         // Rust type Weight
         [Serialize(1)]
-        public Weight Weight { get; set; }
+        public Weight _weight { get; set; }
 
 
 
         public SudoUncheckedWeightCall() { }
-        public SudoUncheckedWeightCall(InheritanceCall<IExtrinsicCall> @call, Weight @weight)
+        public SudoUncheckedWeightCall(InheritanceCall<IExtrinsicCall> @call, Weight @_weight)
         {
             this.Call = @call;
-            this.Weight = @weight;
+            this._weight = @_weight;
         }
 
     }

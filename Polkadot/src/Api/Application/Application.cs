@@ -5,7 +5,6 @@ using Polkadot.BinarySerializer;
 using Polkadot.DataStructs.Metadata.Interfaces;
 using Polkadot.Exceptions;
 using System;
-using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
@@ -17,26 +16,15 @@ using Newtonsoft.Json.Linq;
 using Polkadot.Api.Hashers;
 using Polkadot.BinaryContracts.Calls;
 using Polkadot.BinaryContracts.Calls.Balances;
-using Polkadot.BinaryContracts.Calls.System;
-using Polkadot.BinaryContracts.Events;
-using Polkadot.BinaryContracts.Events.Balances;
-using Polkadot.BinaryContracts.Events.Contracts;
-using Polkadot.BinaryContracts.Events.Grandpa;
-using Polkadot.BinaryContracts.Events.Sudo;
-using Polkadot.BinaryContracts.Events.System;
 using Polkadot.BinaryContracts.Extrinsic;
 using Polkadot.BinarySerializer.Extensions;
 using Polkadot.Data;
 using Polkadot.DataFactory;
-using Polkadot.DataFactory.Metadata;
 using Polkadot.DataStructs;
 using Polkadot.DataStructs.Metadata;
 using Polkadot.DataStructs.Metadata.BinaryContracts;
 using Polkadot.src.DataStructs;
 using Polkadot.Utils;
-using Schnorrkel;
-using SignaturePayload = Polkadot.BinaryContracts.SignaturePayload;
-using Transfer = Polkadot.BinaryContracts.Events.Balances.Transfer;
 
 namespace Polkadot.Api
 {
@@ -840,37 +828,10 @@ namespace Polkadot.Api
 
         public static SerializerSettings DefaultSubstrateSettings()
         {
-            var settings = new SerializerSettings()
+            var settings = new SerializerSettings();
                 
-                .AddEvent<ExtrinsicSuccess>("System", "ExtrinsicSuccess")
-                .AddEvent<ExtrinsicFailed>("System", "ExtrinsicFailed")
-                .AddEvent<CodeUpdated>("System", "CodeUpdated")
-                .AddEvent<NewAccount>("System", "NewAccount")
-                .AddEvent<KilledAccount>("System", "KilledAccount")
-                .AddEvent<Transfer>("Contracts", "Transfer")
-                .AddEvent<Instantiated>("Contracts", "Instantiated")
-                .AddEvent<Evicted>("Contracts", "Evicted")
-                .AddEvent<Restored>("Contracts", "Restored")
-                .AddEvent<CodeStored>("Contracts", "CodeStored")
-                .AddEvent<ScheduleUpdated>("Contracts", "ScheduleUpdated")
-                .AddEvent<Dispatched>("Contracts", "Dispatched")
-                .AddEvent<ContractExecution>("Contracts", "ContractExecution")
-                .AddEvent<NewAuthorities>("Grandpa", "NewAuthorities")
-                .AddEvent<Paused>("Grandpa", "Paused")
-                .AddEvent<Resumed>("Grandpa", "Resumed")
-                .AddEvent<Endowed>("Balances", "Endowed")
-                .AddEvent<DustLost>("Balances", "DustLost")
-                .AddEvent<Transfer>("Balances", "Transfer")
-                .AddEvent<BalanceSet>("Balances", "BalanceSet")
-                .AddEvent<Deposit>("Balances", "Deposit")
-                .AddEvent<Reserved>("Balances", "Reserved")
-                .AddEvent<Unreserved>("Balances", "Unreserved")
-                .AddEvent<ReserveRepatriated>("Balances", "ReserveRepatriated")
-                .AddEvent<Sudid>("Sudo", "Sudid")
-                .AddEvent<KeyChanged>("Sudo", "KeyChanged")
-                .AddEvent<SudoAsDone>("Sudo", "SudoAsDone");
-
             RegisterGeneratedCalls(settings);
+            RegisterGeneratedEvents(settings);
 
             return settings;
         }

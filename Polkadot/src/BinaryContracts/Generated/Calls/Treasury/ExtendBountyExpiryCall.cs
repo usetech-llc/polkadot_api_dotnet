@@ -2,6 +2,7 @@ using Polkadot.BinarySerializer;
 using Polkadot.DataStructs;
 using Polkadot.BinarySerializer.Converters;
 using Polkadot.BinaryContracts.Nft;
+using Polkadot.BinaryContracts.Common;
 using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Treasury
@@ -17,15 +18,15 @@ namespace Polkadot.BinaryContracts.Calls.Treasury
         // Rust type Vec<u8>
         [Serialize(1)]
         [PrefixedArrayConverter]
-        public byte[] Remark { get; set; }
+        public byte[] _remark { get; set; }
 
 
 
         public ExtendBountyExpiryCall() { }
-        public ExtendBountyExpiryCall(BigInteger @bountyId, byte[] @remark)
+        public ExtendBountyExpiryCall(BigInteger @bountyId, byte[] @_remark)
         {
             this.BountyId = @bountyId;
-            this.Remark = @remark;
+            this._remark = @_remark;
         }
 
     }

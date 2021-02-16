@@ -21,7 +21,7 @@ namespace PolkaTest
         {
             string module1 = "System";
             string variable1 = "Account";
-            int expectedBalanceSize = 72;
+            int expectedBalanceSize = 76;
 
             using (IApplication app = PolkaApi.GetApplication())
             {

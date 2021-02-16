@@ -2,6 +2,7 @@ using Polkadot.BinarySerializer;
 using Polkadot.DataStructs;
 using Polkadot.BinarySerializer.Converters;
 using Polkadot.BinaryContracts.Nft;
+using Polkadot.BinaryContracts.Common;
 using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.System
@@ -15,15 +16,15 @@ namespace Polkadot.BinaryContracts.Calls.System
 
         // Rust type u32
         [Serialize(1)]
-        public uint Subkeys { get; set; }
+        public uint _subkeys { get; set; }
 
 
 
         public KillPrefixCall() { }
-        public KillPrefixCall(Key @prefix, uint @subkeys)
+        public KillPrefixCall(Key @prefix, uint @_subkeys)
         {
             this.Prefix = @prefix;
-            this.Subkeys = @subkeys;
+            this._subkeys = @_subkeys;
         }
 
     }

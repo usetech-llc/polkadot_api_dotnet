@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Polkadot.NodeTypesGenerator.TypesParser.Types;
 using Sprache;
 
@@ -6,7 +7,7 @@ namespace Polkadot.NodeTypesGenerator.TypesParser
 {
     public class RustTypeParser
     {
-        public static Parser<RustType> CreateParser()
+        public static Parser<RustType> CreateParser(string module)
         {
             Parser<RustType> type = null;
 
@@ -53,10 +54,10 @@ namespace Polkadot.NodeTypesGenerator.TypesParser
 
             var nestedType =
                 from pref in Parse.String("::")
-                from s in ParseHardcodedTypes().Or(simpleType.Select(r => new RustType(){Type = r}))
+                from s in ParseHardcodedTypes(module).Or(simpleType.Select(r => new RustType(){Type = r}))
                 select s;
             
-            type = ParseHardcodedTypes()
+            type = ParseHardcodedTypes(module)
                 .Or(tuple)
                 .Or(alias)
                 .Or(generic)
@@ -67,7 +68,7 @@ namespace Polkadot.NodeTypesGenerator.TypesParser
             return type.End();
         }
 
-        private static Parser<RustType> ParseHardcodedTypes()
+        private static Parser<RustType> ParseHardcodedTypes(string module)
         {
             var @byte = Parse.String("u8").Text().Select(s => new RustSimpleType(){ Name = "byte"});
             var @ushort = Parse.String("u16").Text().Select(s => new RustSimpleType(){ Name = "ushort"});
@@ -80,11 +81,12 @@ namespace Polkadot.NodeTypesGenerator.TypesParser
             var balanceOf = Parse.String("BalanceOf<T>").Text().Select(s => new RustSimpleType(){ Name = "Balance"});
             var blockNumber = Parse.String("T::BlockNumber").Text().Select(s => new RustSimpleType(){ Name = "BlockNumber"});
             var vestingInfo = Parse.String("VestingInfo<BalanceOf<T>, T::BlockNumber>").Text().Select(s => new RustSimpleType(){ Name = "VestingInfo"});
-            var accountId = Parse.String("T::AccountId").Text().Select(s => new RustSimpleType(){ Name = "PublicKey"});
+            var taccountId = Parse.String("T::AccountId").Text().Select(s => new RustSimpleType(){ Name = "PublicKey"});
+            var accountId = Parse.String("AccountId").Text().Select(s => new RustSimpleType(){ Name = "PublicKey"});
             var call = Parse.String("Call").Text().Select(s => new RustSimpleType(){ Name = "InheritanceCall<IExtrinsicCall>"});
-            var createItemData = Parse.String("CreateItemData").Text().Select(s => new RustSimpleType(){ Name = "Polkadot.BinaryContracts.Nft.CreateItem.CreateItemData"});
+            var createItemData = Parse.String("CreateItemData").Text().Select(s => new RustSimpleType(){ Name = "CreateItemData"});
 
-            return @byte
+            var parser = @byte
                 .Or(@ushort)
                 .Or(@uint)
                 .Or(@ulong)
@@ -96,8 +98,17 @@ namespace Polkadot.NodeTypesGenerator.TypesParser
                 .Or(vestingInfo)
                 .Or(accountId)
                 .Or(address)
+                .Or(taccountId)
                 .Or(call)
-                .Or(createItemData)
+                .Or(createItemData);
+
+            if (string.Equals("balances", module, StringComparison.OrdinalIgnoreCase))
+            {
+                parser = parser.Or(Parse.String("Status").Text().Select(s => new RustSimpleType()
+                    {Name = "Polkadot.BinaryContracts.Events.BalanceStatusEnum.BalanceStatus"}));
+            }
+            
+            return parser
                 .Select(r => new RustType(){Type = r});
         }
     }

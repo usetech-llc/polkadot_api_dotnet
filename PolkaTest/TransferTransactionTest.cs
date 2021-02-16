@@ -33,7 +33,18 @@ namespace PolkaTest
 
             var nonceBefore = application.GetAccountNonce(from);
             var taskCompletionSource = new TaskCompletionSource<string>();
-            var result = application.SignAndSendTransfer(from.Symbols, privateKey.ToHexString(), to.Symbols, BigInteger.One, str => taskCompletionSource.SetResult(str));
+            var result = application.SignAndSendTransfer(
+                from.Symbols, 
+                privateKey.ToHexString(), 
+                to.Symbols, 
+                BigInteger.One, 
+                str =>
+                {
+                    if (taskCompletionSource.Task.Status != TaskStatus.RanToCompletion)
+                    {
+                        taskCompletionSource.SetResult(str);
+                    }
+                });
 
             await taskCompletionSource.Task.WithTimeout(TimeSpan.FromMinutes(2));
             await Task.Delay(TimeSpan.FromSeconds(10));
