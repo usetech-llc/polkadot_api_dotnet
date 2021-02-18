@@ -808,9 +808,9 @@ namespace Polkadot.Api
                 }
 
                 var events = module.GetEvents();
+                eventModuleIndex++;
                 if (events != null && events.Any())
                 {
-                    eventModuleIndex++;
                     var eventIndex = 0;
                     foreach (var @event in events)
                     {
