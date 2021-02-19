@@ -6,7 +6,7 @@ namespace Polkadot.BinaryContracts
     public class Hash
     {
         [Serialize(0)]
-        [FixedSizeArrayConverter(256)]
+        [FixedSizeArrayConverter(32)]
         public byte[] Value { get; set; }
     }
 }
