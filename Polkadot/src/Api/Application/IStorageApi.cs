@@ -73,6 +73,8 @@ namespace Polkadot.Api
         /// <returns> Storage content </returns>
         string GetStorage(string module, string storageName, GetBlockHashParams block = null);
 
+        string GetStorage(IEnumerable<string> rawStorage);
+
         /// <summary>
         ///  Reads storage for a certain Module and State variable defined by parameter and prefix.Parameter is a JSON
         ///   string representing a value of certain type, which has two fields: type and value.Type should be one of type

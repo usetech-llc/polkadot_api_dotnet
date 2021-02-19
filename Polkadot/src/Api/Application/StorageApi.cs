@@ -148,6 +148,16 @@ namespace Polkadot.Api
             return GetStorage<object, object>(module, storageName, null, null, block);
         }
 
+        public string GetStorage(IEnumerable<string> rawStorage)
+        {
+            //  var @params = StorageParams(module, storageName, key1, key2, block);
+            JArray paramsArr = new JArray(rawStorage);
+            JObject query = new JObject { { "method", "state_getStorage" }, { "params", paramsArr } };
+            return MakeRequest<string>(query);
+
+          //  return GetStorage<object, object>(module, storageName, null, null, block);
+        }
+
         /// <summary>
         ///  Reads storage for a certain Module and State variable defined by parameter and prefix.Parameter is a JSON
         ///   string representing a value of certain type, which has two fields: type and value.Type should be one of type

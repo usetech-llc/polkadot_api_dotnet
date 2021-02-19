@@ -55,22 +55,20 @@ namespace Polkadot.DataStructs.Metadata
 
         public Tuple<string, string> GetModuleCallNameByIds(int moduleIndex, int callIndex)
         {
-            var md = _metadata as dynamic;
-            int mi = 0;
-            int i = 0;
+            var md = _metadata as MetadataBase;
+            var module = md.GetModules().ToArray()[moduleIndex];
+            var item = module.GetCalls().ToArray()[callIndex];
 
-            do
-            {
-                if (md.Module[i].Call != null)// && md.Module[i].Call[0].Name != null)
-                {
-                    mi++;
-                }
-                i++;
-            }
-            while (mi != moduleIndex);
+            return new Tuple<string, string>(module.GetName(), item.GetName());
+        }
 
-            dynamic item = md.Module[i].Call[callIndex];
-            return new Tuple<string, string>(md.Module[i].Name, item.Name);
+        public IEnumerable<ICallArgument> GetModuleAgrsByIds(int moduleIndex, int callIndex)
+        {
+            var md = _metadata as MetadataBase;
+            var module = md.GetModules().ToArray()[moduleIndex];
+            var item = module.GetCalls().ToArray()[callIndex];
+
+            return item.GetArguments();
         }
 
         public int GetModuleIndex(string moduleName, bool skipZeroCalls)
