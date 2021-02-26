@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.Vesting
 {
-    public class VestingUpdated : IEvent
+    public partial class VestingUpdated : IEvent
     {
         // Rust type AccountId
         [Serialize(0)]

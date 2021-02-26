@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.Grandpa
 {
-    public class NewAuthorities : IEvent
+    public partial class NewAuthorities : IEvent
     {
         // Rust type AuthorityList
         [Serialize(0)]

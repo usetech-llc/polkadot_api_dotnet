@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common
 {
-    public class ReFungibleItemType
+    public partial class ReFungibleItemType
     {
         // Rust type "Vec<Ownership<AccountId>>"
         [Serialize(0)]

@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Balances
 {
-    public class ForceTransferCall : IExtrinsicCall
+    public partial class ForceTransferCall : IExtrinsicCall
     {
         // Rust type <T::Lookup as StaticLookup>::Source
         [Serialize(0)]

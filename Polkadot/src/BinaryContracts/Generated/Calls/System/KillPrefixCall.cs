@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.System
 {
-    public class KillPrefixCall : IExtrinsicCall
+    public partial class KillPrefixCall : IExtrinsicCall
     {
         // Rust type Key
         [Serialize(0)]

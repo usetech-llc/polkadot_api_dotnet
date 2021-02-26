@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common
 {
-    public class AccessMode
+    public partial class AccessMode
     {
         // Rust type [          "Normal",          "WhiteList"        ]
         [Serialize(0)]

@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Sudo
 {
-    public class SudoCall : IExtrinsicCall
+    public partial class SudoCall : IExtrinsicCall
     {
         // Rust type Box<<T as Trait>::Call>
         [Serialize(0)]

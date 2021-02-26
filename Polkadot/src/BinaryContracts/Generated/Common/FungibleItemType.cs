@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common
 {
-    public class FungibleItemType
+    public partial class FungibleItemType
     {
         // Rust type "u128"
         [Serialize(0)]

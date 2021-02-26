@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common.CollectionModes
 {
-    public class NFT
+    public partial class NFT
     {
 
 

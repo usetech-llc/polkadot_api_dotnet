@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common.AccessModes
 {
-    public class WhiteList
+    public partial class WhiteList
     {
 
 

@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Nft
 {
-    public class RemoveFromContractWhiteListCall : IExtrinsicCall
+    public partial class RemoveFromContractWhiteListCall : IExtrinsicCall
     {
         // Rust type T::AccountId
         [Serialize(0)]

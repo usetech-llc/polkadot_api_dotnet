@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common
 {
-    public class SchemaVersion
+    public partial class SchemaVersion
     {
         // Rust type [          "ImageURL",          "Unique"        ]
         [Serialize(0)]

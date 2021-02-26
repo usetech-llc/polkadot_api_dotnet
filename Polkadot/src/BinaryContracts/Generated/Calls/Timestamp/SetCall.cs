@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Timestamp
 {
-    public class SetCall : IExtrinsicCall
+    public partial class SetCall : IExtrinsicCall
     {
         // Rust type Compact<T::Moment>
         [Serialize(0)]

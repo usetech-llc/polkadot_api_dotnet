@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Grandpa
 {
-    public class ReportEquivocationUnsignedCall : IExtrinsicCall
+    public partial class ReportEquivocationUnsignedCall : IExtrinsicCall
     {
         // Rust type EquivocationProof<T::Hash, T::BlockNumber>
         [Serialize(0)]

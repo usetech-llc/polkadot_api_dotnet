@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Treasury
 {
-    public class CloseTipCall : IExtrinsicCall
+    public partial class CloseTipCall : IExtrinsicCall
     {
         // Rust type T::Hash
         [Serialize(0)]

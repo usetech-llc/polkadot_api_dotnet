@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Vesting
 {
-    public class VestedTransferCall : IExtrinsicCall
+    public partial class VestedTransferCall : IExtrinsicCall
     {
         // Rust type <T::Lookup as StaticLookup>::Source
         [Serialize(0)]

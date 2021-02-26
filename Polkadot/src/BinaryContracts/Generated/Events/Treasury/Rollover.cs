@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.Treasury
 {
-    public class Rollover : IEvent
+    public partial class Rollover : IEvent
     {
         // Rust type Balance
         [Serialize(0)]

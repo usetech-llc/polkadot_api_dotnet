@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common
 {
-    public class CollectionLimits
+    public partial class CollectionLimits
     {
         // Rust type "u32"
         [Serialize(0)]

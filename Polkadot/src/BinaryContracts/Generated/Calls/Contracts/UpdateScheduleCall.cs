@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Contracts
 {
-    public class UpdateScheduleCall : IExtrinsicCall
+    public partial class UpdateScheduleCall : IExtrinsicCall
     {
         // Rust type Schedule
         [Serialize(0)]

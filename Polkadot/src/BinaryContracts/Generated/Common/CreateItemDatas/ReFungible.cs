@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common.CreateItemDatas
 {
-    public class ReFungible
+    public partial class ReFungible
     {
         // Rust type CreateReFungibleData
         [Serialize(0)]

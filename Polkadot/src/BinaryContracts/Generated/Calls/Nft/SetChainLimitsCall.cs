@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Nft
 {
-    public class SetChainLimitsCall : IExtrinsicCall
+    public partial class SetChainLimitsCall : IExtrinsicCall
     {
         // Rust type ChainLimits
         [Serialize(0)]

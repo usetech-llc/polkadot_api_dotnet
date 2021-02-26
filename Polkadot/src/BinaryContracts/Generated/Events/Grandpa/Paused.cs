@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.Grandpa
 {
-    public class Paused : IEvent
+    public partial class Paused : IEvent
     {
 
 

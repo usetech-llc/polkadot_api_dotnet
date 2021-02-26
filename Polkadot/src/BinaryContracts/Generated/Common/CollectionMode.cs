@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common
 {
-    public class CollectionMode
+    public partial class CollectionMode
     {
         // Rust type {          "Invalid": null,          "NFT": null,          "Fungible": "DecimalPoints",          "ReFungible": "DecimalPoints"        }
         [Serialize(0)]

@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common.CollectionModes
 {
-    public class Fungible
+    public partial class Fungible
     {
         // Rust type DecimalPoints
         [Serialize(0)]

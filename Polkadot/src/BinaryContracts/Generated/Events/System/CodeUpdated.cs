@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.System
 {
-    public class CodeUpdated : IEvent
+    public partial class CodeUpdated : IEvent
     {
 
 

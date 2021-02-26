@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common
 {
-    public class Schedule
+    public partial class Schedule
     {
         // Rust type "u32"
         [Serialize(0)]

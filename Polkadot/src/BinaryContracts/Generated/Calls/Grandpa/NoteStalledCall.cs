@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Grandpa
 {
-    public class NoteStalledCall : IExtrinsicCall
+    public partial class NoteStalledCall : IExtrinsicCall
     {
         // Rust type T::BlockNumber
         [Serialize(0)]

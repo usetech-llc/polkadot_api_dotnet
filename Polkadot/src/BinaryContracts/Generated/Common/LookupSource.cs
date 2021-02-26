@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common
 {
-    public class LookupSource
+    public partial class LookupSource
     {
         // Rust type AccountId
         [Serialize(0)]

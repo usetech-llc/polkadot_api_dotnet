@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Sudo
 {
-    public class SudoAsCall : IExtrinsicCall
+    public partial class SudoAsCall : IExtrinsicCall
     {
         // Rust type <T::Lookup as StaticLookup>::Source
         [Serialize(0)]

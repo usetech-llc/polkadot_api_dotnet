@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Sudo
 {
-    public class SudoUncheckedWeightCall : IExtrinsicCall
+    public partial class SudoUncheckedWeightCall : IExtrinsicCall
     {
         // Rust type Box<<T as Trait>::Call>
         [Serialize(0)]

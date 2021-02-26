@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.System
 {
-    public class SetHeapPagesCall : IExtrinsicCall
+    public partial class SetHeapPagesCall : IExtrinsicCall
     {
         // Rust type u64
         [Serialize(0)]

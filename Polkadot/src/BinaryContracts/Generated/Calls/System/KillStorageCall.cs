@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.System
 {
-    public class KillStorageCall : IExtrinsicCall
+    public partial class KillStorageCall : IExtrinsicCall
     {
         // Rust type Vec<Key>
         [Serialize(0)]

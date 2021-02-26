@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common
 {
-    public class RawData
+    public partial class RawData
     {
         // Rust type Vec<u8>
         [Serialize(0)]

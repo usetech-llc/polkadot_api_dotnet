@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common
 {
-    public class DecimalPoints
+    public partial class DecimalPoints
     {
         // Rust type u8
         [Serialize(0)]

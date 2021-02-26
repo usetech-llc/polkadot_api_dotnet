@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Treasury
 {
-    public class ProposeSpendCall : IExtrinsicCall
+    public partial class ProposeSpendCall : IExtrinsicCall
     {
         // Rust type Compact<BalanceOf<T, I>>
         [Serialize(0)]

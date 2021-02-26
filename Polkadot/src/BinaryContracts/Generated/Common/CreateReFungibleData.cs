@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common
 {
-    public class CreateReFungibleData
+    public partial class CreateReFungibleData
     {
         // Rust type "Vec<u8>"
         [Serialize(0)]

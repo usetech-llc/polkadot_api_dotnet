@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.System
 {
-    public class ExtrinsicFailed : IEvent
+    public partial class ExtrinsicFailed : IEvent
     {
         // Rust type DispatchError
         [Serialize(0)]

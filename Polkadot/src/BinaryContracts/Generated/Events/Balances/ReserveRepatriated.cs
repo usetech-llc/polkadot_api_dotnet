@@ -4,11 +4,10 @@ using Polkadot.BinarySerializer.Converters;
 using Polkadot.BinaryContracts.Nft;
 using Polkadot.BinaryContracts.Common;
 using System.Numerics;
-using Polkadot.BinaryContracts.Events.BalanceStatusEnum;
 
 namespace Polkadot.BinaryContracts.Events.Balances
 {
-    public class ReserveRepatriated : IEvent
+    public partial class ReserveRepatriated : IEvent
     {
         // Rust type AccountId
         [Serialize(0)]
@@ -27,12 +26,12 @@ namespace Polkadot.BinaryContracts.Events.Balances
 
         // Rust type Status
         [Serialize(3)]
-        public BalanceStatus EventArgument3 { get; set; }
+        public Polkadot.BinaryContracts.Events.BalanceStatusEnum.BalanceStatus EventArgument3 { get; set; }
 
 
 
         public ReserveRepatriated() { }
-        public ReserveRepatriated(PublicKey @eventArgument0, PublicKey @eventArgument1, Balance @eventArgument2, BalanceStatus @eventArgument3)
+        public ReserveRepatriated(PublicKey @eventArgument0, PublicKey @eventArgument1, Balance @eventArgument2, Polkadot.BinaryContracts.Events.BalanceStatusEnum.BalanceStatus @eventArgument3)
         {
             this.EventArgument0 = @eventArgument0;
             this.EventArgument1 = @eventArgument1;

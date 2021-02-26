@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Treasury
 {
-    public class TipNewCall : IExtrinsicCall
+    public partial class TipNewCall : IExtrinsicCall
     {
         // Rust type Vec<u8>
         [Serialize(0)]

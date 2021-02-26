@@ -20,6 +20,8 @@ namespace Polkadot.BinarySerializer
         private readonly Dictionary<Type, (byte module, byte method)> _callIndexCache = new Dictionary<Type, (byte module, byte method)>();
         private readonly Dictionary<(byte module, byte @event), Type> _eventTypeCache = new Dictionary<(byte module, byte @event), Type>();
         private readonly Dictionary<Type, (byte module, byte @event)> _eventIndexCache = new Dictionary<Type, (byte module, byte @event)>();
+        private readonly Dictionary<Type, (byte[] DestPublicKey, byte[] Selector)> _contractMetaCache;
+        private readonly Dictionary<(byte[] DestPublicKey, byte[] Selector), Type> _contractTypeCache;
 
         public BinarySerializer()
         {
@@ -46,6 +48,12 @@ namespace Polkadot.BinarySerializer
                     _eventTypeCache[eventIndex.Value] = type;
                 }
             }
+
+            _contractMetaCache = settings.KnownContractCalls
+                .ToDictionary(c => c.type, c => (c.DestPublicKey, c.Selector));
+
+            _contractTypeCache = settings.KnownContractCalls
+                .ToDictionary(c => (c.DestPublicKey, c.Selector), c => c.type, new ContractSelectorComparer());
         }
 
         public byte[] Serialize<T>(T value)
@@ -201,6 +209,16 @@ namespace Polkadot.BinarySerializer
         public (byte moduleIndex, byte eventIndex) GetEventIndex(Type typeOfEvent)
         {
             return _eventIndexCache[typeOfEvent];
+        }
+
+        public Type GetContractParameterType(byte[] destPublicKey, byte[] data)
+        {
+            return _contractTypeCache[(destPublicKey, data)];
+        }
+
+        public (byte[] destPublicKey, byte[] selector) GetContractMeta(Type typeOfParameter)
+        {
+            return _contractMetaCache[typeOfParameter];
         }
 
         private long ReadLong(byte b0, byte b1, byte b2, byte b3, byte b4, byte b5, byte b6, byte b7)

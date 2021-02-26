@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Balances
 {
-    public class TransferKeepAliveCall : IExtrinsicCall
+    public partial class TransferKeepAliveCall : IExtrinsicCall
     {
         // Rust type <T::Lookup as StaticLookup>::Source
         [Serialize(0)]

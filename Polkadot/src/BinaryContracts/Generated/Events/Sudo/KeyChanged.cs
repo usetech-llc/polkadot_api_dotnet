@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.Sudo
 {
-    public class KeyChanged : IEvent
+    public partial class KeyChanged : IEvent
     {
         // Rust type AccountId
         [Serialize(0)]

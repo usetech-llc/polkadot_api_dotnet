@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common.CollectionModes
 {
-    public class Invalid
+    public partial class Invalid
     {
 
 

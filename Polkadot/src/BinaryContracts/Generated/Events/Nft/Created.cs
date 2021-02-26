@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.Nft
 {
-    public class Created : IEvent
+    public partial class Created : IEvent
     {
         // Rust type CollectionId
         [Serialize(0)]

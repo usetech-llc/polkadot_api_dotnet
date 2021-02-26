@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.Treasury
 {
-    public class Rejected : IEvent
+    public partial class Rejected : IEvent
     {
         // Rust type ProposalIndex
         [Serialize(0)]

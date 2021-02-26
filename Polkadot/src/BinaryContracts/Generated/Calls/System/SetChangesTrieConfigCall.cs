@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.System
 {
-    public class SetChangesTrieConfigCall : IExtrinsicCall
+    public partial class SetChangesTrieConfigCall : IExtrinsicCall
     {
         // Rust type Option<ChangesTrieConfiguration>
         [Serialize(0)]

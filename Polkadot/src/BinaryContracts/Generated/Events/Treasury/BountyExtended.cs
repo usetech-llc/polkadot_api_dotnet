@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.Treasury
 {
-    public class BountyExtended : IEvent
+    public partial class BountyExtended : IEvent
     {
         // Rust type BountyIndex
         [Serialize(0)]

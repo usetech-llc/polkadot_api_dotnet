@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Vesting
 {
-    public class VestCall : IExtrinsicCall
+    public partial class VestCall : IExtrinsicCall
     {
 
 

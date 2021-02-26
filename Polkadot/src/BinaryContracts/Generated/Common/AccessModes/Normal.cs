@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common.AccessModes
 {
-    public class Normal
+    public partial class Normal
     {
 
 

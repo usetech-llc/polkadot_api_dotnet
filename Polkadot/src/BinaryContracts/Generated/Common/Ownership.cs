@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common
 {
-    public class Ownership
+    public partial class Ownership
     {
         // Rust type "AccountId"
         [Serialize(0)]

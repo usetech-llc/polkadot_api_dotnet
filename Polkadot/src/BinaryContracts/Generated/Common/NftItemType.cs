@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common
 {
-    public class NftItemType
+    public partial class NftItemType
     {
         // Rust type "AccountId"
         [Serialize(0)]

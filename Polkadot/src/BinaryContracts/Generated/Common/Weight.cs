@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common
 {
-    public class Weight
+    public partial class Weight
     {
         // Rust type u64
         [Serialize(0)]

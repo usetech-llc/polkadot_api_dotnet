@@ -383,7 +383,7 @@ using System.Numerics;
 
 namespace {@namespace}
 {{
-{Tab}public class {className}{implements}
+{Tab}public partial class {className}{implements}
 {Tab}{{
 {propertiesStr}
 

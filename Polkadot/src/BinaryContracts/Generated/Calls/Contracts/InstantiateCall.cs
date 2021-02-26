@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Contracts
 {
-    public class InstantiateCall : IExtrinsicCall
+    public partial class InstantiateCall : IExtrinsicCall
     {
         // Rust type Compact<BalanceOf<T>>
         [Serialize(0)]

@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Treasury
 {
-    public class UnassignCuratorCall : IExtrinsicCall
+    public partial class UnassignCuratorCall : IExtrinsicCall
     {
         // Rust type Compact<ProposalIndex>
         [Serialize(0)]

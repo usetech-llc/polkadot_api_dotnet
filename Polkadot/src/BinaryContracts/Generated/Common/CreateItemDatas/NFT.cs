@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common.CreateItemDatas
 {
-    public class NFT
+    public partial class NFT
     {
         // Rust type CreateNftData
         [Serialize(0)]

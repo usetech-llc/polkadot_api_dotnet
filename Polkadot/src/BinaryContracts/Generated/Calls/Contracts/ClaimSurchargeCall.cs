@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Contracts
 {
-    public class ClaimSurchargeCall : IExtrinsicCall
+    public partial class ClaimSurchargeCall : IExtrinsicCall
     {
         // Rust type T::AccountId
         [Serialize(0)]

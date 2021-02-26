@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.Contracts
 {
-    public class CodeStored : IEvent
+    public partial class CodeStored : IEvent
     {
         // Rust type Hash
         [Serialize(0)]

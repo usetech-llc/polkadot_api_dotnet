@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Nft
 {
-    public class ChangeCollectionOwnerCall : IExtrinsicCall
+    public partial class ChangeCollectionOwnerCall : IExtrinsicCall
     {
         // Rust type CollectionId
         [Serialize(0)]

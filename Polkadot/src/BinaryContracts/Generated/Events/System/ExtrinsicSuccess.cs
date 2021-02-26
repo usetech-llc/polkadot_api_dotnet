@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.System
 {
-    public class ExtrinsicSuccess : IEvent
+    public partial class ExtrinsicSuccess : IEvent
     {
         // Rust type DispatchInfo
         [Serialize(0)]

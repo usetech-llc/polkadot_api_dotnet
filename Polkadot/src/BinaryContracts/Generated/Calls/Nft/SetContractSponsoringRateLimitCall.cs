@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Nft
 {
-    public class SetContractSponsoringRateLimitCall : IExtrinsicCall
+    public partial class SetContractSponsoringRateLimitCall : IExtrinsicCall
     {
         // Rust type T::AccountId
         [Serialize(0)]

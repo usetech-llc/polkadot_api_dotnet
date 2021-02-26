@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.System
 {
-    public class SuicideCall : IExtrinsicCall
+    public partial class SuicideCall : IExtrinsicCall
     {
 
 

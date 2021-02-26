@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.Sudo
 {
-    public class Sudid : IEvent
+    public partial class Sudid : IEvent
     {
         // Rust type DispatchResult
         [Serialize(0)]

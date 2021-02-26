@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.System
 {
-    public class FillBlockCall : IExtrinsicCall
+    public partial class FillBlockCall : IExtrinsicCall
     {
         // Rust type Perbill
         [Serialize(0)]

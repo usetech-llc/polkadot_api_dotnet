@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Common.SchemaVersions
 {
-    public class Unique
+    public partial class Unique
     {
 
 

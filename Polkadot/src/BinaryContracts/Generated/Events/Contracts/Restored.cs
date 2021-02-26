@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.Contracts
 {
-    public class Restored : IEvent
+    public partial class Restored : IEvent
     {
         // Rust type AccountId
         [Serialize(0)]

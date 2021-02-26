@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Events.Treasury
 {
-    public class TipRetracted : IEvent
+    public partial class TipRetracted : IEvent
     {
         // Rust type Hash
         [Serialize(0)]

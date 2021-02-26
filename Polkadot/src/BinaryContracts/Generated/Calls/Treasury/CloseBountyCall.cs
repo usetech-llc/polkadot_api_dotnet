@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Polkadot.BinaryContracts.Calls.Treasury
 {
-    public class CloseBountyCall : IExtrinsicCall
+    public partial class CloseBountyCall : IExtrinsicCall
     {
         // Rust type Compact<BountyIndex>
         [Serialize(0)]
