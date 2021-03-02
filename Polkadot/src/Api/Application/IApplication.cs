@@ -233,5 +233,9 @@ namespace Polkadot.Api
         /// </summary>
         /// <param name="id"> Subscription id </param>
         void UnsubscribeAccountInfo(string id);
+
+        string SignAndSendExtrinsic<TCall>(Address from, byte[] privateKeyFrom, TCall call, Action<string> callback,
+            EraDto era = null, BigInteger? chargeTransactionPayment = null) where TCall : IExtrinsicCall;
+
     }
 }

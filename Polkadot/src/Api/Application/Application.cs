@@ -835,5 +835,37 @@ namespace Polkadot.Api
 
             return settings;
         }
+
+        public string SignAndSendExtrinsic<TCall>(Address from, byte[] privateKeyFrom, TCall call, Action<string> callback,
+            EraDto era = null, BigInteger? chargeTransactionPayment = null) where TCall : IExtrinsicCall
+        {
+            var block = GetBlockHeader(null);
+            era ??= DefaultEra(block);
+            chargeTransactionPayment ??= 0;
+
+            var publicKeyFrom = _protocolParams.Metadata.GetPublicKeyFromAddr(from);
+            
+            var extrinsicAddressFrom = new ExtrinsicAddress(publicKeyFrom);
+
+            var nonce = GetAccountNonce(@from);
+            var extra = new SignedExtra(era, nonce, chargeTransactionPayment.Value);
+
+            var inheritanceCall = new InheritanceCall<TCall>(call);
+            var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, InheritanceCall<TCall>>(extrinsicAddressFrom, null, extra, inheritanceCall, block);
+
+            Signer.SignUncheckedExtrinsic(extrinsic, publicKeyFrom.Bytes, privateKeyFrom);
+
+            var vec = AsByteVec.FromValue(extrinsic);
+
+            var extrinsicBytes = Serializer.Serialize(vec);
+            
+            var query = new JObject { { "method", "author_submitAndWatchExtrinsic" }, { "params", new JArray { extrinsicBytes.ToPrefixedHexString() } } };
+
+            // Send == Subscribe callback to completion
+            return Subscribe(query, (json) =>
+            {
+                callback(json.ToString());
+            });
+        }
     }
 }

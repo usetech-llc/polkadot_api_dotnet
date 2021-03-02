@@ -5,7 +5,7 @@ using PublicKey = Polkadot.DataStructs.PublicKey;
 
 namespace Polkadot.BinaryContracts.Calls.Contracts
 {
-    public class TypedContractCall : IBinarySerializable, IBinaryDeserializable
+    public class TypedContractCall : IBinarySerializable, IBinaryDeserializable, IExtrinsicCall
     {
         private CallCall _call = new CallCall();
 
