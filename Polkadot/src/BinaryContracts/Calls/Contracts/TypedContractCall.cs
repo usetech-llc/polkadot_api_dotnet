@@ -37,11 +37,25 @@ namespace Polkadot.BinaryContracts.Calls.Contracts
         public object Deserialize(Stream stream, IBinarySerializer serializer)
         {
             _call = serializer.Deserialize<CallCall>(stream);
-            var parameterType = serializer.GetContractParameterType(_call.Dest.Bytes, _call.Data);
+            return FromCall(serializer, _call);
+        }
+
+        public static TypedContractCall FromCall(IBinarySerializer serializer, CallCall call)
+        {
+            var parameterType = serializer.GetContractParameterType(call.Dest.Bytes, call.Data);
             var (_, selector) = serializer.GetContractMeta(parameterType);
-            using var ms = new MemoryStream(_call.Data, selector.Length, _call.Data.Length - selector.Length);
-            Parameters = (IContractCallParameter)serializer.Deserialize(parameterType, ms);
-            return this;
+            using var ms = new MemoryStream(call.Data, selector.Length, call.Data.Length - selector.Length);
+            var parameters = (IContractCallParameter) serializer.Deserialize(parameterType, ms);
+            return new TypedContractCall
+            {
+                _call = call,
+                Parameters = parameters
+            };
+        }
+
+        public CallCall ToCall()
+        {
+            return _call;
         }
 
         public TypedContractCall()
