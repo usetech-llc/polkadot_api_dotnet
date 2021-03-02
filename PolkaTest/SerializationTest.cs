@@ -55,7 +55,7 @@ namespace PolkaTest
             var settings = new SerializerSettings().AddContractCallParameter<MockedParameter>("0xDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEAD".HexToByteArray(), "0xBEEF".HexToByteArray());
             var serializer = new BinarySerializer(new IndexResolver(), settings);
 
-            var call = TypedContractCall.Create(0, 0, new MockedParameter() {Value = 20}, serializer);
+            var call = CallCall.Create(0, 0, new MockedParameter() {Value = 20}, serializer);
             var serialized = serializer.Serialize(call);
             
             Assert.Equal("0xDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEAD000018BEEF14000000".HexToByteArray(), serialized);
@@ -67,7 +67,7 @@ namespace PolkaTest
             var settings = new SerializerSettings().AddContractCallParameter<MockedParameter>("0xDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEAD".HexToByteArray(), "0xBEEF".HexToByteArray());
             var serializer = new BinarySerializer(new IndexResolver(), settings);
 
-            var call = serializer.Deserialize<TypedContractCall>("0xDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEAD000018BEEF14000000".HexToByteArray());
+            var call = serializer.Deserialize<CallCall>("0xDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEAD000018BEEF14000000".HexToByteArray());
             
             Assert.Equal("0xDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEAD".HexToByteArray(), call.Dest.Bytes);
             Assert.Equal(0, call.Value);
