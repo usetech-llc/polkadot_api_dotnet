@@ -50,7 +50,7 @@ namespace PolkaTest
         }
         
         [Fact]
-        public async Task ContractParamsSerialization()
+        public void ContractParamsSerialization()
         {
             var settings = new SerializerSettings().AddContractCallParameter<MockedParameter>("0xDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEAD".HexToByteArray(), "0xBEEF".HexToByteArray());
             var serializer = new BinarySerializer(new IndexResolver(), settings);
@@ -62,7 +62,7 @@ namespace PolkaTest
         } 
         
         [Fact]
-        public async Task ContractParamsDeserialization()
+        public void ContractParamsDeserialization()
         {
             var settings = new SerializerSettings().AddContractCallParameter<MockedParameter>("0xDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEADDEAD".HexToByteArray(), "0xBEEF".HexToByteArray());
             var serializer = new BinarySerializer(new IndexResolver(), settings);

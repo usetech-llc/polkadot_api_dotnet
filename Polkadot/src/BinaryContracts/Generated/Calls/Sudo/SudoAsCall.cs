@@ -14,7 +14,7 @@ namespace Polkadot.BinaryContracts.Calls.Sudo
         public PublicKey Who { get; set; }
 
 
-        // Rust type Box<<T as Trait>::Call>
+        // Rust type Box<<T as Config>::Call>
         [Serialize(1)]
         public InheritanceCall<IExtrinsicCall> Call { get; set; }
 

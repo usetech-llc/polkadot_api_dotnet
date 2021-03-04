@@ -32,14 +32,21 @@ namespace Polkadot.BinaryContracts.Calls.Contracts
         public byte[] Data { get; set; }
 
 
+        // Rust type Vec<u8>
+        [Serialize(4)]
+        [PrefixedArrayConverter]
+        public byte[] Salt { get; set; }
+
+
 
         public InstantiateCall() { }
-        public InstantiateCall(BigInteger @endowment, BigInteger @gasLimit, Hash @codeHash, byte[] @data)
+        public InstantiateCall(BigInteger @endowment, BigInteger @gasLimit, Hash @codeHash, byte[] @data, byte[] @salt)
         {
             this.Endowment = @endowment;
             this.GasLimit = @gasLimit;
             this.CodeHash = @codeHash;
             this.Data = @data;
+            this.Salt = @salt;
         }
 
     }

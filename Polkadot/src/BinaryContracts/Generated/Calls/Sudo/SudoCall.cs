@@ -9,7 +9,7 @@ namespace Polkadot.BinaryContracts.Calls.Sudo
 {
     public partial class SudoCall : IExtrinsicCall
     {
-        // Rust type Box<<T as Trait>::Call>
+        // Rust type Box<<T as Config>::Call>
         [Serialize(0)]
         public InheritanceCall<IExtrinsicCall> Call { get; set; }
 

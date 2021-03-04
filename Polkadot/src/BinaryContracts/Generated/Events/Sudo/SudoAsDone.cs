@@ -9,14 +9,14 @@ namespace Polkadot.BinaryContracts.Events.Sudo
 {
     public partial class SudoAsDone : IEvent
     {
-        // Rust type bool
+        // Rust type DispatchResult
         [Serialize(0)]
-        public bool EventArgument0 { get; set; }
+        public DispatchResult EventArgument0 { get; set; }
 
 
 
         public SudoAsDone() { }
-        public SudoAsDone(bool @eventArgument0)
+        public SudoAsDone(DispatchResult @eventArgument0)
         {
             this.EventArgument0 = @eventArgument0;
         }

@@ -9,7 +9,7 @@ namespace Polkadot.BinaryContracts.Calls.Contracts
 {
     public partial class UpdateScheduleCall : IExtrinsicCall
     {
-        // Rust type Schedule
+        // Rust type Schedule<T>
         [Serialize(0)]
         public Schedule Schedule { get; set; }
 

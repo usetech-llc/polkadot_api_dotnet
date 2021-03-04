@@ -16,15 +16,15 @@ namespace Polkadot.BinaryContracts.Calls.Nft
 
         // Rust type CollectionLimits
         [Serialize(1)]
-        public CollectionLimits Limits { get; set; }
+        public CollectionLimits NewLimits { get; set; }
 
 
 
         public SetCollectionLimitsCall() { }
-        public SetCollectionLimitsCall(uint @collectionId, CollectionLimits @limits)
+        public SetCollectionLimitsCall(uint @collectionId, CollectionLimits @newLimits)
         {
             this.CollectionId = @collectionId;
-            this.Limits = @limits;
+            this.NewLimits = @newLimits;
         }
 
     }
