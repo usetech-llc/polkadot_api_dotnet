@@ -69,12 +69,21 @@ namespace Polkadot.DataStructs.Metadata
         {
             return Storage?.Items;
         }
+
+        public override IReadOnlyList<IErrorMeta> GetErrors()
+        {
+            return Errors;
+        }
     }
 
-    public class ErrorV11
+    public class ErrorV11 : IErrorMeta 
     {
         public string Name { get; set; }
         public string[] Documentation { get; set; }
+        public string GetName()
+        {
+            return Name;
+        }
     }
 
     public class FunctionCallArgV11 : ICallArgument

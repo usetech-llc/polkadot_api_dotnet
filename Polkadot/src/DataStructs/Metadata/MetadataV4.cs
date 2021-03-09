@@ -68,6 +68,11 @@ namespace Polkadot.DataStructs.Metadata
         {
             return Storage;
         }
+
+        public override IReadOnlyList<IErrorMeta> GetErrors()
+        {
+            return Array.Empty<IErrorMeta>();
+        }
     }
 
     public class FunctionCallArgV4 : ICallArgument

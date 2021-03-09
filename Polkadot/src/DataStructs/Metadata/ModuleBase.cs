@@ -24,6 +24,7 @@ namespace Polkadot.DataStructs.Metadata
         public abstract IReadOnlyList<ICallMeta> GetCalls();
         public abstract IReadOnlyList<IEventMeta> GetEvents();
         public abstract IReadOnlyList<IStorage> GetStorages();
+        public abstract IReadOnlyList<IErrorMeta> GetErrors();
 
         public IConstantMeta GetConstant(string constantName)
         {
