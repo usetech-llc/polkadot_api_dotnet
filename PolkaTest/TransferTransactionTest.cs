@@ -2,6 +2,7 @@
 using System.Numerics;
 using System.Threading.Tasks;
 using Polkadot.Api;
+using Polkadot.BinaryContracts.Calls.Balances;
 using Polkadot.DataStructs;
 using Polkadot.Source.Utils;
 using Polkadot.Utils;
@@ -51,6 +52,22 @@ namespace PolkaTest
             var nonceAfter = application.GetAccountNonce(from);
             
             Assert.Equal(nonceBefore + 1, nonceAfter);
+        }
+
+        [Fact]
+        public async Task CanDetectSuccessfulTransaction()
+        {
+            var from = Constants.LocalAliceAddress;
+            var privateKey = Constants.LocalAlicePrivateKey;
+            var to = Constants.LocalBobAddress;
+            
+            using var application = PolkaApi.GetApplication();
+
+            application.Connect(Constants.LocalNodeUri);
+
+            var result = await application.SignAndWaitForResult(from, privateKey, new TransferCall(AddressUtils.GetPublicKeyFromAddr(to), BigInteger.One));
+            
+            Assert.True(result.IsT0);
         }
     }
 }

@@ -13,9 +13,12 @@ using System.Numerics;
 using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using OneOf;
 using Polkadot.Api.Hashers;
 using Polkadot.BinaryContracts.Calls;
 using Polkadot.BinaryContracts.Calls.Balances;
+using Polkadot.BinaryContracts.Events;
+using Polkadot.BinaryContracts.Events.System;
 using Polkadot.BinaryContracts.Extrinsic;
 using Polkadot.BinarySerializer.Extensions;
 using Polkadot.Data;
@@ -839,33 +842,106 @@ namespace Polkadot.Api
         public string SignAndSendExtrinsic<TCall>(Address from, byte[] privateKeyFrom, TCall call, Action<string> callback,
             EraDto era = null, BigInteger? chargeTransactionPayment = null) where TCall : IExtrinsicCall
         {
+            var extrinsicBytes = SerializeExtrinsic(@from, privateKeyFrom, call, era, chargeTransactionPayment);
+
+            return SubmitExtrinsic(extrinsicBytes, callback);
+        }
+
+        private string SubmitExtrinsic(byte[] extrinsicBytes, Action<string> callback)
+        {
+            var query = new JObject
+                {{"method", "author_submitAndWatchExtrinsic"}, {"params", new JArray {extrinsicBytes.ToPrefixedHexString()}}};
+
+            // Send == Subscribe callback to completion
+            return Subscribe(query, (json) => { callback(json.ToString()); });
+        }
+
+        private byte[] SerializeExtrinsic<TCall>(Address @from, byte[] privateKeyFrom, TCall call, EraDto era,
+            BigInteger? chargeTransactionPayment) where TCall : IExtrinsicCall
+        {
             var block = GetBlockHeader(null);
             era ??= DefaultEra(block);
             chargeTransactionPayment ??= 0;
 
-            var publicKeyFrom = _protocolParams.Metadata.GetPublicKeyFromAddr(from);
-            
+            var publicKeyFrom = _protocolParams.Metadata.GetPublicKeyFromAddr(@from);
+
             var extrinsicAddressFrom = new ExtrinsicAddress(publicKeyFrom);
 
             var nonce = GetAccountNonce(@from);
             var extra = new SignedExtra(era, nonce, chargeTransactionPayment.Value);
 
             var inheritanceCall = new InheritanceCall<TCall>(call);
-            var extrinsic = new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, InheritanceCall<TCall>>(extrinsicAddressFrom, null, extra, inheritanceCall, block);
+            var extrinsic =
+                new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, InheritanceCall<TCall>>(
+                    extrinsicAddressFrom, null, extra, inheritanceCall, block);
 
             Signer.SignUncheckedExtrinsic(extrinsic, publicKeyFrom.Bytes, privateKeyFrom);
 
             var vec = AsByteVec.FromValue(extrinsic);
 
             var extrinsicBytes = Serializer.Serialize(vec);
-            
-            var query = new JObject { { "method", "author_submitAndWatchExtrinsic" }, { "params", new JArray { extrinsicBytes.ToPrefixedHexString() } } };
+            return extrinsicBytes;
+        }
 
-            // Send == Subscribe callback to completion
-            return Subscribe(query, (json) =>
+        public Task<OneOf<ExtrinsicSuccess, ExtrinsicFailed>> SignAndWaitForResult<TCall>(Address @from, byte[] privateKeyFrom, TCall call, EraDto era = null,
+            BigInteger? chargeTransactionPayment = null) where TCall : IExtrinsicCall
+        {
+            var completionSource = new TaskCompletionSource<OneOf<ExtrinsicSuccess, ExtrinsicFailed>>();
+
+            var extrinsicBytes = SerializeExtrinsic(@from, privateKeyFrom, call, era, chargeTransactionPayment);
+
+            SubmitExtrinsic(extrinsicBytes, s =>
             {
-                callback(json.ToString());
+                JToken? inBlock = null;
+                try
+                {
+                    var jObject = JObject.Parse(s);
+                    var isInBlock = jObject.TryGetValue("result", out var callResult)
+                                    && callResult.Type == JTokenType.Object
+                                    && callResult.Value<JObject>().TryGetValue("inBlock", out inBlock)
+                                    && inBlock.Type == JTokenType.String;
+                    if (!isInBlock)
+                    {
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    completionSource.SetException(ex);
+                    return;
+                }
+
+                Task.Run(() =>
+                {
+                    var block = GetBlock(new GetBlockParams() {BlockHash = inBlock!.Value<string>()});
+                    var eventsStr = StorageApi.GetStorage("System", "Events",
+                        new GetBlockHashParams() {BlockNumber = block.Block.Header.Number});
+                    var events = Serializer.Deserialize<EventList>(eventsStr.HexToByteArray());
+                    var index = block.Block.Extrinsic
+                        .Select((e, i) => (Value: e.HexToByteArray(), index: i))
+                        .Where(e => extrinsicBytes.SequenceEqual(e.Value))
+                        .Select(e => e.index)
+                        .First();
+
+                    foreach (var @event in events.Events.Where(e =>
+                        e.Phase.Value.IsT0 && e.Phase.Value.AsT0.Value == index))
+                    {
+                        switch (@event.Event)
+                        {
+                            case ExtrinsicSuccess x: 
+                                completionSource.SetResult(x);
+                                return;
+                            case ExtrinsicFailed x:
+                                completionSource.SetResult(x);
+                                return;
+                        }
+                    }
+                    
+                    completionSource.SetException(new ExtrinsicResultNotFoundException());
+                });
             });
+
+            return completionSource.Task;
         }
     }
 }
