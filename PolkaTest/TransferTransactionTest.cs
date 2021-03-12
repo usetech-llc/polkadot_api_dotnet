@@ -69,5 +69,24 @@ namespace PolkaTest
             
             Assert.True(result.IsT0);
         }
+        
+        [Fact]
+        public async Task CanTransferTwoTransactionsSimultaneously()
+        {
+            var from = Constants.LocalAliceAddress;
+            var privateKey = Constants.LocalAlicePrivateKey;
+            var to = Constants.LocalBobAddress;
+            
+            using var application = PolkaApi.GetApplication();
+            application.Connect(Constants.LocalNodeUri);
+
+            var result = await Task.WhenAll(
+                Task.Run(async () => await application.SignWaitRetryOnLowPriority(@from, privateKey, new TransferCall(AddressUtils.GetPublicKeyFromAddr(to), BigInteger.One))),
+                Task.Run(async () => await application.SignWaitRetryOnLowPriority(@from, privateKey, new TransferCall(AddressUtils.GetPublicKeyFromAddr(to), BigInteger.One)))
+            );
+            
+            Assert.True(result[0].IsT0);
+            Assert.True(result[1].IsT0);
+        }
     }
 }

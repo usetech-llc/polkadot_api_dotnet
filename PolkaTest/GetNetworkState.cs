@@ -42,8 +42,7 @@ namespace PolkaTest
             using (IApplication app = PolkaApi.GetApplication())
             {
                 app.Connect();
-                var exception = Assert.Throws<UnsafeNotAllowedException>(() => app.GetNetworkState());
-                Assert.Contains("system_networkState", exception.Message);
+                var exception = Assert.Throws<JrpcErrorException>(() => app.GetNetworkState());
                 app.Disconnect();
             }
         }

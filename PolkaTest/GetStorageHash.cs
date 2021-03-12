@@ -24,9 +24,9 @@ namespace PolkaTest
 
             using (IApplication app = PolkaApi.GetApplication())
             {
-                app.Connect();
+                app.Connect(Constants.LocalNodeUri);
                 output.WriteLine("================== Get Storage Hash: Address Balance ==================");
-                string storageHash = app.StorageApi.GetStorageHash(module1, variable1, new Address(Constants.KusamaAccount1Address));
+                string storageHash = app.StorageApi.GetStorageHash(module1, variable1, Constants.LocalAliceAddress);
                 output.WriteLine($"Storage hash: {storageHash}");
                 Assert.Equal(66, storageHash.Length);
              

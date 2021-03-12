@@ -166,7 +166,7 @@ namespace Polkadot.Api
             _jsonRpc.Disconnect();
         }
 
-        internal JObject Request(JObject query, int? timeout = null)
+        internal (JObject Result, JObject Error) Request(JObject query, int? timeout = null)
         {
             if (timeout != null)
             {
@@ -188,16 +188,16 @@ namespace Polkadot.Api
         public SystemInfo GetSystemInfo()
         {
             JObject systemNameQuery = JObject.FromObject(new { method = "system_name", @params = new JArray { } });
-            JObject systemNameJson = _jsonRpc.Request(systemNameQuery);
+            JObject systemNameJson = _jsonRpc.Request(systemNameQuery).Result;
 
             JObject systemChainQuery = new JObject { { "method", "system_chain" }, { "params", new JArray { } } };
-            JObject systemChainJson = _jsonRpc.Request(systemChainQuery);
+            JObject systemChainJson = _jsonRpc.Request(systemChainQuery).Result;
 
             JObject systemVersionQuery = new JObject { { "method", "system_version" }, { "params", new JArray { } } };
-            JObject systemVersionJson = _jsonRpc.Request(systemVersionQuery);
+            JObject systemVersionJson = _jsonRpc.Request(systemVersionQuery).Result;
 
             JObject systemPropertiesQuery = new JObject { { "method", "system_properties" }, { "params", new JArray { } } };
-            JObject systemPropertiesJson = _jsonRpc.Request(systemPropertiesQuery);
+            JObject systemPropertiesJson = _jsonRpc.Request(systemPropertiesQuery).Result;
 
             JObject completeJson = JObject.FromObject(new
             {
@@ -233,7 +233,7 @@ namespace Polkadot.Api
 
             JObject query = new JObject { { "method", "chain_getBlockHash" }, { "params", prm } };
 
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             return Deserialize<BlockHash, ParseBlockHash>(response);
         }
@@ -245,7 +245,7 @@ namespace Polkadot.Api
                 prm = new JArray { param.BlockHash };
             JObject query = new JObject { { "method", "chain_getRuntimeVersion" }, { "params", prm } };
 
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             var result = response["result"].ToString();
             return JsonConvert.DeserializeObject<RuntimeVersion>(result);
@@ -262,7 +262,7 @@ namespace Polkadot.Api
                 prm = new JArray { param.BlockHash };
             JObject query = new JObject { { "method", "state_getMetadata" }, { "params", prm } };
 
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             try
             {
@@ -285,7 +285,7 @@ namespace Polkadot.Api
                 prm = new JArray { param.BlockHash };
             JObject query = new JObject { { "method", "chain_getBlock" }, { "params", prm } };
 
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             return Deserialize<SignedBlock, ParseBlock>(response);
         }
@@ -297,7 +297,7 @@ namespace Polkadot.Api
                 prm = new JArray { param.BlockHash };
             JObject query = new JObject { { "method", "chain_getHeader" }, { "params", prm } };
 
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             return Deserialize<BlockHeader, ParseBlockHeader>(response);
         }
@@ -306,7 +306,7 @@ namespace Polkadot.Api
         {
             JObject query = new JObject { { "method", "chain_getFinalizedHead" }, { "params", new JArray { } } };
 
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             return Deserialize<FinalHead, ParseFinalizedHead>(response);
         }
@@ -315,12 +315,7 @@ namespace Polkadot.Api
         {
             JObject query = new JObject { { "method", "system_networkState" },
                                           { "params", new JArray { } } };
-            JObject response = _jsonRpc.Request(query);
-
-            if (response == null)
-            {
-                throw new UnsafeNotAllowedException("system_networkState");
-            }
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             return Deserialize<NetworkState, ParseNetworkState>(response);
         }
@@ -329,12 +324,7 @@ namespace Polkadot.Api
         {
             JObject query = new JObject { { "method", "system_peers" },
                                           { "params", new JArray { } } };
-            JObject response = _jsonRpc.Request(query);
-
-            if (response == null)
-            {
-                throw new UnsafeNotAllowedException("system_peers");
-            }
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             return Deserialize<PeersInfo, ParsePeersInfo>(response);
         }
@@ -343,7 +333,7 @@ namespace Polkadot.Api
         {
             JObject query = new JObject { { "method", "system_health" },
                                           { "params", new JArray { } } };
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             return Deserialize<SystemHealth, ParseSystemHealth>(response);
         }
@@ -463,7 +453,7 @@ namespace Polkadot.Api
         public GenericExtrinsic[] PendingExtrinsics(int bufferSize)
         {
             var query = new JObject { { "method", "author_pendingExtrinsics" }, { "params", new JArray { } } };
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             int count = 0;
             GenericExtrinsic[] genericExtrinsic = new GenericExtrinsic[bufferSize];
@@ -575,7 +565,7 @@ namespace Polkadot.Api
         public bool RemoveExtrinsic(string extrinsicHash)
         {
             var query = new JObject { { "method", "author_removeExtrinsic" }, { "params", new JArray { extrinsicHash } } };
-            var response = _jsonRpc.Request(query);
+            var response = _jsonRpc.Request(query).Unwrap();
 
             if (response == null)
                 throw new ApplicationException("Not supported");
@@ -942,6 +932,31 @@ namespace Polkadot.Api
             });
 
             return completionSource.Task;
+        }
+
+        public Task<OneOf<ExtrinsicSuccess, ExtrinsicFailed>> SignWaitRetryOnLowPriority<TCall>(Address @from, byte[] privateKeyFrom, TCall call, EraDto era = null,
+            BigInteger? chargeTransactionPayment = null) where TCall : IExtrinsicCall
+        {
+            return SignWaitRetryOnLowPriorityInternal(from, privateKeyFrom, call, era, chargeTransactionPayment);
+        }
+
+        private async Task<OneOf<ExtrinsicSuccess, ExtrinsicFailed>> SignWaitRetryOnLowPriorityInternal<TCall>(Address @from,
+            byte[] privateKeyFrom, TCall call, EraDto era = null,
+            BigInteger? chargeTransactionPayment = null, int retryCount = 100) where TCall : IExtrinsicCall
+        {
+            try
+            {
+                return await SignAndWaitForResult(from, privateKeyFrom, call, era, chargeTransactionPayment);
+            }
+            catch (JrpcErrorException ex) when (ex.Code == 1014)
+            {
+                if (retryCount <= 0)
+                {
+                    throw;
+                }
+                await Task.Delay(TimeSpan.FromSeconds(18));
+                return await SignWaitRetryOnLowPriorityInternal(from, privateKeyFrom, call, era, chargeTransactionPayment, retryCount - 1);
+            }
         }
     }
 }

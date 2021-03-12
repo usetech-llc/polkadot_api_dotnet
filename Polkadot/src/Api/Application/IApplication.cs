@@ -242,5 +242,7 @@ namespace Polkadot.Api
 
         Task<OneOf<ExtrinsicSuccess, ExtrinsicFailed>> SignAndWaitForResult<TCall>(Address from, byte[] privateKeyFrom, TCall call,
             EraDto era = null, BigInteger? chargeTransactionPayment = null) where TCall : IExtrinsicCall;
+        Task<OneOf<ExtrinsicSuccess, ExtrinsicFailed>> SignWaitRetryOnLowPriority<TCall>(Address from, byte[] privateKeyFrom, TCall call,
+            EraDto era = null, BigInteger? chargeTransactionPayment = null) where TCall : IExtrinsicCall;
     }
 }
