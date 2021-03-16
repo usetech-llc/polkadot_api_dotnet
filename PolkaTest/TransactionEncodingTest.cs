@@ -4,6 +4,9 @@ using System.Text;
 using Polkadot;
 using Polkadot.Api;
 using Polkadot.BinaryContracts;
+using Polkadot.BinaryContracts.Calls;
+using Polkadot.BinaryContracts.Calls.Balances;
+using Polkadot.BinaryContracts.Extrinsic;
 using Polkadot.BinarySerializer.Extensions;
 using Polkadot.Data;
 using Polkadot.DataStructs;
@@ -61,7 +64,7 @@ namespace PolkaTest
         public void TransactionEncodedCorrectly()
         {
             var expectedTransaction =
-                "290284586CC32614D6A3F219667DB501ADE545753058D43B14E6E971E9C9CC908AD84301.{128}0A001D010006038EAF04151687736326C9FEA17E25FC5287613693C912909CB226AA4794F26A4804";
+                "290284586CC32614D6A3F219667DB501ADE545753058D43B14E6E971E9C9CC908AD84301.{128}0A001D010006008EAF04151687736326C9FEA17E25FC5287613693C912909CB226AA4794F26A4804";
             using var application = MockedApplication.Create();
             application.Connect(Constants.LocalNodeUri);
 

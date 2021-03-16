@@ -71,15 +71,24 @@ namespace Polkadot.DataStructs.Metadata
         {
             return Storage?.Items;
         }
+
+        public override IReadOnlyList<IErrorMeta> GetErrors()
+        {
+            return Errors;
+        }
     }
 
-    public class ErrorV12
+    public class ErrorV12 : IErrorMeta
     {
         public string Name { get; set; }
         public string[] Documentation { get; set; }
+        public string GetName()
+        {
+            return Name;
+        }
     }
 
-    public class FunctionCallArgV12
+    public class FunctionCallArgV12 : ICallArgument
     {
         public string Name { get; set; }
         public string Type { get; set; }
@@ -90,10 +99,8 @@ namespace Polkadot.DataStructs.Metadata
         public string Name { get; set; }
         public string[] Args { get; set; }
         public string[] Documentation { get; set; }
-        public string GetName()
-        {
-            return Name;
-        }
+        public string GetName() => Name;
+        public IReadOnlyList<string> GetArguments() => Args;
     }
 
     public class CallV12 : ICallMeta
@@ -101,10 +108,8 @@ namespace Polkadot.DataStructs.Metadata
         public string Name { get; set; }
         public FunctionCallArgV12[] Args { get; set; }
         public string[] Documentation { get; set; }
-        public string GetName()
-        {
-            return Name;
-        }
+        public string GetName() => Name;
+        public IReadOnlyList<ICallArgument> GetArguments() => Args;
     }
 
     public class FuncTypeV12

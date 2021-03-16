@@ -1,4 +1,6 @@
-﻿namespace Polkadot.Api
+﻿using Polkadot.Exceptions;
+
+namespace Polkadot.Api
 {
     using System;
     using System.Collections.Concurrent;
@@ -20,7 +22,7 @@
         private ILogger _logger;
         private JsonRpcParams _jsonRpcParams;
         private readonly Action<Exception> _errorsHandler;
-        private ConcurrentDictionary<string, BufferBlock<JObject>> _responses;
+        private ConcurrentDictionary<string, BufferBlock<(JObject Result, JObject Error)>> _responses;
         private Dictionary<string, IWebSocketMessageObserver> _subscriptions;
 
         private Object _subscriptionLock = new Object();
@@ -33,7 +35,7 @@
 
         private string GetNextId()
         {
-            return (++_lastId).ToString();
+            return Interlocked.Increment(ref _lastId).ToString();
         }
 
         public JsonRpc(IWebSocketClient wsc, ILogger logger, JsonRpcParams param, Action<Exception> errorsHandler = null)
@@ -43,7 +45,7 @@
             _jsonRpcParams = param;
             _errorsHandler = errorsHandler;
 
-            _responses = new ConcurrentDictionary<string, BufferBlock<JObject>>();
+            _responses = new ConcurrentDictionary<string, BufferBlock<(JObject Result, JObject Error)>>();
             _subscriptions = new Dictionary<string, IWebSocketMessageObserver>();
             _pendingSubscriptionUpdates = new Dictionary<string, JObject>();
             _wsc.RegisterMessageObserver(this);
@@ -103,7 +105,7 @@
             _wsc.Disconnect();
         }
 
-        public JObject Request(JObject jsonMap, int timeout_s = Consts.RESPONSE_TIMEOUT_S)
+        public (JObject Result, JObject Error) Request(JObject jsonMap, int timeout_s = Consts.RESPONSE_TIMEOUT_S)
         {
             try
             {
@@ -124,11 +126,11 @@
                 );
 
                 // create async receiver
-                bool exists = _responses.TryGetValue(query.Id, out BufferBlock<JObject> response);
+                bool exists = _responses.TryGetValue(query.Id, out BufferBlock<(JObject Result, JObject Error)> response);
 
                 if (!exists)
                 {
-                    response = new BufferBlock<JObject>();
+                    response = new BufferBlock<(JObject Result, JObject Error)>();
                     _responses.TryAdd(query.Id, response);
                 }
 
@@ -149,7 +151,7 @@
 
                 var resp = response.Receive(new TimeSpan(0, 0, timeout_s));
                 _responses.TryRemove(query.Id, out _);
-
+                
                 return resp;
             }
             catch (Exception ex)
@@ -163,9 +165,13 @@
         {
             // Send normal request
             var response = Request(jsonMap);
+            if (response.Result == null && response.Error != null)
+            {
+                throw new JrpcErrorException(response.Error);
+            }
 
             // Get response for this request and extract subscription ID
-            string subscriptionId = response["result"].ToObject<string>();
+            string subscriptionId = response.Result["result"].ToObject<string>();
 
             JObject pendingResponse = null;
             lock (_subscriptionLock)
@@ -201,25 +207,31 @@
         {
             try
             {
-                dynamic json = JsonConvert.DeserializeObject(payload);
+                var json = JObject.Parse(payload);
                 _logger.Info($"Message received: {payload}");
                 string requestId = "0";
                 string subscriptionId = null;
-                if (json["id"] != null)
-                    requestId = json["id"].Value.ToString();
-                if (json["params"] != null)
-                    subscriptionId = json["params"]["subscription"].Value;
+                if (json.TryGetValue("id", out var id))
+                    requestId = id.Value<string>();
+                if (json.TryGetValue("params", out var @params))
+                    subscriptionId = @params["subscription"].Value<string>();
 
                 // message is simple request
                 if (requestId != "0")
                 {
                     // cut off protocol body
-                    BufferBlock<JObject> resp;
+                    BufferBlock<(JObject Result, JObject Error)> resp;
                     _responses.TryGetValue(requestId, out resp);
                     JObject result = null;
+                    JObject error = null;
                     try
                     {
-                        result = JObject.FromObject(new {result = json["result"].ToString()});
+                        result = json.TryGetValue("result", out var r) 
+                                ? JObject.FromObject(new {result = r.ToString()}) 
+                                : null;
+                        error = json.TryGetValue("error", out var er) 
+                            ? er.Value<JObject>() 
+                            : null;
                     }
                     catch (Exception ex)
                     {
@@ -227,19 +239,17 @@
                         _errorsHandler?.Invoke(ex);
                     }
 
-                    resp?.SendAsync(result);
+                    resp?.SendAsync((result, error)).GetAwaiter().GetResult();
                 }
-                else
-
-                    // message is subscription request
-                if (subscriptionId != null)
+                // message is subscription request
+                else if (subscriptionId != null)
                 {
                     // Subscription response arrived.
                     var result = json["params"] as JObject;
 
                     IWebSocketMessageObserver existingObserver = null;
                     bool handled = false;
-                    _logger.Info("Subscription message recieved");
+                    _logger.Info("Subscription message received");
 
                     lock (_subscriptionLock)
                     {

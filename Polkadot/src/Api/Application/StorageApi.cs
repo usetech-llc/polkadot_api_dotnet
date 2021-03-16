@@ -28,7 +28,7 @@ namespace Polkadot.Api
 
         public T MakeRequest<T>(JObject request, int? timeout = null)
         {
-            JObject response = _application.Request(request, timeout);
+            JObject response = _application.Request(request, timeout).Unwrap();
 
             return response["result"].ToObject<T>();
         }

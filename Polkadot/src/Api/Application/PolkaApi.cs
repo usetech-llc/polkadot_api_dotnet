@@ -4,11 +4,13 @@
     {
         private static Application CreateInstance()
         {
-            JsonRpcParams param = new JsonRpcParams();
-            param.JsonrpcVersion = "2.0";
+            var param = new JsonRpcParams {JsonrpcVersion = "2.0"};
 
             var logger = new Logger();
-            var jsonrpc = new JsonRpc(new Wsclient(logger), logger, param);
+            var jsonrpc = new JsonRpc(new Wsclient(logger), logger, param, _ =>
+            {
+                
+            });
             return new Application(logger, jsonrpc, Application.DefaultSubstrateSettings());
         }
 

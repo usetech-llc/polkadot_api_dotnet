@@ -1,6 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using OneOf;
 using Polkadot.Api.Hashers;
 using Polkadot.BinaryContracts;
+using Polkadot.BinaryContracts.Events.System;
 using Polkadot.BinarySerializer;
 
 namespace Polkadot.Api
@@ -233,5 +236,13 @@ namespace Polkadot.Api
         /// </summary>
         /// <param name="id"> Subscription id </param>
         void UnsubscribeAccountInfo(string id);
+
+        string SignAndSendExtrinsic<TCall>(Address from, byte[] privateKeyFrom, TCall call, Action<string> callback,
+            EraDto era = null, BigInteger? chargeTransactionPayment = null) where TCall : IExtrinsicCall;
+
+        Task<OneOf<ExtrinsicSuccess, ExtrinsicFailed>> SignAndWaitForResult<TCall>(Address from, byte[] privateKeyFrom, TCall call,
+            EraDto era = null, BigInteger? chargeTransactionPayment = null) where TCall : IExtrinsicCall;
+        Task<OneOf<ExtrinsicSuccess, ExtrinsicFailed>> SignWaitRetryOnLowPriority<TCall>(Address from, byte[] privateKeyFrom, TCall call,
+            EraDto era = null, BigInteger? chargeTransactionPayment = null) where TCall : IExtrinsicCall;
     }
 }

@@ -9,6 +9,7 @@ namespace Polkadot.DataStructs.Metadata.Interfaces
         IReadOnlyList<ICallMeta> GetCalls();
         IReadOnlyList<IEventMeta> GetEvents();
         IReadOnlyList<IStorage> GetStorages();
+        IReadOnlyList<IErrorMeta> GetErrors();
 
         IConstantMeta GetConstant(string constantName);
         int GetStorageIndex(string storageName);

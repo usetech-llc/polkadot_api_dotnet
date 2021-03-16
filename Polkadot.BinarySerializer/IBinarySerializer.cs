@@ -18,5 +18,7 @@ namespace Polkadot.BinarySerializer
         (byte moduleIndex, byte methodIndex) GetCallIndex(Type typeOfCall);
         Type GetEventType(byte moduleIndex, byte eventIndex);
         (byte moduleIndex, byte eventIndex) GetEventIndex(Type typeOfEvent);
+        Type GetContractParameterType(byte[] destPublicKey, byte[] data);
+        (byte[] destPublicKey, byte[] selector) GetContractMeta(Type typeOfParameter);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Polkadot.Api;
 using Polkadot.BinaryContracts;
+using Polkadot.BinaryContracts.Extrinsic;
 using Polkadot.BinarySerializer;
 
 namespace Polkadot.Utils

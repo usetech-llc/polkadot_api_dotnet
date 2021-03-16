@@ -52,7 +52,7 @@
             _wsc.Disconnect();
         }
 
-        public JObject Request(JObject jsonMap, int timeout_s = Consts.RESPONSE_TIMEOUT_S)
+        public (JObject Result, JObject Error) Request(JObject jsonMap, int timeout_s = Consts.RESPONSE_TIMEOUT_S)
         {
             var query = new JsonRpcQuery
             {
@@ -85,7 +85,7 @@
                 _logger.Info($"Message received: {ret}");
             }
 
-            return ret;
+            return (ret, null);
         }
 
         public string SubscribeWs(JObject jsonMap, IWebSocketMessageObserver observer)

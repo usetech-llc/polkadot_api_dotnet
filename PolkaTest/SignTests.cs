@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using Polkadot.Api;
 using Polkadot.BinaryContracts;
+using Polkadot.BinaryContracts.Extrinsic;
 using Polkadot.DataStructs;
 using Polkadot.Utils;
 using Schnorrkel;

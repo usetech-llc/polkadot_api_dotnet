@@ -5,7 +5,6 @@ using Polkadot.BinarySerializer;
 using Polkadot.DataStructs.Metadata.Interfaces;
 using Polkadot.Exceptions;
 using System;
-using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
@@ -14,28 +13,25 @@ using System.Numerics;
 using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using OneOf;
 using Polkadot.Api.Hashers;
+using Polkadot.BinaryContracts.Calls;
+using Polkadot.BinaryContracts.Calls.Balances;
 using Polkadot.BinaryContracts.Events;
-using Polkadot.BinaryContracts.Events.Balances;
-using Polkadot.BinaryContracts.Events.Contracts;
-using Polkadot.BinaryContracts.Events.Grandpa;
-using Polkadot.BinaryContracts.Events.Sudo;
+using Polkadot.BinaryContracts.Events.System;
+using Polkadot.BinaryContracts.Extrinsic;
 using Polkadot.BinarySerializer.Extensions;
 using Polkadot.Data;
 using Polkadot.DataFactory;
-using Polkadot.DataFactory.Metadata;
 using Polkadot.DataStructs;
 using Polkadot.DataStructs.Metadata;
 using Polkadot.DataStructs.Metadata.BinaryContracts;
 using Polkadot.src.DataStructs;
 using Polkadot.Utils;
-using Schnorrkel;
-using SignaturePayload = Polkadot.BinaryContracts.SignaturePayload;
-using Transfer = Polkadot.BinaryContracts.Events.Balances.Transfer;
 
 namespace Polkadot.Api
 {
-    public class Application : IApplication, IWebSocketMessageObserver
+    public partial class Application : IApplication, IWebSocketMessageObserver
     {
         private ILogger _logger;
         private IJsonRpc _jsonRpc;
@@ -170,7 +166,7 @@ namespace Polkadot.Api
             _jsonRpc.Disconnect();
         }
 
-        internal JObject Request(JObject query, int? timeout = null)
+        internal (JObject Result, JObject Error) Request(JObject query, int? timeout = null)
         {
             if (timeout != null)
             {
@@ -192,16 +188,16 @@ namespace Polkadot.Api
         public SystemInfo GetSystemInfo()
         {
             JObject systemNameQuery = JObject.FromObject(new { method = "system_name", @params = new JArray { } });
-            JObject systemNameJson = _jsonRpc.Request(systemNameQuery);
+            JObject systemNameJson = _jsonRpc.Request(systemNameQuery).Result;
 
             JObject systemChainQuery = new JObject { { "method", "system_chain" }, { "params", new JArray { } } };
-            JObject systemChainJson = _jsonRpc.Request(systemChainQuery);
+            JObject systemChainJson = _jsonRpc.Request(systemChainQuery).Result;
 
             JObject systemVersionQuery = new JObject { { "method", "system_version" }, { "params", new JArray { } } };
-            JObject systemVersionJson = _jsonRpc.Request(systemVersionQuery);
+            JObject systemVersionJson = _jsonRpc.Request(systemVersionQuery).Result;
 
             JObject systemPropertiesQuery = new JObject { { "method", "system_properties" }, { "params", new JArray { } } };
-            JObject systemPropertiesJson = _jsonRpc.Request(systemPropertiesQuery);
+            JObject systemPropertiesJson = _jsonRpc.Request(systemPropertiesQuery).Result;
 
             JObject completeJson = JObject.FromObject(new
             {
@@ -237,7 +233,7 @@ namespace Polkadot.Api
 
             JObject query = new JObject { { "method", "chain_getBlockHash" }, { "params", prm } };
 
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             return Deserialize<BlockHash, ParseBlockHash>(response);
         }
@@ -249,7 +245,7 @@ namespace Polkadot.Api
                 prm = new JArray { param.BlockHash };
             JObject query = new JObject { { "method", "chain_getRuntimeVersion" }, { "params", prm } };
 
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             var result = response["result"].ToString();
             return JsonConvert.DeserializeObject<RuntimeVersion>(result);
@@ -266,7 +262,7 @@ namespace Polkadot.Api
                 prm = new JArray { param.BlockHash };
             JObject query = new JObject { { "method", "state_getMetadata" }, { "params", prm } };
 
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             try
             {
@@ -289,7 +285,7 @@ namespace Polkadot.Api
                 prm = new JArray { param.BlockHash };
             JObject query = new JObject { { "method", "chain_getBlock" }, { "params", prm } };
 
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             return Deserialize<SignedBlock, ParseBlock>(response);
         }
@@ -301,7 +297,7 @@ namespace Polkadot.Api
                 prm = new JArray { param.BlockHash };
             JObject query = new JObject { { "method", "chain_getHeader" }, { "params", prm } };
 
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             return Deserialize<BlockHeader, ParseBlockHeader>(response);
         }
@@ -310,7 +306,7 @@ namespace Polkadot.Api
         {
             JObject query = new JObject { { "method", "chain_getFinalizedHead" }, { "params", new JArray { } } };
 
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             return Deserialize<FinalHead, ParseFinalizedHead>(response);
         }
@@ -319,12 +315,7 @@ namespace Polkadot.Api
         {
             JObject query = new JObject { { "method", "system_networkState" },
                                           { "params", new JArray { } } };
-            JObject response = _jsonRpc.Request(query);
-
-            if (response == null)
-            {
-                throw new UnsafeNotAllowedException("system_networkState");
-            }
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             return Deserialize<NetworkState, ParseNetworkState>(response);
         }
@@ -333,12 +324,7 @@ namespace Polkadot.Api
         {
             JObject query = new JObject { { "method", "system_peers" },
                                           { "params", new JArray { } } };
-            JObject response = _jsonRpc.Request(query);
-
-            if (response == null)
-            {
-                throw new UnsafeNotAllowedException("system_peers");
-            }
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             return Deserialize<PeersInfo, ParsePeersInfo>(response);
         }
@@ -347,7 +333,7 @@ namespace Polkadot.Api
         {
             JObject query = new JObject { { "method", "system_health" },
                                           { "params", new JArray { } } };
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             return Deserialize<SystemHealth, ParseSystemHealth>(response);
         }
@@ -467,7 +453,7 @@ namespace Polkadot.Api
         public GenericExtrinsic[] PendingExtrinsics(int bufferSize)
         {
             var query = new JObject { { "method", "author_pendingExtrinsics" }, { "params", new JArray { } } };
-            JObject response = _jsonRpc.Request(query);
+            JObject response = _jsonRpc.Request(query).Unwrap();
 
             int count = 0;
             GenericExtrinsic[] genericExtrinsic = new GenericExtrinsic[bufferSize];
@@ -523,8 +509,8 @@ namespace Polkadot.Api
                     DataStructs.PublicKey pubk = new DataStructs.PublicKey();
                     pubk.Bytes = genericExtrinsic[count].Signature.SignerPublicKey;
                     genericExtrinsic[count].SignerAddress = _protocolParams.Metadata.GetAddrFromPublicKey(pubk);
+                    count++;
                 }
-                count++;
             }
 
             return genericExtrinsic.AsSpan()[..count].ToArray();
@@ -579,7 +565,7 @@ namespace Polkadot.Api
         public bool RemoveExtrinsic(string extrinsicHash)
         {
             var query = new JObject { { "method", "author_removeExtrinsic" }, { "params", new JArray { extrinsicHash } } };
-            var response = _jsonRpc.Request(query);
+            var response = _jsonRpc.Request(query).Unwrap();
 
             if (response == null)
                 throw new ApplicationException("Not supported");
@@ -815,9 +801,9 @@ namespace Polkadot.Api
                 }
 
                 var events = module.GetEvents();
+                eventModuleIndex++;
                 if (events != null && events.Any())
                 {
-                    eventModuleIndex++;
                     var eventIndex = 0;
                     foreach (var @event in events)
                     {
@@ -835,36 +821,142 @@ namespace Polkadot.Api
 
         public static SerializerSettings DefaultSubstrateSettings()
         {
-            return new SerializerSettings()
-                .AddCall<TransferCall>("Balances", "transfer_keep_alive")
+            var settings = new SerializerSettings();
                 
-                .AddEvent<ExtrinsicSuccess>("System", "ExtrinsicSuccess")
-                .AddEvent<ExtrinsicFailed>("System", "ExtrinsicFailed")
-                .AddEvent<CodeUpdated>("System", "CodeUpdated")
-                .AddEvent<NewAccount>("System", "NewAccount")
-                .AddEvent<KilledAccount>("System", "KilledAccount")
-                .AddEvent<Transfer>("Contracts", "Transfer")
-                .AddEvent<Instantiated>("Contracts", "Instantiated")
-                .AddEvent<Evicted>("Contracts", "Evicted")
-                .AddEvent<Restored>("Contracts", "Restored")
-                .AddEvent<CodeStored>("Contracts", "CodeStored")
-                .AddEvent<ScheduleUpdated>("Contracts", "ScheduleUpdated")
-                .AddEvent<Dispatched>("Contracts", "Dispatched")
-                .AddEvent<ContractExecution>("Contracts", "ContractExecution")
-                .AddEvent<NewAuthorities>("Grandpa", "NewAuthorities")
-                .AddEvent<Paused>("Grandpa", "Paused")
-                .AddEvent<Resumed>("Grandpa", "Resumed")
-                .AddEvent<Endowed>("Balances", "Endowed")
-                .AddEvent<DustLost>("Balances", "DustLost")
-                .AddEvent<Transfer>("Balances", "Transfer")
-                .AddEvent<BalanceSet>("Balances", "BalanceSet")
-                .AddEvent<Deposit>("Balances", "Deposit")
-                .AddEvent<Reserved>("Balances", "Reserved")
-                .AddEvent<Unreserved>("Balances", "Unreserved")
-                .AddEvent<ReserveRepatriated>("Balances", "ReserveRepatriated")
-                .AddEvent<Sudid>("Sudo", "Sudid")
-                .AddEvent<KeyChanged>("Sudo", "KeyChanged")
-                .AddEvent<SudoAsDone>("Sudo", "SudoAsDone");
+            RegisterGeneratedCalls(settings);
+            RegisterGeneratedEvents(settings);
+
+            return settings;
+        }
+
+        public string SignAndSendExtrinsic<TCall>(Address from, byte[] privateKeyFrom, TCall call, Action<string> callback,
+            EraDto era = null, BigInteger? chargeTransactionPayment = null) where TCall : IExtrinsicCall
+        {
+            var extrinsicBytes = SerializeExtrinsic(@from, privateKeyFrom, call, era, chargeTransactionPayment);
+
+            return SubmitExtrinsic(extrinsicBytes, callback);
+        }
+
+        private string SubmitExtrinsic(byte[] extrinsicBytes, Action<string> callback)
+        {
+            var query = new JObject
+                {{"method", "author_submitAndWatchExtrinsic"}, {"params", new JArray {extrinsicBytes.ToPrefixedHexString()}}};
+
+            // Send == Subscribe callback to completion
+            return Subscribe(query, (json) => { callback(json.ToString()); });
+        }
+
+        private byte[] SerializeExtrinsic<TCall>(Address @from, byte[] privateKeyFrom, TCall call, EraDto era,
+            BigInteger? chargeTransactionPayment) where TCall : IExtrinsicCall
+        {
+            var block = GetBlockHeader(null);
+            era ??= DefaultEra(block);
+            chargeTransactionPayment ??= 0;
+
+            var publicKeyFrom = _protocolParams.Metadata.GetPublicKeyFromAddr(@from);
+
+            var extrinsicAddressFrom = new ExtrinsicAddress(publicKeyFrom);
+
+            var nonce = GetAccountNonce(@from);
+            var extra = new SignedExtra(era, nonce, chargeTransactionPayment.Value);
+
+            var inheritanceCall = new InheritanceCall<TCall>(call);
+            var extrinsic =
+                new UncheckedExtrinsic<ExtrinsicAddress, ExtrinsicMultiSignature, SignedExtra, InheritanceCall<TCall>>(
+                    extrinsicAddressFrom, null, extra, inheritanceCall, block);
+
+            Signer.SignUncheckedExtrinsic(extrinsic, publicKeyFrom.Bytes, privateKeyFrom);
+
+            var vec = AsByteVec.FromValue(extrinsic);
+
+            var extrinsicBytes = Serializer.Serialize(vec);
+            return extrinsicBytes;
+        }
+
+        public Task<OneOf<ExtrinsicSuccess, ExtrinsicFailed>> SignAndWaitForResult<TCall>(Address @from, byte[] privateKeyFrom, TCall call, EraDto era = null,
+            BigInteger? chargeTransactionPayment = null) where TCall : IExtrinsicCall
+        {
+            var completionSource = new TaskCompletionSource<OneOf<ExtrinsicSuccess, ExtrinsicFailed>>();
+
+            var extrinsicBytes = SerializeExtrinsic(@from, privateKeyFrom, call, era, chargeTransactionPayment);
+
+            SubmitExtrinsic(extrinsicBytes, s =>
+            {
+                JToken? inBlock = null;
+                try
+                {
+                    var jObject = JObject.Parse(s);
+                    var isInBlock = jObject.TryGetValue("result", out var callResult)
+                                    && callResult.Type == JTokenType.Object
+                                    && callResult.Value<JObject>().TryGetValue("inBlock", out inBlock)
+                                    && inBlock.Type == JTokenType.String;
+                    if (!isInBlock)
+                    {
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    completionSource.SetException(ex);
+                    return;
+                }
+
+                Task.Run(() =>
+                {
+                    var block = GetBlock(new GetBlockParams() {BlockHash = inBlock!.Value<string>()});
+                    var eventsStr = StorageApi.GetStorage("System", "Events",
+                        new GetBlockHashParams() {BlockNumber = block.Block.Header.Number});
+                    var events = Serializer.Deserialize<EventList>(eventsStr.HexToByteArray());
+                    var index = block.Block.Extrinsic
+                        .Select((e, i) => (Value: e.HexToByteArray(), index: i))
+                        .Where(e => extrinsicBytes.SequenceEqual(e.Value))
+                        .Select(e => e.index)
+                        .First();
+
+                    foreach (var @event in events.Events.Where(e =>
+                        e.Phase.Value.IsT0 && e.Phase.Value.AsT0.Value == index))
+                    {
+                        switch (@event.Event)
+                        {
+                            case ExtrinsicSuccess x: 
+                                completionSource.SetResult(x);
+                                return;
+                            case ExtrinsicFailed x:
+                                completionSource.SetResult(x);
+                                return;
+                        }
+                    }
+                    
+                    completionSource.SetException(new ExtrinsicResultNotFoundException());
+                });
+            });
+
+            return completionSource.Task;
+        }
+
+        public Task<OneOf<ExtrinsicSuccess, ExtrinsicFailed>> SignWaitRetryOnLowPriority<TCall>(Address @from, byte[] privateKeyFrom, TCall call, EraDto era = null,
+            BigInteger? chargeTransactionPayment = null) where TCall : IExtrinsicCall
+        {
+            return SignWaitRetryOnLowPriorityInternal(from, privateKeyFrom, call, era, chargeTransactionPayment);
+        }
+
+        private async Task<OneOf<ExtrinsicSuccess, ExtrinsicFailed>> SignWaitRetryOnLowPriorityInternal<TCall>(Address @from,
+            byte[] privateKeyFrom, TCall call, EraDto era = null,
+            BigInteger? chargeTransactionPayment = null, int retryCount = 100) where TCall : IExtrinsicCall
+        {
+            try
+            {
+                return await SignAndWaitForResult(from, privateKeyFrom, call, era, chargeTransactionPayment);
+            }
+            catch (JrpcErrorException ex) when (ex.Code == 1014)
+            {
+                if (retryCount <= 0)
+                {
+                    throw;
+                }
+                await Task.Delay(TimeSpan.FromSeconds(18));
+                return await SignWaitRetryOnLowPriorityInternal(from, privateKeyFrom, call, era, chargeTransactionPayment, retryCount - 1);
+            }
         }
     }
 }

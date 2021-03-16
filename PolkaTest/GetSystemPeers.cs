@@ -40,8 +40,7 @@ namespace PolkaTest
             using (IApplication app = PolkaApi.GetApplication())
             {
                 app.Connect();
-                var exception = Assert.Throws<UnsafeNotAllowedException>(() => app.GetSystemPeers());
-                Assert.Contains("system_peers", exception.Message);
+                var exception = Assert.Throws<JrpcErrorException>(() => app.GetSystemPeers());
 
                 app.Disconnect();
             }

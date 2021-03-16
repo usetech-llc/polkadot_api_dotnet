@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Polkadot.BinaryContracts.Extrinsic;
 using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 using Polkadot.Utils;
