@@ -709,9 +709,9 @@ namespace Polkadot.Api
             return Subscribe(subscribeQuery, (json) =>
             {
                 var changes = json["result"]["changes"];
-                var accountInfoHex = changes[0][1].ToString();
+                var accountInfoHex = changes[0][1];
                 
-                var accountInfo = accountInfoHex.HexToByteArray().ToStruct<AccountInfo>();
+                var accountInfo = accountInfoHex.Type == JTokenType.Null ? default : accountInfoHex.Value<string>().HexToByteArray().ToStruct<AccountInfo>();
                 callback(accountInfo);
             });
         }
