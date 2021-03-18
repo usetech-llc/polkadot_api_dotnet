@@ -16,13 +16,13 @@ namespace Polkadot.BinaryContracts.Events
         
         [Serialize(2)]
         [PrefixedArrayConverter]
-        public ITopics[] Topics;
+        public Hash[] Topics;
 
         public EventRecord()
         {
         }
 
-        public EventRecord(Phase phase, IEvent @event, ITopics[] topics)
+        public EventRecord(Phase phase, IEvent @event, Hash[] topics)
         {
             Phase = phase;
             Event = @event;
