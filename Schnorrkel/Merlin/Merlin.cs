@@ -251,7 +251,6 @@
         static Random _rnd;
         public Transcript _strobe { get; private set; }
         private byte[] _strobeBytes;
-        private int _pointer;
 
         public TranscriptRng(Transcript strobe)
         {
@@ -262,7 +261,6 @@
 
             _strobe = strobe;
             _strobeBytes = Transcript.StringToByteArray(strobe._obj.DebugPrintState());
-            _pointer = 0;
         }
 
         public override void FillBytes(ref byte[] dst)

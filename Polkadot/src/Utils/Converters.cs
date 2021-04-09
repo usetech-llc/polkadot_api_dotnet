@@ -87,11 +87,19 @@ namespace Polkadot.Utils
             var value = new byte[span.Length / 2];
             for (int i = 0; i < value.Length; i++)
             {
-                var substring = span[(i * 2)..(i * 2 + 2)];
-                value[i] = byte.Parse(substring, NumberStyles.HexNumber);
+                var b1 = ParseChar(span[i * 2]);
+                var b2 = ParseChar(span[i * 2 + 1]);
+                
+                value[i] = (byte)((b1 << 4) | b2);
             }
 
             return value;
+        }
+
+        public static byte ParseChar(char c)
+        {
+            var l = char.ToLower(c);
+            return c >= 'a' ? (byte)(c - 'a' + 10) : (byte)(c - '0');
         }
 
         public static string ToHexString(this byte[] data, int? length = null)

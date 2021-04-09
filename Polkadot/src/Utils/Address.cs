@@ -43,9 +43,9 @@
         
         public static string GetAddrFromPublicKey(PublicKey pubKey)
         {
-            var plainAddr = new byte[35];
-            Array.Fill<byte>(plainAddr, 0x2A);
-            pubKey.Bytes.CopyTo(plainAddr.AsMemory(1));
+            var plainAddr = Enumerable.Repeat((byte)0x2A, 35).ToArray();
+            
+            pubKey.Bytes.CopyTo(plainAddr.AsSpan(1));
 
             // Add control sum
             // Add SS58RPE prefix

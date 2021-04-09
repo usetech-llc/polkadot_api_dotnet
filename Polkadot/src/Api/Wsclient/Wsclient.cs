@@ -100,7 +100,7 @@
             using (StreamReader sr = new StreamReader(filePath))
             {
                 var stringData = sr.ReadToEnd();
-                var certs = stringData.Split("-----BEGIN CERTIFICATE-----").Where(i => i.Length > 0).ToArray();
+                var certs = stringData.Split(new [] {"-----BEGIN CERTIFICATE-----"}, StringSplitOptions.None).Where(i => i.Length > 0).ToArray();
 
                 foreach (var cert in certs)
                 {

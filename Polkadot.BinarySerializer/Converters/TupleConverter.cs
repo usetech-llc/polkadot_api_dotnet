@@ -14,16 +14,17 @@ namespace Polkadot.BinarySerializer.Converters
         {
             var converters = parameters[0] as Type[];
 
-            var tuple = (ITuple) value;
-            for (int i = 0; i < tuple.Length; i++)
+            var tupleTypes = value.GetType().GenericTypeArguments;
+            for (int i = 0; i < tupleTypes.Length; i++)
             {
+                var item = value.GetType().GetProperty($"Item{i + 1}")?.GetValue(value);
                 if (converters?[i] != null)
                 {
-                    serializer.GetConverter(converters[i]).Serialize(stream, tuple[i], serializer, (parameters[1] as object[][])?[i]);
+                    serializer.GetConverter(converters[i]).Serialize(stream, item!, serializer, (parameters[1] as object[][])?[i]);
                 }
                 else
                 {
-                    serializer.Serialize(tuple[i], stream);
+                    serializer.Serialize(item, stream);
                 }
             }
         }

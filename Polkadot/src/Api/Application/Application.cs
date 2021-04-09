@@ -46,13 +46,9 @@ namespace Polkadot.Api
         public ProtocolParameters _protocolParams;
 
         // Era/epoch/session subscription storage hashes and data
-        private string _storageKeySessionsPerEra;
-        private string _storageKeyCurrentSessionIndex;
         private string _storageKeyBabeGenesisSlot;
-        private string _storageKeyBabeCurrentSlot;
         private BigInteger _babeEpochDuration;
         private BigInteger _sessionsPerEra;
-        private string _storageKeyBabeEpochIndex;
         private bool _isEpoch; // True, if epochs should be used instead of sessions
         private Lazy<IBinarySerializer> _serializer;
 
@@ -272,7 +268,7 @@ namespace Polkadot.Api
                 _metadataCache = meta.RuntimeMetadata.IsT12 ? meta.RuntimeMetadata.AsT12 : null;
                 return _metadataCache;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -748,9 +744,9 @@ namespace Polkadot.Api
             var blockHashCount = blockHashCountBytes switch
             {
                 {Length: 1} => blockHashCountBytes[0],
-                {Length: 2} => BitConverter.ToUInt16(blockHashCountBytes),
-                {Length: 4} => BitConverter.ToUInt32(blockHashCountBytes),
-                {Length: 8} => BitConverter.ToUInt64(blockHashCountBytes),
+                {Length: 2} => BitConverter.ToUInt16(blockHashCountBytes, 0),
+                {Length: 4} => BitConverter.ToUInt32(blockHashCountBytes, 0),
+                {Length: 8} => BitConverter.ToUInt64(blockHashCountBytes, 0),
                 _ => throw new OverflowException("Unable to deserialize block hash count")
             };
 
@@ -882,7 +878,7 @@ namespace Polkadot.Api
 
             SubmitExtrinsic(extrinsicBytes, s =>
             {
-                JToken? inBlock = null;
+                JToken inBlock = null;
                 try
                 {
                     var jObject = JObject.Parse(s);

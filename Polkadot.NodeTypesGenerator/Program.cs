@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -123,7 +124,8 @@ namespace Polkadot.NodeTypesGenerator
             {
                 JsonValueKind.String => CustomTypeStringProperties(property.Value.GetString()),
                 JsonValueKind.Object => CustomTypeObjectProperties(configuration, property),
-                JsonValueKind.Null => Array.Empty<Property>()
+                JsonValueKind.Null => Array.Empty<Property>(),
+                _ => throw new SwitchExpressionException()
             };
         }
 
@@ -151,7 +153,8 @@ namespace Polkadot.NodeTypesGenerator
                     var type = jsonProperty.Value switch
                     {
                         {ValueKind: JsonValueKind.String} v => ParseType(null, v.GetString()),
-                        {ValueKind: JsonValueKind.Object} v => ObjectType(v, jsonProperty.Name) 
+                        {ValueKind: JsonValueKind.Object} v => ObjectType(v, jsonProperty.Name),
+                        _ => throw new SwitchExpressionException()
                     };
 
                     yield return new Property()

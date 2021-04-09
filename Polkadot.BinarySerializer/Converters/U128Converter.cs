@@ -22,7 +22,13 @@ namespace Polkadot.BinarySerializer.Converters
             var bytes = new byte[128 / 8];
             stream.Read(bytes, 0, bytes.Length);
 
-            return new BigInteger(bytes, isUnsigned: true);
+            var value = new BigInteger(bytes);
+            if (value.Sign < 0)
+            {
+                value = (~value) + 1;
+            }
+
+            return value;
         }
     }
 }

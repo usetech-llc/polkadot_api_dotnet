@@ -38,8 +38,8 @@
             // var key = data.AsMemory().Slice(0, 32).ToArray();
             return new SecretKey
             {
-                key = new Scalar { ScalarBytes = data.AsMemory().Slice(0, 32).ToArray() },
-                nonce = data.AsMemory().Slice(32, 32).ToArray()
+                key = new Scalar { ScalarBytes = data.AsSpan().Slice(0, 32).ToArray() },
+                nonce = data.AsSpan().Slice(32, 32).ToArray()
             };
         }
 

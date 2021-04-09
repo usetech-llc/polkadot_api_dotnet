@@ -1,6 +1,8 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using Mnemonic;
 using Polkadot.Api;
+using Polkadot.BinarySerializer;
 using Polkadot.DataStructs;
 using Polkadot.Utils;
 using Xunit;
