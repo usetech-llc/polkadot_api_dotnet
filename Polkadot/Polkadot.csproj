@@ -27,6 +27,7 @@
     <PackageReference Include="OneOf" Version="3.0.163" />
     <PackageReference Include="OneOf.Extended" Version="3.0.163" />
     <PackageReference Include="SimpleBase" Version="2.1.0" />
+    <PackageReference Include="System.Text.Json" Version="5.0.1" />
     <PackageReference Include="System.Threading.Tasks.Dataflow" Version="4.11.1" />
     <PackageReference Include="websocketsharp.core" Version="1.0.0" />
   </ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Polkadot.Api.Client;
 using Polkadot.DataStructs;
 using Polkadot.Utils;
 
@@ -11,7 +12,7 @@ namespace PolkaTest
 
         public static readonly Address LocalAliceAddress = new Address("5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY");
         public static readonly Address LocalAccountWithKey = new Address("5E4eP18dC346yx1PRXBFbyaAVzXfGqf2TMcbBkyWr28K4f3Q");
-
+        
         public static readonly byte[] LocalAlicePrivateKey = "0x33A6F3093F158A7109F679410BEF1A0C54168145E0CECB4DF006C1C2FFFB1F09925A225D97AA00682D6A59B95B18780C10D7032336E88F3442B42361F4A66011".HexToByteArray();
 
         public static readonly byte[] LocalAccountPrivateKey = {
@@ -22,5 +23,13 @@ namespace PolkaTest
         public static readonly Address LocalBobAddress = new Address("5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty");
 
         public const string LocalNodeUri = "ws://localhost:9944/";
+
+        public static ISubstrateClient LocalClient()
+        {
+            return new SubstrateClient(SubstrateClientSettings.Default() with
+            {
+                RpcEndpoint = LocalNodeUri
+            });
+        }
     }
 }
