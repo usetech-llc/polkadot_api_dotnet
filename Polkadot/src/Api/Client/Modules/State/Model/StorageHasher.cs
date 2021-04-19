@@ -4,7 +4,7 @@ using Polkadot.Api.Hashers;
 using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 
-namespace Polkadot.DataStructs.Metadata.BinaryContracts.StorageHasher
+namespace Polkadot.Api.Client.Modules.State.Model
 {
     public class StorageHasher : IHasher
     {

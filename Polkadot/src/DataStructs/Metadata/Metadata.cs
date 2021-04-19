@@ -1,5 +1,5 @@
-﻿using Polkadot.BinarySerializer;
-using Polkadot.DataStructs.Metadata.Interfaces;
+﻿using Polkadot.Api.Client.Modules.State.Model.Interfaces;
+using Polkadot.BinarySerializer;
 
 namespace Polkadot.DataStructs.Metadata
 {

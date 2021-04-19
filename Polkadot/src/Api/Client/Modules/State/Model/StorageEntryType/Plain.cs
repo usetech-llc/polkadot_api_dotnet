@@ -1,7 +1,7 @@
 ﻿using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 
-namespace Polkadot.DataStructs.Metadata.BinaryContracts.StorageEntryType
+namespace Polkadot.Api.Client.Modules.State.Model.StorageEntryType
 {
     public class Plain
     {

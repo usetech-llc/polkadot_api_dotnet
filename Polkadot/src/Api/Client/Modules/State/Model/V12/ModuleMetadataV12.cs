@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using OneOf;
+using Polkadot.Api.Client.Modules.State.Model.Interfaces;
 using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 using Polkadot.BinarySerializer.Types;
-using Polkadot.DataStructs.Metadata.Interfaces;
+using Polkadot.DataStructs.Metadata;
 
-namespace Polkadot.DataStructs.Metadata.BinaryContracts.V12
+namespace Polkadot.Api.Client.Modules.State.Model.V12
 {
     public class ModuleMetadataV12 : ModuleBase, IModuleMeta
     {

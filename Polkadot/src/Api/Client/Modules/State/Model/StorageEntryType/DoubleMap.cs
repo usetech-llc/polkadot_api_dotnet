@@ -1,12 +1,12 @@
 ﻿using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 
-namespace Polkadot.DataStructs.Metadata.BinaryContracts.StorageEntryType
+namespace Polkadot.Api.Client.Modules.State.Model.StorageEntryType
 {
     public class DoubleMap
     {
         [Serialize(0)]
-        public StorageHasher.StorageHasher Hasher { get; set; }
+        public StorageHasher Hasher { get; set; }
         [Serialize(1)]
         [Utf8StringConverter]
         public string Key1 { get; set; }
@@ -17,6 +17,6 @@ namespace Polkadot.DataStructs.Metadata.BinaryContracts.StorageEntryType
         [Utf8StringConverter]
         public string Value { get; set; }
         [Serialize(4)]
-        public StorageHasher.StorageHasher Key2Hasher { get; set; }
+        public StorageHasher Key2Hasher { get; set; }
     }
 }

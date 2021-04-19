@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Polkadot.DataStructs.Metadata.Interfaces;
+using Polkadot.Api.Client.Modules.State.Model.Interfaces;
 using Polkadot.Utils;
 
 namespace Polkadot.DataStructs.Metadata

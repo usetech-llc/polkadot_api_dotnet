@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Polkadot.DataStructs.Metadata.Interfaces
+namespace Polkadot.Api.Client.Modules.State.Model.Interfaces
 {
     public interface ICallMeta
     {

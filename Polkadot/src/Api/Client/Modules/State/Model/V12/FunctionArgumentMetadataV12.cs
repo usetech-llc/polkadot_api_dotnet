@@ -1,8 +1,8 @@
-﻿using Polkadot.BinarySerializer;
+﻿using Polkadot.Api.Client.Modules.State.Model.Interfaces;
+using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
-using Polkadot.DataStructs.Metadata.Interfaces;
 
-namespace Polkadot.DataStructs.Metadata.BinaryContracts.V12
+namespace Polkadot.Api.Client.Modules.State.Model.V12
 {
     public class FunctionArgumentMetadataV12 : ICallArgument
     {

@@ -1,4 +1,4 @@
-﻿namespace Polkadot.DataStructs.Metadata.BinaryContracts.StorageEntryModifier
+﻿namespace Polkadot.Api.Client.Modules.State.Model.StorageEntryModifier
 {
     public class DefaultModifier
     {

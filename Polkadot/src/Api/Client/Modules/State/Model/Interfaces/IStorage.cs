@@ -1,7 +1,7 @@
 ﻿using OneOf;
-using Polkadot.DataStructs.Metadata.BinaryContracts.StorageEntryType;
+using Polkadot.Api.Client.Modules.State.Model.StorageEntryType;
 
-namespace Polkadot.DataStructs.Metadata.Interfaces
+namespace Polkadot.Api.Client.Modules.State.Model.Interfaces
 {
     public interface IStorage
     {

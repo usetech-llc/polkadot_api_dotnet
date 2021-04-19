@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Polkadot.Api.Client.Modules.State.Model;
 using Polkadot.Api.Client.RpcCalls;
 using Polkadot.BinaryContracts;
-using Polkadot.DataStructs.Metadata.BinaryContracts;
 
 namespace Polkadot.Api.Client.Modules.State.Rpc
 {

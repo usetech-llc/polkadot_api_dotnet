@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Polkadot.Api.Client.Modules.State.Model;
 using Polkadot.Api.Client.RpcCalls;
-using Polkadot.DataStructs.Metadata.BinaryContracts;
 using Xunit;
 
 namespace PolkaTest.RpcTest

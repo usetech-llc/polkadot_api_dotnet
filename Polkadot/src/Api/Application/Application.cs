@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Polkadot.BinaryContracts;
 using Polkadot.BinarySerializer;
-using Polkadot.DataStructs.Metadata.Interfaces;
 using Polkadot.Exceptions;
 using System;
 using System.Collections.Concurrent;
@@ -14,6 +13,8 @@ using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OneOf;
+using Polkadot.Api.Client.Modules.State.Model;
+using Polkadot.Api.Client.Modules.State.Model.Interfaces;
 using Polkadot.Api.Hashers;
 using Polkadot.BinaryContracts.Calls;
 using Polkadot.BinaryContracts.Calls.Balances;
@@ -25,7 +26,6 @@ using Polkadot.Data;
 using Polkadot.DataFactory;
 using Polkadot.DataStructs;
 using Polkadot.DataStructs.Metadata;
-using Polkadot.DataStructs.Metadata.BinaryContracts;
 using Polkadot.src.DataStructs;
 using Polkadot.Utils;
 

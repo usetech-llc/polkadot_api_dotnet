@@ -1,12 +1,12 @@
 ﻿using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 
-namespace Polkadot.DataStructs.Metadata.BinaryContracts.StorageEntryType
+namespace Polkadot.Api.Client.Modules.State.Model.StorageEntryType
 {
     public class Map
     {
         [Serialize(0)]
-        public StorageHasher.StorageHasher Hasher { get; set; }
+        public StorageHasher Hasher { get; set; }
         
         [Serialize(1)]
         [Utf8StringConverter]

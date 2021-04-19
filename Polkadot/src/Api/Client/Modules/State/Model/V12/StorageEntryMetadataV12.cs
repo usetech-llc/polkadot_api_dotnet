@@ -1,11 +1,11 @@
 ﻿using OneOf;
+using Polkadot.Api.Client.Modules.State.Model.Interfaces;
+using Polkadot.Api.Client.Modules.State.Model.StorageEntryModifier;
+using Polkadot.Api.Client.Modules.State.Model.StorageEntryType;
 using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
-using Polkadot.DataStructs.Metadata.BinaryContracts.StorageEntryModifier;
-using Polkadot.DataStructs.Metadata.BinaryContracts.StorageEntryType;
-using Polkadot.DataStructs.Metadata.Interfaces;
 
-namespace Polkadot.DataStructs.Metadata.BinaryContracts.V12
+namespace Polkadot.Api.Client.Modules.State.Model.V12
 {
     public class StorageEntryMetadataV12: IStorage
     {

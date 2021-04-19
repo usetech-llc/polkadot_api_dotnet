@@ -42,4 +42,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="src\Api\Client\Model" />
+    <Folder Include="src\Api\Client\Modules\Author" />
+  </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Polkadot.DataStructs.Metadata.Interfaces
+﻿namespace Polkadot.Api.Client.Modules.State.Model.Interfaces
 {
     public interface IConstantMeta
     {

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using OneOf;
-using Polkadot.DataStructs.Metadata.BinaryContracts.StorageEntryType;
-using Polkadot.DataStructs.Metadata.Interfaces;
+using Polkadot.Api.Client.Modules.State.Model.Interfaces;
+using Polkadot.Api.Client.Modules.State.Model.StorageEntryType;
 
 namespace Polkadot.DataStructs.Metadata
 {
