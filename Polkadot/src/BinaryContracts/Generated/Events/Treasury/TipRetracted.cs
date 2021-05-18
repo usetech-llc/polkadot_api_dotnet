@@ -4,6 +4,7 @@ using Polkadot.BinarySerializer.Converters;
 using Polkadot.BinaryContracts.Nft;
 using Polkadot.BinaryContracts.Common;
 using System.Numerics;
+using Polkadot.Api.Client.Model;
 
 namespace Polkadot.BinaryContracts.Events.Treasury
 {
@@ -11,12 +12,12 @@ namespace Polkadot.BinaryContracts.Events.Treasury
     {
         // Rust type Hash
         [Serialize(0)]
-        public Hash EventArgument0 { get; set; }
+        public Hash256 EventArgument0 { get; set; }
 
 
 
         public TipRetracted() { }
-        public TipRetracted(Hash @eventArgument0)
+        public TipRetracted(Hash256 @eventArgument0)
         {
             this.EventArgument0 = @eventArgument0;
         }

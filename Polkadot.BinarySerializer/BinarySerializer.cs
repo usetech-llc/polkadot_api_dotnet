@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using OneOf;
 using Polkadot.BinarySerializer.Extensions;
+using Polkadot.BinarySerializer.Types;
 
 namespace Polkadot.BinarySerializer
 {
@@ -23,11 +24,85 @@ namespace Polkadot.BinarySerializer
         private readonly Dictionary<Type, (byte[] DestPublicKey, byte[] Selector)> _contractMetaCache;
         private readonly Dictionary<(byte[] DestPublicKey, byte[] Selector), Type> _contractTypeCache;
 
+        private readonly Dictionary<Type, Func<Type, Stream, object>> _deserializers;
+        private readonly Dictionary<Type, Action<Stream, object>> _serializers;
+
         public BinarySerializer()
         {
+            _deserializers = new ()
+            {
+                { typeof(byte), (_, stream) => stream.ReadByteThrowIfStreamEnd() },
+                { typeof(sbyte), (_, stream) => (sbyte)stream.ReadByteThrowIfStreamEnd() },
+                { typeof(short), (_, stream) => ReadShort(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()) },
+                { typeof(ushort), (_, stream) => (ushort)ReadShort(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()) },
+                { typeof(int), (_, stream) => ReadInt(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()) },
+                { typeof(uint), (_, stream) => (uint)ReadInt(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()) },
+                { typeof(long), (_, stream) => ReadLong(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()) },
+                { typeof(ulong), (_, stream) => ReadUlong(stream) },
+                { typeof(Int128), (_, stream) => ReadInt128(stream) },
+                { typeof(UInt128), (_, stream) => ReadUInt128(stream) },
+                { typeof(Int256), (_, stream) => ReadInt256(stream) },
+                { typeof(UInt256), (_, stream) => ReadUInt256(stream) },
+                { typeof(Int512), (_, stream) => ReadInt512(stream) },
+                { typeof(UInt512), (_, stream) => ReadUInt512(stream) },
+                { typeof(bool), (_, stream) => ReadBool(stream.ReadByteThrowIfStreamEnd()) },
+                { typeof(Tuple<>), ReadTuple },
+                { typeof(Tuple<,>), ReadTuple },
+                { typeof(Tuple<,,>), ReadTuple },
+                { typeof(Tuple<,,,>), ReadTuple },
+                { typeof(Tuple<,,,,>), ReadTuple },
+                { typeof(Tuple<,,,,,>), ReadTuple },
+                { typeof(Tuple<,,,,,,>), ReadTuple },
+                { typeof(Tuple<,,,,,,,>), ReadTuple },
+                { typeof(ValueTuple<>), ReadTuple },
+                { typeof(ValueTuple<,>), ReadTuple },
+                { typeof(ValueTuple<,,>), ReadTuple },
+                { typeof(ValueTuple<,,,>), ReadTuple },
+                { typeof(ValueTuple<,,,,>), ReadTuple },
+                { typeof(ValueTuple<,,,,,>), ReadTuple },
+                { typeof(ValueTuple<,,,,,,>), ReadTuple },
+                { typeof(ValueTuple<,,,,,,,>), ReadTuple },
+            };
+
+            _serializers = new()
+            {
+                {typeof(byte), (stream, value) => stream.WriteByte((byte)value)},
+                {typeof(sbyte), (stream, value) => stream.WriteByte((byte)(sbyte)value)},
+                { typeof(short), (stream, value) => WriteShort(stream, (short)value) },
+                { typeof(ushort), (stream, value) => WriteShort(stream, (short)(ushort)value) },
+                { typeof(int), (stream, value) => WriteInt(stream, (int)value) },
+                { typeof(uint), (stream, value) => WriteInt(stream, (int)(uint)value) },
+                { typeof(long), (stream, value) => WriteLong(stream, (long)value) },
+                { typeof(ulong), (stream, value) => WriteLong(stream, (long)(ulong)value) },
+                { typeof(Int128), (stream, value) => WriteInt128(stream, (Int128)value) },
+                { typeof(UInt128), (stream, value) => WriteUint128(stream, (UInt128)value) },
+                { typeof(Int256), (stream, value) => WriteInt256(stream, (Int256)value) },
+                { typeof(UInt256), (stream, value) => WriteUint256(stream, (UInt256)value) },
+                { typeof(Int512), (stream, value) => WriteInt512(stream, (Int512)value) },
+                { typeof(UInt512), (stream, value) => WriteUint512(stream, (UInt512)value) },
+                { typeof(Enum), (stream, value) => WriteEnum(stream, (Enum)value) },
+                { typeof(bool), (stream, value) => WriteBool(stream, (bool)value) },
+                { typeof(string), (stream, value) => WriteString(stream, (string)value) },
+                { typeof(Tuple<>), WriteTuple },
+                { typeof(Tuple<,>), WriteTuple },
+                { typeof(Tuple<,,>), WriteTuple },
+                { typeof(Tuple<,,,>), WriteTuple },
+                { typeof(Tuple<,,,,>), WriteTuple },
+                { typeof(Tuple<,,,,,>), WriteTuple },
+                { typeof(Tuple<,,,,,,>), WriteTuple },
+                { typeof(Tuple<,,,,,,,>), WriteTuple },
+                { typeof(ValueTuple<>), WriteTuple },
+                { typeof(ValueTuple<,>), WriteTuple },
+                { typeof(ValueTuple<,,>), WriteTuple },
+                { typeof(ValueTuple<,,,>), WriteTuple },
+                { typeof(ValueTuple<,,,,>), WriteTuple },
+                { typeof(ValueTuple<,,,,,>), WriteTuple },
+                { typeof(ValueTuple<,,,,,,>), WriteTuple },
+                { typeof(ValueTuple<,,,,,,,>), WriteTuple },
+            };
         }
-        
-        public BinarySerializer(IndexResolver resolver, SerializerSettings settings)
+
+        public BinarySerializer(IndexResolver resolver, SerializerSettings settings) : this()
         {
             foreach (var (module, method, type) in settings.KnownCalls)
             {
@@ -78,6 +153,12 @@ namespace Polkadot.BinarySerializer
             return DeserializeInternal(type, stream);
         }
 
+        public object Deserialize(Type type, byte[] stream)
+        {
+            using var ms = new MemoryStream(stream);
+            return DeserializeInternal(type, ms);
+        }
+
         private object DeserializeInternal(Type type, Stream stream)
         {
             if (typeof(IBinaryDeserializable).IsAssignableFrom(type))
@@ -86,25 +167,26 @@ namespace Polkadot.BinarySerializer
                 return deserializable.Deserialize(stream, this);
             }
             
-            return type switch
+            if (_deserializers.TryGetValue(type, out var deserializer))
             {
-                {} when type == typeof(byte) => stream.ReadByteThrowIfStreamEnd(),
-                {} when type == typeof(sbyte) => (sbyte)stream.ReadByteThrowIfStreamEnd(),
-                {} when type == typeof(short) => ReadShort(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
-                {} when type == typeof(ushort) => (ushort)ReadShort(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
-                {} when type == typeof(int) => ReadInt(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
-                {} when type == typeof(uint) => (uint)ReadInt(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
-                {} when type == typeof(long) => ReadLong(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
-                {} when type == typeof(ulong) => (ulong)ReadLong(stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd()),
-                {} when type == typeof(bool) => ReadBool(stream.ReadByteThrowIfStreamEnd()),
-                {} when typeof(Enum).IsAssignableFrom(type) => ReadEnum(type, stream), 
-                
-                _ => ReadObject(type, stream),
-            };
+                return deserializer(type, stream);
+            }
 
+            if (type.IsGenericType &&
+                _deserializers.TryGetValue(type.GetGenericTypeDefinition(), out var genericDeserializer))
+            {
+                return genericDeserializer(type, stream);
+            }
+
+            if (type.IsEnum)
+            {
+                return ReadEnum(type, stream);
+            }
+
+            return ReadObject(type, stream);
         }
 
-        private bool ReadBool(byte b)
+        private static bool ReadBool(byte b)
         {
             if (b == 0)
             {
@@ -221,7 +303,79 @@ namespace Polkadot.BinarySerializer
             return _contractMetaCache[typeOfParameter];
         }
 
-        private long ReadLong(byte b0, byte b1, byte b2, byte b3, byte b4, byte b5, byte b6, byte b7)
+        public UInt512 ReadUInt512(Stream ms)
+        {
+            var ul0 = ReadUlong(ms);
+            var ul1 = ReadUlong(ms);
+            var ul2 = ReadUlong(ms);
+            var ul3 = ReadUlong(ms);
+            var ul4 = ReadUlong(ms);
+            var ul5 = ReadUlong(ms);
+            var ul6 = ReadUlong(ms);
+            var ul7 = ReadUlong(ms);
+
+            return new UInt512(ul0, ul1, ul2, ul3, ul4, ul5, ul6, ul7);
+        }
+
+        public Int512 ReadInt512(Stream ms)
+        {
+            var ul0 = ReadUlong(ms);
+            var ul1 = ReadUlong(ms);
+            var ul2 = ReadUlong(ms);
+            var ul3 = ReadUlong(ms);
+            var ul4 = ReadUlong(ms);
+            var ul5 = ReadUlong(ms);
+            var ul6 = ReadUlong(ms);
+            var ul7 = ReadUlong(ms);
+
+            return new Int512(ul0, ul1, ul2, ul3, ul4, ul5, ul6, ul7);
+        }
+
+        public Int256 ReadInt256(Stream ms)
+        {
+            var ul0 = ReadUlong(ms);
+            var ul1 = ReadUlong(ms);
+            var ul2 = ReadUlong(ms);
+            var ul3 = ReadUlong(ms);
+
+            return new Int256(ul0, ul1, ul2, ul3);
+        }
+
+        public UInt256 ReadUInt256(Stream ms)
+        {
+            var ul0 = ReadUlong(ms);
+            var ul1 = ReadUlong(ms);
+            var ul2 = ReadUlong(ms);
+            var ul3 = ReadUlong(ms);
+
+            return new UInt256(ul0, ul1, ul2, ul3);
+        }
+
+        private Int128 ReadInt128(Stream ms)
+        {
+            var ul0 = ReadUlong(ms);
+            var ul1 = ReadUlong(ms);
+
+            return new Int128(ul0, ul1);
+        }
+
+        private UInt128 ReadUInt128(Stream ms)
+        {
+            var ul0 = ReadUlong(ms);
+            var ul1 = ReadUlong(ms);
+
+            return new UInt128(ul0, ul1);
+        }
+        
+        
+        private ulong ReadUlong(Stream stream)
+        {
+            return (ulong) ReadLong(
+                stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), 
+                stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd(), stream.ReadByteThrowIfStreamEnd());
+        }
+
+        private static long ReadLong(byte b0, byte b1, byte b2, byte b3, byte b4, byte b5, byte b6, byte b7)
         {
             var ul0 = (ulong) b0;
             var ul1 = ((ulong) b1) << 8;
@@ -235,7 +389,7 @@ namespace Polkadot.BinarySerializer
             return (long) (ul0 | ul1 | ul2 | ul3 | ul4 | ul5 | ul6 | ul7);
         }
 
-        private int ReadInt(byte b0, byte b1, byte b2, byte b3)
+        private static int ReadInt(byte b0, byte b1, byte b2, byte b3)
         {
             var ul0 = (ulong) b0;
             var ul1 = ((ulong) b1) << 8;
@@ -245,12 +399,20 @@ namespace Polkadot.BinarySerializer
             return (int) (ul0 | ul1 | ul2 | ul3);
         }
 
-        private short ReadShort(byte b0, byte b1)
+        private static short ReadShort(byte b0, byte b1)
         {
             var ul0 = (ulong) b0;
             var ul1 = ((ulong) b1) << 8;
             return (short)(ul0 | ul1);
         }
+        
+        private object ReadTuple(Type type, Stream stream)
+        {
+            var values = type.GenericTypeArguments.Select(t => DeserializeInternal(t, stream)).ToArray();
+    
+            return type.GetMethod("Create")!.MakeGenericMethod(type.GenericTypeArguments).Invoke(null, values);
+        }
+
 
         public T Deserialize<T>(byte[] data)
         {
@@ -272,55 +434,39 @@ namespace Polkadot.BinarySerializer
                 ((IBinarySerializable)value).Serialize(ms, this);
                 return;
             }
-
-            if (value is string s)
+            
+            if (_serializers.TryGetValue(type, out var serializer))
             {
-                WriteString(ms, s);
+                serializer(ms, value);
+                return;
+            }
+
+            if (type.IsGenericType &&
+                _serializers.TryGetValue(type.GetGenericTypeDefinition(), out var genericSerializer))
+            {
+                genericSerializer(ms, value);
                 return;
             }
 
             if (typeof(IEnumerable).IsAssignableFrom(type))
             {
-                WriteEnumerable((IEnumerable)value, ms);
+                WriteEnumerable(ms, (IEnumerable)value);
                 return;
             }
             
-            switch (value)
+            WriteObject(ms, type, value);
+        }
+
+        private void WriteTuple(Stream stream, object value)
+        {
+            var type = value.GetType();
+
+            var index = 1;
+            foreach (var genericParameter in type.GenericTypeArguments)
             {
-                case byte b: 
-                    ms.WriteByte(b);
-                    break;
-                case sbyte b: 
-                    ms.WriteByte((byte)b);
-                    break;
-                case short b:
-                    WriteShort(ms, b);
-                    break;
-                case ushort b:
-                    WriteShort(ms, (short)b);
-                    break;
-                case int b:
-                    WriteInt(ms, b);
-                    break;
-                case uint b:
-                    WriteInt(ms, (int)b);
-                    break;
-                case long b:
-                    WriteLong(ms, b);
-                    break;
-                case ulong b:
-                    WriteLong(ms, (long)b);
-                    break;
-                case Enum e:
-                    WriteEnum(ms, e);
-                    break;
-                case bool b:
-                    WriteBool(ms, b);
-                    break;
-                
-                default:
-                    WriteObject(ms, type, value);
-                    break;
+                var item = type.GetProperty($"Item{index}")!.GetValue(value);
+                SerializeInternal(item, stream);
+                index++;
             }
         }
 
@@ -342,7 +488,7 @@ namespace Polkadot.BinarySerializer
             }
         }
 
-        private void WriteEnumerable(IEnumerable enumerable, Stream ms)
+        private void WriteEnumerable(Stream ms, IEnumerable enumerable)
         {
             if (enumerable is byte[] byteArray)
             {
@@ -497,6 +643,64 @@ namespace Polkadot.BinarySerializer
             ms.WriteByte((byte)((i >> 40) & 0xff));
             ms.WriteByte((byte)((i >> 48) & 0xff));
             ms.WriteByte((byte)(i >> 56));
+        }
+
+        private void WriteInt128(Stream ms, Int128 i)
+        {
+            var (l0, l1) = i;
+            WriteLong(ms, (long)l0);
+            WriteLong(ms, (long)l1);
+        }
+
+        private void WriteUint128(Stream ms, UInt128 i)
+        {
+            var (l0, l1) = i;
+            WriteLong(ms, (long)l0);
+            WriteLong(ms, (long)l1);
+        }
+
+        private void WriteInt256(Stream ms, Int256 i)
+        {
+            var (l0, l1, l2, l3) = i;
+            WriteLong(ms, (long)l0);
+            WriteLong(ms, (long)l1);
+            WriteLong(ms, (long)l2);
+            WriteLong(ms, (long)l3);
+        }
+
+        private void WriteUint256(Stream ms, UInt256 i)
+        {
+            var (l0, l1, l2, l3) = i;
+            WriteLong(ms, (long)l0);
+            WriteLong(ms, (long)l1);
+            WriteLong(ms, (long)l2);
+            WriteLong(ms, (long)l3);
+        }
+ 
+        private void WriteInt512(Stream ms, Int512 i)
+        {
+            var (l0, l1, l2, l3, l4, l5, l6, l7) = i;
+            WriteLong(ms, (long)l0);
+            WriteLong(ms, (long)l1);
+            WriteLong(ms, (long)l2);
+            WriteLong(ms, (long)l3);
+            WriteLong(ms, (long)l4);
+            WriteLong(ms, (long)l5);
+            WriteLong(ms, (long)l6);
+            WriteLong(ms, (long)l7);
+        }
+ 
+        private void WriteUint512(Stream ms, UInt512 i)
+        {
+            var (l0, l1, l2, l3, l4, l5, l6, l7) = i;
+            WriteLong(ms, (long)l0);
+            WriteLong(ms, (long)l1);
+            WriteLong(ms, (long)l2);
+            WriteLong(ms, (long)l3);
+            WriteLong(ms, (long)l4);
+            WriteLong(ms, (long)l5);
+            WriteLong(ms, (long)l6);
+            WriteLong(ms, (long)l7);
         }
     }
 }

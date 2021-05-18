@@ -4,6 +4,7 @@ using Polkadot.BinarySerializer.Converters;
 using Polkadot.BinaryContracts.Nft;
 using Polkadot.BinaryContracts.Common;
 using System.Numerics;
+using Polkadot.Api.Client.Model;
 
 namespace Polkadot.BinaryContracts.Calls.Contracts
 {
@@ -23,7 +24,7 @@ namespace Polkadot.BinaryContracts.Calls.Contracts
 
         // Rust type CodeHash<T>
         [Serialize(2)]
-        public Hash CodeHash { get; set; }
+        public Hash256 CodeHash { get; set; }
 
 
         // Rust type Vec<u8>
@@ -40,7 +41,7 @@ namespace Polkadot.BinaryContracts.Calls.Contracts
 
 
         public InstantiateCall() { }
-        public InstantiateCall(BigInteger @endowment, BigInteger @gasLimit, Hash @codeHash, byte[] @data, byte[] @salt)
+        public InstantiateCall(BigInteger @endowment, BigInteger @gasLimit, Hash256 @codeHash, byte[] @data, byte[] @salt)
         {
             this.Endowment = @endowment;
             this.GasLimit = @gasLimit;

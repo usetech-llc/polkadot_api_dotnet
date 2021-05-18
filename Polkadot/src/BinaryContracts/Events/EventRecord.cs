@@ -1,4 +1,5 @@
 ﻿using OneOf;
+using Polkadot.Api.Client.Model;
 using Polkadot.BinaryContracts.Events.PhaseEnum;
 using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
@@ -16,13 +17,13 @@ namespace Polkadot.BinaryContracts.Events
         
         [Serialize(2)]
         [PrefixedArrayConverter]
-        public Hash[] Topics;
+        public Hash256[] Topics;
 
         public EventRecord()
         {
         }
 
-        public EventRecord(Phase phase, IEvent @event, Hash[] topics)
+        public EventRecord(Phase phase, IEvent @event, Hash256[] topics)
         {
             Phase = phase;
             Event = @event;

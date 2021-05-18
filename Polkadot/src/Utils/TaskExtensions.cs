@@ -30,6 +30,17 @@ namespace Polkadot.Utils
             }
 
             return task.WithTimeout(interval.Value);
+        }
+        
+        public static async Task WithTimeout(this Task task, TimeSpan interval)
+        {
+            using var tokenSource = new CancellationTokenSource();
+            var t = await Task.WhenAny(task, Task.Delay(interval, tokenSource.Token));
+            if (t != task)
+            {
+                throw new TimeoutException();
+            }
+            await task;
         } 
     }
 }

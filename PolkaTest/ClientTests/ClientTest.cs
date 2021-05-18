@@ -10,8 +10,9 @@ namespace PolkaTest.ClientTests
         [Fact]
         public async Task ConnectingToUnexistingUrlThrowsTransportException()
         {
-            var client = new SubstrateClient(SubstrateClientSettings.Default() with {RpcEndpoint = "ws://0.0.0.0/"});
-            await Assert.ThrowsAsync<TransportException>(() => client.Rpc.Call<string>("rpc does not exist"));
+            var client = SubstrateClient.FromSettings(SubstrateClientSettings.Default() with {RpcEndpoint = "ws://10.10.10.10/"});
+            var exception = await Assert.ThrowsAsync<TransportException>(() => client.Rpc.Call<string>("rpc does not exist"));
+            Assert.True(exception.IsConnectionTimeout());
         }
     }
 }

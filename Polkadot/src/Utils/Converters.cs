@@ -84,11 +84,25 @@ namespace Polkadot.Utils
                 span = span[2..];
             }
 
-            var value = new byte[span.Length / 2];
-            for (int i = 0; i < value.Length; i++)
+            var value = new byte[span.Length / 2 + span.Length % 2];
+
+            if (span.Length % 2 == 1)
             {
-                var b1 = ParseChar(span[i * 2]);
-                var b2 = ParseChar(span[i * 2 + 1]);
+                value[0] = ParseChar(span[0]);
+            }
+            else
+            {
+                var b1 = ParseChar(span[0]);
+                var b2 = ParseChar(span[1]);
+                
+                value[0] = (byte)((b1 << 4) | b2);
+            }
+            
+            
+            for (int i = 1; i < value.Length; i++)
+            {
+                var b1 = ParseChar(span[i * 2 - span.Length % 2]);
+                var b2 = ParseChar(span[i * 2 + 1 - span.Length % 2]);
                 
                 value[i] = (byte)((b1 << 4) | b2);
             }

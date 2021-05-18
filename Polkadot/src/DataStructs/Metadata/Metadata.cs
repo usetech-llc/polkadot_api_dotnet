@@ -3,7 +3,6 @@ using Polkadot.BinarySerializer;
 
 namespace Polkadot.DataStructs.Metadata
 {
-    using Extensions.Data;
     using Polkadot.Api;
     using Polkadot.Utils;
     using System;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Polkadot.Api.Client.Model;
 using Polkadot.Api.Client.Modules.State.Model;
 using Polkadot.Api.Client.RpcCalls;
 using Polkadot.BinaryContracts;
@@ -16,10 +17,10 @@ namespace Polkadot.Api.Client.Modules.State.Rpc
             _rpc = rpc;
         }
 
-        public Task<RuntimeMetadataPrefixed> GetMetadata(Hash at = null, CancellationToken token = default, TimeSpan? timeout = default)
+        public Task<RuntimeMetadataPrefixed> GetMetadata(Hash256 at = null, CancellationToken token = default)
         {
             var p = at == null ? null : new[] {at};
-            return _rpc.Call<RuntimeMetadataPrefixed>("state_getMetadata", p, token, timeout);
+            return _rpc.Call<RuntimeMetadataPrefixed>("state_getMetadata", p, token);
         }
     }
 }

@@ -14,5 +14,18 @@ namespace Polkadot.BinarySerializer.Extensions
 
             return (byte) read;
         }
+
+        public static bool TryReadByte(this Stream stream, out byte b)
+        {
+            b = 0;
+            var read = stream.ReadByte();
+            if (read == -1)
+            {
+                return false;
+            }
+
+            b = (byte) read;
+            return true;
+        }
     }
 }

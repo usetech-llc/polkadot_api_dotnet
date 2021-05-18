@@ -10,6 +10,7 @@ namespace Polkadot.BinarySerializer
         void Serialize<T>(T value, Stream stream);
         T Deserialize<T>(Stream stream);
         object Deserialize(Type type, Stream stream);
+        object Deserialize(Type type, byte[] stream);
         T Deserialize<T>(byte[] data);
         object CreateObject(Type type);
         IBinaryConverter GetConverter(Type type);

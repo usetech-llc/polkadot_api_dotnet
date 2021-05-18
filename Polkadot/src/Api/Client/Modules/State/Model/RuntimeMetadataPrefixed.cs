@@ -1,5 +1,8 @@
-﻿using OneOf;
+﻿using System.Text.Json.Serialization;
+using OneOf;
 using Polkadot.Api.Client.Modules.State.Model.V12;
+using Polkadot.Api.Client.RpcCalls;
+using Polkadot.Api.Client.Serialization;
 using Polkadot.BinarySerializer;
 using Polkadot.BinarySerializer.Converters;
 
@@ -8,6 +11,7 @@ namespace Polkadot.Api.Client.Modules.State.Model
     /// <summary>
     /// From frame\metadata\src\lib.rs
     /// </summary>
+    [JsonConverter(typeof(BinaryJsonConverter<RuntimeMetadataPrefixed>))]
     public class RuntimeMetadataPrefixed
     {
         [Serialize(0)]

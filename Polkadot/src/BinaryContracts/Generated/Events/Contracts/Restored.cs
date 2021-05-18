@@ -4,6 +4,7 @@ using Polkadot.BinarySerializer.Converters;
 using Polkadot.BinaryContracts.Nft;
 using Polkadot.BinaryContracts.Common;
 using System.Numerics;
+using Polkadot.Api.Client.Model;
 
 namespace Polkadot.BinaryContracts.Events.Contracts
 {
@@ -21,7 +22,7 @@ namespace Polkadot.BinaryContracts.Events.Contracts
 
         // Rust type Hash
         [Serialize(2)]
-        public Hash EventArgument2 { get; set; }
+        public Hash256 EventArgument2 { get; set; }
 
 
         // Rust type Balance
@@ -31,7 +32,7 @@ namespace Polkadot.BinaryContracts.Events.Contracts
 
 
         public Restored() { }
-        public Restored(PublicKey @eventArgument0, PublicKey @eventArgument1, Hash @eventArgument2, Balance @eventArgument3)
+        public Restored(PublicKey @eventArgument0, PublicKey @eventArgument1, Hash256 @eventArgument2, Balance @eventArgument3)
         {
             this.EventArgument0 = @eventArgument0;
             this.EventArgument1 = @eventArgument1;

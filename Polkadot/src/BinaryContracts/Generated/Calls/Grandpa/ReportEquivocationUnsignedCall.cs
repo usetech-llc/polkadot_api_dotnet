@@ -4,6 +4,7 @@ using Polkadot.BinarySerializer.Converters;
 using Polkadot.BinaryContracts.Nft;
 using Polkadot.BinaryContracts.Common;
 using System.Numerics;
+using Polkadot.Api.Client.Model;
 
 namespace Polkadot.BinaryContracts.Calls.Grandpa
 {
@@ -11,7 +12,7 @@ namespace Polkadot.BinaryContracts.Calls.Grandpa
     {
         // Rust type EquivocationProof<T::Hash, T::BlockNumber>
         [Serialize(0)]
-        public EquivocationProof<Hash, BlockNumber> EquivocationProof { get; set; }
+        public EquivocationProof<Hash256, BlockNumber> EquivocationProof { get; set; }
 
 
         // Rust type T::KeyOwnerProof
@@ -21,7 +22,7 @@ namespace Polkadot.BinaryContracts.Calls.Grandpa
 
 
         public ReportEquivocationUnsignedCall() { }
-        public ReportEquivocationUnsignedCall(EquivocationProof<Hash, BlockNumber> @equivocationProof, KeyOwnerProof @keyOwnerProof)
+        public ReportEquivocationUnsignedCall(EquivocationProof<Hash256, BlockNumber> @equivocationProof, KeyOwnerProof @keyOwnerProof)
         {
             this.EquivocationProof = @equivocationProof;
             this.KeyOwnerProof = @keyOwnerProof;

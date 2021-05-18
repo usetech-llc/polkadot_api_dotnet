@@ -2,7 +2,7 @@
 
 namespace Polkadot.BinarySerializer
 {
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
+    [AttributeUsage(AttributeTargets.All)]
     public class ConverterAttribute : Attribute
     {
         /// <summary>

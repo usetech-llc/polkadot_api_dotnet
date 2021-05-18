@@ -6,7 +6,16 @@
         <Nullable>disable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
     <ItemGroup>
+      <PackageReference Include="Contrib.Bcl.Ranges" Version="1.0.0" />
       <PackageReference Include="OneOf" Version="3.0.163" />
       <PackageReference Include="System.Memory" Version="4.5.4" />
     </ItemGroup>

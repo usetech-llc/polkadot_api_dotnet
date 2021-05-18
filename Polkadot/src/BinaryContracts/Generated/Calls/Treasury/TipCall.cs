@@ -4,6 +4,7 @@ using Polkadot.BinarySerializer.Converters;
 using Polkadot.BinaryContracts.Nft;
 using Polkadot.BinaryContracts.Common;
 using System.Numerics;
+using Polkadot.Api.Client.Model;
 
 namespace Polkadot.BinaryContracts.Calls.Treasury
 {
@@ -11,7 +12,7 @@ namespace Polkadot.BinaryContracts.Calls.Treasury
     {
         // Rust type T::Hash
         [Serialize(0)]
-        public Hash Hash { get; set; }
+        public Hash256 Hash { get; set; }
 
 
         // Rust type Compact<BalanceOf<T, I>>
@@ -22,7 +23,7 @@ namespace Polkadot.BinaryContracts.Calls.Treasury
 
 
         public TipCall() { }
-        public TipCall(Hash @hash, BigInteger @tipValue)
+        public TipCall(Hash256 @hash, BigInteger @tipValue)
         {
             this.Hash = @hash;
             this.TipValue = @tipValue;

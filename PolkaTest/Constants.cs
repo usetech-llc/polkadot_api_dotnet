@@ -1,7 +1,13 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.Json;
 using Polkadot.Api.Client;
+using Polkadot.Api.Client.Serialization;
 using Polkadot.DataStructs;
 using Polkadot.Utils;
+using Xunit.Abstractions;
 
 namespace PolkaTest
 {
@@ -24,12 +30,48 @@ namespace PolkaTest
 
         public const string LocalNodeUri = "ws://localhost:9944/";
 
-        public static ISubstrateClient LocalClient()
+        public static ISubstrateClient<TextJsonElement> LocalClient(ITestOutputHelper output = null)
         {
-            return new SubstrateClient(SubstrateClientSettings.Default() with
+            var client = SubstrateClient.FromSettings(SubstrateClientSettings.Default() with
             {
-                RpcEndpoint = LocalNodeUri
+                RpcEndpoint = LocalNodeUri,
+                RpcTimeout = TimeSpan.FromHours(4)
             });
+
+            if (output != null)
+            {
+                client.Sending += b => output.WriteLine($"Sending: {PrettyJson(b)}");
+                client.Received += b => output.WriteLine($"Received: {PrettyJson(b)}");
+                client.Error += ex => output.WriteLine($"Error: {ex}");
+            }
+
+            return client;
+        }
+
+        private static string PrettyJson(byte[] utf8)
+        {
+            using var doc = JsonDocument.Parse(
+                utf8,
+                new JsonDocumentOptions
+                {
+                    AllowTrailingCommas = true
+                }
+            );
+            MemoryStream memoryStream = new MemoryStream();
+            using (
+                var utf8JsonWriter = new Utf8JsonWriter(
+                    memoryStream,
+                    new JsonWriterOptions
+                    {
+                        Indented = true
+                    }
+                )
+            )
+            {
+                doc.WriteTo(utf8JsonWriter);
+            }
+            return new System.Text.UTF8Encoding()
+                .GetString(memoryStream.ToArray());
         }
     }
 }
