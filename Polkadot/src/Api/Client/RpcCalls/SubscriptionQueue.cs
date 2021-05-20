@@ -87,7 +87,9 @@ namespace Polkadot.Api.Client.RpcCalls
         // Method is what you get from websocket once subscribed
         // SubscribeMethod is method you call to initiate subscription and
         // Unsubscribe method is method to call to unsubscribe.
-        public async Task<ISubscription> Subscribe<TMessage>(string method, string subscribeMethod, string unsubscribeMethod, Func<OneOf<TMessage, Exception>, Task> handler, bool keepAlive, IReadOnlyCollection<object> parameters = null, CancellationToken token = default)
+        public async Task<ISubscription> Subscribe<TMessage>(string method, string subscribeMethod,
+            string unsubscribeMethod, Func<OneOf<TMessage, Exception>, Task> handler, bool keepAlive,
+            CancellationToken token, params object[] parameters)
         {
             var callId = Guid.NewGuid();
             if (keepAlive)
@@ -96,7 +98,7 @@ namespace Polkadot.Api.Client.RpcCalls
             }
 
             _unsubscribeMethods[method] = unsubscribeMethod;
-            var subscriptionId = await _client.Rpc.Call<string>(subscribeMethod, parameters, token);
+            var subscriptionId = await _client.Rpc.Call<string>(subscribeMethod, token, parameters);
             token.ThrowIfCancellationRequested();
             var subscriptionKey = (method, subscriptionId);
             _handledSubscriptions.Add(subscriptionKey);
@@ -175,7 +177,7 @@ namespace Polkadot.Api.Client.RpcCalls
 
             var subscriptionRemap = await Task.WhenAll(_keepAliveSubscriptionInfo.Select(async reconnect =>
             {
-                var newSubscribeId = await _client.Rpc.Call<string>(reconnect.Value.SubscribeMethod, reconnect.Value.Parameters, cts.Token);
+                var newSubscribeId = await _client.Rpc.Call<string>(reconnect.Value.SubscribeMethod, cts.Token, reconnect.Value.Parameters);
                 return (Id: reconnect.Key, NewId: newSubscribeId);
             }));
             if (cts.Token.IsCancellationRequested)
@@ -197,7 +199,7 @@ namespace Polkadot.Api.Client.RpcCalls
             }
             
             _handledSubscriptions.Remove((method, subscriptionId));
-            return _client.Rpc.Call<bool>(unsubscribeMethod, new []{subscriptionId});
+            return _client.Rpc.Call<bool>(unsubscribeMethod, default, subscriptionId);
         }
 
         public Task StopResubscribingAndUnsubscribe(Guid callId)

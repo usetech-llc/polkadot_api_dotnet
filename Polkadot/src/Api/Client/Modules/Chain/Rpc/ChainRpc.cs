@@ -18,7 +18,7 @@ namespace Polkadot.Api.Client.Modules.Chain.Rpc
         
         public Task<ISubscription> SubscribeNewHead(Func<OneOf<Header<ulong, Hash256>, Exception>, Task> onMessage, bool keepAlive = false, CancellationToken token = default)
         {
-            return _rpc.Subscribe("chain_newHead", "chain_subscribeNewHead", "chain_unsubscribeNewHead", null, onMessage,
+            return _rpc.Subscribe("chain_newHead", "chain_subscribeNewHead", "chain_unsubscribeNewHead", onMessage,
                 keepAlive, token);
         }
     }

@@ -22,7 +22,8 @@ namespace Polkadot.Api.Client.RpcCalls
             _subscriptionQueue = new(_substrateClient);
         }
         
-        public Task<TResult> Call<TResult>(string method, IEnumerable<object> parameters = null, CancellationToken token = default)
+        public Task<TResult> Call<TResult>(string method, CancellationToken token,
+            params object[] parameters)
         {
             parameters ??= Array.Empty<object>();
             var id = _substrateClient.NextRequestId();
@@ -40,9 +41,11 @@ namespace Polkadot.Api.Client.RpcCalls
             return (TModule)_modules.GetOrAdd(typeof(TModule), _ => moduleFactory());
         }
 
-        public Task<ISubscription> Subscribe<TMessage>(string responseMethod, string subscribeMethod, string unsubscribeMethod, IReadOnlyCollection<object> parameters, Func<OneOf<TMessage, Exception>, Task> onMessage, bool keepAlive = false, CancellationToken token = default)
+        public Task<ISubscription> Subscribe<TMessage>(string responseMethod, string subscribeMethod,
+            string unsubscribeMethod, Func<OneOf<TMessage, Exception>, Task> onMessage, bool keepAlive,
+            CancellationToken token, params object[] parameters)
         {
-            return _subscriptionQueue.Subscribe(responseMethod, subscribeMethod, unsubscribeMethod, onMessage, keepAlive, parameters, token);
+            return _subscriptionQueue.Subscribe(responseMethod, subscribeMethod, unsubscribeMethod, onMessage, keepAlive, token, parameters);
         }
     }
 }

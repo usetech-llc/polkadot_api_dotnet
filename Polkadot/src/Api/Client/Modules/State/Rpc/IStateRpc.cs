@@ -9,6 +9,6 @@ namespace Polkadot.Api.Client.Modules.State.Rpc
 {
     public interface IStateRpc
     {
-        Task<RuntimeMetadataPrefixed> GetMetadata(Hash256 at = null, CancellationToken token = default);
+        Task<RuntimeMetadataPrefixed> GetMetadata<THash>(THash at = default, CancellationToken token = default);
     }
 }

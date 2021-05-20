@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Polkadot.Api.Client.Model;
@@ -17,10 +18,14 @@ namespace Polkadot.Api.Client.Modules.State.Rpc
             _rpc = rpc;
         }
 
-        public Task<RuntimeMetadataPrefixed> GetMetadata(Hash256 at = null, CancellationToken token = default)
+        public Task<RuntimeMetadataPrefixed> GetMetadata<THash>(THash at = default, CancellationToken token = default)
         {
-            var p = at == null ? null : new[] {at};
-            return _rpc.Call<RuntimeMetadataPrefixed>("state_getMetadata", p, token);
+            if (EqualityComparer<THash>.Default.Equals(at, default))
+            {
+                return _rpc.Call<RuntimeMetadataPrefixed>("state_getMetadata", token);
+            }
+
+            return _rpc.Call<RuntimeMetadataPrefixed>("state_getMetadata", token, at);
         }
     }
 }

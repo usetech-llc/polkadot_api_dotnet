@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Polkadot.Api.Client;
 using Polkadot.Api.Client.Modules.Chain;
@@ -24,7 +25,7 @@ namespace PolkaTest.RpcTests
         public async Task NotExistingRpcThrowsError()
         {
             using var client = Constants.LocalClient();
-            await Assert.ThrowsAsync<JrpcErrorException<TextJsonElement>>(() => client.Rpc.Call<string>("this rpc should not exist"));
+            await Assert.ThrowsAsync<JrpcErrorException<TextJsonElement>>(() => client.Rpc.Call<string>("this rpc should not exist", CancellationToken.None));
         }
 
         [Fact]
@@ -36,7 +37,7 @@ namespace PolkaTest.RpcTests
                 RpcTimeout = TimeSpan.FromSeconds(0)
             });
             await Assert.ThrowsAsync<TimeoutException>(() =>
-                client.Rpc.Call<RuntimeMetadataPrefixed>("state_getMetadata"));
+                client.Rpc.Call<RuntimeMetadataPrefixed>("state_getMetadata", CancellationToken.None));
         }
 
         [Fact]

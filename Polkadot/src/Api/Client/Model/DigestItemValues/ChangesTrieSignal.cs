@@ -8,6 +8,6 @@ namespace Polkadot.Api.Client.Model.DigestItemValues
     public class ChangesTrieSignal
     {
         [Serialize(0)]
-        private OneOf<NewConfiguration> Value { get; set; }
+        public OneOf<NewConfiguration> Value { get; set; }
     }
 }
