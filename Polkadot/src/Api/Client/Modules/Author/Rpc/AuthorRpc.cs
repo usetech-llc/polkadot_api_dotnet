@@ -2,15 +2,12 @@
 using System.Threading;
 using System.Threading.Tasks;
 using OneOf;
-using Polkadot.Api.Client.Model;
-using Polkadot.Api.Client.Modules.Model;
 using Polkadot.Api.Client.RpcCalls;
-using Polkadot.BinaryContracts.Extrinsic;
 using Polkadot.BinarySerializer.Types;
 
 namespace Polkadot.Api.Client.Modules.Author.Rpc
 {
-    public class AuthorRpc : IAuthorRpc
+    public class AuthorRpc<TExtrinsicOrHash, THash, TTransactionStatus> : IAuthorRpc<TExtrinsicOrHash, THash, TTransactionStatus>
     {
         private readonly IRpc _rpc;
 
@@ -39,7 +36,7 @@ namespace Polkadot.Api.Client.Modules.Author.Rpc
             return _rpc.Call<byte[][]>("author_pendingExtrinsics", token);
         }
 
-        public Task<THash[]> RemoveExtrinsic<THash>(ExtrinsicOrHash<THash>[] hashes, CancellationToken token = default)
+        public Task<THash[]> RemoveExtrinsic(TExtrinsicOrHash[] hashes, CancellationToken token = default)
         {
             return _rpc.Call<THash[]>("author_removeExtrinsic", token, new object[] {hashes});
         }
@@ -49,7 +46,7 @@ namespace Polkadot.Api.Client.Modules.Author.Rpc
             return _rpc.Call<byte[]>("author_rotateKeys", token);
         }
 
-        public Task<ISubscription> SubmitAndWatchExtrinsic<THash, THashBlock, TExtrinsic>(Func<OneOf<TransactionStatus<THash, THashBlock>, Exception>, Task> onMessage, AsByteVec<TExtrinsic> extrinsic, bool keepAlive = false,
+        public Task<ISubscription> SubmitAndWatchExtrinsic<TExtrinsic>(Func<OneOf<TTransactionStatus, Exception>, Task> onMessage, TExtrinsic extrinsic, bool keepAlive = false,
             CancellationToken token = default)
         {
             return _rpc.Subscribe(
@@ -61,7 +58,7 @@ namespace Polkadot.Api.Client.Modules.Author.Rpc
                 token, extrinsic);
         }
 
-        public Task<THash> SubmitExtrinsic<THash, TExtrinsic>(AsByteVec<TExtrinsic> extrinsic, CancellationToken token = default)
+        public Task<THash> SubmitExtrinsic<TExtrinsic>(TExtrinsic extrinsic, CancellationToken token = default)
         {
             return _rpc.Call<THash>("author_submitExtrinsic", token, extrinsic);
         }
