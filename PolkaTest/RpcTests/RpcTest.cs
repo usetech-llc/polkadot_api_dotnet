@@ -31,7 +31,7 @@ namespace PolkaTest.RpcTests
         [Fact]
         public async Task ShortTimeoutThrowsTimeoutException()
         {
-            var client = SubstrateClient.FromSettings(SubstrateClientSettings.Default() with
+            using var client = SubstrateClient.FromSettings(SubstrateClientSettings.Default() with
             {
                 RpcEndpoint = Constants.LocalNodeUri,
                 RpcTimeout = TimeSpan.FromSeconds(0)

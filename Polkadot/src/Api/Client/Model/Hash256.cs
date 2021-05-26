@@ -5,7 +5,7 @@ using Polkadot.BinarySerializer.Converters;
 
 namespace Polkadot.Api.Client.Model
 {
-    [JsonConverter(typeof(BinaryJsonConverter<Hash256>))]
+    [BinaryJsonConverter]
     public class Hash256
     {
         [Serialize(0)]

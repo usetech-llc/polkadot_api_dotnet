@@ -5,7 +5,7 @@ using Xunit;
 
 namespace PolkaTest.RpcTests
 {
-    public class AuthorTest
+    public class AuthorModuleTest
     {
         [Fact(Skip = "Method not found")]
         public async Task AliceHasKey()

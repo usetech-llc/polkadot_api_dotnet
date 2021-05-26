@@ -25,9 +25,14 @@ namespace Polkadot.Api.Client.RpcCalls
         public Task<TResult> Call<TResult>(string method, CancellationToken token,
             params object[] parameters)
         {
-            parameters ??= Array.Empty<object>();
             var id = _substrateClient.NextRequestId();
-            var jrpcParameter = new JrpcParameter(id, method, parameters.Select(p => _substrateClient.BinarySerializer.Serialize(p).ToPrefixedHexString()));
+            var jrpcParameter = new
+            {
+                id = id,
+                jsonrpc = "2.0",
+                method = method,
+                @params = parameters
+            };
             var bytes = _substrateClient.JsonSerializer.Serialize(jrpcParameter);
 
             var listener = new RpcResultListener<TResult, TJsonElement>(_substrateClient, id, token);

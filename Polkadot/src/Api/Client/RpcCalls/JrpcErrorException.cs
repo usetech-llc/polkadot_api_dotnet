@@ -6,6 +6,7 @@ namespace Polkadot.Api.Client.RpcCalls
     public class JrpcErrorException<TJsonElement> : Exception  where TJsonElement : IJsonElement<TJsonElement>
     {
         public const long MethodNotFound = -32601;
+        public const long InvalidParams = -32602;
         
         public long? Code { get; }
         public TJsonElement Error { get; }
