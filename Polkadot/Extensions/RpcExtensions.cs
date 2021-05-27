@@ -17,5 +17,24 @@ namespace Polkadot.Extensions
 
             return rpc.Call<TResult>(method, token, parameter);
         }
+
+        public static Task<TResult> CallWithOptionalParam<TResult, TParam1, TParam2, TParam3>(this IRpc rpc, string method, CancellationToken token,
+            TParam1 parameter1, TParam2 parameter2, TParam3 parameter3)
+        {
+            if (EqualityComparer<TParam3>.Default.Equals(parameter3, default))
+            {
+                if (EqualityComparer<TParam2>.Default.Equals(parameter2, default))
+                {
+                    if (EqualityComparer<TParam1>.Default.Equals(parameter1, default))
+                    {
+                        return rpc.Call<TResult>(method, token);
+                    }
+
+                    return rpc.Call<TResult>(method, token, parameter1);
+                }
+                return rpc.Call<TResult>(method, token, parameter1, parameter2);
+            }
+            return rpc.Call<TResult>(method, token, parameter1, parameter2, parameter3);
+        }
     }
 }
