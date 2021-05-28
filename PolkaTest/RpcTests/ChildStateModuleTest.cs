@@ -7,11 +7,11 @@ using Xunit.Abstractions;
 
 namespace PolkaTest.RpcTests
 {
-    public class ChildStateTest
+    public class ChildStateModuleTest
     {
         private readonly ITestOutputHelper _output;
 
-        public ChildStateTest(ITestOutputHelper output)
+        public ChildStateModuleTest(ITestOutputHelper output)
         {
             _output = output;
         }
